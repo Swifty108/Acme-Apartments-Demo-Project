@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        @if (ViewContext.RouteData.Values["Controller"].ToString().ToLower() != "home")
+        @if (ViewContext.RouteData.Values["Controller"] != null && ViewContext.RouteData.Values["Controller"].ToString().ToLower() != "home")
         {
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container">
