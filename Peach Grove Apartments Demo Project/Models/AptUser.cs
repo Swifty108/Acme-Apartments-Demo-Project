@@ -28,5 +28,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         [Required]
         public string LastFourOfSSN { get; set; }
         public Boolean IsResident { get; set; }
+
     }
 }
