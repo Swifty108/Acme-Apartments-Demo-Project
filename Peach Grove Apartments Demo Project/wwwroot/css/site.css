@@ -1,15 +1,69 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+@import url(//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,800,700,900);
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+.nav-header {
+    border-bottom: 2px solid #cbcbcb;
+    border-top: 2px solid #cbcbcb;
+
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.top-bar {
+    background: #3fa9f5;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 15px;
+}
+
+.bottom-menu-bar {
+    height: 50px;
+    display: inline;
+}
+
+.navbar-nav {
+    float:none;
+   margin-left: 200px;
+    display: block;
+    text-align: center;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+    float:none;
+}
+
+nav .navbar-nav li a {
+    color: black !important;
+    font-size: 19px;
+}
+
+aside {
+    width: 80%;
+    padding-left: 2.3rem;
+    margin-left: 1rem;
+    float: right;
+    border-left: 1px solid lightgray;
+
+}
+
+p {
+    font-family: Raleway, sans-serif;
+}
+
+
+#contact-widget {
+    border-bottom: 1px solid lightgray;
+    width: 210px;
+    line-height: 130%;
+}
+
+body {
+    background-color: #ffff;
+    font-family: Raleway, sans-serif;
 }
 
 .btn-primary {
@@ -35,17 +89,6 @@ html {
   }
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
@@ -58,11 +101,6 @@ html {
   min-height: 100%;
 }
 
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-    font-family: Verdana;
-}
 .footer {
   position: absolute;
   bottom: 0;
@@ -73,7 +111,7 @@ body {
 
 /*My CSS styles*/
 
-.index-main-div {
+/*.index-main-div {
     //background-image: url("../images/01-Standard-Apartments-018.jpg");
     background-repeat: no-repeat;
     text-align: center;
@@ -81,6 +119,6 @@ body {
     height: 700px;
     width: 100%;
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/01-Standard-Apartments-018.jpg");
-}
+}*/
 
 /*End Custom styles*/

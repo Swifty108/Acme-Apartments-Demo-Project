@@ -9,8 +9,58 @@
     <link href="~/lib/font-awesome/css/fontawesome.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        @if (ViewContext.RouteData.Values["Controller"].ToString().ToLower() != "home")
+
+    <div class="nav-header">
+        <div class="top-bar">
+            <div style="font-family: Raleway, sans-serif; color: white; display: flex; margin-top: 10px;">
+
+                <div>
+                    (412) 555-1212
+                </div>
+
+                <div style="margin-left: 10px;">
+                    Login
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bottom-menu-bar">
+
+
+
+
+
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="#" style="margin-left: 200px;">
+
+                    <img src="~/images/logo.png" style="margin-left:150px; margin-top: 10px;" />
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">AMENITIES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FLOOR PLANS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">PHOTOS & TOUR</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+
+    @*@if (ViewContext.RouteData.Values["Controller"].ToString().ToLower() != "home")
         {
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div class="container">
@@ -32,15 +82,77 @@
                     </div>
                 </div>
             </nav>
-        }
-      
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        }*@
 
+
+
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-4 order-2" id="sticky-sidebar">
+                <div class="sticky-top">
+                    <aside id="sidebar">
+                        <section id="contact-widget">
+
+                            <span style="font-weight: bold; font-size: 20px;">Contact</span><br /><br />
+
+                            <span>(412) 787-5433</span><br />
+                            <span>Email Us</span>
+
+
+                            <br />
+
+                            <br />
+                        </section>
+                        <section id="contact-widget">
+                            <br />
+                            <br />
+                            <span style="font-weight: bold; font-size: 20px;">Pet Policy</span>                      <br /><br />
+                            <a href="#">View Our Pet Policy</a>
+                            <br />
+                            <br />
+                            <br />
+                        </section>
+
+
+                        <section id="contact-widget">
+
+                            <br /><br />
+                            <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
+
+
+                            1100 Penceter Blvd.<br />
+                            Pittsburgh, PA 15146<br />
+                            <br /><br />
+                        </section>
+                        <br />
+                        <br />
+
+                        <section style="width: 280px;">
+                            <span style="font-weight: bold; font-size: 20px;">Offie Hours</span><br /><br />
+                            Monday - Friday 9:00am to 6:00pm <br />
+                            Saturday By Appointment
+                            <br />
+                            <br />
+                            <br />
+
+                        </section>
+            
+
+                        <br />
+                        <br />
+                        <br />
+                    </aside>
+                </div>
+            </div>
+            <div class="col" id="main">
+                <h1>Main Area</h1>
+                <p>Chambray sustainable roof party. Shoreditch vegan artisan Helvetica. Tattooed Codeply <br /> Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache. 3 wolf moon hashtag church-key Odd Future. Austin messenger bag normcore, Helvetica Williamsburg sartorial tote bag distillery Portland before they sold out gastropub taxidermy Vice.</p>
+                <p>3 wolf moon retro jean shorts chambray sustainable roof party. Shoreditch <br />vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel<br /> Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache. 3 wolf moon hashtag church-key Odd Future. Austin messenger bag normcore, Helvetica Williamsburg sartorial tote bag distillery Portland before they sold out gastropub taxidermy Vice.</p>
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <br />
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - Peach_Grove_Apartments_Demo_Project - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
