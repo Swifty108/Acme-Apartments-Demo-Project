@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Peach Grove Apartments Demo Project</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/font-awesome/css/fontawesome.css" rel="stylesheet" />
 </head>
 <body>
 
-    <div class="nav-header">
+    <header class="nav-header">
         <div class="top-bar">
             <div style="font-family: Raleway, sans-serif; color: white; display: flex; margin-top: 10px;">
 
                 <div>
-                    (412) 555-1212
+                    <i class="fa fa-phone"></i> (412) 555-1212
                 </div>
 
-                <div style="margin-left: 10px;">
-                    Login
+                <div style="margin-left: 15px;">
+                    <i class="fa fa-user-circle"></i>  Login
                 </div>
 
             </div>
@@ -28,19 +29,16 @@
         <div class="bottom-menu-bar">
 
 
-
-
-
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#" style="margin-left: 200px;">
 
-                    <img src="~/images/logo.png" style="margin-left:150px; margin-top: 10px;" />
+                    <img src="~/images/logo.jpg" style="margin-left: 150px; " />
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" asp-controller="home" asp-action="index">HOME <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">AMENITIES</a>
@@ -55,10 +53,9 @@
                     </ul>
                 </div>
             </nav>
+
         </div>
-    </div>
-
-
+    </header>
 
     @*@if (ViewContext.RouteData.Values["Controller"].ToString().ToLower() != "home")
         {
@@ -83,13 +80,12 @@
                 </div>
             </nav>
         }*@
-
-
-
-    <div class="container">
-        <div class="row py-5">
-            <div class="col-4 order-2" id="sticky-sidebar">
-                <div class="sticky-top">
+   
+    <div class="container-fluid">
+        <br />
+        <div class="row justify-content-center py-md-3">
+            <div class="col-md-3 order-2">
+               
                     <aside id="sidebar">
                         <section id="contact-widget">
 
@@ -120,8 +116,8 @@
                             <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
 
 
-                            1100 Penceter Blvd.<br />
-                            Pittsburgh, PA 15146<br />
+                            1201 Peach Grove Blvd.<br />
+                            Pittsburgh, PA 15213<br />
                             <br /><br />
                         </section>
                         <br />
@@ -136,28 +132,49 @@
                             <br />
 
                         </section>
-            
+
 
                         <br />
                         <br />
                         <br />
                     </aside>
                 </div>
-            </div>
-            <div class="col" id="main">
-                <h1>Main Area</h1>
-                <p>Chambray sustainable roof party. Shoreditch vegan artisan Helvetica. Tattooed Codeply <br /> Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache. 3 wolf moon hashtag church-key Odd Future. Austin messenger bag normcore, Helvetica Williamsburg sartorial tote bag distillery Portland before they sold out gastropub taxidermy Vice.</p>
-                <p>3 wolf moon retro jean shorts chambray sustainable roof party. Shoreditch <br />vegan artisan Helvetica. Tattooed Codeply Echo Park Godard kogi, next level irony ennui twee squid fap selvage. Meggings flannel<br /> Brooklyn literally small batch, mumblecore PBR try-hard kale chips. Brooklyn vinyl lumbersexual bicycle rights, viral fap cronut leggings squid chillwave pickled gentrify mustache. 3 wolf moon hashtag church-key Odd Future. Austin messenger bag normcore, Helvetica Williamsburg sartorial tote bag distillery Portland before they sold out gastropub taxidermy Vice.</p>
+            
+            <div class="col-md-5 offset-md-1" id="main">
                 @RenderBody()
             </div>
         </div>
     </div>
+
     <br />
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Peach_Grove_Apartments_Demo_Project - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+    <footer class="footer">
+
+        <div class="footer-address">
+            1201 Peach Grove Blvd Pittsburgh, PA 15213<br />
+            p: (412) 555-1212 | Email Us<br />
+            <br />
         </div>
+
+        <div style="font-size: 19px;">
+            <b>Office Hours</b> Monday - Friday 9:00am to 6:00pm Saturday By Appointment
+        </div>
+        <br /><br />
+        <div>
+            <ul class="social-network social-circle">
+                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+            </ul>
+        </div>
+        <br />
+
+        <br>
+        &copy; 2020 - Peach Grove Apartments Demo Project - Raj Narayanan
+        <br /><br>
     </footer>
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/font-awesome/js/fontawesome.js"></script>
