@@ -2,11 +2,26 @@
 for details on configuring this project to bundle and minify static web assets. */
 @import url(//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,800,700,900);
 
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: #ffff;
+    font-family: Raleway, sans-serif;
+}
+
 .nav-header {
-    position: -webkit-sticky;
+    /*    position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 9999;
+    z-index: 9999;*/
     background-color: #fff;
     border-bottom: 2px solid #cbcbcb;
     border-top: 2px solid #cbcbcb;
@@ -30,16 +45,16 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 .navbar-nav {
-    float:none;
-   margin-left: 200px;
+    float: none;
+    margin-left: 200px;
     display: block;
     text-align: center;
 }
 
-.navbar-nav > li {
-    display: inline-block;
-    float:none;
-}
+    .navbar-nav > li {
+        display: inline-block;
+        float: none;
+    }
 
 nav .navbar-nav li a {
     color: black !important;
@@ -48,6 +63,7 @@ nav .navbar-nav li a {
 
 aside {
     width: 80%;
+    height: 100%;
     padding-left: 2.3rem;
     margin-left: 3rem;
     border-left: 1px solid lightgray;
@@ -64,45 +80,27 @@ p {
     line-height: 130%;
 }
 
-body {
-    background-color: #ffff;
-    font-family: Raleway, sans-serif;
-}
+
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
 
 .footer {
     position: relative;
@@ -197,53 +195,159 @@ a.socialIcon:hover, .socialHoverClass {
     transform: translateX(-50%);
 }
 
-.image {
-    position: relative;
-    right: 17px;
-    width: 100%; /* for IE 6 */
+
+.nav-tabs {
+    border-color: #ddd;
+    width: 90%;
 }
 
-.text-over-aptfront {
+    .nav-tabs > li > a {
+        color: #757575;
+        padding-top: 10px;
+        padding-left: 20px;
+        margin-right: 3px;
+        font-size: .8rem;
+        background-color: #f7f7f7;
+        border: 1px solid #ddd !important;
+        height: 40px;
+        width: 90px;
+        text-transform: uppercase;
+        align-content: center;
+    }
+
+        /*    .nav-tabs > li > a.active,
+    .nav-tabs > li > a.active:focus,
+    .nav-tabs > li > a.active:hover {*/
+        .nav-tabs > li > a.active,
+        .nav-tabs > li > a.active:focus,
+        .nav-tabs > li > a.active:hover {
+            color: #222;
+            border-bottom-color: transparent !important;
+        }
+
+        .nav-tabs > li > a:hover {
+            /*    border-radius: 5px;*/
+            color: #222
+        }
+
+table div.fp-applylink {
+    display: inline-block;
+    padding: 6px;
+    width: 165px;
+    text-align: center;
+    border: 3px solid #3fa9f5;
+    color: #3fa9f5;
+    transition: 0.3s;
+}
+
+table div.fp-applylink:hover {
+    background-color: #3fa9f5;
+}
+
+
+    table div.fp-applylink:hover * {
+        text-decoration: none;
+        color: white;
+    }
+    
+    .fp-table tbody td  {
+
+       vertical-align: middle;
+    }
+
+    .table {
+        width: 780px;
+    }
+    /*        .nav-tabs > li > a > div {
+            border: 1px solid red;
+            border-style: dotted;
+        }*/
+    /*
+        .nav-tabs > li > a > div > div {
+            border: 1px solid blue;
+        }*/
+    /*        .nav-tabs > li > a > div > div > .fp-group-name {
+            display: inline-block;
+            text-transform: uppercase;
+            bottom: 1px;
+        }*/
+    /*
+            .nav-tabs > li > a > div > div > .fp-group-count {
+
+                width: 22px;
+                height: 22px;
+                margin-left: 4px;
+                font-size: 10px;
+                bottom: 2px;
+                position: relative;
+                display: inline-block;
+                text-align: center;
+                color: white;
+                border-radius: 5px;
+                background-color: #3fa9f5;
+            }*/
+    /*.tab-pane {
+    border: solid 1px #1A3E5E;
+    border-top: 0;
+    width: 60%;
+    background-color: #D6E6F3;
+    padding: 5px;
+}*/
+    /* Tabed navigation for Floor Plan page
+-------------------------------------------------- */
+    /*   Change Color for Active Tabs     */
+    /*.nav-tabs li .active a,
+.nav-tabs li .active a:focus,
+.nav-tabs li .active a:hover,
+.nav-tabs li a:hover{
+    background-color: #F47321;
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+}*/
+    /*   Change Color for Inactive Tabs     */
+    /*.nav-tabs > li > a {
+    background-color: #777;
+    border-color: #FFFFFF;
+    color: gray;
+}*/
+    /*    .nav-tabs .nav-item .group-count {
+    background-color: #858585;
+    color: #cacaca
+}
+
+.nav-tabs .nav-item.active .group-count {
+    background-color: #3fa9f5;
+    color: #fff
+}
+
+.nav-tabs .nav-item.active:focus {
+    text-decoration: none
+}
+
+    .nav-tabs .nav-item.active:focus .group-name {
+        text-decoration: underline
+    }*/
+    /* Text over home page image
+-------------------------------------------------- */
+    #holder {
+        width: 100%;
+        position: relative;
+    }
+
+#image-over {
+    position: relative;
+    width: 100%;
+}
+
+#text {
+    z-index: 100;
     position: absolute;
-    top: 130px;
-    padding-left: 15px;
-    margin-left: 120px;
+    left: 179px;
+    top: 151px;
     color: white;
     font-size: 46px;
     font-weight: bold;
     text-shadow: 2px 2px 4px black;
 }
-/*.social-circle li a:hover i, .triggeredHover {
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -ms--transform: rotate(360deg);
-    transform: rotate(360deg);
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    transition: all 0.2s;
-}
-
-.social-circle i {
-    color: #fff;
-    -webkit-transition: all 0.8s;
-    -moz-transition: all 0.8s;
-    -o-transition: all 0.8s;
-    -ms-transition: all 0.8s;
-    transition: all 0.8s;
-}
-*/
-/*My CSS styles*/
-
-/*.index-main-div {
-    //background-image: url("../images/01-Standard-Apartments-018.jpg");
-    background-repeat: no-repeat;
-    text-align: center;
-    padding-top: 50px;
-    height: 700px;
-    width: 100%;
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/01-Standard-Apartments-018.jpg");
-}*/
 
 /*End Custom styles*/

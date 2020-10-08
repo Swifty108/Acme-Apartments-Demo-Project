@@ -26,10 +26,20 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
+        public IActionResult Amenities()
+        {
+            return View();
+        }
+
         public IActionResult Gallery()
         {
             return View();
         }
+        public IActionResult FloorPlans()
+        {
+            return View();
+        }
+
 
         public IActionResult Apply()
         {
