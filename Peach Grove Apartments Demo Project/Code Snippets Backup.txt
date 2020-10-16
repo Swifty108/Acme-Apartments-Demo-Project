@@ -1,0 +1,40 @@
+﻿/// Floor Plan Page ////
+
+<script type="text/javascript">
+
+    function loginRedirect() {
+
+    }
+
+    $(document).ready(function () {
+
+        loginRedirect();
+
+    });
+
+</script>
+
+
+@section scripts {
+
+    <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $('table a').click(function () {
+
+       if ($("#checkLogin").val === "loggedIn") {
+                window.location.href = "@Url.Action("Apply", "Home")";
+            }
+            else {
+                    window.location.href="@Url.Action("Login", "Home")";
+            }
+
+                });
+
+            });
+
+    </script>
+
+}
+

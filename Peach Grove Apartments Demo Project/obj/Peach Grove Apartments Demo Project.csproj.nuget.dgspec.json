@@ -10,11 +10,11 @@
         "projectUniqueName": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
         "projectName": "Peach Grove Apartments Demo Project",
         "projectPath": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
-        "packagesPath": "C:\\Users\\Raj\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Nova\\.nuget\\packages\\",
         "outputPath": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Raj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nova\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -81,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
