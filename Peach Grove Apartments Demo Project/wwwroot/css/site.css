@@ -196,12 +196,12 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 
-.nav-tabs {
+.nav-tabs.fp {
     border-color: #ddd;
     width: 90%;
 }
 
-    .nav-tabs > li > a {
+    .nav-tabs.fp > li > a {
         color: #757575;
         padding-top: 10px;
         padding-left: 20px;
@@ -218,14 +218,14 @@ a.socialIcon:hover, .socialHoverClass {
         /*    .nav-tabs > li > a.active,
     .nav-tabs > li > a.active:focus,
     .nav-tabs > li > a.active:hover {*/
-        .nav-tabs > li > a.active,
-        .nav-tabs > li > a.active:focus,
-        .nav-tabs > li > a.active:hover {
+        .nav-tabs.fp > li > a.active,
+        .nav-tabs.fp > li > a.active:focus,
+        .nav-tabs.fp > li > a.active:hover {
             color: #222;
             border-bottom-color: transparent !important;
         }
 
-        .nav-tabs > li > a:hover {
+        .nav-tabs.fp > li > a:hover {
             /*    border-radius: 5px;*/
             color: #222
         }
@@ -244,7 +244,6 @@ table div.fp-applylink:hover {
     background-color: #3fa9f5;
 }
 
-
     table div.fp-applylink:hover * {
         text-decoration: none;
         color: white;
@@ -258,77 +257,7 @@ table div.fp-applylink:hover {
     .table {
         width: 780px;
     }
-    /*        .nav-tabs > li > a > div {
-            border: 1px solid red;
-            border-style: dotted;
-        }*/
-    /*
-        .nav-tabs > li > a > div > div {
-            border: 1px solid blue;
-        }*/
-    /*        .nav-tabs > li > a > div > div > .fp-group-name {
-            display: inline-block;
-            text-transform: uppercase;
-            bottom: 1px;
-        }*/
-    /*
-            .nav-tabs > li > a > div > div > .fp-group-count {
 
-                width: 22px;
-                height: 22px;
-                margin-left: 4px;
-                font-size: 10px;
-                bottom: 2px;
-                position: relative;
-                display: inline-block;
-                text-align: center;
-                color: white;
-                border-radius: 5px;
-                background-color: #3fa9f5;
-            }*/
-    /*.tab-pane {
-    border: solid 1px #1A3E5E;
-    border-top: 0;
-    width: 60%;
-    background-color: #D6E6F3;
-    padding: 5px;
-}*/
-    /* Tabed navigation for Floor Plan page
--------------------------------------------------- */
-    /*   Change Color for Active Tabs     */
-    /*.nav-tabs li .active a,
-.nav-tabs li .active a:focus,
-.nav-tabs li .active a:hover,
-.nav-tabs li a:hover{
-    background-color: #F47321;
-    border-color: #FFFFFF;
-    color: #FFFFFF;
-}*/
-    /*   Change Color for Inactive Tabs     */
-    /*.nav-tabs > li > a {
-    background-color: #777;
-    border-color: #FFFFFF;
-    color: gray;
-}*/
-    /*    .nav-tabs .nav-item .group-count {
-    background-color: #858585;
-    color: #cacaca
-}
-
-.nav-tabs .nav-item.active .group-count {
-    background-color: #3fa9f5;
-    color: #fff
-}
-
-.nav-tabs .nav-item.active:focus {
-    text-decoration: none
-}
-
-    .nav-tabs .nav-item.active:focus .group-name {
-        text-decoration: underline
-    }*/
-    /* Text over home page image
--------------------------------------------------- */
     #holder {
         width: 100%;
         position: relative;
@@ -350,4 +279,38 @@ table div.fp-applylink:hover {
     text-shadow: 2px 2px 4px black;
 }
 
+/*for tab control
+*/
+div.login-logout-tab div.card-header {
+    padding: 0px 0px 12px 0px;
+}
+
+div.login-logout-tab ul.nav-tabs {
+    margin: 0px 0px -12px 0px;
+}
+
+div.login-logout-tab li.nav-item {
+    width: 50%;
+}
+
+div.login-logout-tab a.nav-link {
+    font-size: 25px;
+    color: #495057;
+    text-align: center;
+}
+
+div.card-content {
+    padding: 10px 20px;
+}
+/*
+login form*/
+div.login-form-icon {
+    text-align: center;
+}
+
+.form-actions {
+/*    margin: 0;
+    background-color: transparent;*/
+    text-align: center;
+}
 /*End Custom styles*/

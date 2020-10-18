@@ -26,7 +26,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         [Required]
         public string Zipcode { get; set; }
         [Required]
-        public string LastFourOfSSN { get; set; }
+        public string SSN { get; set; }
         public Boolean IsResident { get; set; }
 
     }

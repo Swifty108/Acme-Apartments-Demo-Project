@@ -16,30 +16,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Login([Bind] LoginInfo model)
-        {
-
-            if (ModelState.IsValid)
-            {
-               // await _db.Applicants.AddAsync(model);
-               // await _db.SaveChangesAsync();
-                ModelState.Clear();
-                ViewBag.Message = "All Done!";
-            }
-            else
-            {
-                return View();
-            }
-
-            return View();
-        }
-
         // GET: UserAccount/Details/5
         public ActionResult Details(int id)
         {

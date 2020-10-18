@@ -1,0 +1,60 @@
+﻿@page
+@model LoginModel
+
+@{
+    //ViewData["Title"] = "Log in";
+    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+}
+
+<div class="col-md-10 offset-1">
+    <br />
+    <div class="login-form-icon">
+        <font size="10"><i class="fa fa-user-circle text-secondary fa-lg"></i></font>
+</div>
+    <br />
+    <form id="account" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <font size="2"> <i class="fa fa-envelope"></i></font>
+</div>
+                </div>
+                <input asp-for="Input.Email" class="form-control" placeholder="Email Address" />
+            </div>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <font size="3"><i class="fa fa-lock"></i></font>
+</div>
+                </div>
+                <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+            </div>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label asp-for="Input.RememberMe">
+                    <input asp-for="Input.RememberMe" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+            </div>
+        </div>
+        <div class="form-group form-actions">
+            <button type="submit" class="btn btn-primary col-md-6">Log in</button>
+        </div>
+        <div class="form-group">
+            <p>
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

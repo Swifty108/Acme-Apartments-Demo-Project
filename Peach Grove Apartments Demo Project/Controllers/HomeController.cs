@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Peach_Grove_Apartments_Demo_Project.Data;
@@ -14,11 +15,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private ApplicationDbContext _db;
+        private readonly UserManager<AptUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager)
         {
             _logger = logger;
             _db = db;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -46,8 +49,15 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
 
-        public IActionResult Apply()
+        public async Task<IActionResult> Apply(ApplyViewModel appviewmodel)
         {
+            var user = await _userManager.GetUserAsync(User);
+            ViewData["fname"] = user.FName;
+            ViewData["lname"] = user.LName;
+
+            ViewData["roomnum"] = appviewmodel.RoomNum;
+            ViewData["price"] = appviewmodel.Price;
+
             return View();
         }
 

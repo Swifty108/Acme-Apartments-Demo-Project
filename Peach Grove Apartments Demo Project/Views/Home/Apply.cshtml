@@ -1,0 +1,99 @@
+﻿@model Peach_Grove_Apartments_Demo_Project.Models.Application
+
+@{
+    ViewData["Title"] = "Apply";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Application</h1> <span><b>Room #:</b></span> <span>@ViewData["roomnum"]</span>   <span><b>Price:</b></span> <span>$@ViewData["price"]</span>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Apply">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FName" class="control-label"></label>
+                <input asp-for="FName" class="form-control" value="@ViewData["fname"]"/>
+                <span asp-validation-for="FName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LName" class="control-label"></label>
+                <input asp-for="LName" class="form-control" value="@ViewData["lname"]"/>
+                <span asp-validation-for="LName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label"></label>
+                <input asp-for="DateOfBirth" class="form-control" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StreetAddress" class="control-label"></label>
+                <input asp-for="StreetAddress" class="form-control" />
+                <span asp-validation-for="StreetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zipcode" class="control-label"></label>
+                <input asp-for="Zipcode" class="form-control" />
+                <span asp-validation-for="Zipcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Occupation" class="control-label"></label>
+                <input asp-for="Occupation" class="form-control" />
+                <span asp-validation-for="Occupation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Income" class="control-label"></label>
+                <input asp-for="Income" class="form-control" />
+                <span asp-validation-for="Income" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReasonForMoving" class="control-label"></label>
+                <input asp-for="ReasonForMoving" class="form-control" />
+                <span asp-validation-for="ReasonForMoving" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SSN" class="control-label"></label>
+                <input asp-for="SSN" class="form-control" />
+                <span asp-validation-for="SSN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Room" class="control-label"></label>
+                <input asp-for="Room" class="form-control" value="@ViewData["roomnum"]" disabled />
+                <span asp-validation-for="Room" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" value="@ViewData["price"]" disabled />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Apply" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

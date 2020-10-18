@@ -15,7 +15,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -258,10 +258,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastFourOfSSN")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Occupation")
                         .HasColumnType("nvarchar(max)");
 
@@ -269,7 +265,17 @@ namespace Peach_Grove_Apartments_Demo_Project.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ReasonForMoving")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Room")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SSN")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -314,7 +320,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastFourOfSSN")
+                    b.Property<string>("SSN")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
