@@ -313,4 +313,8 @@ div.login-form-icon {
     background-color: transparent;*/
     text-align: center;
 }
+
+.default-val-none {
+    display: none;
+}
 /*End Custom styles*/

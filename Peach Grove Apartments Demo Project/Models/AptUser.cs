@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace Peach_Grove_Apartments_Demo_Project.Models
 {
     public class AptUser : IdentityUser
-    {
+    { 
         [Required]
-        public string FName { get; set; }
+        public string FirstName { get; set; }
         [Required]
-        public string LName { get; set; }
+        public string LastName { get; set; }
         [Required]
         [Column(TypeName = "date")]
         public DateTime DateOfBirth { get; set; }
@@ -25,9 +25,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         public string State { get; set; }
         [Required]
         public string Zipcode { get; set; }
-        [Required]
         public string SSN { get; set; }
         public Boolean IsResident { get; set; }
-
+        public virtual ICollection<Application> Applications { get; set; }
     }
 }

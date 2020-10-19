@@ -86,9 +86,9 @@
                         <td>750 SF</td>
                         <td>$750</td>
                         <td><div class="fp-applylink">@{ if (User.Identity.IsAuthenticated)
-                            { <a asp-controller="home" asp-action="apply" asp-route-roomnum="5432-315" asp-route-price="750">Apply Now!</a>}
+                            { <a asp-controller="home" asp-action="apply" asp-route-room="5432-315" asp-route-price="750">Apply Now!</a>}
                             else
-                            { <a asp-area="Identity" asp-page="/Account/Login" >Apply Now!</a>} }</div></td>
+                            { <a asp-area="Identity" asp-page="/Account/Login">Apply Now!</a>} }</div></td>
                     </tr>
                     <tr>
                         <td>5432-720</td>
@@ -97,9 +97,9 @@
                         <td>$750</td>
 
                         <td><div class="fp-applylink">@{ if (User.Identity.IsAuthenticated)
-                            { <a asp-controller="home" asp-action="apply">Apply Now!</a>}
+                            { <a asp-controller="home" asp-action="apply"  asp-route-room="5432-720" asp-route-price="750">Apply Now!</a>}
                             else
-                            { <a asp-area="Identity" asp-page="/Account/Login" asp-route-roomnum="5432-720" asp-route-price="750">Apply Now!</a>} }</div></td>
+                            { <a asp-area="Identity" asp-page="/Account/Login">Apply Now!</a>} }</div></td>
                     </tr>
                     <tr>
                         <td>5433-403</td>
@@ -107,15 +107,13 @@
                         <td>750 SF</td>
                         <td>$750</td>
                         <td><div class="fp-applylink">@{ if (User.Identity.IsAuthenticated)
-                            { <a asp-controller="home" asp-action="apply">Apply Now!</a>}
+                            { <a asp-controller="home" asp-action="apply" asp-route-room="5433-403" asp-route-price="750">Apply Now!</a>}
                             else
-                            { <a asp-area="Identity" asp-page="/Account/Login" asp-route-roomnum="5433-403" asp-route-price="750">Apply Now!</a>} }</div></td>
+                            { <a asp-area="Identity" asp-page="/Account/Login">Apply Now!</a>} }</div></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
-
         <div id="1bed" class="container tab-pane fade">
             <br>
             <h3>1 Bed/1 Bath Floor Plan</h3>
@@ -143,9 +141,9 @@
                         <td>1,050 SF</td>
                         <td>$1,150</td>
                         <td><div class="fp-applylink">@{ if (User.Identity.IsAuthenticated)
-                            { <a asp-controller="home" asp-action="apply">Apply Now!</a>}
+                            { <a asp-controller="home" asp-action="apply" asp-route-room="5432-210" asp-route-price="1,150">Apply Now!</a>}
                             else
-                            { <a asp-area="Identity" asp-page="/Account/Login" asp-route-roomnum="5432-210" asp-route-price="1,150">Apply Now!</a>} }</div></td>
+                            { <a asp-area="Identity" asp-page="/Account/Login">Apply Now!</a>} }</div></td>
                     </tr>
                     <tr>
                         <td>5432-319</td>
@@ -153,9 +151,9 @@
                         <td>1,050 SF</td>
                         <td>$1,150</td>
                         <td><div class="fp-applylink">@{ if (User.Identity.IsAuthenticated)
-                            { <a asp-controller="home" asp-action="apply">Apply Now!</a>}
+                            { <a asp-controller="home" asp-action="apply" asp-route-room="5432-319" asp-route-price="1,150">Apply Now!</a>}
                             else
-                            { <a asp-area="Identity" asp-page="/Account/Login" asp-route-roomnum="5432-319" asp-route-price="1,150">Apply Now!</a>} }</div></td>
+                            { <a asp-area="Identity" asp-page="/Account/Login">Apply Now!</a>} }</div></td>
                     </tr>
                     <tr>
                         <td>5433-819</td>
@@ -163,9 +161,9 @@
                         <td>1,050 SF</td>
                         <td>$1,150</td>
                         <td><div class="fp-applylink">@{ if (User.Identity.IsAuthenticated)
-                            { <a asp-controller="home" asp-action="apply">Apply Now!</a>}
+                            { <a asp-controller="home" asp-action="apply" asp-route-room="5433-819" asp-route-price="1,150">Apply Now!</a>}
                             else
-                            { <a asp-area="Identity" asp-page="/Account/Login" asp-route-roomnum="5433-819" asp-route-price="1,150">Apply Now!</a>} }</div></td>
+                            { <a asp-area="Identity" asp-page="/Account/Login">Apply Now!</a>} }</div></td>
                     </tr>
                 </tbody>
             </table>
@@ -199,9 +197,9 @@
                         <td>2,000 SF</td>
                         <td>$1,300</td>
                         <td><div class="fp-applylink">@{ if (User.Identity.IsAuthenticated)
-                            { <a asp-controller="home" asp-action="apply">Apply Now!</a>}
+                            { <a asp-controller="home" asp-action="apply" asp-route-room="5432-300" asp-route-price="1,300">Apply Now!</a>}
                             else
-                            { <a asp-area="Identity" asp-page="/Account/Login" asp-route-roomnum="5432-300" asp-route-price="1,300">Apply Now!</a>} }</div></td>
+                            { <a asp-area="Identity" asp-page="/Account/Login">Apply Now!</a>} }</div></td>
                     </tr>
                     <tr>
                         <td>5432-623</td>
@@ -209,9 +207,9 @@
                         <td>2,000 SF</td>
                         <td>$1,300</td>
                         <td><div class="fp-applylink">@{ if (User.Identity.IsAuthenticated)
-                            { <a asp-controller="home" asp-action="apply">Apply Now!</a>}
+                            { <a asp-controller="home" asp-action="apply" asp-route-room="5432-623" asp-route-price="1,300">Apply Now!</a>}
                             else
-                            { <a asp-area="Identity" asp-page="/Account/Login" asp-route-roomnum="5432-623" asp-route-price="1,300">Apply Now!</a>} }</div></td>
+                            { <a asp-area="Identity" asp-page="/Account/Login">Apply Now!</a>} }</div></td>
                     </tr>
                     <tr>
                         <td>5433-411</td>
@@ -219,9 +217,9 @@
                         <td>2,000 SF</td>
                         <td>$1,300</td>
                         <td><div class="fp-applylink">@{ if (User.Identity.IsAuthenticated)
-                            { <a asp-controller="home" asp-action="apply">Apply Now!</a>}
+                            { <a asp-controller="home" asp-action="apply" asp-route-room="5432-411" asp-route-price="1,300">Apply Now!</a>}
                             else
-                            { <a asp-area="Identity" asp-page="/Account/Login" asp-route-roomnum="5432-411" asp-route-price="1,300">Apply Now!</a>} }</div></td>
+                            { <a asp-area="Identity" asp-page="/Account/Login">Apply Now!</a>} }</div></td>
                     </tr>
                 </tbody>
             </table>

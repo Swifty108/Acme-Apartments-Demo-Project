@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -12,8 +14,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
 
 namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
@@ -25,10 +29,12 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
         private readonly UserManager<AptUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private ApplicationDbContext _db;
 
         public RegisterModel(
             UserManager<AptUser> userManager,
             SignInManager<AptUser> signInManager,
+            ApplicationDbContext db,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -44,6 +50,62 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+
+        public List<SelectListItem> States { get; } = new List<SelectListItem>
+        {
+            new SelectListItem() {Text="AL", Value="AL"},
+            new SelectListItem() { Text="AK", Value="AK"},
+            new SelectListItem() { Text="AZ", Value="AZ"},
+            new SelectListItem() { Text="AR", Value="AR"},
+            new SelectListItem() { Text="CA", Value="CA"},
+            new SelectListItem() { Text="CO", Value="CO"},
+            new SelectListItem() { Text="CT", Value="CT"},
+            new SelectListItem() { Text="DC", Value="DC"},
+            new SelectListItem() { Text="DE", Value="DE"},
+            new SelectListItem() { Text="FL", Value="FL"},
+            new SelectListItem() { Text="GA", Value="GA"},
+            new SelectListItem() { Text="HI", Value="HI"},
+            new SelectListItem() { Text="ID", Value="ID"},
+            new SelectListItem() { Text="IL", Value="IL"},
+            new SelectListItem() { Text="IN", Value="IN"},
+            new SelectListItem() { Text="IA", Value="IA"},
+            new SelectListItem() { Text="KS", Value="KS"},
+            new SelectListItem() { Text="KY", Value="KY"},
+            new SelectListItem() { Text="LA", Value="LA"},
+            new SelectListItem() { Text="ME", Value="ME"},
+            new SelectListItem() { Text="MD", Value="MD"},
+            new SelectListItem() { Text="MA", Value="MA"},
+            new SelectListItem() { Text="MI", Value="MI"},
+            new SelectListItem() { Text="MN", Value="MN"},
+            new SelectListItem() { Text="MS", Value="MS"},
+            new SelectListItem() { Text="MO", Value="MO"},
+            new SelectListItem() { Text="MT", Value="MT"},
+            new SelectListItem() { Text="NE", Value="NE"},
+            new SelectListItem() { Text="NV", Value="NV"},
+            new SelectListItem() { Text="NH", Value="NH"},
+            new SelectListItem() { Text="NJ", Value="NJ"},
+            new SelectListItem() { Text="NM", Value="NM"},
+            new SelectListItem() { Text="NY", Value="NY"},
+            new SelectListItem() { Text="NC", Value="NC"},
+            new SelectListItem() { Text="ND", Value="ND"},
+            new SelectListItem() { Text="OH", Value="OH"},
+            new SelectListItem() { Text="OK", Value="OK"},
+            new SelectListItem() { Text="OR", Value="OR"},
+            new SelectListItem() { Text="PA", Value="PA"},
+            new SelectListItem() { Text="PR", Value="PR"},
+            new SelectListItem() { Text="RI", Value="RI"},
+            new SelectListItem() { Text="SC", Value="SC"},
+            new SelectListItem() { Text="SD", Value="SD"},
+            new SelectListItem() { Text="TN", Value="TN"},
+            new SelectListItem() { Text="TX", Value="TX"},
+            new SelectListItem() { Text="UT", Value="UT"},
+            new SelectListItem() { Text="VT", Value="VT"},
+            new SelectListItem() { Text="VA", Value="VA"},
+            new SelectListItem() { Text="WA", Value="WA"},
+            new SelectListItem() { Text="WV", Value="WV"},
+            new SelectListItem() { Text="WI", Value="WI"},
+            new SelectListItem() { Text="WY", Value="WY"}
+        };
 
         public class InputModel
         {
@@ -69,7 +131,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
             [Required]
-            [Column(TypeName = "date")]
+           // [Column(TypeName = "date")]
+            [DataType(DataType.Date)]
             [Display(Name = "Date of Birth")]
             public DateTime DateOfBirth { get; set; }
             [Required]
@@ -80,9 +143,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             [Required]
             public string State { get; set; }
             [Required]
+            [Display(Name = "Zip Code")]
             public string Zipcode { get; set; }
             [Required]
-            public string SSN { get; set; }
+            [Display(Name = "Phone Number")]
+            [DataType(DataType.PhoneNumber)]
+            [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+            public string PhoneNumber { get; set; }
             public Boolean IsResident { get; set; }
         }
 
@@ -101,10 +168,18 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                 Response.Redirect(returnUrl);
             }
 
+            //var tempUser = await _userManager.FindByNameAsync(Input.Email);
+
+            //if (tempUser != null)
+            //{
+            //    ModelState.AddModelError("Email", "User with this email already exists");
+            //   //return await this.OnGetAsync();
+            //}
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AptUser { UserName = Input.Email, Email = Input.Email, FName = Input.FName, LName = Input.LName, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, SSN = Input.SSN, IsResident = false };
+                var user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber, IsResident = false };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

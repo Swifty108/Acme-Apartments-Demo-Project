@@ -43,26 +43,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             }
         }
 
-
-        //[HttpPost]
-        //public async Task<IActionResult> Apply([Bind] Applicant model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _db.Applicants.AddAsync(model);
-        //        await _db.SaveChangesAsync();
-        //        ModelState.Clear();
-        //        ViewBag.Message = "All Done!";
-        //    }
-        //    else
-        //    {
-        //        return View();
-        //    }
-
-        //    return View();
-        //}
-
-
         // GET: UserAccount/Edit/5
         public ActionResult Edit(int id)
         {

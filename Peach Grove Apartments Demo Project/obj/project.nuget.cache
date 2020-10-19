@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ahdHXQvMNeXUVojE05fPr4FUzGZgZ+Gb7wBSOaouoE6aLofQOVz2ZuCHQALzePX7Mc0H+ovxjtyZs/5rfvWp5g==",
+  "dgSpecHash": "h7bHTtYsX7ge0Q179kWW5OeiH9vonkF0jkN02Zfj3ec5OgJWkurvAfAPYHlTZdwiBX7LHQ+V2wYDKCt6XB7nFA==",
   "success": true,
   "projectFilePath": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nova\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.9\\microsoft.aspnetcore.cryptography.internal.3.1.9.nupkg.sha512",
     "C:\\Users\\Nova\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.9\\microsoft.aspnetcore.cryptography.keyderivation.3.1.9.nupkg.sha512",
-    "C:\\Users\\Nova\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.8\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.8.nupkg.sha512",
+    "C:\\Users\\Nova\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.9\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.9.nupkg.sha512",
     "C:\\Users\\Nova\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Nova\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.9\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.9.nupkg.sha512",
     "C:\\Users\\Nova\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\3.1.9\\microsoft.aspnetcore.identity.ui.3.1.9.nupkg.sha512",
