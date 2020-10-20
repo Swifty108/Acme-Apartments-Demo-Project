@@ -2,7 +2,10 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
-    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+    // Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+
 }
 
 <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -137,10 +140,10 @@
         </div>
     </div>*@
 
-
 @section Scripts {
 
-   <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }
+
 
 

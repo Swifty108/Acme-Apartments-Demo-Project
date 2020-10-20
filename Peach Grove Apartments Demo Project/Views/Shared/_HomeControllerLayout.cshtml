@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewData["Title"] = "_HomeControllerLayout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="nav-header">
+    <div class="top-bar">
+
+        <div style=" width: 400px;margin: 0 auto;display: flex;justify-content: center;padding: 0;">
+            <div>
+                <div style="display: inline-block;margin-left: 3px" class="text-white">
+                    <i class="fa fa-phone"></i> <a href="tel:123-456-7890" style="color:white;text-decoration: none">(412) 555-1212</a>
+                </div> <div style="display: inline-block;">
+                    <partial name="_LoginPartial.cshtml" />
+                    @*@await Html.PartialAsync("_LoginPartial.cshtml")  <a asp-area="Identity" asp-page="/Account/Login" style="color: white;">Login</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-menu-bar">
+
+
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#" style="margin-left: 320px;">
+
+                <img src="~/images/logo.jpg" />
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 30px;">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-controller="home" asp-action="index">HOME <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="home" asp-action="amenities">AMENITIES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="home" asp-action="floorplans">FLOOR PLANS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="home" asp-action="gallery">PHOTOS & TOUR</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+
+
+    </div>
+</header>
+
+<div class="container-fluid">
+
+
+
+    <div class="row py-md-5">
+
+        <div class="col-md-6 offset-2">
+            @RenderBody()
+        </div>
+
+        <div class="col-md-2 order-2">
+
+            <aside id="sidebar">
+                <section id="contact-widget">
+
+                    <span style="font-weight: bold; font-size: 20px;">Contact</span><br /><br />
+
+                    <span>(412) 555-1212</span><br />
+                    <span>Email Us</span>
+
+
+                    <br />
+
+                    <br />
+                </section>
+                <section id="contact-widget">
+                    <br />
+                    <br />
+                    <span style="font-weight: bold; font-size: 20px;">Pet Policy</span>                      <br /><br />
+                    <a href="#petPolicyModal" data-toggle="modal" data-target="#petPolicyModal">View Our Pet Policy</a>
+                    <br />
+                    <br />
+                    <br />
+                </section>
+
+
+                <section id="contact-widget">
+
+                    <br /><br />
+                    <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
+
+
+                    1201 Peach Grove Blvd.<br />
+                    Pittsburgh, PA 15213<br />
+                    <br /><br />
+                </section>
+                <br />
+                <br />
+
+                <section style="width: 280px; border-bottom: 1px solid lightgray;">
+                    <span style="font-weight: bold; font-size: 20px;">Offie Hours</span><br /><br />
+                    Monday - Friday 9:00am to 6:00pm <br />
+                    Saturday By Appointment
+                    <br />
+                    <br />
+                    <br />
+
+                </section>
+
+
+                <br />
+                <br />
+                <br />
+            </aside>
+        </div>
+
+
+    </div>
+</div>
+
+<br />
+
+<div class="modal fade" tabindex="" id="petPolicyModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">OUR PET POLICY</h4>
+
+                <button type="button" class="close" data-dismiss="modal">
+                    X
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    We welcome small dogs and cats. Each animal in your apartment is subject to a one-time non-refundable fee of $250.00. We allow Dogs up to 45lbs full grown. Breed restrictions may apply Cats are permitted in any unit. We do not allow more than 2 animals in any unit. The pet rent for your furry friend(s) is as follows; All pets cats and dogs are $25.00 per month. Total combined pet weight cannot exceed 45lbs. Please call the leasing office with any questions about our pet policy. *Subject to change at any time*
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -9,12 +9,13 @@
 
             var user = await UserManager.GetUserAsync(User);
 
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @user.FirstName!</a>
-            </li>
+        <li class="nav-item">
+            @*<a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa fa-tachometer text-white"></i> Hello @user.FirstName!</a>*@
+            <a class="nav-link text-white" asp-controller="useraccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
+        </li>
             <li class="nav-item text-white">
                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
-                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                    <button type="submit" class="nav-link btn btn-link text-white" style="margin-left: 10px;"> <i class="fa fa-sign-out text-white"></i> Logout</button>
                 </form>
 
                 @*<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -25,10 +26,10 @@
         else
         {
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register"><i class="fa fa-registered text-white"></i> Register</a>
+                <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register" style="margin-left: 10px;"><i class="fa fa-registered text-white"></i> Register</a>
             </li>
-            <li class="nav-item" style="margin-left: 3px;">
-                 <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-user-circle text-white"></i> Login</a>
+              <li class="nav-item" style="margin-left: 3px;">
+                 <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login" style="margin-left: 10px;"><i class="fa fa-user-circle text-white"></i> Login</a>
             </li>
         }
     </ul>
