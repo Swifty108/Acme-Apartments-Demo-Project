@@ -26,17 +26,20 @@
 
     <header class="nav-header">
         <div class="top-bar">
-            <div style="font-family: Raleway, sans-serif; color: white; display: flex; margin-top: 10px;">
+         
 
-                <div>
-                    <i class="fa fa-phone"></i> (412) 555-1212
+                <div style=" width: 400px;margin: 0 auto;display: flex;justify-content: center;padding: 0;">
+                    <div>
+                        <div style="display: inline-block;margin-left: 3px" class="text-white">
+                            <i class="fa fa-phone"></i> <a href="tel:123-456-7890" style="color:white;text-decoration: none">(412) 555-1212</a>
+                        </div> <div style="margin-left: 3px;display: inline-block;">
+                            <partial name="_LoginPartial.cshtml" />
+                            @*@await Html.PartialAsync("_LoginPartial.cshtml")  <a asp-area="Identity" asp-page="/Account/Login" style="color: white;">Login</a>*@
+                        </div>
+                    </div>
                 </div>
 
-                <div style="margin-left: 15px;">
-                    <i class="fa fa-user-circle"></i> <a asp-area="Identity" asp-page="/Account/Login" style="color: white;">Login</a>
-                </div>
-
-            </div>
+          
         </div>
 
         <div class="bottom-menu-bar">

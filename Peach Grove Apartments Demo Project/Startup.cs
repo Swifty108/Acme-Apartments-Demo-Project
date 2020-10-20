@@ -35,6 +35,7 @@ namespace Peach_Grove_Apartments_Demo_Project
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
