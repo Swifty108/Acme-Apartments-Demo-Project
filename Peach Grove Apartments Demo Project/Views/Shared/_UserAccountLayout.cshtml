@@ -24,7 +24,7 @@
 
 
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="#" style="margin-left: 320px;">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index" style="margin-left: 320px;">
 
                 <img src="~/images/logo.jpg" />
             </a>
@@ -35,20 +35,21 @@
                         <a class="nav-link" asp-controller="home" asp-action="index">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="home" asp-action="amenities">AMENITIES</a>
+                        <a class="nav-link" asp-controller="home" asp-action="amenities">PAYMENTS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="home" asp-action="floorplans">FLOOR PLANS</a>
+                        <a class="nav-link" asp-controller="home" asp-action="floorplans">MAINTENANCE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="home" asp-action="gallery">PHOTOS & TOUR</a>
-                    </li>
+                        <a class="nav-link" asp-controller="home" asp-action="gallery">WRITE A REVIEW</a>
 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="home" asp-action="gallery">CONTACT US</a>
+                    </li>
                 </ul>
             </div>
         </nav>
-
-
 
     </div>
 </header>

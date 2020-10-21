@@ -1,0 +1,25 @@
+﻿/*User Account Styles*/
+
+/*ul.widgeticons, .widgeticons li {
+    margin: 0;
+    padding: 0;
+}
+*/
+ul.widgeticons {
+    list-style-type: none;
+    margin-top: 30px;
+    padding: 0;
+    justify-content: left;
+}
+
+.widgeticons li {
+    width: 190px;
+    border: 1px solid #ccc;
+    background: #fcfcfc;
+    text-align: center !important;
+    text-decoration: none !important;
+    padding: 20px;
+    display: inline-block;
+    margin-right: 20px;
+}
+/*End Custom styles*/
