@@ -17,6 +17,26 @@ body {
     font-family: Raleway, sans-serif;
 }
 
+/* unvisited link */
+/*a:link {
+   color: blue;
+}
+
+ visited link 
+a:visited {
+    color: green;
+}*/
+
+/* mouse over link */
+a:hover {
+    color: #62b2ff;
+    text-decoration: none;
+}
+
+/* selected link */
+/*a:active {
+    color: blue;
+}*/
 .nav-header {
     /*    position: -webkit-sticky;
     position: sticky;
@@ -115,7 +135,7 @@ button.accept-policy {
 }
 
 .footer-address {
-    padding-top: 150px;
+    padding-top: 100px;
     text-align: center;
     font-size: 26px;
     color: white;
@@ -317,4 +337,6 @@ div.login-form-icon {
 .default-val-none {
     display: none;
 }
+
+
 

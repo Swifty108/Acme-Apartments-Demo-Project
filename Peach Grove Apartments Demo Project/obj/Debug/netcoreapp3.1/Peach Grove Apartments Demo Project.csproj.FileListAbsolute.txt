@@ -137,9 +137,6 @@ D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.AssemblyInfoInputs.cache
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.AssemblyInfo.cs
-D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csproj.CoreCompileInputs.cache
-D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cs
-D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cache
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.RazorAssemblyInfo.cache
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.RazorAssemblyInfo.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.TagHelpers.input.cache
@@ -166,10 +163,7 @@ D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ParentAuthLayout.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_TopNavStatic.cshtml.g.cs
-D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_UserAccountLayout.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\UserAccount\Index.cshtml.g.cs
-D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\UserAccount\_ViewStart.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.RazorTargetAssemblyInfo.cache
@@ -181,4 +175,34 @@ D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.dll
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.pdb
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.genruntimeconfig.cache
-D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csprojAssemblyReference.cache
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Sqlite.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\SQLitePCLRaw.core.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\SQLitePCLRaw.provider.dynamic_cdecl.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\alpine-x64\native\libe_sqlite3.so
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\linux-arm\native\libe_sqlite3.so
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\linux-arm64\native\libe_sqlite3.so
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\linux-armel\native\libe_sqlite3.so
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\linux-musl-x64\native\libe_sqlite3.so
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libe_sqlite3.so
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\linux-x86\native\libe_sqlite3.so
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\libe_sqlite3.dylib
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\e_sqlite3.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csproj.CoreCompileInputs.cache
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cache
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\AppUserAccount\Create.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\AppUserAccount\Delete.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\AppUserAccount\Details.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\AppUserAccount\Edit.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\AppUserAccount\Index.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\AppUserAccount\_ViewStart.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AppUserAccountLayout.cshtml.g.cs
