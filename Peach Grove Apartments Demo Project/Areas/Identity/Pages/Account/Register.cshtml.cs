@@ -29,12 +29,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
         private readonly UserManager<AptUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private ApplicationDbContext _db;
 
         public RegisterModel(
             UserManager<AptUser> userManager,
             SignInManager<AptUser> signInManager,
-            ApplicationDbContext db,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {

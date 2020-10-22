@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Models
 {
-    public class ApplicationViewModel
+    public class Class
     {
-
     }
 }

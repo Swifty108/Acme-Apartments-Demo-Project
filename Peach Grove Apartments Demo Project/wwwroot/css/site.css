@@ -17,6 +17,11 @@ body {
     font-family: Raleway, sans-serif;
 }
 
+
+textarea {
+    width: 700px !important;
+    height: 160px;
+}
 /* unvisited link */
 /*a:link {
    color: blue;

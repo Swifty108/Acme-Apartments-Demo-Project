@@ -10,8 +10,8 @@ using Peach_Grove_Apartments_Demo_Project.Data;
 namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201022011530_adddatereqcolumnmainttable")]
-    partial class adddatereqcolumnmainttable
+    [Migration("20201022154044_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -324,7 +324,7 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateRequested")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ProblemDescription")
                         .IsRequired()
@@ -338,6 +338,32 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     b.HasIndex("AptUserId");
 
                     b.ToTable("MaintenanceRequests");
+                });
+
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AptUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateReviewed")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReviewText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(10000);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AptUserId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.WaterBill", b =>
@@ -432,6 +458,15 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                 });
 
             modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.MaintenanceRequest", b =>
+                {
+                    b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
+                        .WithMany()
+                        .HasForeignKey("AptUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.Review", b =>
                 {
                     b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
                         .WithMany()

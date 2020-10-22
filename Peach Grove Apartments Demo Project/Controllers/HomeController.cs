@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.Extensions.Logging;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
+using Peach_Grove_Apartments_Demo_Project.ViewModels;
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {

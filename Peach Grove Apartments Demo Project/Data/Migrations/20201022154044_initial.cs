@@ -208,6 +208,49 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MaintenanceRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateRequested = table.Column<DateTime>(nullable: false),
+                    AptUserId = table.Column<string>(nullable: false),
+                    ProblemDescription = table.Column<string>(nullable: false),
+                    isAllowedToEnter = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MaintenanceRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MaintenanceRequests_AspNetUsers_AptUserId",
+                        column: x => x.AptUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateReviewed = table.Column<DateTime>(nullable: false),
+                    AptUserId = table.Column<string>(nullable: false),
+                    ReviewText = table.Column<string>(maxLength: 10000, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_AspNetUsers_AptUserId",
+                        column: x => x.AptUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "WaterBills",
                 columns: table => new
                 {
@@ -278,6 +321,16 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                 column: "AptUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MaintenanceRequests_AptUserId",
+                table: "MaintenanceRequests",
+                column: "AptUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_AptUserId",
+                table: "Reviews",
+                column: "AptUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_WaterBills_AptUserId",
                 table: "WaterBills",
                 column: "AptUserId");
@@ -305,6 +358,12 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 
             migrationBuilder.DropTable(
                 name: "ElectricBills");
+
+            migrationBuilder.DropTable(
+                name: "MaintenanceRequests");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "WaterBills");

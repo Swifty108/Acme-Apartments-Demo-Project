@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.ComponentModel;
+﻿using Peach_Grove_Apartments_Demo_Project.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Peach_Grove_Apartments_Demo_Project.Models
+namespace Peach_Grove_Apartments_Demo_Project.ViewModels
 {
     public class ApplyViewModel
     {

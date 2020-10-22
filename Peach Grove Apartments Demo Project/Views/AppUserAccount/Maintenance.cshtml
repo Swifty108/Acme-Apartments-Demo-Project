@@ -1,14 +1,31 @@
-﻿@model Peach_Grove_Apartments_Demo_Project.Models.CompositeMaintRequestViewModel
+﻿@model Peach_Grove_Apartments_Demo_Project.ViewModels.MaintenanceRequestViewModel
 @{
     ViewData["Title"] = "Maintenance";
     Layout = "~/Views/Shared/_AppUserAccountLayout.cshtml";
 }
 
-@{
-
+@if (ViewBag.MaintenanceSuccess != null && ViewBag.MaintenanceSuccess)
+{
+    <div style="background: #5ce600; color: white; width: 600px;text-align: center;padding: 40px;">
+        <div style="display: inline-block;">
+            <b>Your maintenance request was submitted successfully!</b>
+        </div>
+    </div>
+    <br />
+    <br />
+}
+else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
+{
+    <div style="background: #5ce600; color: white; width: 600px;text-align: center;padding: 40px;">
+        <div style="display: inline-block;">
+            <b>There was a problem submitting your request. Please try again later.</b>
+        </div>
+    </div>
+    <br />
+    <br />
 }
 
-<h1>Maintenance Requests</h1>
+<h1>New Maintenance Request</h1>
 <br />
 <div class="container">
     <ul class="nav nav-tabs mp" role="tablist">
@@ -29,13 +46,13 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#reqhistory">
+            <a class="nav-link" asp-controller="appuseraccount" asp-action="reqhistory">
 
                 <div class="wrapper">
 
 
                     <div class="fp-link-content">
-                        <span class="fp-group-name"> Request History</span>
+                        <span class="fp-group-name"> Request History </span>
 
                     </div>
 
@@ -52,21 +69,19 @@
 
         <div id="newreq" class="container tab-pane active">
 
-            <br>
-            <h3>Submit A Request</h3>
             <br />
-
-            <form id="newreq" asp-action="Maintenance">
+            <form id="newreq" asp-action="maintenance">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @*<input type="hidden" asp-for="@Model.User" value="@Model.User" />*@
 
                 <div class="form-group">
-                    <label asp-for="@Model.MaintenanceRequestViewModel.ProblemDescription" class="control-label"></label>
-                    <textarea asp-for="@Model.MaintenanceRequestViewModel.ProblemDescription" class="form-control" style="width: 650px;"></textarea>
+                    <label asp-for="ProblemDescription" class="control-label"></label>
+                    <textarea asp-for="ProblemDescription" class="form-control" maxlength="10000" required></textarea>
+                    <span asp-validation-for="ProblemDescription" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="@Model.MaintenanceRequestViewModel.isAllowedToEnter" class="control-label"></label>
-                    <input asp-for="@Model.MaintenanceRequestViewModel.isAllowedToEnter" class="control-label" />
+                    <input asp-for="isAllowedToEnter" class="control-label" />
+                    <label asp-for="isAllowedToEnter" class="control-label"></label>
+                    <span asp-validation-for="isAllowedToEnter" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Submit" class="btn btn-primary" />
@@ -76,114 +91,14 @@
 
         </div>
 
-        <div id="reqhistory" class="container tab-pane">
 
-            <br>
-            <h3>Maintenance Request History</h3>
-            <br />
-
-            <table class="table fp-table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Date Requested</th>
-                        <th scope="col">Description</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @{ foreach (var request in Model.MaintenanceRequests)
-
-                        {
-
-                            <tr>
-                                <td>@request.DateRequested.ToString("MM/dd/yyyy")</td>
-                                <td>@request.ProblemDescription</td>
-                            </tr>
-                        }
-
-                    }
-
-
-
-                </tbody>
-            </table>
-
-
-
-        </div>
 
     </div>
 
+
 </div>
-
-@{
-
-    
-    if (TempData["isSuccess"].ToString() == "success")
-
-    {
-        <div class="modal fade" tabindex="" id="success-modal"
-             data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <h4 class="modal-title" style="background: lightgreen; padding: 30px;">Success!</h4>
-
-                        <button type="button" class="close" data-dismiss="modal">
-                            X
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            Your maintenance request was submitted successfully.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-    else if (TempData["isSuccess"].ToString() == "failure")
-    {
-        <div class="modal fade" tabindex="" id="failure-modal"
-             data-keyboard="false" data-backdrop="static">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <h4 class="modal-title" style="background: #ff6666; padding: 30px;">Something Went Wrong!</h4>
-
-                        <button type="button" class="close" data-dismiss="modal">
-                            X
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            Something went wrong while submitting your request. Our IT engineers have been notified. Thanks!<br />
-                            Error Message: @TempData["maintReqError"]
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
 
 }
-
-
-
-
-
-
-
-<script>
-    if (@TempData["isSuccess"].ToString() == "success")
-    {
-   $('#success-modal').show();
-    }
-    else if(@TempData["isSuccess"].ToString() == "failure")
-    {
-  $('#falure-modal').show();
-    }
-</script>

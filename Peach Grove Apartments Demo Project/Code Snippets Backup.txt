@@ -436,3 +436,661 @@
 
             return View(payViewModel);
         }
+
+        //////// AppUserAccountController /////////////
+
+ private readonly ApplicationDbContext _context;
+        private readonly UserManager<AptUser> _userManager;
+
+        public AppUserAccountController(ApplicationDbContext context, UserManager<AptUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
+
+        // GET: AppUserAccount
+        public IActionResult Index()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Maintenance()
+        {
+            //var user = await _userManager.GetUserAsync(User);
+
+            //var maintreq = new MaintenanceRequest { AptUser = user, ProblemDescription = "My closet door is not opening smoothly. This started yesterday.", DateRequested = DateTime.Now, isAllowedToEnter = true };
+
+            //await _context.MaintenanceRequests.AddAsync(maintreq);
+            //await _context.SaveChangesAsync();
+
+            // var maintReq = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).FirstOrDefaultAsync();
+            // var maintReqs = await _context.MaintenanceRequests.ToListAsync();
+
+            //var maintenanceReqViewModel = new CompositeMaintRequestViewModel
+            //{
+            //    MaintenanceRequestViewModel = new MaintenanceRequestViewModel { },
+            //    MaintenanceRequests = maintReqs
+            //};
+
+            //var maintenanceReqViewModel = new MaintenanceRequestViewModel
+            //{
+
+            //};
+          
+            ViewBag.Success = TempData["isSuccess"];
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Maintenance(MaintenanceRequestViewModel maintReqViewModel)
+        {
+
+            //var maintReqs = await _context.MaintenanceRequests.ToListAsync();
+            //maintReqViewModel.MaintenanceRequests = maintReqs;
+
+            if (ModelState.IsValid) // Is User Input Valid?
+            {
+
+                try
+                {
+                    
+                    var user = await _userManager.GetUserAsync(User);
+                    var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription };
+                    await _context.MaintenanceRequests.AddAsync(maintReq);
+                    await _context.SaveChangesAsync();
+
+                  
+
+                    //TempData["isSuccess"] = new MessageVM() { CssClassName = "alert-sucess", Title = "Success!", Message = "Operation Done." };
+                   
+                    TempData["isSuccess"] = true;
+
+                    return RedirectToAction("Maintenance");
+
+                }
+                catch (Exception e)
+                {
+                    TempData["SuccessMessage"] = "failure";
+                   // maintReqViewModel.SuccessMessage = "failure";
+                    TempData["maintReqError"] = e;
+                    return View(maintReqViewModel);
+
+                }
+
+            }
+
+            return View(maintReqViewModel);
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Maintenance(MaintenRequestViewModel compMaintReqViewModel)
+        //{
+
+        //    var maintReqs = await _context.MaintenanceRequests.ToListAsync();
+        //    compMaintReqViewModel.MaintenanceRequests = maintReqs;
+
+        //    if (ModelState.IsValid) // Is User Input Valid?
+        //    {
+
+        //        try
+        //        {
+
+        //            var user = await _userManager.GetUserAsync(User);
+        //            var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = compMaintReqViewModel.MaintenanceRequestViewModel.isAllowedToEnter, ProblemDescription = compMaintReqViewModel.MaintenanceRequestViewModel.ProblemDescription };
+        //            await _context.MaintenanceRequests.AddAsync(maintReq);
+        //            await _context.SaveChangesAsync();
+
+
+
+        //            //TempData["isSuccess"] = new MessageVM() { CssClassName = "alert-sucess", Title = "Success!", Message = "Operation Done." };
+        //            TempData["SuccessMessage"] = "success";
+
+        //            return View(compMaintReqViewModel);
+
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            TempData["SuccessMessage"] = "falure";
+        //            TempData["maintReqError"] = e;
+        //            return View(compMaintReqViewModel);
+
+        //        }
+
+        //    }
+
+        //    return View(compMaintReqViewModel);
+        //}
+
+
+        [HttpGet]
+        public async Task<IActionResult> ReqHistory()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            //var maintreq = new MaintenanceRequest { AptUser = user, ProblemDescription = "My closet door is not opening smoothly. This started yesterday.", DateRequested = DateTime.Now, isAllowedToEnter = true };
+
+            //await _context.MaintenanceRequests.AddAsync(maintreq);
+            //await _context.SaveChangesAsync();
+
+            //var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToList();
+            var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
+
+            //var maintenanceReqViewModel = new CompositeMaintRequestViewModel
+            //{
+            //    MaintenanceRequestViewModel = new MaintenanceRequestViewModel { },
+            //    MaintenanceRequests = maintReqs
+            //};
+
+            var maintReqViewModel = new MaintenanceReqHistoryViewModel { Requests = maintReqs };
+
+            TempData["SuccessMessage"] = "";
+
+            return View(maintReqViewModel);
+        }
+
+
+        public async Task<IActionResult> Payments()
+        {
+
+
+            var user = await _userManager.GetUserAsync(User);
+
+            var waterBill = await _context.WaterBills.FirstOrDefaultAsync();
+            var electricBill = await _context.ElectricBills.FirstOrDefaultAsync();
+            var wbill = new WaterBill();
+            var ebill = new ElectricBill();
+
+            if (waterBill == null)
+            {
+                wbill = new WaterBill { AptUser = user, Amount = 42.53M, DateDue = DateTime.Now.AddDays(20) };
+                await _context.AddAsync(wbill);
+                await _context.SaveChangesAsync();
+            }
+
+            if (electricBill == null)
+            {
+                ebill = new ElectricBill { AptUser = user, Amount = 96.53M, DateDue = DateTime.Now.AddDays(20) };
+                await _context.AddAsync(ebill);
+                await _context.SaveChangesAsync();
+            }
+
+            var app = await _context.Applications.Where(u => u.AptUserId == user.Id).FirstOrDefaultAsync();
+
+            //var waterBill = _context.WaterBills.Include(a => a.AptUser);
+
+            var payViewModel = new PaymentsViewModel
+            {
+                Application = app,
+                WaterBill = waterBill ?? wbill,
+                ElectricBill = electricBill ?? ebill
+            };
+            //return View(await applicationDbContext.ToListAsync());
+
+            return View(payViewModel);
+        }
+
+        public IActionResult WriteReview()
+        {
+            ViewBag.ReviewSuccess = TempData["ReviewSuccess"];
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> WriteReview(ReviewViewModel review)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var newReview = new Review { AptUser = user, DateReviewed = DateTime.Now.AddDays(20), ReviewText = review.ReviewText  };
+                await _context.AddAsync(newReview);
+                await _context.SaveChangesAsync();
+
+                TempData["ReviewSuccess"] = true;
+                return RedirectToAction("WriteReview");
+
+            }
+            return View();
+        }
+
+        [HttpGet]
+
+        public IActionResult ContactUs()
+        {
+            ViewBag.ContactUsSuccess = TempData["ContactUsSuccess"];
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ContactUs(ContactViewModel viewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                TempData["ContactUsSuccess"] = true;
+                return RedirectToAction("ContactUs");
+            }
+            return View(viewModel);
+        }
+
+
+
+        // GET: AppUserAccount/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var application = await _context.Applications
+                .Include(a => a.AptUser)
+                .FirstOrDefaultAsync(m => m.ApplicationId == id);
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            return View(application);
+        }
+
+        // GET: AppUserAccount/Create
+        public IActionResult Create()
+        {
+            ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id");
+            return View();
+        }
+
+        // POST: AppUserAccount/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ApplicationId,AptUserId,Occupation,Income,ReasonForMoving,SSN,Room,Price")] Application application)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(application);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
+            return View(application);
+        }
+
+        // GET: AppUserAccount/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var application = await _context.Applications.FindAsync(id);
+            if (application == null)
+            {
+                return NotFound();
+            }
+            ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
+            return View(application);
+        }
+
+        // POST: AppUserAccount/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ApplicationId,AptUserId,Occupation,Income,ReasonForMoving,SSN,Room,Price")] Application application)
+        {
+            if (id != application.ApplicationId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(application);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ApplicationExists(application.ApplicationId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
+            return View(application);
+        }
+
+        // GET: AppUserAccount/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var application = await _context.Applications
+                .Include(a => a.AptUser)
+                .FirstOrDefaultAsync(m => m.ApplicationId == id);
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            return View(application);
+        }
+
+        // POST: AppUserAccount/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var application = await _context.Applications.FindAsync(id);
+            _context.Applications.Remove(application);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ApplicationExists(int id)
+        {
+            return _context.Applications.Any(e => e.ApplicationId == id);
+        }
+
+
+        //////// Maintenance View ////////////
+        
+        
+        @model Peach_Grove_Apartments_Demo_Project.ViewModels.MaintenanceRequestViewModel
+@{
+    ViewData["Title"] = "Maintenance";
+    Layout = "~/Views/Shared/_AppUserAccountLayout.cshtml";
+}
+
+@if (ViewBag.Success != null && ViewBag.Success)
+{
+    @*<div class="modal fade show" tabindex="" id="success-modal"
+             data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title" style="background: lightgreen; padding: 30px;">Success!</h4>
+
+                        <button type="button" class="close" data-dismiss="modal">
+                            X
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Your maintenance request was submitted successfully.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+
+                $("#success-modal").show;
+            }
+        </script>*@
+
+    <div style="background: #5ce600; color: white; width: 600px;text-align: center;padding: 40px;">
+        <div style="display: inline-block;">
+            <b>Your maintenance request was submitted successfully</b>
+        </div>
+    </div>
+    <br />
+    <br />
+
+}
+
+<h1>New Maintenance Request</h1>
+<br />
+<div class="container">
+    <ul class="nav nav-tabs mp" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#newreq">
+
+                <div class="wrapper">
+
+
+                    <div class="fp-link-content">
+                        <span class="fp-group-name"> New Request </span>
+
+                    </div>
+
+
+                </div>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="appuseraccount" asp-action="reqhistory">
+
+                <div class="wrapper">
+
+
+                    <div class="fp-link-content">
+                        <span class="fp-group-name"> Request History </span>
+
+                    </div>
+
+
+                </div>
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="tab-content">
+
+
+        <div id="newreq" class="container tab-pane active">
+
+            <br />
+            <form id="newreq" asp-action="maintenance">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @*<input type="hidden" asp-for="@Model.User" value="@Model.User" />*@
+
+            <div class="form-group">
+                <label asp-for="ProblemDescription" class="control-label"></label>
+                <textarea asp-for="ProblemDescription" class="form-control" maxlength="10000" required></textarea>
+                <span asp-validation-for="ProblemDescription" class="text-danger"></span>
+                @*@Html.TextAreaFor(model => model.ProblemDescription, new { required = "required", htmlAttributes = new { @class = "form-control" } })*@
+
+
+
+                @*<textarea asp-for="@Model.MaintenanceRequestViewModel.ProblemDescription" class="form-control" style="width: 650px;" maxlength="10000" required></textarea>*@
+            </div>
+            <div class="form-group">
+                <input asp-for="isAllowedToEnter" class="control-label" />
+                <label asp-for="isAllowedToEnter" class="control-label"></label>
+                <span asp-validation-for="isAllowedToEnter" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+
+
+        </div>
+
+
+
+    </div>
+
+
+    @{
+
+        @*@if ((string)TempData["SuccessMessage"] == "success")
+            {
+                <div class="modal fade in" tabindex="" id="success-modal"
+                     data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title" style="background: lightgreen; padding: 30px;">Success!</h4>
+
+                                <button type="button" class="close" data-dismiss="modal">
+                                    X
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    Your maintenance request was submitted successfully.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            }
+            else
+            {
+                @TempData["SuccessMessage"].ToString()
+            }*@
+
+
+        <!--if (TempData["SuccessMessage"].ToString() == "success")
+
+        {
+
+            <div class="modal show fade" tabindex="" id="success-modal"
+                 data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <h4 class="modal-title" style="background: lightgreen; padding: 30px;">Success!</h4>
+
+                            <button type="button" class="close" data-dismiss="modal">
+                                X
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Your maintenance request was submitted successfully.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+        @*<script>
+                $(document).ready(function () {
+                    $('#success-modal').show();
+                }
+            </script>*@
+
+
+        <!--}
+        else if (TempData["SuccessMessage"].ToString() == "failure")
+        {
+            <div class="modal fade" tabindex="" id="failure-modal"
+                 data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <h4 class="modal-title" style="background: #ff6666; padding: 30px;">Something Went Wrong!</h4>
+
+                            <button type="button" class="close" data-dismiss="modal">
+                                X
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Something went wrong while submitting your request. Our IT engineers have been notified. Thanks!<br />
+                                Error Message: @TempData["maintReqError"]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $('#failure-modal').show();
+                }
+
+            </script>
+
+        }-->
+
+    }
+</div>
+@section Scripts 
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+
+    @*if (success == true) {
+        //toastr.options = {
+        //    "closeButton": true,
+        //    "positionClass": "toast-bottom-right"
+        //}
+        //toastr.success("Success!  You're now registered for Lose A Ton!");
+
+          $('#success-modal').show();
+    }
+    else if(@TempData["isSuccess"].ToString() == "failure")
+    {
+  $('#falure-modal').show();
+    }
+});*@
+
+
+    @*if (@TempData["isSuccess"].ToString() == "success")
+    {
+
+        }
+
+        $(document).ready(function () {
+
+            var success = @((TempData["SuccessMessage"] != null).ToString().ToLower());
+
+            if (success == true) {
+                $('#success-modal').show();
+                $('#falure-modal').hide();
+            }
+            else {
+                $('#falure-modal').show();
+                $('#success-modal').hide();
+            }
+
+        }*@
+
+
+
+
+    @*$(document).ready(function () {
+
+
+        if (@ViewBag.Success != null && @ViewBag.Success)
+        { toastr.success("Succcess!!"); }
+
+    });
+</script>*@
+
+

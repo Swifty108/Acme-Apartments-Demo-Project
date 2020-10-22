@@ -338,6 +338,32 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     b.ToTable("MaintenanceRequests");
                 });
 
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AptUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateReviewed")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReviewText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(10000);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AptUserId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.WaterBill", b =>
                 {
                     b.Property<int>("WaterBillId")
@@ -430,6 +456,15 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                 });
 
             modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.MaintenanceRequest", b =>
+                {
+                    b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
+                        .WithMany()
+                        .HasForeignKey("AptUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.Review", b =>
                 {
                     b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
                         .WithMany()

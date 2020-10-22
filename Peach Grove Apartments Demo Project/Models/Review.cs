@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Models
 {
-    public class MaintenanceRequest
+    public class Review
     {
         [Key]
         public int Id { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateTime DateRequested { get; set; }
+        public DateTime DateReviewed { get; set; }
         [Required]
         [ForeignKey("AptUser")]
         public string AptUserId { get; set; }
         public AptUser AptUser { get; set; }
         [Required]
-        public string ProblemDescription { get; set; }
-        public bool isAllowedToEnter { get; set; }
-
+        [MaxLength(10000)]
+        [DisplayName("Review Text")]
+        public string ReviewText { get; set; }
     }
 }

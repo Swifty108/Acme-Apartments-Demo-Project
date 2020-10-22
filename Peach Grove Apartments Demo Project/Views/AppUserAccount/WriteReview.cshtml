@@ -1,0 +1,47 @@
+﻿@model Peach_Grove_Apartments_Demo_Project.ViewModels.ReviewViewModel
+
+@{
+    ViewData["Title"] = "Write A Review";
+    Layout = "~/Views/Shared/_AppUserAccountLayout.cshtml";
+}
+
+
+@if (ViewBag.ReviewSuccess != null && ViewBag.ReviewSuccess)
+{
+    
+    <div style="background: #5ce600; color: white; width: 600px;text-align: center;padding: 40px;">
+        <div style="display: inline-block;">
+            <b>Your Review was submitted successfully!</b>
+        </div>
+    </div>
+    <br />
+    <br />
+
+}
+
+<h1>Write A Review</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="writereview">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="ReviewText" class="control-label"></label>
+                <textarea asp-for="ReviewText" class="form-control" maxlength="10000" required></textarea>
+                <span asp-validation-for="ReviewText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+

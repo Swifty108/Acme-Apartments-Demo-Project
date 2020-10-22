@@ -20,6 +20,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Data
         public DbSet<WaterBill> WaterBills { get; set; }
         public DbSet<ElectricBill> ElectricBills { get; set; }
         public DbSet<MaintenanceRequest> MaintenanceRequests { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
     }
 }

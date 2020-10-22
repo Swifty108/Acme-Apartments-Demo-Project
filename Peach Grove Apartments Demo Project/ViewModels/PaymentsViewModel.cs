@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Peach_Grove_Apartments_Demo_Project.Models;
 
-namespace Peach_Grove_Apartments_Demo_Project.Models
+namespace Peach_Grove_Apartments_Demo_Project.ViewModels
 {
     public class PaymentsViewModel
     {

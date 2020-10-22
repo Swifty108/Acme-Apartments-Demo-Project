@@ -54,7 +54,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Extended Classes\" />
+    <Folder Include="Class Extensions\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿@model Peach_Grove_Apartments_Demo_Project.Models.ApplyViewModel
+﻿@model Peach_Grove_Apartments_Demo_Project.ViewModels.ApplyViewModel
 
 @{
     ViewData["Title"] = "Apply";
@@ -11,7 +11,6 @@
     <div class="col-md-4">
         <form id="apply" asp-action="Apply">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<input type="hidden" asp-for="@Model.User" value="@Model.User" />*@
             <div class="form-group">
                 <label class="control-label"></label>
                 <input class="form-control" value="@Model.User.FirstName" disabled />
