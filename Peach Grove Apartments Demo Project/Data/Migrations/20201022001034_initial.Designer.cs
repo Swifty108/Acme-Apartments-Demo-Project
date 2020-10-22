@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Peach_Grove_Apartments_Demo_Project.Data;
 
 namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201022001034_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,34 +312,6 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     b.ToTable("ElectricBills");
                 });
 
-            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.MaintenanceRequest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AptUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateRequested")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ProblemDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isAllowedToEnter")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AptUserId");
-
-                    b.ToTable("MaintenanceRequests");
-                });
-
             modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.WaterBill", b =>
                 {
                     b.Property<int>("WaterBillId")
@@ -421,15 +395,6 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                 });
 
             modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.ElectricBill", b =>
-                {
-                    b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
-                        .WithMany()
-                        .HasForeignKey("AptUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.MaintenanceRequest", b =>
                 {
                     b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
                         .WithMany()

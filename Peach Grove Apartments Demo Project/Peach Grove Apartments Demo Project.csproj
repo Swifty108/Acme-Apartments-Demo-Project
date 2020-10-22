@@ -17,6 +17,14 @@
     <Compile Remove="Data\Migrations\20201019151314_dbgenaptuserId.Designer.cs" />
     <Compile Remove="Data\Migrations\20201019164338_test2.cs" />
     <Compile Remove="Data\Migrations\20201019164338_test2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201021213017_addelectricandwaterbilltables.cs" />
+    <Compile Remove="Data\Migrations\20201021213017_addelectricandwaterbilltables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201021213209_addelectricandwaterbilltables.cs" />
+    <Compile Remove="Data\Migrations\20201021213209_addelectricandwaterbilltables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201021213431_addelectricandwaterbilltables.cs" />
+    <Compile Remove="Data\Migrations\20201021213431_addelectricandwaterbilltables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201022004105_addmaintenancetable.cs" />
+    <Compile Remove="Data\Migrations\20201022004105_addmaintenancetable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +54,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Extended Classes\" />
   </ItemGroup>
 
 </Project>

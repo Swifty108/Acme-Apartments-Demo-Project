@@ -1,0 +1,132 @@
+﻿@model PaymentsViewModel
+@{
+    ViewData["Title"] = "Payments";
+    Layout = "~/Views/Shared/_AppUserAccountLayout.cshtml";
+}
+
+<h1>Payments</h1>
+<br />
+
+<div class="container">
+    <ul class="nav nav-tabs fp" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#bills">
+
+                <div class="wrapper">
+
+
+                    <div class="fp-link-content">
+                        <span class="fp-group-name"> My Bills </span>
+
+                    </div>
+
+
+                </div>
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="tab-content">
+
+
+        <div id="bills" class="container tab-pane active">
+
+
+            <br>
+            <h3>Rent Bill</h3>
+            <br />
+
+            <table class="table fp-table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Apartment Number</th>
+                        <th scope="col">SF</th>
+                        <th scope="col">Amount Due</th>
+                        <th scope="col">Due Date</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5432-315</td>
+                        <td>750</td>
+                        <td>
+                            @Model.Application.Price
+                        </td>
+                        <td>12/25/2020</td>
+                        <td>
+                            <div class="fp-applylink">
+
+                                <a href="#">Pay Now</a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <br>
+            <h3>Water Bill</h3>
+            <br />
+
+            <table class="table fp-table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Amount Due</th>
+                        <th scope="col">Due Date</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.WaterBill.Amount</td>
+                        <td>@Model.WaterBill.DateDue.ToString("MM/dd/yyyy")</td>
+                        <td>
+                            <div class="fp-applylink">
+
+                                <a href="#">Pay Now</a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <br>
+            <h3>Electric Bill</h3>
+            <br />
+
+            <table class="table fp-table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Amount Due</th>
+                        <th scope="col">Due Date</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        <td>@Model.ElectricBill.Amount</td>
+                        <td>@Model.ElectricBill.DateDue.ToString("MM/dd/yyyy")</td>
+                        <td>
+                            <div class="fp-applylink">
+
+                                <a href="#">Pay Now</a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+</div>

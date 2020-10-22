@@ -17,6 +17,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Data
 
         public DbSet<AptUser> AptUsers { get; set; }
         public DbSet<Application> Applications { get; set; }
+        public DbSet<WaterBill> WaterBills { get; set; }
+        public DbSet<ElectricBill> ElectricBills { get; set; }
+        public DbSet<MaintenanceRequest> MaintenanceRequests { get; set; }
 
     }
 }

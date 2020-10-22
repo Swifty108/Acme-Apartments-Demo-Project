@@ -80,10 +80,11 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                 name: "Applications",
                 columns: table => new
                 {
-                    ApplicationId = table.Column<Guid>(nullable: false),
+                    ApplicationId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AptUserId = table.Column<string>(nullable: true),
-                    Occupation = table.Column<string>(nullable: true),
-                    Income = table.Column<int>(nullable: false),
+                    Occupation = table.Column<string>(nullable: false),
+                    Income = table.Column<int>(nullable: true),
                     ReasonForMoving = table.Column<string>(nullable: false),
                     SSN = table.Column<string>(nullable: false),
                     Room = table.Column<string>(nullable: true),
@@ -185,6 +186,48 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ElectricBills",
+                columns: table => new
+                {
+                    ElectricBillId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AptUserId = table.Column<string>(nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DateDue = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ElectricBills", x => x.ElectricBillId);
+                    table.ForeignKey(
+                        name: "FK_ElectricBills_AspNetUsers_AptUserId",
+                        column: x => x.AptUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WaterBills",
+                columns: table => new
+                {
+                    WaterBillId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AptUserId = table.Column<string>(nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DateDue = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WaterBills", x => x.WaterBillId);
+                    table.ForeignKey(
+                        name: "FK_WaterBills_AspNetUsers_AptUserId",
+                        column: x => x.AptUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_AptUserId",
                 table: "Applications",
@@ -228,6 +271,16 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ElectricBills_AptUserId",
+                table: "ElectricBills",
+                column: "AptUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WaterBills_AptUserId",
+                table: "WaterBills",
+                column: "AptUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -249,6 +302,12 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "ElectricBills");
+
+            migrationBuilder.DropTable(
+                name: "WaterBills");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -407,3 +407,32 @@
 
         // everything else you want to do on submit
     });
+
+
+
+
+      public async Task<IActionResult> Maintenance()
+        {
+            var applicationDbContext = _context.Applications.Include(a => a.AptUser);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> Payments()
+        {
+
+            var application = await _context.Applications.Include(a => a.AptUser).FirstOrDefaultAsync();
+
+            //var waterBill = _context.WaterBills.Include(a => a.AptUser);
+            var waterBill = await _context.WaterBills.FirstOrDefaultAsync();
+            var electricBill = await _context.ElectricBills.FirstOrDefaultAsync();
+
+            var payViewModel = new PaymentsViewModel
+            {
+                Application = application,
+                WaterBill = waterBill,
+                ElectricBill = electricBill
+            };
+            //return View(await applicationDbContext.ToListAsync());
+
+            return View(payViewModel);
+        }

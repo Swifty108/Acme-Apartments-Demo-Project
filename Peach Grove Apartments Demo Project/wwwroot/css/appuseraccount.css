@@ -22,4 +22,20 @@ ul.widgeticons {
     display: inline-block;
     margin-right: 20px;
 }
+
+.nav-tabs.mp li a {
+    color: #757575;
+    padding-top: 10px;
+    padding-left: 38px;
+    margin-right: 3px;
+    font-size: .8rem;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    height: 40px;
+    width: 190px;
+    text-transform: uppercase;
+    align-content: center;
+}
+
+
 /*End Custom styles*/

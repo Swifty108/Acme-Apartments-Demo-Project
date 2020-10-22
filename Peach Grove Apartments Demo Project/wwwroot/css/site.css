@@ -215,38 +215,58 @@ a.socialIcon:hover, .socialHoverClass {
     transform: translateX(-50%);
 }
 
-
-.nav-tabs.fp {
-    border-color: #ddd;
-    width: 90%;
+/*.tab-content {
+    border: 1px solid #ddd;
+    border-width: 0px 1px 1px;*/ /* Removes the top border */
+    /*padding: 40px;
+    margin: 0 auto;
 }
 
-    .nav-tabs.fp > li > a {
+.nav-tabs > li {
+    float: right;
+}
+
+    .nav-tabs > li > a {
+        margin-right: 0;
+        margin-left: 2px;
+    }*/
+
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.nav-tabs {
+    border-color: #ddd;
+    width: 100%;
+}
+
+    .nav-tabs.fp li a {
         color: #757575;
         padding-top: 10px;
-        padding-left: 20px;
+        padding-left: 24px;
         margin-right: 3px;
         font-size: .8rem;
         background-color: #f7f7f7;
-        border: 1px solid #ddd !important;
+        border: 1px solid #ddd;
         height: 40px;
-        width: 90px;
+        width: 110px;
         text-transform: uppercase;
         align-content: center;
     }
 
-        /*    .nav-tabs > li > a.active,
-    .nav-tabs > li > a.active:focus,
-    .nav-tabs > li > a.active:hover {*/
-        .nav-tabs.fp > li > a.active,
-        .nav-tabs.fp > li > a.active:focus,
-        .nav-tabs.fp > li > a.active:hover {
+            .nav-tabs > ul > li > a.active,
+    .nav-tabs > ul > li > a.active:focus,
+    .nav-tabs > ul > li > a.active:hover {
             color: #222;
             border-bottom-color: transparent !important;
         }
 
         .nav-tabs.fp > li > a:hover {
-            /*    border-radius: 5px;*/
+                border-radius: 5px;
             color: #222
         }
 
@@ -337,6 +357,8 @@ div.login-form-icon {
 .default-val-none {
     display: none;
 }
+
+
 
 
 

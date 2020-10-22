@@ -10,8 +10,8 @@ using Peach_Grove_Apartments_Demo_Project.Data;
 namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201020184606_update")]
-    partial class update
+    [Migration("20201022004156_addmaintenancetable")]
+    partial class addmaintenancetable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -154,9 +154,10 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 
             modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.Application", b =>
                 {
-                    b.Property<Guid>("ApplicationId")
+                    b.Property<int>("ApplicationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AptUserId")
                         .HasColumnType("nvarchar(450)");
@@ -287,6 +288,73 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.ElectricBill", b =>
+                {
+                    b.Property<int>("ElectricBillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AptUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateDue")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ElectricBillId");
+
+                    b.HasIndex("AptUserId");
+
+                    b.ToTable("ElectricBills");
+                });
+
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.MaintenanceRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ProblemDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isAllowedToEnter")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaintenanceRequests");
+                });
+
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.WaterBill", b =>
+                {
+                    b.Property<int>("WaterBillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AptUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DateDue")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("WaterBillId");
+
+                    b.HasIndex("AptUserId");
+
+                    b.ToTable("WaterBills");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -343,6 +411,24 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
                         .WithMany("Applications")
                         .HasForeignKey("AptUserId");
+                });
+
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.ElectricBill", b =>
+                {
+                    b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
+                        .WithMany()
+                        .HasForeignKey("AptUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.WaterBill", b =>
+                {
+                    b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
+                        .WithMany()
+                        .HasForeignKey("AptUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

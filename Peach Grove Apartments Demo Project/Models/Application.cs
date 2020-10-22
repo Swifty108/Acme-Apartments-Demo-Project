@@ -13,7 +13,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
 {
     public class Application
     {
-        public Guid ApplicationId { get; set; }
+        [Key]
+        public int ApplicationId { get; set; }
         [ForeignKey(nameof(AptUser))]
         public string AptUserId { get; set; }
         public AptUser AptUser { get; set; }
