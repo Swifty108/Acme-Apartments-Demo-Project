@@ -10,7 +10,7 @@ using Peach_Grove_Apartments_Demo_Project.Data;
 namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201022234215_initial")]
+    [Migration("20201023123509_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

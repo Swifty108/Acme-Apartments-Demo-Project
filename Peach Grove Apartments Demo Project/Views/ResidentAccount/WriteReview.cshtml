@@ -2,15 +2,15 @@
 
 @{
     ViewData["Title"] = "Write A Review";
-    Layout = "~/Views/Shared/_AppUserAccountLayout.cshtml";
+    Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
 }
 
 
-
-
+<partial name="_LoggedInAsPartial" />
+<br />
 <h1>Write A Review</h1>
 <hr />
-<partial name="_LoggedInAsPartial" />
+
 <br />
 
 @if (ViewBag.ReviewSuccess != null && ViewBag.ReviewSuccess)
@@ -24,7 +24,7 @@
     <br />
 
 }
-<br />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="writereview">

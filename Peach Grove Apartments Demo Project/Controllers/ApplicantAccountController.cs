@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,14 +13,16 @@ using Peach_Grove_Apartments_Demo_Project.ViewModels;
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {
-    [Authorize(Roles = "applicant")]
+    [Authorize(Roles = "Applicant")]
     public class ApplicantAccountController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AptUser> _userManager;
 
-        public ApplicantAccountController(ApplicationDbContext context)
+        public ApplicantAccountController(ApplicationDbContext context, UserManager<AptUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: ApplicantAccount
@@ -53,7 +56,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> Applications()
         {
-            var apps = await _context.Applications.Include(a => a.AptUser).ToListAsync();
+            var apps = await _context.Applications.Where(u => u.AptUserId == _userManager.GetUserAsync(User).Result.Id).ToListAsync();
             return View(apps);
         }
 

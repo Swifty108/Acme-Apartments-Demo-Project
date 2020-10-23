@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_ApplicantAccountLayout.cshtml";
+    Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
 }
 <partial name="_LoggedInAsPartial" />
 <h1>Delete</h1>
@@ -58,9 +58,9 @@
             </dd>
         </dl>*@
 
-    <form asp-action="Delete">
+    <form asp-action="AppDelete">
         <input type="hidden" asp-for="ApplicationId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="applications">Back to List</a>
+        <a asp-action="applicationuser">Back to List</a>
     </form>
 </div>

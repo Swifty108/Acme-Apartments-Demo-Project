@@ -2,14 +2,14 @@
 @{
     ViewData["Title"] = "Account Home";
 }
-
+<partial name="_LoggedInAsPartial" />
 <h1>My Account Home</h1>
 
-<partial name="_LoggedInAsPartial" />
+
 
 <hr />
 
 <ul class="widgeticons">
-    <li><a asp-controller="applicantaccount" asp-action="applications"><img src="~/images/ua-money.png" alt="Make a Payment" /><br />My Applications</a></li>
+    <li><a asp-controller="applicantaccount" asp-action="applications"><img src="~/images/applicationicon.png" style="width: 64px; height: 64px;" alt="My applications" /><br />My Applications</a></li>
     <li><a asp-controller="applicantaccount" asp-action="contactus"><img src="~/images/ua-email.png" alt="Email Us" /><br />Contact Us</a></li>
 </ul>

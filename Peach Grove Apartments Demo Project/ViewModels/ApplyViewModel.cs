@@ -9,6 +9,7 @@ namespace Peach_Grove_Apartments_Demo_Project.ViewModels
         [Required]
         public string Occupation { get; set; }
         public string AptNumber { get; set; }
+        public string Area { get; set; }
         public string Price { get; set; }
         [Required]
         public int? Income { get; set; }

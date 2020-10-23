@@ -14,23 +14,40 @@ using Peach_Grove_Apartments_Demo_Project.ViewModels;
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {
-    [Authorize(Roles = "Resident")]
-    public class AppUserAccountController : Controller
+    [Authorize(Roles = "Manager")]
+    public class ManagerAccountController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
+        private AptUser _user;
 
-        public AppUserAccountController(ApplicationDbContext context, UserManager<AptUser> userManager)
+        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager)
         {
             _context = context;
             _userManager = userManager;
+            
         }
 
         // GET: AppUserAccount
         public IActionResult Index()
         {
-
+            _user = _userManager.GetUserAsync(User).Result;
             return View();
+        }
+        public IActionResult ApplicationUsers()
+        {
+            var applicationUsers = from userRecord in _context.Users
+                                   join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
+                                   select userRecord;
+            return View(applicationUsers.ToList());
+        }
+        public IActionResult ApplicationUser(int Id)
+        {
+
+            var applicationUsers = from userRecord in _context.Users
+                                   join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
+                                   select applicationRecord;
+            return View(applicationUsers.ToList());
         }
 
         [HttpGet]
@@ -164,5 +181,87 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             }
             return View(viewModel);
         }
+
+        public async Task<IActionResult> ApplicationEdit(int? id)
+        {
+            var application = await _context.Applications.FindAsync(id);
+            if (application == null)
+            {
+                return NotFound();
+            }
+            ViewBag.AppEditSuccess = TempData["AppEditSuccess"];
+            // ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
+            return View(application);
+        }
+
+        // POST: ApplicantAccount/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApplicationEdit(Application application)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(application);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ApplicationExists(application.ApplicationId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                TempData["Success"] = true;
+                return RedirectToAction("ApplicationEdit");
+            }
+            ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
+            return View(application);
+        }
+
+        // GET: ApplicantAccount/Delete/5
+        public async Task<IActionResult> ApplicationDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var application = await _context.Applications
+                .Include(a => a.AptUser)
+                .FirstOrDefaultAsync(m => m.ApplicationId == id);
+           
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            return View(application);
+        }
+
+        // POST: ApplicantAccount/Delete/5
+        [HttpPost, ActionName("AppDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteApplicationConfirmed(Application app)
+        {
+            var application = await _context.Applications.FindAsync(app.ApplicationId);
+            _context.Applications.Remove(application);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ApplicationExists(int id)
+        {
+            return _context.Applications.Any(e => e.ApplicationId == id);
+        }
+
     }
 }

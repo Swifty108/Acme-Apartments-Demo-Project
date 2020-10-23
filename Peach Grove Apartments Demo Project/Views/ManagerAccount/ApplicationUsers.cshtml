@@ -1,0 +1,44 @@
+﻿@model List<Peach_Grove_Apartments_Demo_Project.Models.AptUser>
+@{
+    ViewData["Title"] = "Applications";
+}
+
+<partial name="_LoggedInAsPartial" />
+<br />
+<h1>Applicants</h1>
+
+<hr />
+<div class="container">
+    @{
+        if (Model.Count != 0)
+        { <table class="table fp-table">
+
+                <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col"></th>
+                        </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+
+                    {
+                    <tr>
+                        <td>@user.FirstName @user.LastName</td>
+
+                        <td>
+                            <div class="fp-applylink">
+                                <a asp-controller="manageraccount" asp-action="applicationuser" asp-route-Id="@user.Id">View</a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h4>There are no applicants in the system right now.</h4>
+        }
+    }
+</div>

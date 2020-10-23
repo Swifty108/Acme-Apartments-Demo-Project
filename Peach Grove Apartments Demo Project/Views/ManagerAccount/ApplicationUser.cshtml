@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AptUser> SignInManager
+@inject UserManager<AptUser> UserManager
+@model List<Peach_Grove_Apartments_Demo_Project.Models.Application>
+@{
+    ViewData["Title"] = "Application User";
+    var user = UserManager.GetUserAsync(User).Result;
+}
+
+<partial name="_LoggedInAsPartial" />
+<br />
+<h1>Applications for @user.FirstName @user.LastName</h1>
+
+<hr />
+<div class="container">
+    @{
+        if (Model.Count != 0)
+        { <table class="table fp-table">
+
+                <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Application Id</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                </thead>
+                <tbody>
+                    @foreach (var application in Model)
+
+                    {
+                    <tr>
+                        <td>@application.ApplicationId</td>
+
+                        <td>
+                            <div class="fp-applylink">
+                                <a asp-controller="manageraccount" asp-action="applicationedit" asp-route-Id="@application.ApplicationId">Edit</a>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="fp-applylink">
+                                <a asp-controller="manageraccount" asp-action="applicationdelete" asp-route-Id="@application.ApplicationId">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h4>This applicant does not have any applications on file.</h4>
+        }
+    }
+</div>
+

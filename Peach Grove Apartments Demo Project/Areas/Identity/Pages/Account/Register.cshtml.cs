@@ -186,12 +186,28 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber };
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var user = new AptUser
+                {
+
+                    UserName = "john.doe@applicant.com",
+                    Email = "john.doe@applicant.com",
+                    FirstName = "John",
+                    LastName = "Doe",
+                    DateOfBirth = DateTime.Parse("08/29/1976"),
+                    StreetAddress = "1295 Lanny Drive",
+                    City = "Pittsburgh",
+                    State = "PA",
+                    Zipcode = "15213",
+                    PhoneNumber = "412-555-1212",
+                    DateRegistered = DateTime.Now
+                };
+
+                //var user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber };
+                var result = await _userManager.CreateAsync(user, "Hotel5r@j");
                 if (result.Succeeded)
                 {
-                     _userManager.AddToRoleAsync(user,
-                                        Input.Role).Wait();
+                     await _userManager.AddToRoleAsync(user,
+                                        "Applicant");
 
                     _logger.LogInformation("User created a new account with password.");
 

@@ -19,7 +19,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly ILogger<HomeController> _logger;
         private ApplicationDbContext _db;
         private readonly UserManager<AptUser> _userManager;
-        private ApplyViewModel appViewModel = new ApplyViewModel();
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager)
         {
@@ -47,19 +46,21 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Applicant")]
         [HttpGet]
-        public async Task<IActionResult> Apply(string room, string price)
+        public async Task<IActionResult> Apply(string aptNumber, string price, string area )
         {
-                    var user = await _userManager.GetUserAsync(User);
-                    appViewModel.AptNumber = room;
+            var appViewModel = new ApplyViewModel();
+                       var user = await _userManager.GetUserAsync(User);
+                    appViewModel.AptNumber = aptNumber;
                     appViewModel.Price = price;
                     appViewModel.User = user;
+                    appViewModel.Area = area;
 
-                    return View(appViewModel);
+            return View(appViewModel);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Applicant")]
         [HttpPost]
         public async Task<IActionResult> Apply(ApplyViewModel applicationViewModel)
         {
@@ -67,7 +68,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
             if (ModelState.IsValid)
                 {
-                    var app = new Application { AptUser = user, Income = applicationViewModel.Income, Occupation = applicationViewModel.Occupation, Price = applicationViewModel.Price, ReasonForMoving = applicationViewModel.ReasonForMoving, AptNumber = applicationViewModel.AptNumber, SSN = applicationViewModel.SSN };
+                    var app = new Application { AptUser = user, Income = applicationViewModel.Income, Occupation = applicationViewModel.Occupation, Price = applicationViewModel.Price, ReasonForMoving = applicationViewModel.ReasonForMoving, AptNumber = applicationViewModel.AptNumber, Area = applicationViewModel.Area, DateApplied = DateTime.Now, SSN = applicationViewModel.SSN };
                     _db.Add(app);
 
                     //await _db.AddAsync(app);

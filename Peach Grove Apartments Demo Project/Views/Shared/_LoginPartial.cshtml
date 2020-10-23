@@ -23,15 +23,15 @@
 
             if (User.IsInRole("Applicant"))
             {
-                <a class="nav-link text-white" asp-controller="applicantcontroller" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
+                <a class="nav-link text-white" asp-controller="applicantaccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
             }
             else if (User.IsInRole("Resident"))
             {
-                <a class="nav-link text-white" asp-controller="appuseraccountcontroller" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
+                <a class="nav-link text-white" asp-controller="residentaccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
             }
             else if (User.IsInRole("Manager"))
             {
-                <a class="nav-link text-white" asp-controller="managercontroller" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
+                <a class="nav-link text-white" asp-controller="manageraccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
             }
 
         }

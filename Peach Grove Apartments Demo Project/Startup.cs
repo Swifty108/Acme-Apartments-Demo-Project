@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Peach_Grove_Apartments_Demo_Project.Models;
+using Peach_Grove_Apartments_Demo_Project.HelperClasses;
 
 namespace Peach_Grove_Apartments_Demo_Project
 {
@@ -31,12 +32,13 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<AptUser, IdentityRole>(options => { options.SignIn.RequireConfirmedAccount = false; options.User.RequireUniqueEmail = true; options.Password.RequireLowercase = false; options.Password.RequireUppercase = false;})
+            services.AddIdentity<AptUser, IdentityRole>(options => { options.SignIn.RequireConfirmedAccount = false; options.User.RequireUniqueEmail = true; options.Password.RequireLowercase = false; options.Password.RequireUppercase = false; })
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
-                
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddRoles<IdentityRole>();
+                .AddRoles<IdentityRole>();
+
+            services.AddScoped<IDbInitializer, DbInitializer>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -63,6 +65,8 @@ namespace Peach_Grove_Apartments_Demo_Project
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+
             
             app.UseEndpoints(endpoints =>
             {
@@ -71,6 +75,14 @@ namespace Peach_Grove_Apartments_Demo_Project
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
+                dbInitializer.Initialize();
+                dbInitializer.SeedData();
+            }
         }
     }
 }

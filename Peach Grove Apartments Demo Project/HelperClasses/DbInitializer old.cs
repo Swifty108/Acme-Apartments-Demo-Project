@@ -5,25 +5,72 @@ using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
-namespace Peach_Grove_Apartments_Demo_Project.Services
+namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
+
 {
-    public class DbInitializer
+    public class DbInitializerold
+
     { 
 
-        public static void SeedData
+        public static async Task SeedData
   (UserManager<AptUser> userManager,
   RoleManager<IdentityRole> roleManager, ApplicationDbContext dbcontext)
         {
             SeedRoles(roleManager);
-            SeedUsers(userManager, dbcontext);
+            await SeedUsers(userManager, dbcontext);
         }
 
-        public static async void SeedUsers
+
+        //private async Task CreateRoles(IServiceProvider serviceProvider)
+        //{
+        //    //initializing custom roles 
+        //    var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        //    var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        //    string[] roleNames = { "Admin", "Manager", "Member" };
+        //    IdentityResult roleResult;
+
+        //    foreach (var roleName in roleNames)
+        //    {
+        //        var roleExist = await RoleManager.RoleExistsAsync(roleName);
+        //        if (!roleExist)
+        //        {
+        //            //create the roles and seed them to the database: Question 1
+        //            roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+        //        }
+        //    }
+
+        //    //Here you could create a super user who will maintain the web app
+        //    var poweruser = new ApplicationUser
+        //    {
+
+        //        UserName = Configuration["AppSettings:UserName"],
+        //        Email = Configuration["AppSettings:UserEmail"],
+        //    };
+        //    //Ensure you have these values in your appsettings.json file
+        //    string userPWD = Configuration["AppSettings:UserPassword"];
+        //    var _user = await UserManager.FindByEmailAsync(Configuration["AppSettings:AdminUserEmail"]);
+
+        //    if (_user == null)
+        //    {
+        //        var createPowerUser = await UserManager.CreateAsync(poweruser, userPWD);
+        //        if (createPowerUser.Succeeded)
+        //        {
+        //            //here we tie the new user to the role
+        //            await UserManager.AddToRoleAsync(poweruser, "Admin");
+
+        //        }
+        //    }
+        //}
+
+
+
+        public static async Task SeedUsers
     (UserManager<AptUser> userManager, ApplicationDbContext _context)
         {
-            if (userManager.FindByNameAsync
-        ("john.doe@applicant.com").Result == null)
+            if (await userManager.FindByNameAsync
+        ("john.doe@applicant.com") == null)
             {
                 var user = new AptUser {
 
@@ -40,13 +87,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Services
                     DateRegistered = DateTime.Now
                 };
 
-                IdentityResult result = userManager.CreateAsync
-                (user, "john4helix").Result;
+                IdentityResult result = await userManager.CreateAsync
+                (user, "Hotel5r@j");
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user,
-                                        "Applicant").GetAwaiter().GetResult();
+                   await userManager.AddToRoleAsync(user,
+                                        "Applicant");
 
                     var ebill = await _context.ElectricBills.Where(a => a.AptUserId == user.Id).FirstOrDefaultAsync();
                     var wbill = await _context.WaterBills.Where(a => a.AptUserId == user.Id).FirstOrDefaultAsync();
@@ -63,8 +110,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Services
                 }
             }
 
-            if (userManager.FindByNameAsync
-      ("tom.higgins@resident.com").Result == null)
+            if (await userManager.FindByNameAsync
+      ("tom.higgins@resident.com") == null)
             {
                 var user = new AptUser
                 {
@@ -82,13 +129,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Services
                     DateRegistered = DateTime.Now
                 };
 
-                IdentityResult result = userManager.CreateAsync
-                (user, "tom3helix").Result;
+                IdentityResult result = await userManager.CreateAsync
+                (user, "Hotel5r@j");
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user,
-                                        "Resident").GetAwaiter().GetResult();
+                    await userManager.AddToRoleAsync(user,
+                                        "Resident");
 
                     var ebill = await _context.ElectricBills.Where(a => a.AptUserId == user.Id).FirstOrDefaultAsync();
                     var wbill = await _context.WaterBills.Where(a => a.AptUserId == user.Id).FirstOrDefaultAsync();
@@ -105,8 +152,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Services
                 }
             }
 
-            if (userManager.FindByNameAsync
-       ("jamie.jackson@manager.com").Result == null)
+            if (await userManager.FindByNameAsync
+       ("jamie.jackson@manager.com") == null)
             {
                 var user = new AptUser
                 {
@@ -124,46 +171,46 @@ namespace Peach_Grove_Apartments_Demo_Project.Services
                     DateRegistered = DateTime.Now
                 };
 
-                IdentityResult result = userManager.CreateAsync
-                (user, "jamie5helix").Result;
+                IdentityResult result = await userManager.CreateAsync
+                (user, "Hotel5r@j");
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user,
-                                        "Manager").GetAwaiter().GetResult();
+                   await userManager.AddToRoleAsync(user,
+                                        "Manager");
                 }
             }
         }
 
-        public static void SeedRoles
+        public static async Task SeedRoles
    (RoleManager<IdentityRole> roleManager)
         {
-            if (!roleManager.RoleExistsAsync
-        ("Applicant").Result)
+            if (!await roleManager.RoleExistsAsync
+        ("Applicant"))
             {
                 IdentityRole role = new IdentityRole();
                 role.Name = "Applicant";
-                IdentityResult roleResult = roleManager.
-                CreateAsync(role).Result;
+                IdentityResult roleResult = await roleManager.
+                CreateAsync(role);
             }
 
 
-            if (!roleManager.RoleExistsAsync
-        ("Resident").Result)
+            if (!await roleManager.RoleExistsAsync
+        ("Resident"))
             {
                 IdentityRole role = new IdentityRole();
                 role.Name = "Resident";
-                IdentityResult roleResult = roleManager.
-                CreateAsync(role).Result;
+                IdentityResult roleResult = await roleManager.
+                CreateAsync(role);
             }
 
-            if (!roleManager.RoleExistsAsync
-        ("Manager").Result)
+            if (!await roleManager.RoleExistsAsync
+        ("Manager"))
             {
                 IdentityRole role = new IdentityRole();
                 role.Name = "Manager";
-                IdentityResult roleResult = roleManager.
-                CreateAsync(role).Result;
+                IdentityResult roleResult = await roleManager.
+                CreateAsync(role);
             }
         }
     }
