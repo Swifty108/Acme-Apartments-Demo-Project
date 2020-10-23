@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.ViewModels
 {
-    public class ContactViewModel
+    public class AppUserContactViewModel
     {
         [Required]
         [MaxLength(10000)]

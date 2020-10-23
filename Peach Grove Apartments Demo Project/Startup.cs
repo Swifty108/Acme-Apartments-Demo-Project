@@ -34,7 +34,9 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddIdentity<AptUser, IdentityRole>(options => { options.SignIn.RequireConfirmedAccount = false; options.User.RequireUniqueEmail = true; options.Password.RequireLowercase = false; options.Password.RequireUppercase = false;})
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddRoles<IdentityRole>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

@@ -105,6 +105,14 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             new SelectListItem() { Text="WY", Value="WY"}
         };
 
+        public List<SelectListItem> Roles { get; } = new List<SelectListItem>
+        {
+            new SelectListItem() { Text="Applicant", Value="Applicant"},
+            new SelectListItem() { Text="Resident", Value="Resident"},
+            new SelectListItem() { Text="Manager", Value="Manager"},
+        };
+
+
         public class InputModel
         {
 
@@ -148,7 +156,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             [DataType(DataType.PhoneNumber)]
             [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
             public string PhoneNumber { get; set; }
-            public Boolean IsResident { get; set; }
+            [Required]
+            public string Role { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -177,10 +186,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber, IsResident = false };
+                var user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                     _userManager.AddToRoleAsync(user,
+                                        Input.Role).Wait();
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

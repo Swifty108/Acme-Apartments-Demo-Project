@@ -6,10 +6,16 @@
 }
 
 
+
+
+<h1>Write A Review</h1>
+<hr />
+<partial name="_LoggedInAsPartial" />
+<br />
+
 @if (ViewBag.ReviewSuccess != null && ViewBag.ReviewSuccess)
 {
-    
-    <div style="background: #5ce600; color: white; width: 600px;text-align: center;padding: 40px;">
+    <div style="background: lightgreen; border: 1px solid green; color: black; width: 600px;text-align: center;padding: 40px;">
         <div style="display: inline-block;">
             <b>Your Review was submitted successfully!</b>
         </div>
@@ -18,9 +24,7 @@
     <br />
 
 }
-
-<h1>Write A Review</h1>
-<hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="writereview">

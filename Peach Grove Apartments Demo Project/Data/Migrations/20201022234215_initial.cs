@@ -42,13 +42,14 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(nullable: false),
+                    DateRegistered = table.Column<DateTime>(nullable: false),
                     StreetAddress = table.Column<string>(nullable: false),
                     City = table.Column<string>(nullable: false),
                     State = table.Column<string>(nullable: false),
                     Zipcode = table.Column<string>(nullable: false),
                     SSN = table.Column<string>(nullable: true),
-                    IsResident = table.Column<bool>(nullable: false)
+                    AptNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,11 +84,13 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     ApplicationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AptUserId = table.Column<string>(nullable: true),
+                    DateApplied = table.Column<DateTime>(nullable: false),
                     Occupation = table.Column<string>(nullable: false),
                     Income = table.Column<int>(nullable: true),
                     ReasonForMoving = table.Column<string>(nullable: false),
                     SSN = table.Column<string>(nullable: false),
-                    Room = table.Column<string>(nullable: true),
+                    AptNumber = table.Column<string>(nullable: true),
+                    Area = table.Column<string>(nullable: true),
                     Price = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

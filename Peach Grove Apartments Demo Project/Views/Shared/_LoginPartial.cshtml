@@ -2,36 +2,60 @@
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 
-    <ul class="navbar-nav" style="margin:0 auto;">
-        @if (User.Identity.IsAuthenticated)
+<ul class="navbar-nav" style="margin:0 auto;">
+    @if (User.Identity.IsAuthenticated)
 
-        {
+    {
 
-            var user = await UserManager.GetUserAsync(User);
+        var user = await UserManager.GetUserAsync(User);
 
-        <li class="nav-item">
-            @*<a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa fa-tachometer text-white"></i> Hello @user.FirstName!</a>*@
-            <a class="nav-link text-white" asp-controller="AppUserAccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
-        </li>
-            <li class="nav-item text-white">
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
-                    <button type="submit" class="nav-link btn btn-link text-white" style="margin-left: 10px;"> <i class="fa fa-sign-out text-white"></i> Logout</button>
-                </form>
+    <li class="nav-item">
+        @*<a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa fa-tachometer text-white"></i> Hello @user.FirstName!</a>*@
 
-                @*<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+
+
+        @{
+
+            //// Resolve the user via their email
+            //var user = await UserManager.FindByEmailAsync(User.Email);
+            //// Get the roles for the user
+            //var roles = await _userManager.GetRolesAsync(user);
+
+            if (User.IsInRole("Applicant"))
+            {
+                <a class="nav-link text-white" asp-controller="applicantcontroller" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
+            }
+            else if (User.IsInRole("Resident"))
+            {
+                <a class="nav-link text-white" asp-controller="appuseraccountcontroller" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
+            }
+            else if (User.IsInRole("Manager"))
+            {
+                <a class="nav-link text-white" asp-controller="managercontroller" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Account Home </a>
+            }
+
+        }
+
+    </li>
+        <li class="nav-item text-white">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
+                <button type="submit" class="nav-link btn btn-link text-white" style="margin-left: 10px;"> <i class="fa fa-sign-out text-white"></i> Logout</button>
+            </form>
+
+            @*<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                     <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                 </form>*@
-            </li>
-        }
-        else
-        {
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register" style="margin-left: 10px;"><i class="fa fa-registered text-white"></i> Register</a>
-            </li>
-              <li class="nav-item" style="margin-left: 3px;">
-                 <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login" style="margin-left: 10px;"><i class="fa fa-user-circle text-white"></i> Login</a>
-            </li>
-        }
-    </ul>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register" style="margin-left: 10px;"><i class="fa fa-registered text-white"></i> Register</a>
+        </li>
+        <li class="nav-item" style="margin-left: 3px;">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login" style="margin-left: 10px;"><i class="fa fa-user-circle text-white"></i> Login</a>
+        </li>
+    }
+</ul>
 
 

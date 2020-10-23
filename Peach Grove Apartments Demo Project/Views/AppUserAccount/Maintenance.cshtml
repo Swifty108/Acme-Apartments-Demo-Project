@@ -3,10 +3,14 @@
     ViewData["Title"] = "Maintenance";
     Layout = "~/Views/Shared/_AppUserAccountLayout.cshtml";
 }
+<partial name="_LoggedInAsPartial" />
+<br />
 
+<h1>New Maintenance Request</h1>
+<br />
 @if (ViewBag.MaintenanceSuccess != null && ViewBag.MaintenanceSuccess)
 {
-    <div style="background: #5ce600; color: white; width: 600px;text-align: center;padding: 40px;">
+    <div style="background: lightgreen; border: 1px solid green; color: black; width: 600px;text-align: center;padding: 40px;">
         <div style="display: inline-block;">
             <b>Your maintenance request was submitted successfully!</b>
         </div>
@@ -16,7 +20,7 @@
 }
 else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
 {
-    <div style="background: #5ce600; color: white; width: 600px;text-align: center;padding: 40px;">
+    <div style="background: orange; color: black; border: 1px solid yellow; width: 600px;text-align: center;padding: 40px;">
         <div style="display: inline-block;">
             <b>There was a problem submitting your request. Please try again later.</b>
         </div>
@@ -24,8 +28,6 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
     <br />
     <br />
 }
-
-<h1>New Maintenance Request</h1>
 <br />
 <div class="container">
     <ul class="nav nav-tabs mp" role="tablist">

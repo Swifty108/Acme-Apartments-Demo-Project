@@ -1,0 +1,62 @@
+﻿@model Peach_Grove_Apartments_Demo_Project.Models.Application
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Application</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ApplicationId" />
+            <div class="form-group">
+                <label asp-for="AptUserId" class="control-label"></label>
+                <select asp-for="AptUserId" class="form-control" asp-items="ViewBag.AptUserId"></select>
+                <span asp-validation-for="AptUserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Occupation" class="control-label"></label>
+                <input asp-for="Occupation" class="form-control" />
+                <span asp-validation-for="Occupation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Income" class="control-label"></label>
+                <input asp-for="Income" class="form-control" />
+                <span asp-validation-for="Income" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReasonForMoving" class="control-label"></label>
+                <input asp-for="ReasonForMoving" class="form-control" />
+                <span asp-validation-for="ReasonForMoving" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SSN" class="control-label"></label>
+                <input asp-for="SSN" class="form-control" />
+                <span asp-validation-for="SSN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AptNumber" class="control-label"></label>
+                <input asp-for="AptNumber" class="form-control" />
+                <span asp-validation-for="AptNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

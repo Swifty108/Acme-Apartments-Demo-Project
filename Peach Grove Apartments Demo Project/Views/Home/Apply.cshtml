@@ -5,7 +5,7 @@
 
 }
 
-<h1>Application</h1> <span><b>Room #:</b></span> <span>@Model.Room</span>   <span><b>Price:</b></span> <span>$@Model.Price</span>
+<h1>Application</h1> <span><b>Room #:</b></span> <span>@Model.AptNumber</span>   <span><b>Price:</b></span> <span>$@Model.Price</span>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -77,8 +77,8 @@
                 <span asp-validation-for="@Model.SSN" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.Room" class="control-label"></label>
-                <input asp-for="@Model.Room" class="form-control" value="@Model.Room" disabled />
+                <label asp-for="@Model.AptNumber" class="control-label"></label>
+                <input asp-for="@Model.AptNumber" class="form-control" value="@Model.AptNumber" disabled />
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Price" class="control-label"></label>

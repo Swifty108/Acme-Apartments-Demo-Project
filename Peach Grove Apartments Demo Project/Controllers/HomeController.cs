@@ -52,7 +52,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> Apply(string room, string price)
         {
                     var user = await _userManager.GetUserAsync(User);
-                    appViewModel.Room = room;
+                    appViewModel.AptNumber = room;
                     appViewModel.Price = price;
                     appViewModel.User = user;
 
@@ -67,7 +67,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
             if (ModelState.IsValid)
                 {
-                    var app = new Application { AptUser = user, Income = applicationViewModel.Income, Occupation = applicationViewModel.Occupation, Price = applicationViewModel.Price, ReasonForMoving = applicationViewModel.ReasonForMoving, Room = applicationViewModel.Room, SSN = applicationViewModel.SSN };
+                    var app = new Application { AptUser = user, Income = applicationViewModel.Income, Occupation = applicationViewModel.Occupation, Price = applicationViewModel.Price, ReasonForMoving = applicationViewModel.ReasonForMoving, AptNumber = applicationViewModel.AptNumber, SSN = applicationViewModel.SSN };
                     _db.Add(app);
 
                     //await _db.AddAsync(app);
@@ -75,7 +75,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                     return RedirectToAction("Index");
                 }
 
-            return RedirectToAction("Apply", applicationViewModel.Room, applicationViewModel.Price);
+            return RedirectToAction("Apply", applicationViewModel.AptNumber, applicationViewModel.Price);
         }
 
         public IActionResult Privacy()

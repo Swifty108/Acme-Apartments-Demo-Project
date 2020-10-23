@@ -1,0 +1,44 @@
+﻿@model List<Peach_Grove_Apartments_Demo_Project.Models.Application>
+@{
+    ViewData["Title"] = "Request History";
+    Layout = "~/Views/Shared/_AppUserAccountLayout.cshtml";
+}
+
+<h1>Your Applications</h1>
+
+<br />
+<div class="container">
+    <div>
+        <table class="table fp-table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Date Applied</th>
+                    <th scope="col">Apartment Number</th>
+                    <th scope="col">SQ Feet</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{ foreach (var application in Model)
+
+                    {
+                        <tr>
+                            <td>@application.DateApplied</td>
+                            <td>@application.AptNumber</td>
+                            <td>@application.Area</td>
+                            <td>@application.Price</td>
+                            <td>
+                                <div class="fp-applylink">
+                                       <a asp-controller="applicantaccount" asp-action="delete" asp-route-applicationId="@application.ApplicationId">Cancel</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

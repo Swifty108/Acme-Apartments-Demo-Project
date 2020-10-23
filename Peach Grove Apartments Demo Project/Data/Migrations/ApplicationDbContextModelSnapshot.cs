@@ -157,8 +157,17 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AptNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AptUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Area")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateApplied")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("Income")
                         .HasColumnType("int");
@@ -172,9 +181,6 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 
                     b.Property<string>("ReasonForMoving")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Room")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SSN")
@@ -196,6 +202,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("AptNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -205,7 +214,10 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateRegistered")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
@@ -217,9 +229,6 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsResident")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()

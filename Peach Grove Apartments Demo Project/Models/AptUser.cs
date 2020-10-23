@@ -15,8 +15,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         [Required]
         public string LastName { get; set; }
         [Required]
-        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime DateRegistered { get; set; }
         [Required]
         public string StreetAddress { get; set; }
         [Required]
@@ -26,7 +29,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         [Required]
         public string Zipcode { get; set; }
         public string SSN { get; set; }
-        public Boolean IsResident { get; set; }
+        public string AptNumber { get; set; }
         public virtual ICollection<Application> Applications { get; set; }
     }
 }

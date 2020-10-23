@@ -18,6 +18,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         [ForeignKey(nameof(AptUser))]
         public string AptUserId { get; set; }
         public AptUser AptUser { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DateApplied { get; set; }
         [Required]
         public string Occupation { get; set; }
         public int? Income { get; set; }
@@ -27,7 +29,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         [Required]
         [RegularExpression(@"^\d{9}|\d{3}-\d{2}-\d{4}$", ErrorMessage = "Invalid Social Security Number")]
         public string SSN { get; set; }
-        public string Room { get; set; }
+        public string AptNumber { get; set; }
+        public string Area { get; set; }
         public string Price{ get; set; }
 
 

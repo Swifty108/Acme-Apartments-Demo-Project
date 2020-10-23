@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,6 +14,7 @@ using Peach_Grove_Apartments_Demo_Project.ViewModels;
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {
+    [Authorize(Roles = "Resident")]
     public class AppUserAccountController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -152,7 +154,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactUs(ContactViewModel viewModel)
+        public IActionResult ContactUs(AppUserContactViewModel viewModel)
         {
 
             if (ModelState.IsValid)
