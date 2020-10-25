@@ -10,7 +10,7 @@ using Peach_Grove_Apartments_Demo_Project.Data;
 namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201023123509_initial")]
+    [Migration("20201025130142_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,6 +163,7 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AptUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Area")
@@ -454,7 +455,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                 {
                     b.HasOne("Peach_Grove_Apartments_Demo_Project.Models.AptUser", "AptUser")
                         .WithMany("Applications")
-                        .HasForeignKey("AptUserId");
+                        .HasForeignKey("AptUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.ElectricBill", b =>

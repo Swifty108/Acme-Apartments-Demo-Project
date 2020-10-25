@@ -101,14 +101,17 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $('#apply').on('submit', function () {
+            //event.preventDefault();
+            if ($('#apply').valid()) {
+                $('input, select').prop('disabled', false);
+                return true;
+            }
+        });
+    </script>
+
 }
 
-<script>
-    $('#apply').on('submit', function () {
-        //event.preventDefault();
-        if ($('#apply').valid()) {
-            $('input, select').prop('disabled', false);
-            return true;
-        }
-    });
-</script>
+

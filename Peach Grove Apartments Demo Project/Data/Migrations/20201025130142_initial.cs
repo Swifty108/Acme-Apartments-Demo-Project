@@ -83,7 +83,7 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                 {
                     ApplicationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AptUserId = table.Column<string>(nullable: true),
+                    AptUserId = table.Column<string>(nullable: false),
                     DateApplied = table.Column<DateTime>(nullable: false),
                     Occupation = table.Column<string>(nullable: false),
                     Income = table.Column<int>(nullable: true),
@@ -101,7 +101,7 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         column: x => x.AptUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

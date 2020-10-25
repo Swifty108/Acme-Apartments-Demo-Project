@@ -18,7 +18,7 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
   (UserManager<AptUser> userManager,
   RoleManager<IdentityRole> roleManager, ApplicationDbContext dbcontext)
         {
-            SeedRoles(roleManager);
+            await SeedRoles(roleManager);
             await SeedUsers(userManager, dbcontext);
         }
 

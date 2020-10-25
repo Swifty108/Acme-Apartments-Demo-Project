@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Peach_Grove_Apartments_Demo_Project.Data;
+using Peach_Grove_Apartments_Demo_Project.HelperClasses;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
 
@@ -20,12 +22,14 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
         private AptUser _user;
+        private readonly IMapper _mapper;
 
-        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager)
+        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
-            
+            _mapper = mapper;
+
         }
 
         // GET: AppUserAccount
@@ -34,12 +38,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             _user = _userManager.GetUserAsync(User).Result;
             return View();
         }
-        public IActionResult ApplicationUsers()
+        public async Task<IActionResult> ApplicationUsers()
         {
             var applicationUsers = from userRecord in _context.Users
                                    join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
                                    select userRecord;
-            return View(applicationUsers.ToList());
+
+            var vf = await applicationUsers.ToListAsync();
+
+          
+            return View(vf);
         }
         public IActionResult ApplicationUser(int Id)
         {
@@ -50,10 +58,101 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(applicationUsers.ToList());
         }
 
+      
+        public async Task<IActionResult> ApplicationEdit(int? id)
+        {
+            var application = await _context.Applications.FindAsync(id);
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+
+            var app = _mapper.Map<ApplicationViewModel>(application);
+
+            ViewBag.AppEditSuccess = TempData["AppEditSuccess"];
+
+            // ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
+            return View(app);
+        }
+
+        // POST: ApplicantAccount/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApplicationEdit(ApplicationViewModel application)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var app = _mapper.Map<Application>(application);
+
+                    _context.Update(app);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ApplicationExists(application.ApplicationId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                TempData["AppEditSuccess"] = true;
+                return RedirectToAction("ApplicationEdit");
+            }
+
+            ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
+            return View(application);
+        }
+
+        // GET: ApplicantAccount/Delete/5
+        public async Task<IActionResult> ApplicationDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var application = await _context.Applications
+                .Include(a => a.AptUser)
+                .FirstOrDefaultAsync(m => m.ApplicationId == id);
+           
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            return View(application);
+        }
+
+        // POST: ApplicantAccount/Delete/5
+        [HttpPost, ActionName("AppDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteApplicationConfirmed(Application app)
+        {
+            var application = await _context.Applications.FindAsync(app.ApplicationId);
+            _context.Applications.Remove(application);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ApplicationExists(int id)
+        {
+            return _context.Applications.Any(e => e.ApplicationId == id);
+        }
+
+
         [HttpGet]
         public IActionResult Maintenance()
         {
- 
+
             ViewBag.MaintenanceSuccess = TempData["MaintenanceSuccess"];
 
             return View();
@@ -68,7 +167,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
                 try
                 {
-                    
+
                     var user = await _userManager.GetUserAsync(User);
                     var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription };
                     await _context.MaintenanceRequests.AddAsync(maintReq);
@@ -151,7 +250,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
-                var newReview = new Review { AptUser = user, DateReviewed = DateTime.Now.AddDays(20), ReviewText = review.ReviewText  };
+                var newReview = new Review { AptUser = user, DateReviewed = DateTime.Now.AddDays(20), ReviewText = review.ReviewText };
                 await _context.AddAsync(newReview);
                 await _context.SaveChangesAsync();
 
@@ -182,86 +281,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ApplicationEdit(int? id)
-        {
-            var application = await _context.Applications.FindAsync(id);
-            if (application == null)
-            {
-                return NotFound();
-            }
-            ViewBag.AppEditSuccess = TempData["AppEditSuccess"];
-            // ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
-            return View(application);
-        }
 
-        // POST: ApplicantAccount/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ApplicationEdit(Application application)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(application);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ApplicationExists(application.ApplicationId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                TempData["Success"] = true;
-                return RedirectToAction("ApplicationEdit");
-            }
-            ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
-            return View(application);
-        }
-
-        // GET: ApplicantAccount/Delete/5
-        public async Task<IActionResult> ApplicationDelete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var application = await _context.Applications
-                .Include(a => a.AptUser)
-                .FirstOrDefaultAsync(m => m.ApplicationId == id);
-           
-            if (application == null)
-            {
-                return NotFound();
-            }
-
-            return View(application);
-        }
-
-        // POST: ApplicantAccount/Delete/5
-        [HttpPost, ActionName("AppDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteApplicationConfirmed(Application app)
-        {
-            var application = await _context.Applications.FindAsync(app.ApplicationId);
-            _context.Applications.Remove(application);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ApplicationExists(int id)
-        {
-            return _context.Applications.Any(e => e.ApplicationId == id);
-        }
 
     }
 }

@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.HelperClasses;
+using AutoMapper;
 
 namespace Peach_Grove_Apartments_Demo_Project
 {
@@ -42,6 +43,8 @@ namespace Peach_Grove_Apartments_Demo_Project
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddAutoMapper(typeof(Startup));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
