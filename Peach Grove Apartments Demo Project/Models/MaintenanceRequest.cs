@@ -22,6 +22,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         [Required]
         public string ProblemDescription { get; set; }
         public bool isAllowedToEnter { get; set; }
+        public bool isApproved { get; set; }
 
     }
 }

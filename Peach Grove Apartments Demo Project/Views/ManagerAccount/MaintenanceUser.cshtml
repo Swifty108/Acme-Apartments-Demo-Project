@@ -1,15 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
-@model List<Peach_Grove_Apartments_Demo_Project.Models.Application>
+@model List<Peach_Grove_Apartments_Demo_Project.Models.MaintenanceRequest>
 @{
-    ViewData["Title"] = "Application User";
+    ViewData["Title"] = "Maintenace User";
     var user = UserManager.GetUserAsync(User).Result;
 }
 
 <partial name="_LoggedInAsPartial" />
 <br />
-<h1>Applications for @user.FirstName @user.LastName</h1>
+<h1>Maintenance Requests for @user.FirstName @user.LastName</h1>
 
 <hr />
 <div class="container">
@@ -19,7 +19,7 @@
 
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Application Id</th>
+                        <th scope="col">Maintenance Id</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -27,31 +27,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var application in Model)
+                    @foreach (var mRecord in Model)
 
                     {
                         <tr>
-                            <td>@application.ApplicationId</td>
+                            <td>@mRecord.Id</td>
 
                             <td>
                                 <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="viewapplication" asp-route-Id="@application.ApplicationId">View</a>
+                                    <a asp-controller="manageraccount" asp-action="viewmaintencerequest" asp-route-Id="@mRecord.Id">View</a>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="applicationedit" asp-route-Id="@application.ApplicationId">Edit</a>
+                                    <a asp-controller="manageraccount" asp-action="maintenancedit" asp-route-Id="@mRecord.Id">Edit</a>
                                 </div>
                             </td>
                                     <td>
                                         <div class="fp-applylink">
-                                            <a asp-controller="manageraccount" asp-action="approveapplication" asp-route-id="@application.AptUserId" asp-route-ssn="@application.SSN" asp-route-aptnumber="@application.AptNumber" asp-route-appid="@application.ApplicationId">Approve</a>
+                                            <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-id="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
                                         </div>
                                     </td>
                             <td>
                                 <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="applicationdelete" asp-route-Id="@application.ApplicationId">Delete</a>
+                                    <a asp-controller="manageraccount" asp-action="maintenancedelete" asp-route-Id="@mRecord.Id">Delete</a>
                                 </div>
                             </td>
 
@@ -62,7 +62,7 @@
         }
         else
         {
-            <h4>This applicant does not have any applications on file.</h4>
+            <h4>This resident does not have any requests on file.</h4>
         }
     }
 </div>

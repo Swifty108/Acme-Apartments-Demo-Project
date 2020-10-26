@@ -14,6 +14,8 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
         {
             CreateMap<ApplicationViewModel, Application>();
             CreateMap<Application, ApplicationViewModel>();
+            CreateMap<MaintenanceRequest, MaintenanceRequestViewModel>();
+            CreateMap<MaintenanceRequestViewModel, MaintenanceRequest>();
         }
     }
 }

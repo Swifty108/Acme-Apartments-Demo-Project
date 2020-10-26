@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Approve Maintenace Failed";
+    Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
+}
+<partial name="_LoggedInAsPartial" />
+<br />
+
+
+<div style="background: red; color: black; color: white; width: 650px;text-align: center;padding: 40px;">
+    <div style="display: inline-block;">
+        <b>There was a problem processing your request. Please try again later.</b>
+    </div>
+</div>
+
+@ViewBag.ApproveMaintenanceFailed
+

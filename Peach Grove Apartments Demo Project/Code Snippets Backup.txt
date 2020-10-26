@@ -1305,8 +1305,7 @@
             }
         }
 
-        /////////////
-
+     ---------------------------------------------
         
                             var ebill = await context.ElectricBills.Where(a => a.AptUserId == user.Id).FirstOrDefaultAsync();
                             var wbill = await context.WaterBills.Where(a => a.AptUserId == user.Id).FirstOrDefaultAsync();
@@ -1320,3 +1319,27 @@
                             {
                                 await context.WaterBills.AddAsync(new WaterBill { AptUser = user, Amount = 57.23M, DateDue = DateTime.Parse("12/27/2020") });
                             }
+     
+     
+     ///////////// Manager Controller ////////////////
+
+                 //    if (id == null)
+            //    {
+            //        return NotFound();
+            //    }
+
+            //    var application = await _context.Applications
+            //        .Include(a => a.AptUser)
+            //        .FirstOrDefaultAsync(m => m.ApplicationId == id);
+
+            //    if (application == null)
+            //    {
+            //        return NotFound();
+            //    }
+
+            //    var applicationUser = from userRecord in _context.Users
+            //                           join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
+            //                           select userRecord;
+
+
+            //    applicationUser.FirstOrDefaultAsync(m => m.);

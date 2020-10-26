@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AptUser> SignInManager
+@inject UserManager<AptUser> UserManager
+@model IList<AptUser>
+
+@{
+    ViewData["Title"] = "Residents";
+}
+
+<partial name="_LoggedInAsPartial" />
+<br />
+<h1>Residents with Maintenance Requests</h1>
+
+<hr />
+
+
+<div class="container">
+    @{
+       
+
+        if (Model.Count() != 0)
+        { <table class="table fp-table">
+
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+
+                    {
+                      // var  user = UserManager.FindByIdAsync(mRecord.AptUserId).Result;
+                        <tr>
+                            <td>@user.FirstName @user.LastName</td>
+
+                            <td>
+                                <div class="fp-applylink">
+                                    <a asp-controller="manageraccount" asp-action="applicationuser" asp-route-Id="@user.Id">View</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h4>There are no residents with maintenance requests at this time.</h4>
+        }
+    }
+</div>

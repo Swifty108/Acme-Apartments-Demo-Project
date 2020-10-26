@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.VisualBasic;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.HelperClasses;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
+
+
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {
@@ -38,6 +41,18 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             _user = _userManager.GetUserAsync(User).Result;
             return View();
         }
+
+        public async Task<IActionResult> ViewApplicationAsync(int Id)
+        {
+            var application = await _context.Applications.FindAsync(Id);
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            return View(application);
+
+        }
         public async Task<IActionResult> ApplicationUsers()
         {
             var applicationUsers = from userRecord in _context.Users
@@ -46,9 +61,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
             var vf = await applicationUsers.ToListAsync();
 
-          
+
             return View(vf);
         }
+
+
         public IActionResult ApplicationUser(int Id)
         {
 
@@ -58,10 +75,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(applicationUsers.ToList());
         }
 
-      
-        public async Task<IActionResult> ApplicationEdit(int? id)
+
+        public async Task<IActionResult> ApplicationEdit(int? Id)
         {
-            var application = await _context.Applications.FindAsync(id);
+            var application = await _context.Applications.FindAsync(Id);
             if (application == null)
             {
                 return NotFound();
@@ -123,7 +140,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             var application = await _context.Applications
                 .Include(a => a.AptUser)
                 .FirstOrDefaultAsync(m => m.ApplicationId == id);
-           
+
             if (application == null)
             {
                 return NotFound();
@@ -143,142 +160,193 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> ApproveApplication(string id, string ssn, string aptNumber, int appid)
+        {
+            try
+            {
+                var applicationUser = await _context.Users.FindAsync(id);
+
+                applicationUser.SSN = ssn;
+                applicationUser.AptNumber = aptNumber;
+                _context.Users.Update(applicationUser);
+                _context.Applications.Remove(_context.Applications.Find(appid));
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+
+                TempData["ApproveFailedMessage"] = e.Message;
+                return RedirectToAction("ApproveApplicationFailed");
+
+            }
+
+            return RedirectToAction("ApproveApplicationSuccess");
+        }
+
+        public IActionResult ApproveApplicationSuccess()
+        {
+           //ViewBag.ApproveApplicationSuccess = TempData["ApproveSuccessMessage"];
+            return View();
+        }
+
+        public IActionResult ApproveApplicationFailed()
+        {
+            ViewBag.ApproveApplicationFailed = TempData["ApproveFailedMessage"];
+            return View();
+        }
+
         private bool ApplicationExists(int id)
         {
             return _context.Applications.Any(e => e.ApplicationId == id);
         }
 
-
         [HttpGet]
-        public IActionResult Maintenance()
+        public async Task<IActionResult> MaintenanceRequestsAsync()
         {
+            var userRecords = from userRecord in _context.Users
+                           join mRecord  in _context.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
+                           select userRecord;
 
-            ViewBag.MaintenanceSuccess = TempData["MaintenanceSuccess"];
+            var vf = await userRecords.ToListAsync();
 
-            return View();
+            return View(vf);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Maintenance(MaintenanceRequestViewModel maintReqViewModel)
+        public IActionResult MaintenanceUser(int Id)
         {
 
+            var muRecords = from userRecord in _context.Users
+                                   join mRecord in _context.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
+                                   select mRecord;
+
+            return View(muRecords.ToList());
+        }
+
+        public async Task<IActionResult> ViewMaintenanceRequestAsync(int Id)
+        {
+            var mRecord = await _context.Applications.FindAsync(Id);
+            if (mRecord == null)
+            {
+                return NotFound();
+            }
+
+            return View(mRecord);
+
+        }
+
+
+        public async Task<IActionResult> MaintenanceEdit(int? Id)
+        {
+            var mRecord = await _context.MaintenanceRequests.FindAsync(Id);
+            if (mRecord == null)
+            {
+                return NotFound();
+            }
+
+
+            var mRecordMapped = _mapper.Map<MaintenanceRequestViewModel>(mRecord);
+
+            ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
+
+            // ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
+            return View(mRecordMapped);
+        }
+
+        // POST: ApplicantAccount/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MaintenanceEdit(MaintenanceRequestViewModel mViewModel)
+        {
             if (ModelState.IsValid)
             {
-
                 try
                 {
+                    var mRecord = _mapper.Map<MaintenanceRequest>(mViewModel);
 
-                    var user = await _userManager.GetUserAsync(User);
-                    var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription };
-                    await _context.MaintenanceRequests.AddAsync(maintReq);
+                    _context.Update(mRecord);
                     await _context.SaveChangesAsync();
-
-                    TempData["MaintenanceSuccess"] = true;
-
-                    return RedirectToAction("Maintenance");
-
                 }
-                catch (Exception e)
+                catch (DbUpdateConcurrencyException)
                 {
-                    TempData["MaintenanceSuccess"] = false;
-                    return View(maintReqViewModel);
                 }
 
+                TempData["MaintenanceEditSuccess"] = true;
+                return RedirectToAction("MaintenanceEdit");
             }
 
-            return View(maintReqViewModel);
+            //ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", mViewModel.Id);
+
+            return View(mViewModel);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ReqHistory()
+        // GET: ApplicantAccount/Delete/5
+        public async Task<IActionResult> MaintenanceDelete(int? id)
         {
-            var user = await _userManager.GetUserAsync(User);
-            var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
-            var maintReqViewModel = new MaintenanceReqHistoryViewModel { Requests = maintReqs };
-            TempData["SuccessMessage"] = "";
-
-            return View(maintReqViewModel);
-        }
-
-
-        public async Task<IActionResult> Payments()
-        {
-            var user = await _userManager.GetUserAsync(User);
-
-            var waterBill = await _context.WaterBills.FirstOrDefaultAsync();
-            var electricBill = await _context.ElectricBills.FirstOrDefaultAsync();
-            var wbill = new WaterBill();
-            var ebill = new ElectricBill();
-
-            if (waterBill == null)
+            if (id == null)
             {
-                wbill = new WaterBill { AptUser = user, Amount = 42.53M, DateDue = DateTime.Now.AddDays(20) };
-                await _context.AddAsync(wbill);
+                return NotFound();
+            }
+
+            var mRecord = await _context.MaintenanceRequests
+                .Include(a => a.AptUser)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (mRecord == null)
+            {
+                return NotFound();
+            }
+
+            return View(mRecord);
+        }
+
+        // POST: ApplicantAccount/Delete/5
+        [HttpPost, ActionName("MaintenanceDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteMaintenaceConfirmed(MaintenanceRequest request)
+        {
+            var mRecord = await _context.Applications.FindAsync(request.Id);
+            _context.Applications.Remove(mRecord);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ApproveMaintenace(string id, int mid)
+        {
+            try
+            {
+                var mUser = await _context.MaintenanceRequests.FindAsync(id);
+
+                mUser.Id = mid;
+                mUser.AptUserId = id;
+                _context.MaintenanceRequests.Update(mUser);
+                _context.MaintenanceRequests.Remove(_context.MaintenanceRequests.Find(mid));
                 await _context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+
+                TempData["ApproveFailedMessage"] = e.Message;
+                return RedirectToAction("ApproveMaintenaceFailed");
+
             }
 
-            if (electricBill == null)
-            {
-                ebill = new ElectricBill { AptUser = user, Amount = 96.53M, DateDue = DateTime.Now.AddDays(20) };
-                await _context.AddAsync(ebill);
-                await _context.SaveChangesAsync();
-            }
-
-            var app = await _context.Applications.Where(u => u.AptUserId == user.Id).FirstOrDefaultAsync();
-
-
-            var payViewModel = new PaymentsViewModel
-            {
-                Application = app,
-                WaterBill = waterBill ?? wbill,
-                ElectricBill = electricBill ?? ebill
-            };
-
-            return View(payViewModel);
+            return RedirectToAction("ApproveMaintenanceSuccess");
         }
 
-        public IActionResult WriteReview()
+        public IActionResult ApproveMaintenanceSuccess()
         {
-            ViewBag.ReviewSuccess = TempData["ReviewSuccess"];
+            //ViewBag.ApproveApplicationSuccess = TempData["ApproveSuccessMessage"];
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> WriteReview(ReviewViewModel review)
+        public IActionResult ApproveMaintenaceFailed()
         {
-
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.GetUserAsync(User);
-                var newReview = new Review { AptUser = user, DateReviewed = DateTime.Now.AddDays(20), ReviewText = review.ReviewText };
-                await _context.AddAsync(newReview);
-                await _context.SaveChangesAsync();
-
-                TempData["ReviewSuccess"] = true;
-                return RedirectToAction("WriteReview");
-
-            }
+            ViewBag.ApproveMaintenanceFailed = TempData["ApproveFailedMessage"];
             return View();
-        }
-
-        [HttpGet]
-
-        public IActionResult ContactUs()
-        {
-            ViewBag.ContactUsSuccess = TempData["ContactUsSuccess"];
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult ContactUs(AppUserContactViewModel viewModel)
-        {
-
-            if (ModelState.IsValid)
-            {
-                TempData["ContactUsSuccess"] = true;
-                return RedirectToAction("ContactUs");
-            }
-            return View(viewModel);
         }
 
 
