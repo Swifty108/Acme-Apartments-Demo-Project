@@ -48,8 +48,8 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" asp-controller="residentaccount" asp-action="reqhistory">
-
+            @*<a class="nav-link" asp-controller="residentaccount" asp-action="reqhistory">*@
+            <a class="nav-link" data-toggle="tab">
                 <div class="wrapper">
 
 
@@ -93,10 +93,54 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
 
         </div>
 
+        <div id="reqhistory" class="container tab-pane">
+
+            @*<br />
+            <table class="table fp-table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Date Requested</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @{ foreach (var request in Model.Requests)
+
+                        {
+
+                            <tr>
+                                <td>@request.DateRequested.ToString("MM/dd/yyyy")</td>
+                                <td>@request.ProblemDescription</td>
+                                <td>
+                                    @{
+
+                                        var result = request.isApproved ? "Approved" : "Under Review";
+
+                                        @result;
+
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>*@
+
+
+
+        </div>
+
 
 
     </div>
 
+
+
+    <button class="btn btn-primary" id="reqhistoryclick">fdsafd</button>
 
 </div>
 @section Scripts
@@ -104,3 +148,83 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
     <partial name="_ValidationScriptsPartial" />
 
 }
+
+<script type="text/javascript">
+
+
+
+
+    $(function () {
+        $("#reqhistoryclick").click(function () {
+            $.ajax({
+                type: "GET",
+                url: "/residentaccount/getreqhistory",
+                async: true,
+               // data: JSON.stringify({ }),
+               // contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                   //alert(response.responseText);
+                    //var jsonObj = JSON.parse(response);
+                    alert(response.list[0].dateRequested);
+                   // alert(response.Name);
+                    //document.getElementById("reqhistory").innerHTML = jsonObj[0].problemdescription;
+                },
+                failure: function (response) {
+                    alert("failed");
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+//import { parseJSON } from "jquery";
+
+    //$(function () {
+    //    $("#reqhistoryclick").click(function () {
+
+    //        if (window.XMLHttpRequest) {
+    //            // code for modern browsers
+    //            ajaxRequest = new XMLHttpRequest();
+    //        } else {
+    //            // code for old IE browsers
+    //            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+    //        }
+
+    //        ajaxRequest.onreadystatechange = function () {
+
+    //            if (ajaxRequest.readyState == 4) {
+    //                //the request is completed, now check its status
+    //                if (ajaxRequest.status == 200) {
+
+    //                    var jsonObj = JSON.parse(ajaxRequest.responseText);
+    //                    document.getElementById("reqhistory").innerHTML = jsonObj[0].problemdescription;
+    //                }
+    //                else {
+    //                    document.getElementById("reqhistory").innerHTML = '<span style="color:red;">Status error: ' + ajaxRequest.status + '</span>';
+    //                }
+
+
+
+    //            }
+    //        }
+
+    //        ajaxRequest.open('GET', '/residentaccount/getreqhistory', true);
+    //        ajaxRequest.send();
+
+    //    }
+    //);
+
+</script>

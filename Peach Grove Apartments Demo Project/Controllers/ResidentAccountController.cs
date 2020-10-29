@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
@@ -74,14 +75,26 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ReqHistory()
+        public async Task<JsonResult> GetReqHistory()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
-            var maintReqViewModel = new MaintenanceReqHistoryViewModel { Requests = maintReqs };
-            TempData["SuccessMessage"] = "";
+           var user = await _userManager.GetUserAsync(User);
+           var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
 
-            return View(maintReqViewModel);
+            // var result = JsonConvert.SerializeObject(maintReqs);
+
+            // var maintReqViewModel = new MaintenanceReqHistoryViewModel { Requests = maintReqs };
+
+
+
+            // TempData["SuccessMessage"] = "";
+
+          var f = new { Name = "homer" };
+
+            return Json(new
+            {
+                list = maintReqs
+            });
+
         }
 
 
