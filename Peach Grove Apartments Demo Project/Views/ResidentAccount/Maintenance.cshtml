@@ -29,74 +29,25 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
     <br />
 }
 <br />
+
+
 <div class="container">
-    <ul class="nav nav-tabs mp" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#newreq">
 
-                <div class="wrapper">
-
-
-                    <div class="fp-link-content">
-                        <span class="fp-group-name"> New Request </span>
-
-                    </div>
-
-
-                </div>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            @*<a class="nav-link" asp-controller="residentaccount" asp-action="reqhistory">*@
-            <a class="nav-link" data-toggle="tab">
-                <div class="wrapper">
-
-
-                    <div class="fp-link-content">
-                        <span class="fp-group-name"> Request History </span>
-
-                    </div>
-
-
-                </div>
-            </a>
-        </li>
-
-    </ul>
-
-
-    <div class="tab-content">
-
-
-        <div id="newreq" class="container tab-pane active">
-
-            <br />
-            <form id="newreq" asp-action="maintenance">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                <div class="form-group">
-                    <label asp-for="ProblemDescription" class="control-label"></label>
-                    <textarea asp-for="ProblemDescription" class="form-control" maxlength="10000" required></textarea>
-                    <span asp-validation-for="ProblemDescription" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="isAllowedToEnter" class="control-label" />
-                    <label asp-for="isAllowedToEnter" class="control-label"></label>
-                    <span asp-validation-for="isAllowedToEnter" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Submit" class="btn btn-primary" />
-                </div>
-            </form>
-
-
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
         </div>
+    </nav>
 
-        <div id="reqhistory" class="container tab-pane">
+    <div class="tab-content" id="nav-tabContent">
 
-            @*<br />
-            <table class="table fp-table">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">fdfdafasfdasf</div>
+
+
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+            <table class="table table-hover" id="reqhistorytable">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Date Requested</th>
@@ -104,45 +55,12 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
                         <th scope="col">Status</th>
                     </tr>
                 </thead>
-                <tbody>
-
-
-                    @{ foreach (var request in Model.Requests)
-
-                        {
-
-                            <tr>
-                                <td>@request.DateRequested.ToString("MM/dd/yyyy")</td>
-                                <td>@request.ProblemDescription</td>
-                                <td>
-                                    @{
-
-                                        var result = request.isApproved ? "Approved" : "Under Review";
-
-                                        @result;
-
-                                    }
-                                </td>
-                            </tr>
-                        }
-
-                    }
-                </tbody>
-            </table>*@
-
-
-
+            </table>
         </div>
 
-
-
     </div>
-
-
-
-    <button class="btn btn-primary" id="reqhistoryclick">fdsafd</button>
-
 </div>
+
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
@@ -160,15 +78,11 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
                 type: "GET",
                 url: "/residentaccount/getreqhistory",
                 async: true,
-               // data: JSON.stringify({ }),
-               // contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                   //alert(response.responseText);
-                    //var jsonObj = JSON.parse(response);
-                    alert(response.list[0].dateRequested);
-                   // alert(response.Name);
-                    //document.getElementById("reqhistory").innerHTML = jsonObj[0].problemdescription;
+
+                    createTable(response.list);
+                   
                 },
                 failure: function (response) {
                     alert("failed");
@@ -178,53 +92,28 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
                 }
             });
         });
+
+        function createTable(data) {
+            var tbody = $("<tbody />"), tr;
+            $.each(data, function (_, obj) {
+                tr = $("<tr />");
+                $.each(obj, function (index, value) {
+                    switch (index) {
+                        case "dateRequested":
+                        case "problemDescription":
+                            tr.append("<td> " + value + " </td>");
+                            break;
+                        case "isApproved":
+                            var toAppend = (value == true) ? "<td> Approved </td>" : "<td> Under Review </td>";
+                            tr.append(toAppend);
+                            break;
+                    }
+
+                });
+                tr.appendTo(tbody);
+            });
+            tbody.appendTo("#reqhistorytable");
+        }
     });
-
-
-
-
-
-
-
-
-
-
-
-//import { parseJSON } from "jquery";
-
-    //$(function () {
-    //    $("#reqhistoryclick").click(function () {
-
-    //        if (window.XMLHttpRequest) {
-    //            // code for modern browsers
-    //            ajaxRequest = new XMLHttpRequest();
-    //        } else {
-    //            // code for old IE browsers
-    //            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
-    //        }
-
-    //        ajaxRequest.onreadystatechange = function () {
-
-    //            if (ajaxRequest.readyState == 4) {
-    //                //the request is completed, now check its status
-    //                if (ajaxRequest.status == 200) {
-
-    //                    var jsonObj = JSON.parse(ajaxRequest.responseText);
-    //                    document.getElementById("reqhistory").innerHTML = jsonObj[0].problemdescription;
-    //                }
-    //                else {
-    //                    document.getElementById("reqhistory").innerHTML = '<span style="color:red;">Status error: ' + ajaxRequest.status + '</span>';
-    //                }
-
-
-
-    //            }
-    //        }
-
-    //        ajaxRequest.open('GET', '/residentaccount/getreqhistory', true);
-    //        ajaxRequest.send();
-
-    //    }
-    //);
 
 </script>

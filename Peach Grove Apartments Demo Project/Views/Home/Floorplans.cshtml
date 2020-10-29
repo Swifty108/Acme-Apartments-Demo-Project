@@ -12,46 +12,20 @@
 
 <br />
 <div class="container">
-    <ul class="nav nav-tabs fp" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#studio">
 
-                <div class="wrapper">
+    <nav>
+        <div class="nav nav-tabs fp" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
+            <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
+            <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+        </div>
+    </nav>
 
-                    <div class="fp-link-content">
-                        <span class="fp-group-name"> Studio </span>
-                    </div>
-                </div>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#1bed">
+    <div class="tab-content" id="nav-tabContent">
 
-                <div class="wrapper">
-                    <div class="fp-link-content">
-                        <span class="fp-group-name"> 1 Bed </span>
+        <div class="tab-pane fade show active" id="nav-studio" role="tabpanel" aria-labelledby="nav-studio-tab">
 
-                    </div>
-                </div>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#2bed">
-
-                <div class="wrapper">
-                    <div class="fp-link-content">
-                        <span class="fp-group-name"> 2 Bed </span>
-                    </div>
-                </div>
-            </a>
-        </li>
-    </ul>
-
-    <div class="tab-content">
-
-
-        <div id="studio" class="container tab-pane active">
-            <br>
+             <br>
             <h3>Studio Floor Plan</h3>
 
             <br />
@@ -184,8 +158,23 @@
             </table>
         </div>
 
+        </div>
 
-        <div id="2bed" class="container tab-pane fade">
+
+        <div class="tab-pane fade" id="nav-1bed" role="tabpanel" aria-labelledby="nav-1bed-tab">
+
+            <table class="table table-hover" id="reqhistorytable">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Date Requested</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <div class="tab-pane fade" id="nav-2bed" role="tabpanel" aria-labelledby="nav-2bed-tab">
             <br>
             <h3>2 Bed/2 Bath Floor Plan</h3>
 
@@ -250,6 +239,76 @@
                     </tr>
                 </tbody>
             </table>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*////////////////////////////////////////////
+
+    <ul class="nav nav-tabs fp" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#studio">
+
+                <div class="wrapper">
+
+                    <div class="fp-link-content">
+                        <span class="fp-group-name"> Studio </span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#1bed">
+
+                <div class="wrapper">
+                    <div class="fp-link-content">
+                        <span class="fp-group-name"> 1 Bed </span>
+
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#2bed">
+
+                <div class="wrapper">
+                    <div class="fp-link-content">
+                        <span class="fp-group-name"> 2 Bed </span>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+
+
+        <div id="studio" class="container tab-pane active">
+           
+
+
+        <div id="2bed" class="container tab-pane fade">
+         
         </div>
     </div>
-</div>
+</div>*@

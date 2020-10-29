@@ -2,12 +2,6 @@
 for details on configuring this project to bundle and minify static web assets. */
 @import url(//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,800,700,900);
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
 html {
     font-size: 16px;
 }
@@ -17,20 +11,14 @@ body {
     font-family: Raleway, sans-serif;
 }
 
-
 textarea {
-    width: 700px !important;
-    height: 160px;
+/*    width: 700px !important;
+*/    height: 160px;
 }
 /* unvisited link */
 /*a:link {
    color: blue;
 }
-
- visited link 
-a:visited {
-    color: green;
-}*/
 
 /* mouse over link */
 a:hover {
@@ -87,7 +75,7 @@ nav .navbar-nav li a {
 }
 
 aside {
-    width: 80%;
+    max-width: 80%;
     height: 100%;
     padding-left: 2.3rem;
     margin-left: 3rem;
@@ -237,19 +225,19 @@ a.socialIcon:hover, .socialHoverClass {
     }*/
 
 
-.tab-content {
+/*.tab-content {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     padding: 10px;
-}
-
+}*/
+/*
 .nav-tabs {
     border-color: #ddd;
     width: 100%;
-}
+}*/
 
-    .nav-tabs.fp li a {
+   .nav-tabs.fp a {
         color: #757575;
         padding-top: 10px;
         padding-left: 24px;
@@ -263,19 +251,19 @@ a.socialIcon:hover, .socialHoverClass {
         align-content: center;
     }
 
-            .nav-tabs > ul > li > a.active,
-    .nav-tabs > ul > li > a.active:focus,
-    .nav-tabs > ul > li > a.active:hover {
+            .nav-tabs > a.active,
+    .nav-tabs a.active:focus,
+    .nav-tabs a.active:hover {
             color: #222;
             border-bottom-color: transparent !important;
         }
 
-        .nav-tabs.fp > li > a:hover {
+        .nav-tabs.fp > a:hover {
                 border-radius: 5px;
             color: #222
         }
 
-table div.fp-applylink {
+/*table div.fp-applylink {
     display: inline-block;
     padding: 6px;
     width: 165px;
@@ -283,25 +271,25 @@ table div.fp-applylink {
     border: 3px solid #3fa9f5;
     color: #3fa9f5;
     transition: 0.3s;
-}
+}*/
 
-table div.fp-applylink:hover {
+/*table div.fp-applylink:hover {
     background-color: #3fa9f5;
-}
+}*/
 
-    table div.fp-applylink:hover * {
+/*    table div.fp-applylink:hover * {
         text-decoration: none;
         color: white;
-    }
+    }*/
     
     .fp-table tbody td  {
 
        vertical-align: middle;
     }
 
-    .table {
-        width: 780px;
-    }
+/*    .table {
+        max-width: 780px;
+    }*/
 
     #holder {
         width: 100%;
