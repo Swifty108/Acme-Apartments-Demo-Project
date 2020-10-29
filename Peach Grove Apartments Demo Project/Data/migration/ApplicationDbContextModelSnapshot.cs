@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Peach_Grove_Apartments_Demo_Project.Data;
 
-namespace Peach_Grove_Apartments_Demo_Project.data.migrations
+namespace Peach_Grove_Apartments_Demo_Project.data.migration
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -204,6 +204,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .HasColumnType("int");
 
                     b.Property<string>("AptNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AptPrice")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")

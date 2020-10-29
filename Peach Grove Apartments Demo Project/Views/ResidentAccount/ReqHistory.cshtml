@@ -11,7 +11,7 @@
 <div class="container">
     <ul class="nav nav-tabs mp" role="tablist">
         <li class="nav-item">
-            <a class="nav-link" asp-controller="appuseraccount" asp-action="maintenance">
+            <a class="nav-link" asp-controller="residentaccount" asp-action="maintenance">
 
                 <div class="wrapper">
 
@@ -47,8 +47,7 @@
 
     <div class="tab-content">
 
-
-        <div id="newreq" class="container tab-pane active">
+        <div id="newreq" class="container tab-pane active" sty>
 
             <br />
             <table class="table fp-table">
@@ -56,7 +55,7 @@
                     <tr>
                         <th scope="col">Date Requested</th>
                         <th scope="col">Description</th>
-
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,13 +67,19 @@
                             <tr>
                                 <td>@request.DateRequested.ToString("MM/dd/yyyy")</td>
                                 <td>@request.ProblemDescription</td>
+                                <td>
+                                    @{
+
+                                        var result = request.isApproved ? "Approved" : "Under Review";
+
+                                        @result;
+
+                                    }
+                                </td>
                             </tr>
                         }
 
                     }
-
-
-
                 </tbody>
             </table>
 

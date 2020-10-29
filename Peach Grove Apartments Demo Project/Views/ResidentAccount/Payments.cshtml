@@ -2,7 +2,9 @@
 @{
     ViewData["Title"] = "Payments";
     Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
+
 }
+
 <partial name="_LoggedInAsPartial" />
 <br />
 <h1>Payments</h1>
@@ -56,7 +58,7 @@
                         <td>5432-315</td>
                         <td>750</td>
                         <td>
-                            @Model.Application.Price
+                            @Model.AptUser.AptPrice
                         </td>
                         <td>12/25/2020</td>
                         <td>

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Peach_Grove_Apartments_Demo_Project.data.migrations
+namespace Peach_Grove_Apartments_Demo_Project.data.migration
 {
     public partial class initial : Migration
     {
@@ -49,7 +49,8 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     State = table.Column<string>(nullable: false),
                     Zipcode = table.Column<string>(nullable: false),
                     SSN = table.Column<string>(nullable: true),
-                    AptNumber = table.Column<string>(nullable: true)
+                    AptNumber = table.Column<string>(nullable: true),
+                    AptPrice = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -219,7 +220,8 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     DateRequested = table.Column<DateTime>(nullable: false),
                     AptUserId = table.Column<string>(nullable: false),
                     ProblemDescription = table.Column<string>(nullable: false),
-                    isAllowedToEnter = table.Column<bool>(nullable: false)
+                    isAllowedToEnter = table.Column<bool>(nullable: false),
+                    isApproved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

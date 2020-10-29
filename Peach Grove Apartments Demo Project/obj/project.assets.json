@@ -9435,7 +9435,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nova\\.nuget\\packages\\": {}
+    "C:\\Users\\Raj\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -9443,11 +9443,11 @@
       "projectUniqueName": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
       "projectName": "Peach Grove Apartments Demo Project",
       "projectPath": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
-      "packagesPath": "C:\\Users\\Nova\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Raj\\.nuget\\packages\\",
       "outputPath": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Nova\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Raj\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

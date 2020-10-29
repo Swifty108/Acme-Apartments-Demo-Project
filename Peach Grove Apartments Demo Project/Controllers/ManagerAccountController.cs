@@ -8,10 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
-using Microsoft.VisualBasic;
 using Peach_Grove_Apartments_Demo_Project.Data;
-using Peach_Grove_Apartments_Demo_Project.HelperClasses;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
 
@@ -24,25 +21,25 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
-        private AptUser _user;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
 
-        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IMapper mapper)
+        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
             _mapper = mapper;
 
         }
 
-        // GET: AppUserAccount
+        // GET: ManagerAccount
         public IActionResult Index()
         {
-            _user = _userManager.GetUserAsync(User).Result;
             return View();
         }
 
-        public async Task<IActionResult> ViewApplicationAsync(int Id)
+        public async Task<IActionResult> ViewApplication(int Id)
         {
             var application = await _context.Applications.FindAsync(Id);
             if (application == null)
@@ -66,7 +63,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
 
-        public IActionResult ApplicationUser(int Id)
+        public IActionResult ApplicationUser(int id)
         {
 
             var applicationUsers = from userRecord in _context.Users
@@ -111,6 +108,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+
+
                     if (!ApplicationExists(application.ApplicationId))
                     {
                         return NotFound();
@@ -157,10 +156,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             var application = await _context.Applications.FindAsync(app.ApplicationId);
             _context.Applications.Remove(application);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ApplicationUser));
         }
 
-        public async Task<IActionResult> ApproveApplication(string id, string ssn, string aptNumber, int appid)
+        public async Task<IActionResult> ApproveApplication(string id, string ssn, string aptNumber, string aptPrice, int appid)
         {
             try
             {
@@ -168,25 +167,34 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
                 applicationUser.SSN = ssn;
                 applicationUser.AptNumber = aptNumber;
+                applicationUser.AptPrice = aptPrice;
                 _context.Users.Update(applicationUser);
+
+                await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
+                await _userManager.AddToRoleAsync(applicationUser, "Resident");
+
                 _context.Applications.Remove(_context.Applications.Find(appid));
+
                 await _context.SaveChangesAsync();
 
             }
             catch (Exception e)
             {
-
                 TempData["ApproveFailedMessage"] = e.Message;
                 return RedirectToAction("ApproveApplicationFailed");
-
             }
-
             return RedirectToAction("ApproveApplicationSuccess");
         }
 
         public IActionResult ApproveApplicationSuccess()
         {
-           //ViewBag.ApproveApplicationSuccess = TempData["ApproveSuccessMessage"];
+            //ViewBag.ApproveApplicationSuccess = TempData["ApproveSuccessMessage"];
+            return View();
+        }
+
+        public IActionResult Test()
+        {
+            //ViewBag.ApproveApplicationSuccess = TempData["ApproveSuccessMessage"];
             return View();
         }
 
@@ -202,30 +210,38 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MaintenanceRequestsAsync()
+        public async Task<IActionResult> MaintenanceRequests()
         {
-            var userRecords = from userRecord in _context.Users
-                           join mRecord  in _context.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
-                           select userRecord;
+            var userRecords = (from userRecord in _context.Users
+                               join mRecord in _context.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
+                               select userRecord).Distinct();
 
             var vf = await userRecords.ToListAsync();
 
             return View(vf);
         }
 
-        public IActionResult MaintenanceUser(int Id)
+        public async Task<IActionResult> MaintenanceUser(int Id)
         {
-
-            var muRecords = from userRecord in _context.Users
+            var user = _userManager.GetUserAsync(User).Result;
+            var mURecords = await (from userRecord in _context.Users
                                    join mRecord in _context.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
-                                   select mRecord;
+                                   select mRecord).ToListAsync();
 
-            return View(muRecords.ToList());
+            var mViewModel = new MaintenanceRequestViewModel
+            {
+                mRequests = mURecords,
+                userFName = user.FirstName,
+                userLName = user.LastName
+            };
+
+
+            return View(mViewModel);
         }
 
-        public async Task<IActionResult> ViewMaintenanceRequestAsync(int Id)
+        public async Task<IActionResult> ViewMaintenanceRequest(int Id)
         {
-            var mRecord = await _context.Applications.FindAsync(Id);
+            var mRecord = await _context.MaintenanceRequests.FindAsync(Id);
             if (mRecord == null)
             {
                 return NotFound();
@@ -238,19 +254,21 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> MaintenanceEdit(int? Id)
         {
-            var mRecord = await _context.MaintenanceRequests.FindAsync(Id);
-            if (mRecord == null)
+            try
             {
-                return NotFound();
+                var mRecord = await _context.MaintenanceRequests.FindAsync(Id);
+
+                var mRecordMapped = _mapper.Map<MaintenanceRequestViewModel>(mRecord);
+
+                ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
+                return View(mRecordMapped);
+            }
+            catch (Exception e)
+            {
+
             }
 
-
-            var mRecordMapped = _mapper.Map<MaintenanceRequestViewModel>(mRecord);
-
-            ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
-
-            // ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
-            return View(mRecordMapped);
+            return View();
         }
 
         // POST: ApplicantAccount/Edit/5
@@ -307,22 +325,22 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteMaintenaceConfirmed(MaintenanceRequest request)
         {
-            var mRecord = await _context.Applications.FindAsync(request.Id);
-            _context.Applications.Remove(mRecord);
+            var mRecord = await _context.MaintenanceRequests.FindAsync(request.Id);
+            _context.MaintenanceRequests.Remove(mRecord);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(MaintenanceUser));
         }
 
-        public async Task<IActionResult> ApproveMaintenace(string id, int mid)
+        public async Task<IActionResult> ApproveMaintenace(int mid, string id)
         {
             try
             {
-                var mUser = await _context.MaintenanceRequests.FindAsync(id);
+                var mUser = await _context.MaintenanceRequests.FindAsync(mid);
 
                 mUser.Id = mid;
                 mUser.AptUserId = id;
+                mUser.isApproved = true;
                 _context.MaintenanceRequests.Update(mUser);
-                _context.MaintenanceRequests.Remove(_context.MaintenanceRequests.Find(mid));
                 await _context.SaveChangesAsync();
 
             }
@@ -349,7 +367,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-
-
+        private bool MaintenanceRequestExists(int id)
+        {
+            return _context.MaintenanceRequests.Any(e => e.Id == id);
+        }
     }
 }

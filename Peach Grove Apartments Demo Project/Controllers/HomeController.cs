@@ -89,5 +89,23 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult ContactUs()
+        {
+            ViewBag.ContactUsSuccess = TempData["ContactUsSuccess"];
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ContactUs(AppUserContactViewModel viewModel)
+        {
+
+            if (ModelState.IsValid)
+            {
+                TempData["ContactUsSuccess"] = true;
+                return RedirectToAction("ContactUs");
+            }
+            return View(viewModel);
+        }
     }
 }

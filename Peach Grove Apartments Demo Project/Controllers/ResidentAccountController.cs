@@ -113,7 +113,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
             var payViewModel = new PaymentsViewModel
             {
-                Application = app,
+                AptUser = user,
                 WaterBill = waterBill ?? wbill,
                 ElectricBill = electricBill ?? ebill
             };

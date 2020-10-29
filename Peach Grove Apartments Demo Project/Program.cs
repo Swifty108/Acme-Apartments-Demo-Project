@@ -1,16 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using Peach_Grove_Apartments_Demo_Project.Models;
-using Microsoft.AspNetCore.Identity;
-using Peach_Grove_Apartments_Demo_Project.Data;
-using System.ComponentModel.DataAnnotations;
 
 namespace Peach_Grove_Apartments_Demo_Project
 {

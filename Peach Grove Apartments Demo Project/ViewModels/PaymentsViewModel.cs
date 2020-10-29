@@ -6,6 +6,6 @@ namespace Peach_Grove_Apartments_Demo_Project.ViewModels
     {
         public WaterBill WaterBill { get; set; }
         public ElectricBill ElectricBill { get; set; }
-        public Application Application { get; set; }
+        public AptUser AptUser { get; set; }
     }
 }

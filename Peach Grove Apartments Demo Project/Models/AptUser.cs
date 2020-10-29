@@ -30,6 +30,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         public string Zipcode { get; set; }
         public string SSN { get; set; }
         public string AptNumber { get; set; }
+        public string AptPrice { get; set; }
         public virtual ICollection<Application> Applications { get; set; }
     }
 }

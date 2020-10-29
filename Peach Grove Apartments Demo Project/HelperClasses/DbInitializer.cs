@@ -99,7 +99,7 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                     if (!roleManager.Roles.Any())
                     {
                         if (!await roleManager.RoleExistsAsync
-     ("Applicant"))
+                    ("Applicant"))
                         {
                             IdentityRole role = new IdentityRole();
                             role.Name = "Applicant";

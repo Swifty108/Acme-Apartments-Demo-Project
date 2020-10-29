@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Peach_Grove_Apartments_Demo_Project.Data;
 
-namespace Peach_Grove_Apartments_Demo_Project.data.migrations
+namespace Peach_Grove_Apartments_Demo_Project.data.migration
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201025130142_initial")]
+    [Migration("20201026134218_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -208,6 +208,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     b.Property<string>("AptNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AptPrice")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -341,6 +344,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isAllowedToEnter")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isApproved")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

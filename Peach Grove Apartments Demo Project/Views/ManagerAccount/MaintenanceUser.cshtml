@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
-@model List<Peach_Grove_Apartments_Demo_Project.Models.MaintenanceRequest>
+@model Peach_Grove_Apartments_Demo_Project.ViewModels.MaintenanceRequestViewModel
 @{
     ViewData["Title"] = "Maintenace User";
     var user = UserManager.GetUserAsync(User).Result;
@@ -9,12 +9,12 @@
 
 <partial name="_LoggedInAsPartial" />
 <br />
-<h1>Maintenance Requests for @user.FirstName @user.LastName</h1>
+<h1>Maintenance Requests for @Model.userFName @Model.userLName</h1>
 
 <hr />
 <div class="container">
     @{
-        if (Model.Count != 0)
+        if (Model.mRequests.Count() != 0)
         { <table class="table fp-table">
 
                 <thead class="thead-light">
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var mRecord in Model)
+                    @foreach (var mRecord in Model.mRequests)
 
                     {
                         <tr>
@@ -35,23 +35,29 @@
 
                             <td>
                                 <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="viewmaintencerequest" asp-route-Id="@mRecord.Id">View</a>
+                                    <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id">View</a>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="maintenancedit" asp-route-Id="@mRecord.Id">Edit</a>
+                                    <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id">Edit</a>
                                 </div>
                             </td>
+
+                            @{ if (!mRecord.isApproved)
+                                {
                                     <td>
                                         <div class="fp-applylink">
-                                            <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-id="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
+                                            <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-mid="@mRecord.Id" asp-route-id="@mRecord.AptUserId">Approve</a>
                                         </div>
                                     </td>
+                                }
+                            }
+
                             <td>
                                 <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="maintenancedelete" asp-route-Id="@mRecord.Id">Delete</a>
+                                    <a asp-controller="manageraccount" asp-action="maintenancedelete" asp-route-id="@mRecord.Id">Delete</a>
                                 </div>
                             </td>
 
