@@ -9,11 +9,11 @@ namespace Peach_Grove_Apartments_Demo_Project.ViewModels
     {
         [Required]
         [MaxLength(10000)]
+        [Display(Name = "Problem Description")]
         public string ProblemDescription { get; set; }
         [DisplayName("Permitted to enter the apartment?")]
         public bool isAllowedToEnter { get; set; }
         public bool isSuccess { get; set; }
-
         public string userFName { get; set; }
         public string userLName { get; set; }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
@@ -19,12 +20,14 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly ILogger<HomeController> _logger;
         private ApplicationDbContext _db;
         private readonly UserManager<AptUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context)
         {
             _logger = logger;
             _db = db;
             _userManager = userManager;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -41,9 +44,20 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             return View();
         }
-        public IActionResult FloorPlans()
+        public async Task<IActionResult> FloorPlans()
         {
-            return View();
+           var sPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "Studio").ToListAsync();
+           var oneBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "1Bed").ToListAsync();
+           var twoBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "2Bed").ToListAsync();
+
+            var list = new FloorPlansViewModel
+            {
+                StudioPlans = sPlans,
+                OneBedPlans = oneBedPlans,
+                TwoBedPlans = twoBedPlans
+            };
+           
+            return View(list);
         }
 
         [Authorize(Roles = "Applicant")]

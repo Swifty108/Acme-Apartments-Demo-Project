@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,8 +88,8 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
         {
             await CreateRoles();
             await CreateUsers(_users);
+            await CreateFloorPlans();
         }
-
 
         public async Task CreateRoles()
         {
@@ -178,6 +179,40 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                     }
                 }
             }
+        }
+
+        public async Task CreateFloorPlans()
+        {
+            var aDate = new RandomDateTime();
+
+            using (var serviceScope = _scopeFactory.CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
+                {
+                    if (!context.FloorPlans.Any())
+                    {
+                        var fpList = new List<FloorPlan>()
+                    {
+
+                        new FloorPlan { FloorPlanType = "Studio", AptNumber = "5475-315", DateAvailable = aDate.Next(), SF = "750", Price = "850"  },
+                        new FloorPlan { FloorPlanType = "Studio", AptNumber = "5475-720", DateAvailable = aDate.Next(), SF = "750", Price = "850"  },
+                        new FloorPlan { FloorPlanType = "Studio", AptNumber = "5475-403", DateAvailable = aDate.Next(), SF = "750", Price = "850"  },
+                        new FloorPlan { FloorPlanType = "1Bed", AptNumber = "5495-501", DateAvailable = aDate.Next(), SF = "1050", Price = "1,150"  },
+                        new FloorPlan { FloorPlanType = "1Bed", AptNumber = "5495-309", DateAvailable = aDate.Next(), SF = "1050", Price = "1,150"  },
+                        new FloorPlan { FloorPlanType = "1Bed", AptNumber = "5495-404", DateAvailable = aDate.Next(), SF = "1050", Price = "1,150"  },
+                        new FloorPlan { FloorPlanType = "2Bed", AptNumber = "5475-310", DateAvailable = aDate.Next(), SF = "1050", Price = "1,250"  },
+                        new FloorPlan { FloorPlanType = "2Bed", AptNumber = "5475-419", DateAvailable = aDate.Next(), SF = "1050", Price = "1,250"  },
+                        new FloorPlan { FloorPlanType = "2Bed", AptNumber = "5475-328", DateAvailable = aDate.Next(), SF = "1050", Price = "1,250"  }
+
+                    };
+
+                       await context.FloorPlans.AddRangeAsync(fpList);
+                       await context.SaveChangesAsync();
+                    }
+                    
+                }
+            }
+
         }
     }
 

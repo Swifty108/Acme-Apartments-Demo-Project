@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Peach_Grove_Apartments_Demo_Project.data.migration
+namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     public partial class initial : Migration
     {
@@ -55,6 +55,23 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migration
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FloorPlans",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FloorPlanType = table.Column<string>(nullable: false),
+                    AptNumber = table.Column<string>(nullable: false),
+                    DateAvailable = table.Column<DateTime>(nullable: false),
+                    SF = table.Column<string>(nullable: false),
+                    Price = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FloorPlans", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -363,6 +380,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migration
 
             migrationBuilder.DropTable(
                 name: "ElectricBills");
+
+            migrationBuilder.DropTable(
+                name: "FloorPlans");
 
             migrationBuilder.DropTable(
                 name: "MaintenanceRequests");

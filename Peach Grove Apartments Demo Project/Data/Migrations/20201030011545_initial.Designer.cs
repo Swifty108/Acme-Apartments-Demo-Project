@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Peach_Grove_Apartments_Demo_Project.Data;
 
-namespace Peach_Grove_Apartments_Demo_Project.data.migration
+namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201030011545_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -321,6 +323,37 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migration
                     b.HasIndex("AptUserId");
 
                     b.ToTable("ElectricBills");
+                });
+
+            modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.FloorPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AptNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateAvailable")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FloorPlanType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Price")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SF")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FloorPlans");
                 });
 
             modelBuilder.Entity("Peach_Grove_Apartments_Demo_Project.Models.MaintenanceRequest", b =>
