@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peach Grove Apartments Demo Project", "Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project.csproj", "{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTests", "XUnitTests\XUnitTests.csproj", "{3A415EBE-C14A-4483-9DBF-F8D89EBEA23F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A415EBE-C14A-4483-9DBF-F8D89EBEA23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A415EBE-C14A-4483-9DBF-F8D89EBEA23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A415EBE-C14A-4483-9DBF-F8D89EBEA23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A415EBE-C14A-4483-9DBF-F8D89EBEA23F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
