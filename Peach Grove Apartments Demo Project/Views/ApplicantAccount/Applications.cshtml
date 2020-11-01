@@ -17,13 +17,14 @@
         { <table class="table fp-table">
 
                 <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Date Applied</th>
-                        <th scope="col">Apartment Number</th>
-                        <th scope="col">SQ Feet</th>
-                        <th scope="col">Price</th>
-                        <th scope="col"></th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Date Applied</th>
+                            <th scope="col">Apartment Number</th>
+                            <th scope="col">SQ Feet</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Status</th>
+                          
+                        </tr>
                 </thead>
                 <tbody>
                     @foreach (var application in Model)
@@ -35,9 +36,24 @@
                             <td>@application.Area</td>
                             <td>@application.Price</td>
                             <td>
-                                <div class="fp-applylink">
-                                    <a asp-controller="applicantaccount" asp-action="delete" asp-route-Id="@application.ApplicationId">Cancel</a>
-                                </div>
+                                @if (application.isApproved)
+                                {
+                                    <div style="background: lightgreen; border: 3px solid green; color: black;text-align: center;padding: 10px 30px;">
+
+                                        <b>Approved</b>
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="background: #ff3333; border: 3px solid yellow; color: white;text-align: center; padding: 10px 30px;">
+
+                                        <b>Pending Approval</b>
+
+                                    </div>
+
+                                }
+
                             </td>
                         </tr>
                     }

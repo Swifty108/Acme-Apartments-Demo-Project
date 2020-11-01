@@ -2,60 +2,47 @@
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 
-<ul class="navbar-nav" style="margin:0 auto;">
-    @if (User.Identity.IsAuthenticated)
-
-    {
-
-        var user = await UserManager.GetUserAsync(User);
-
-        <li class="nav-item">
-            @*<a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa fa-tachometer text-white"></i> Hello @user.FirstName!</a>*@
 
 
+@if (User.Identity.IsAuthenticated)
 
-            @{
+{
 
-                //// Resolve the user via their email
-                //var user = await UserManager.FindByEmailAsync(User.Email);
-                //// Get the roles for the user
-                //var roles = await _userManager.GetRolesAsync(user);
+    var user = await UserManager.GetUserAsync(User);
 
-                if (User.IsInRole("Applicant"))
-                {
-                    <a class="nav-link text-white" asp-controller="applicantaccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Hi @UserManager.GetUserAsync(User).Result.FirstName! </a>
-                }
-                else if (User.IsInRole("Resident"))
-                {
-                    <a class="nav-link text-white" asp-controller="residentaccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Hi @UserManager.GetUserAsync(User).Result.FirstName! </a>
-                }
-                else if (User.IsInRole("Manager"))
-                {
-                    <a class="nav-link text-white" asp-controller="manageraccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><i class="fa fa-tachometer text-white"></i> Hi @UserManager.GetUserAsync(User).Result.FirstName! </a>
-                }
+    <li class="nav-item">
 
+        @{
+
+            if (User.IsInRole("Applicant"))
+            {
+                <a class="nav-link" asp-controller="applicantaccount" asp-action="index" title="Account Dashboard"><span class="text-white" style="font-size: 15px;"><i class="fa fa-tachometer text-white"></i>Hi @UserManager.GetUserAsync(User).Result.FirstName! </span></a>
+            }
+            else if (User.IsInRole("Resident"))
+            {
+                <a class="nav-link text-white" asp-controller="residentaccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><span class="text-white" style="font-size: 15px;"><i class="fa fa-tachometer text-white"></i> Hi @UserManager.GetUserAsync(User).Result.FirstName!</span> </a>
+            }
+            else if (User.IsInRole("Manager"))
+            {
+                <a class="nav-link text-white" asp-controller="manageraccount" asp-action="index" title="Account Dashboard" style="margin-left: 10px;"><span class="text-white" style="font-size: 15px;"><i class="fa fa-tachometer text-white"></i> Hi @UserManager.GetUserAsync(User).Result.FirstName!</span> </a>
             }
 
-        </li>
-        <li class="nav-item text-white">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
-                <button type="submit" class="nav-link btn btn-link text-white" style="margin-left: 10px;"> <i class="fa fa-sign-out text-white"></i> Logout</button>
-            </form>
+        }
 
-            @*<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                </form>*@
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register" style="margin-left: 10px;"><i class="fa fa-registered text-white"></i> Register</a>
-        </li>
-        <li class="nav-item" style="margin-left: 3px;">
-            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login" style="margin-left: 10px;"><i class="fa fa-user-circle text-white"></i> Login</a>
-        </li>
-    }
-</ul>
+    </li>
+    <li class="nav-item" style="margin-top: 3px;">
 
-
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
+            <button type="submit" class="nav-link btn btn-link"><span class="text-white" style="font-size: 15px;"><i class="fa fa-sign-out text-white"></i>Logout</span></button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register"><span class="text-white" style="font-size: 15px;"> <i class="fa fa-registered text-white"></i>Register</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login"><span class="text-white" style="font-size: 15px;"> <i class="fa fa-user-circle text-white" style="font-size: 15px;"></i> Login</span></a>
+    </li>
+}

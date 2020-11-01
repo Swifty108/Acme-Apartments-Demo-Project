@@ -109,7 +109,8 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     SSN = table.Column<string>(nullable: false),
                     AptNumber = table.Column<string>(nullable: true),
                     Area = table.Column<string>(nullable: true),
-                    Price = table.Column<string>(nullable: true)
+                    Price = table.Column<string>(nullable: true),
+                    isApproved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

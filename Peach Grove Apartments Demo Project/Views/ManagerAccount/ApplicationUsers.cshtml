@@ -30,9 +30,7 @@
                             <td>@user.FirstName @user.LastName</td>
 
                             <td>
-                                <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="applicationuser" asp-route-Id="@user.Id">View</a>
-                                </div>
+                                    <a asp-controller="manageraccount" asp-action="applicationuser" asp-route-fname="@user.FirstName" asp-route-lname="@user.LastName" class="fp-applylink">View</a>
                             </td>
                         </tr>
                     }

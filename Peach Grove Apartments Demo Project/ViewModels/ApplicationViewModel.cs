@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Peach_Grove_Apartments_Demo_Project.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,11 +9,17 @@ namespace Peach_Grove_Apartments_Demo_Project.ViewModels
 {
     public class ApplicationViewModel
     {
+
+        public IList<Application> Apps { get; set; }
+
         [Display(Name = "Applicantion ID")]
         public int ApplicationId { get; set; }
       
         [Display(Name = "Applicant ID")]
         public string AptUserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         [DataType(DataType.Date)]
         [Display(Name = "Date Applied")]
         public DateTime DateApplied { get; set; }

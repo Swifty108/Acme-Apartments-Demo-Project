@@ -188,6 +188,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isApproved")
+                        .HasColumnType("bit");
+
                     b.HasKey("ApplicationId");
 
                     b.HasIndex("AptUserId");

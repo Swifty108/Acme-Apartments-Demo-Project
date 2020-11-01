@@ -38,6 +38,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         public string AptNumber { get; set; }
         public string Area { get; set; }
         public string Price { get; set; }
+        public bool isApproved { get; set; }
 
 
     }

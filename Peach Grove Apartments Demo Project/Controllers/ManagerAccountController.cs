@@ -63,13 +63,18 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
 
-        public IActionResult ApplicationUser(int id)
+        public IActionResult ApplicationUser(string fname, string lname)
         {
 
-            var applicationUsers = from userRecord in _context.Users
+            var applications = (from userRecord in _context.Users
                                    join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
-                                   select applicationRecord;
-            return View(applicationUsers.ToList());
+                                   select applicationRecord).ToList();
+            return View(new ApplicationViewModel
+            {
+                Apps = applications,
+                FirstName = fname,
+                LastName = lname
+            });
         }
 
 
@@ -170,10 +175,14 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 applicationUser.AptPrice = aptPrice;
                 _context.Users.Update(applicationUser);
 
+                var app = await _context.Applications.FindAsync(appid);
+
+                app.isApproved = true;
+                _context.Applications.Update(app);
+
+
                 await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
                 await _userManager.AddToRoleAsync(applicationUser, "Resident");
-
-                _context.Applications.Remove(_context.Applications.Find(appid));
 
                 await _context.SaveChangesAsync();
 
@@ -221,9 +230,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(vf);
         }
 
-        public async Task<IActionResult> MaintenanceUser(int Id)
+        public async Task<IActionResult> MaintenanceUser(int Id, string fName, string lName)
         {
-            var user = _userManager.GetUserAsync(User).Result;
+           // var user = _userManager.GetUserAsync(User).Result;
             var mURecords = await (from userRecord in _context.Users
                                    join mRecord in _context.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
                                    select mRecord).ToListAsync();
@@ -231,8 +240,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             var mViewModel = new MaintenanceRequestViewModel
             {
                 mRequests = mURecords,
-                userFName = user.FirstName,
-                userLName = user.LastName
+                userFName = fName,
+                userLName = lName
             };
 
 
@@ -279,17 +288,17 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> MaintenanceEdit(MaintenanceRequestViewModel mViewModel)
         {
             if (ModelState.IsValid)
-            {
-                try
-                {
-                    var mRecord = _mapper.Map<MaintenanceRequest>(mViewModel);
+            { 
+                var mRecord = await _context.MaintenanceRequests.FindAsync(mViewModel.Id);
+                
+                
+                mRecord.ProblemDescription = mViewModel.ProblemDescription;
+                mRecord.isAllowedToEnter = mViewModel.isAllowedToEnter;
+                  //  var mRecord = _mapper.Map<MaintenanceRequest>(mViewModel);
 
                     _context.Update(mRecord);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                }
+
 
                 TempData["MaintenanceEditSuccess"] = true;
                 return RedirectToAction("MaintenanceEdit");
@@ -331,16 +340,15 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return RedirectToAction(nameof(MaintenanceUser));
         }
 
-        public async Task<IActionResult> ApproveMaintenace(int mid, string id)
+        public async Task<IActionResult> ApproveMaintenance(string uid, int mid)
         {
             try
             {
-                var mUser = await _context.MaintenanceRequests.FindAsync(mid);
+                var mRecord = await _context.MaintenanceRequests.FindAsync(mid);
+                mRecord.AptUserId = uid;
+                mRecord.isApproved = true;
 
-                mUser.Id = mid;
-                mUser.AptUserId = id;
-                mUser.isApproved = true;
-                _context.MaintenanceRequests.Update(mUser);
+                _context.MaintenanceRequests.Update(mRecord);
                 await _context.SaveChangesAsync();
 
             }

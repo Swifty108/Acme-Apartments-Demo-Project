@@ -13,13 +13,13 @@
 
 <hr />
 <div class="container">
-    @{
-        if (Model.mRequests.Count() != 0)
-        { <table class="table fp-table">
+ 
+            <table class="table fp-table">
 
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Maintenance Id</th>
+                        <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -30,46 +30,75 @@
                     @foreach (var mRecord in Model.mRequests)
 
                     {
-                        <tr>
-                            <td>@mRecord.Id</td>
+
+
+                    <tr>
+                        <td>@mRecord.Id</td>
+
+                        <td>
+
+                            <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id" class="fp-applylink">View</a>
+                        </td>
+
+                        <td>
+
+                            <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id" class="fp-applylink">Edit</a>
+                        </td>
+
+                        @if (mRecord.isApproved)
+                        {
 
                             <td>
-                                <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id">View</a>
-                                </div>
-                            </td>
+                                <img src="/images/appapprovedplaceholder.jpg" class="img-fluid" />
 
+                            </td>
+                        }
+                        else
+                        {
                             <td>
-                                <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id">Edit</a>
-                                </div>
-                            </td>
 
-                            @{ if (!mRecord.isApproved)
-                                {
-                                    <td>
-                                        <div class="fp-applylink">
-                                            <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-mid="@mRecord.Id" asp-route-id="@mRecord.AptUserId">Approve</a>
-                                        </div>
-                                    </td>
-                                }
+                                <a class="fp-applylink" asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
+                            </td>
+                        }
+
+
+
+
+                        <td>
+
+                            <a asp-controller="manageraccount" asp-action="maintenancedelete" asp-route-id="@mRecord.Id" class="fp-applylink">Delete</a>
+                        </td>
+
+                        <td>
+                            @if (mRecord.isApproved)
+                            {
+                                <div style="background: lightgreen; border: 3px solid green; color: black;text-align: center;padding: 10px 30px;">
+
+                                    <b>Approved</b>
+
+                                </div>
+                            }
+                            else
+                            {
+                                <div style="background: #ff3333; border: 3px solid yellow; color: white;text-align: center; padding: 10px 30px;">
+
+                                    <b>Needs Approval</b>
+
+                                </div>
+
+                            }
+                        </td>
+
+                        <td>
+
+                    </tr>
+                                
                             }
 
-                            <td>
-                                <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="maintenancedelete" asp-route-id="@mRecord.Id">Delete</a>
-                                </div>
-                            </td>
-
-                        </tr>
-                    }
-                </tbody>
+                        
+                    </tbody>
             </table>
-        }
-        else
-        {
-            <h4>This resident does not have any requests on file.</h4>
-        }
-    }
+        
+    
 </div>
 

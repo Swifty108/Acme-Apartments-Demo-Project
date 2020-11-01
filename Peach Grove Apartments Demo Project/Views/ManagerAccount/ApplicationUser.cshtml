@@ -1,60 +1,77 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
-@model List<Peach_Grove_Apartments_Demo_Project.Models.Application>
+@model Peach_Grove_Apartments_Demo_Project.ViewModels.ApplicationViewModel
 @{
     ViewData["Title"] = "Application User";
-    var user = UserManager.GetUserAsync(User).Result;
+   
 }
 
 <partial name="_LoggedInAsPartial" />
 <br />
-<h1>Applications for @user.FirstName @user.LastName</h1>
+<h1>Applications for @Model.FirstName @Model.LastName</h1>
 
 <hr />
 <div class="container">
     @{
-        if (Model.Count != 0)
+        if (Model.Apps.Count != 0)
         { <table class="table fp-table">
 
                 <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Application Id</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Application Id</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
                 </thead>
                 <tbody>
-                    @foreach (var application in Model)
+                    @foreach (var application in Model.Apps)
 
                     {
-                        <tr>
-                            <td>@application.ApplicationId</td>
+                    <tr>
+                        <td>@application.ApplicationId</td>
 
-                            <td>
-                                <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="viewapplication" asp-route-id="@application.ApplicationId">View</a>
-                                </div>
-                            </td>
+                        <td>
 
-                            <td>
-                                <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="applicationedit" asp-route-id="@application.ApplicationId">Edit</a>
-                                </div>
-                            </td>
-                                    <td>
-                                        <div class="fp-applylink">
-                                            <a asp-controller="manageraccount" asp-action="approveapplication" asp-route-id="@application.AptUserId" asp-route-ssn="@application.SSN" asp-route-aptnumber="@application.AptNumber" asp-route-aptprice="@application.Price" asp-route-appid="@application.ApplicationId">Approve</a>
-                                        </div>
-                                    </td>
-                            <td>
-                                <div class="fp-applylink">
-                                    <a asp-controller="manageraccount" asp-action="applicationdelete" asp-route-id="@application.ApplicationId">Delete</a>
-                                </div>
-                            </td>
+                            <a asp-controller="manageraccount" asp-action="viewapplication" asp-route-id="@application.ApplicationId" class="fp-applylink">View</a>
 
+                        </td>
+
+                        <td>
+
+                            <a asp-controller="manageraccount" asp-action="applicationedit" asp-route-id="@application.ApplicationId" class="fp-applylink">Edit</a>
+
+                        </td>
+
+
+
+
+
+
+                        <td>
+
+                            <a asp-controller="manageraccount" asp-action="applicationdelete" asp-route-id="@application.ApplicationId" class="fp-applylink">Delete</a>
+
+                        </td>
+
+
+                        <td>
+
+                            @if (application.isApproved)
+                            {
+
+                                <img src="/images/appapprovedplaceholder.jpg" class="img-fluid" />
+                            }
+                            else
+                            {
+                        <td>
+
+                                <a asp-controller="manageraccount" asp-action="approveapplication" asp-route-id="@application.AptUserId" asp-route-ssn="@application.SSN" asp-route-aptnumber="@application.AptNumber" asp-route-aptprice="@application.Price" asp-route-appid="@application.ApplicationId" class="fp-applylink">Approve</a>
+                            </td>
+                            }
                         </tr>
                     }
                 </tbody>

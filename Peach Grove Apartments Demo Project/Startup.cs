@@ -77,7 +77,13 @@ namespace Peach_Grove_Apartments_Demo_Project
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-            });
+
+                endpoints.MapControllerRoute(
+                    name: "maintenanceedit",
+                    pattern: "{controller=manageraccount}/{action=approvemaintenance}/{uid}/{mid}");
+                endpoints.MapRazorPages();
+
+        });
 
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (var scope = scopeFactory.CreateScope())

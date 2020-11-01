@@ -40,7 +40,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
  
             ViewBag.MaintenanceSuccess = TempData["MaintenanceSuccess"];
 
-            return View();
+            return View(new MaintenanceRequestViewModel());
+
         }
 
         [HttpPost]
@@ -88,7 +89,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
             // TempData["SuccessMessage"] = "";
 
-          var f = new { Name = "homer" };
 
             return Json(new
             {
@@ -147,7 +147,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
-                var newReview = new Review { AptUser = user, DateReviewed = DateTime.Now.AddDays(20), ReviewText = review.ReviewText  };
+                var newReview = new Review { AptUser = user, DateReviewed = DateTime.Now, ReviewText = review.ReviewText  };
                 await _context.AddAsync(newReview);
                 await _context.SaveChangesAsync();
 

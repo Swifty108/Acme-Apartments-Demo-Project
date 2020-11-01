@@ -45,6 +45,7 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
         <div class="tab-pane fade show active" id="nav-newrequest" role="tabpanel" aria-labelledby="nav-newrequest-tab">
 
             <form id="newreq" asp-action="maintenance">
+                <input type="hidden" asp-for="AptUserId" value="@Model.AptUserId" />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="ProblemDescription" class="control-label"></label>
@@ -65,6 +66,11 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
 
         <div class="tab-pane fade" id="nav-reqhistory" role="tabpanel" aria-labelledby="nav-reqhistory-tab">
 
+            <div id="showError">
+                    <b>Your maintenance history is empty.</b>
+                </div>
+          
+
             <table class="table table-hover fp-table" id="reqhistorytable">
                 <thead class="thead-light">
                     <tr>
@@ -73,9 +79,9 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
                         <th scope="col">Status</th>
                     </tr>
                 </thead>
+                <tbody id="tbody-appened"></tbody>
             </table>
         </div>
-
     </div>
 </div>
 
@@ -90,8 +96,9 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
 
 
 
-    $(function () {
+    $(document).ready(function () {
         $("#nav-reqhistory-tab").click(function () {
+            $("#showError").hide();
             $.ajax({
                 type: "GET",
                 url: "/residentaccount/getreqhistory",
@@ -99,8 +106,14 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
                 dataType: "json",
                 success: function (response) {
 
-                    createTable(response.list);
-                   
+                    if (response.list.length != 0) {
+                        //$("#showError").hide();
+                        createTable(response.list);
+                    }
+                    else {
+                        $("#showError").show();
+                        $("#reqhistorytable").hide();
+                    }
                 },
                 failure: function (response) {
                     alert("failed");
@@ -112,9 +125,11 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
         });
 
         function createTable(data) {
-            var tbody = $("<tbody />"), tr;
+            $("#tbody-appened").empty();
+            //var tbody = $("<tbody />"), tr;
+            
             $.each(data, function (_, obj) {
-                tr = $("<tr />");
+               var tr = $("<tr />");
                 $.each(obj, function (index, value) {
                     switch (index) {
                         case "dateRequested":
@@ -122,16 +137,18 @@ else if (ViewBag.MaintenanceSuccess == false && ViewBag.MaintenanceSuccess)
                             tr.append("<td> " + value + " </td>");
                             break;
                         case "isApproved":
-                            var toAppend = (value == true) ? "<td> Approved </td>" : "<td> Pending Review </td>";
+                            var toAppend = (value == true) ? "<td> Approved </td>" : "<td> Pending Approval </td>";
                             tr.append(toAppend);
                             break;
                     }
 
                 });
-                tr.appendTo(tbody);
+                tr.appendTo("#tbody-appened");
             });
-            tbody.appendTo("#reqhistorytable");
+            //tbody.appendTo("#reqhistorytable");
         }
+
+
     });
 
 </script>

@@ -10,7 +10,7 @@ using Peach_Grove_Apartments_Demo_Project.Data;
 namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201030011545_initial")]
+    [Migration("20201031195711_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,6 +189,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     b.Property<string>("SSN")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isApproved")
+                        .HasColumnType("bit");
 
                     b.HasKey("ApplicationId");
 
