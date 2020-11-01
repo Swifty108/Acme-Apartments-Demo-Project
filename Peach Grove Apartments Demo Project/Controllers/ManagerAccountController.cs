@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 
@@ -67,8 +67,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
 
             var applications = (from userRecord in _context.Users
-                                   join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
-                                   select applicationRecord).ToList();
+                                join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
+                                select applicationRecord).ToList();
             return View(new ApplicationViewModel
             {
                 Apps = applications,
@@ -232,7 +232,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> MaintenanceUser(int Id, string fName, string lName)
         {
-           // var user = _userManager.GetUserAsync(User).Result;
+            // var user = _userManager.GetUserAsync(User).Result;
             var mURecords = await (from userRecord in _context.Users
                                    join mRecord in _context.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
                                    select mRecord).ToListAsync();
@@ -263,21 +263,12 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> MaintenanceEdit(int? Id)
         {
-            try
-            {
-                var mRecord = await _context.MaintenanceRequests.FindAsync(Id);
+            var mRecord = await _context.MaintenanceRequests.FindAsync(Id);
 
-                var mRecordMapped = _mapper.Map<MaintenanceRequestViewModel>(mRecord);
+            var mRecordMapped = _mapper.Map<MaintenanceRequestViewModel>(mRecord);
 
-                ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
-                return View(mRecordMapped);
-            }
-            catch (Exception e)
-            {
-
-            }
-
-            return View();
+            ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
+            return View(mRecordMapped);
         }
 
         // POST: ApplicantAccount/Edit/5
@@ -288,16 +279,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> MaintenanceEdit(MaintenanceRequestViewModel mViewModel)
         {
             if (ModelState.IsValid)
-            { 
+            {
                 var mRecord = await _context.MaintenanceRequests.FindAsync(mViewModel.Id);
-                
-                
+
+
                 mRecord.ProblemDescription = mViewModel.ProblemDescription;
                 mRecord.isAllowedToEnter = mViewModel.isAllowedToEnter;
-                  //  var mRecord = _mapper.Map<MaintenanceRequest>(mViewModel);
+                //  var mRecord = _mapper.Map<MaintenanceRequest>(mViewModel);
 
-                    _context.Update(mRecord);
-                    await _context.SaveChangesAsync();
+                _context.Update(mRecord);
+                await _context.SaveChangesAsync();
 
 
                 TempData["MaintenanceEditSuccess"] = true;
