@@ -78,10 +78,10 @@ namespace Peach_Grove_Apartments_Demo_Project
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
 
-                endpoints.MapControllerRoute(
-                    name: "maintenanceedit",
-                    pattern: "{controller=manageraccount}/{action=approvemaintenance}/{uid}/{mid}");
-                endpoints.MapRazorPages();
+                //endpoints.MapControllerRoute(
+                //    name: "maintenanceedit",
+                //    pattern: "{controller=manageraccount}/{action=approvemaintenance}/{uid}/{mid}");
+                //endpoints.MapRazorPages();
 
         });
 

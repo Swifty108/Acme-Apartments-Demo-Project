@@ -321,6 +321,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // POST: ApplicantAccount/Delete/5
+        //todo-p: don't delete maint records, just mark as canceled.
+
         [HttpPost, ActionName("MaintenanceDelete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteMaintenaceConfirmed(MaintenanceRequest request)

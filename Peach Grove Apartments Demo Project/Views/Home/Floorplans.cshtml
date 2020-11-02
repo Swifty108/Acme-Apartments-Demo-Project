@@ -2,10 +2,17 @@
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 @inject RoleManager<IdentityRole> roleManager
-@model  Peach_Grove_Apartments_Demo_Project.ViewModels.FloorPlansViewModel
+@model Peach_Grove_Apartments_Demo_Project.ViewModels.FloorPlansViewModel
 
 @{
     ViewData["Title"] = "Floor Plans";
+}
+
+
+@{
+
+    //todo-p: fix mobile resposive
+
 }
 
 <h1>Our Floor Plans</h1>
@@ -45,13 +52,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
-                        @{
 
-                            foreach (var fp in Model.StudioPlans)
-                            { 
-                                
-                                <tr>
+                    @{
+
+                        foreach (var fp in Model.StudioPlans)
+                        {
+
+                            <tr>
                                 <td>@fp.AptNumber</td>
                                 <td>@fp.DateAvailable</td>
                                 <td>@fp.SF</td>
@@ -59,7 +66,8 @@
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>  
+                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
+
                                 }
                                 else
                                 {
@@ -67,9 +75,9 @@
 
                                 }
 
-                                </tr>
-                            }
+                            </tr>
                         }
+                    }
 
                 </tbody>
             </table>
@@ -108,11 +116,11 @@
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
+                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
                                 }
                                 else
                                 {
-                                <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?room=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
+                                    <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?room=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
 
                                 }
 
@@ -159,11 +167,11 @@
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
+                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
                                 }
                                 else
                                 {
-                                <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?room=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
+                                    <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?room=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
 
                                 }
 

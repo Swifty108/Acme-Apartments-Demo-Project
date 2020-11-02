@@ -7,16 +7,18 @@
     ViewData["Title"] = "Residents";
 }
 
+@{
+    //todo-p: table not resp - header row not all the way
+}
 <partial name="_LoggedInAsPartial" />
 <br />
 <h1>Residents with Maintenance Requests</h1>
-
 <hr />
 
 
 <div class="container">
     @{
-       
+
 
         if (Model.Count() != 0)
         { <table class="table fp-table">
@@ -31,7 +33,7 @@
                     @foreach (var user in Model)
 
                     {
-                      // var  user = UserManager.FindByIdAsync(mRecord.AptUserId).Result;
+                        // var  user = UserManager.FindByIdAsync(mRecord.AptUserId).Result;
                         <tr>
                             <td>@user.FirstName @user.LastName</td>
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using System.Linq;
+using System.Threading.Tasks;
+
+
+// todo-p: readme.md "applicant" capitalize
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {

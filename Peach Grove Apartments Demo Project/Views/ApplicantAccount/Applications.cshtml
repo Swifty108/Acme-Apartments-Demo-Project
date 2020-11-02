@@ -4,6 +4,9 @@
     Layout = "~/Views/Shared/_ApplicantAccountLayout.cshtml";
 }
 
+@{
+    //todo-p: table not resp
+}
 <partial name="_LoggedInAsPartial" />
 <br />
 <h1>Your Applications</h1>
@@ -17,14 +20,14 @@
         { <table class="table fp-table">
 
                 <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Date Applied</th>
-                            <th scope="col">Apartment Number</th>
-                            <th scope="col">SQ Feet</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Status</th>
-                          
-                        </tr>
+                    <tr>
+                        <th scope="col">Date Applied</th>
+                        <th scope="col">Apartment Number</th>
+                        <th scope="col">SQ Feet</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var application in Model)

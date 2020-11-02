@@ -7,98 +7,99 @@
     var user = UserManager.GetUserAsync(User).Result;
 }
 
+@{
+    //todo-p: table not resp and rename variables accord to name conv
+}
+
 <partial name="_LoggedInAsPartial" />
 <br />
 <h1>Maintenance Requests for @Model.userFName @Model.userLName</h1>
 
 <hr />
 <div class="container">
- 
-            <table class="table fp-table">
 
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Maintenance Id</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var mRecord in Model.mRequests)
+    <table class="table fp-table">
 
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Maintenance Id</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mRecord in Model.mRequests)
+
+            {
+
+
+                <tr>
+                    <td>@mRecord.Id</td>
+
+                    <td>
+
+                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id" class="fp-applylink">View</a>
+                    </td>
+
+                    <td>
+
+                        <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id" class="fp-applylink">Edit</a>
+                    </td>
+
+                    @if (mRecord.isApproved)
                     {
 
+                        <td>
+                            <img src="/images/appapprovedplaceholder.jpg" class="img-fluid" />
 
-                    <tr>
-                        <td>@mRecord.Id</td>
-
+                        </td>
+                    }
+                    else
+                    {
                         <td>
 
-                            <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id" class="fp-applylink">View</a>
+                            <a class="fp-applylink" asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
                         </td>
+                    }
 
-                        <td>
+                    <td>
 
-                            <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id" class="fp-applylink">Edit</a>
-                        </td>
+                        <a asp-controller="manageraccount" asp-action="maintenancedelete" asp-route-id="@mRecord.Id" class="fp-applylink">Delete</a>
+                    </td>
 
+                    <td>
                         @if (mRecord.isApproved)
                         {
+                            <div style="background: lightgreen; border: 3px solid green; color: black;text-align: center;padding: 10px 30px;">
 
-                            <td>
-                                <img src="/images/appapprovedplaceholder.jpg" class="img-fluid" />
+                                <b>Approved</b>
 
-                            </td>
+                            </div>
                         }
                         else
                         {
-                            <td>
+                            <div style="background: #ff3333; border: 3px solid yellow; color: white;text-align: center; padding: 10px 30px;">
 
-                                <a class="fp-applylink" asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
-                            </td>
+                                <b>Needs Approval</b>
+
+                            </div>
+
                         }
+                    </td>
 
 
 
+                </tr>
 
-                        <td>
+            }
 
-                            <a asp-controller="manageraccount" asp-action="maintenancedelete" asp-route-id="@mRecord.Id" class="fp-applylink">Delete</a>
-                        </td>
 
-                        <td>
-                            @if (mRecord.isApproved)
-                            {
-                                <div style="background: lightgreen; border: 3px solid green; color: black;text-align: center;padding: 10px 30px;">
+        </tbody>
+    </table>
 
-                                    <b>Approved</b>
 
-                                </div>
-                            }
-                            else
-                            {
-                                <div style="background: #ff3333; border: 3px solid yellow; color: white;text-align: center; padding: 10px 30px;">
-
-                                    <b>Needs Approval</b>
-
-                                </div>
-
-                            }
-                        </td>
-
-                        
-
-                    </tr>
-                                
-                            }
-
-                        
-                    </tbody>
-            </table>
-        
-    
 </div>
 
