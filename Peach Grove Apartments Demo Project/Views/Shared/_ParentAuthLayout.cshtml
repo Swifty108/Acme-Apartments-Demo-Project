@@ -2,6 +2,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+
+    //TODO-P: Fix space between phone num and hi text and center enter set
+}
 <header class="nav-header">
     <div class="top-bar">
         <nav class="navbar navbar-expand">
@@ -61,11 +65,9 @@
 
 <div class="container-fluid">
 
+    <div class="row justify-content-center py-5">
 
-
-    <div class="row py-md-5">
-
-        <div class="col-md-6 offset-2">
+        <div class="col-md-6 col-sm-3">
             @RenderBody()
         </div>
 

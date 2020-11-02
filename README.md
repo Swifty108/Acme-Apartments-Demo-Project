@@ -8,4 +8,4 @@ ASP.NET Core 3.1, EF Core 3.1, MVC architecture architecture , SQL Server Expres
 
 ## Features
 
-The app is front faced by static informational pages. A user starts out as an applicant and, once approved, is promoted to Resident status. Manager accounts have special roles. [Click here for a live demo.](https://peachgroveapartments.azurewebsites.net)
+The app is front faced by static informational pages. A user starts out as an applicant and, once approved, is promoted to Resident status. Manager accounts have special roles.
