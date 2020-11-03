@@ -8,7 +8,7 @@
 
 }
 
-<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+<form asp-route-returnUrl="@Model.ReturnUrl" method="post" style="min-width: 335px;">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <div class="col-md-6">
@@ -32,14 +32,14 @@
         <span asp-validation-for="Input.Email" class="text-danger"></span>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
@@ -49,7 +49,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Input.DateOfBirth"></label>
                 <input asp-for="Input.DateOfBirth" class="form-control" />
@@ -59,7 +59,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Input.StreetAddress"></label>
                 <input asp-for="Input.StreetAddress" class="form-control" />
@@ -68,7 +68,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Input.City"></label>
                 <input asp-for="Input.City" class="form-control" />
@@ -77,7 +77,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Input.State"></label>
                 <select asp-for="Input.State" asp-items="Model.States" class="form-control"></select>
@@ -86,7 +86,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Input.Zipcode"></label>
                 <input asp-for="Input.Zipcode" class="form-control" />
@@ -95,7 +95,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber"></label>
                 <input asp-for="Input.PhoneNumber" class="form-control" />
@@ -104,7 +104,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Input.Role"> <span>*Only for demo purposes*</span></label>
                 <select asp-for="Input.Role" asp-items="Model.Roles" class="form-control"></select>
