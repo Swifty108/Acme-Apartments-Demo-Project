@@ -37,10 +37,32 @@ for details on configuring this project to bundle and minify static web assets. 
         margin-top: 10px;
     }
 
+    a.navbar-brand {
+    
+    margin-left: 60px;
+    margin-right: 30px;
+    margin-top:0;
+    
+    }
+
     [class*="col-"] {
         width: 100%;
     }
 }
+/*end media query*/
+
+@media (min-width: 768px) {
+
+    a.navbar-brand {
+        margin-left: 320px; 
+        margin-right: 300px;
+    }
+
+
+}
+
+/*end media query*/
+
 
     html {
         font-size: 16px;
@@ -49,6 +71,10 @@ for details on configuring this project to bundle and minify static web assets. 
     body {
         background-color: #ffff;
         font-family: Raleway, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
     }
 
     textarea {
@@ -89,7 +115,6 @@ for details on configuring this project to bundle and minify static web assets. 
         padding: 0;
         display: flex;
         font-size: 14px !important;
-
     }
 
     .bottom-menu-bar {
@@ -337,16 +362,15 @@ for details on configuring this project to bundle and minify static web assets. 
 
 
 
-.fp-applylink {
-    display: table-cell;
-    padding: 10px 30px !important;
-    border: 3px solid #3fa9f5;
-    align-content: center;
-    vertical-align: middle;
-    transition: 0.3s;
-    max-height: 30px;
-
-}
+    .fp-applylink {
+        display: table-cell;
+        padding: 10px 30px !important;
+        border: 3px solid #3fa9f5;
+        align-content: center;
+        vertical-align: middle;
+        transition: 0.3s;
+        max-height: 30px;
+    }
 
     .paylink {
         display: table-cell;

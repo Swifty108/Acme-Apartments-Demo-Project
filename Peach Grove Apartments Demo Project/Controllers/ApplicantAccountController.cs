@@ -9,9 +9,6 @@ using Peach_Grove_Apartments_Demo_Project.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-// todo-p: readme.md "applicant" capitalize
-
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {
     [Authorize(Roles = "Applicant")]
@@ -34,17 +31,17 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpGet]
-
         public IActionResult ContactUs()
         {
             ViewBag.ContactUsSuccess = TempData["ContactUsSuccess"];
             return View();
         }
 
+
+
         [HttpPost]
         public IActionResult ContactUs(ApplicantContactViewModel viewModel)
         {
-
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
@@ -54,7 +51,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> Applications()
         {
             var apps = await _context.Applications.Where(u => u.AptUserId == _userManager.GetUserAsync(User).Result.Id).ToListAsync();
@@ -106,7 +102,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // POST: ApplicantAccount/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -140,7 +136,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // POST: ApplicantAccount/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
