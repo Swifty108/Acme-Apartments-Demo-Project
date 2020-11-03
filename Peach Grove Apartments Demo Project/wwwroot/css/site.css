@@ -58,6 +58,9 @@ for details on configuring this project to bundle and minify static web assets. 
         margin-right: 300px;
     }
 
+    .table {
+        max-width: none !important;
+    }
 
 }
 
@@ -398,9 +401,6 @@ for details on configuring this project to bundle and minify static web assets. 
         vertical-align: middle;
     }
 
-    /*    .table {
-        max-width: 780px;
-    }*/
 
     #holder {
         width: 100%;
