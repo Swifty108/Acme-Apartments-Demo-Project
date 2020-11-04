@@ -7,27 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20201019113636_onetomanyapptousersetupv14.cs" />
-    <Compile Remove="Data\Migrations\20201019113636_onetomanyapptousersetupv14.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201019122725_makeaptuservirtual.cs" />
-    <Compile Remove="Data\Migrations\20201019122725_makeaptuservirtual.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201019144724_virtualaptuserfk.cs" />
-    <Compile Remove="Data\Migrations\20201019144724_virtualaptuserfk.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201019151314_dbgenaptuserId.cs" />
-    <Compile Remove="Data\Migrations\20201019151314_dbgenaptuserId.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201019164338_test2.cs" />
-    <Compile Remove="Data\Migrations\20201019164338_test2.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201021213017_addelectricandwaterbilltables.cs" />
-    <Compile Remove="Data\Migrations\20201021213017_addelectricandwaterbilltables.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201021213209_addelectricandwaterbilltables.cs" />
-    <Compile Remove="Data\Migrations\20201021213209_addelectricandwaterbilltables.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201021213431_addelectricandwaterbilltables.cs" />
-    <Compile Remove="Data\Migrations\20201021213431_addelectricandwaterbilltables.Designer.cs" />
-    <Compile Remove="Data\Migrations\20201022004105_addmaintenancetable.cs" />
-    <Compile Remove="Data\Migrations\20201022004105_addmaintenancetable.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
@@ -55,10 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <None Include="wwwroot\js\ajax-maintenance-request-history.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
     <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />

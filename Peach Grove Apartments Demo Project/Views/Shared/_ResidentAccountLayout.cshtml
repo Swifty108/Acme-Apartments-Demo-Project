@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <header class="nav-header">
     <div class="top-bar">
         <nav class="navbar navbar-expand">
@@ -81,8 +80,15 @@
 
                     <span style="font-weight: bold; font-size: 20px;">Your Address</span><br /><br />
 
+                    @{
+                        var splitAptNum = (@UserManager.GetUserAsync(User).Result.AptNumber).Split("-");
+                        var AptNum = splitAptNum[1];
+                    }
+
                     <span><b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName</b></span><br />
-                    <span>3495 Peach Grove Blvd. Apt @UserManager.GetUserAsync(User).Result.AptNumber</span>
+                    <span>
+                        3495 Peach Grove Blvd. Apt @AptNum
+                    </span>
                     <span>Pittsburgh, PA 15213</span>
 
                     <br />

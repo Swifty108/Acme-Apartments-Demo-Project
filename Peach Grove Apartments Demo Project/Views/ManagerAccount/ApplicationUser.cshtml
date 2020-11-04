@@ -4,7 +4,7 @@
 @model Peach_Grove_Apartments_Demo_Project.ViewModels.ApplicationViewModel
 @{
     ViewData["Title"] = "Application User";
-   
+    var routeParams = new Dictionary<string, string>();
 }
 
 <partial name="_LoggedInAsPartial" />
@@ -14,7 +14,7 @@
 <hr />
 <div class="container">
     @{
-        if (Model.Apps.Count != 0)
+        if (@Model.Apps.Count != 0)
         { <table class="table fp-table">
 
                 <thead class="thead-light">
@@ -24,53 +24,69 @@
                             <th scope="col"></th>
                             <th scope="col"></th>
                             <th scope="col"></th>
-                            <th scope="col"></th>
                         </tr>
                 </thead>
                 <tbody>
-                    @foreach (var application in Model.Apps)
+                    @foreach (var application in @Model.Apps)
 
                     {
-                    <tr>
-                        <td>@application.ApplicationId</td>
+                        routeParams = new Dictionary<string, string>
+                                        {
+                                        { "id", application.AptUserId },
+                                        { "aptnumber", application.AptNumber },
+                                        { "aptprice", application.Price },
+                                        { "ssn", application.SSN },
+                                        { "appid", application.ApplicationId.ToString() }
 
-                        <td>
+                                };
 
-                            <a asp-controller="manageraccount" asp-action="viewapplication" asp-route-id="@application.ApplicationId" class="fp-applylink">View</a>
+                        <tr>
+                            <td>@application.ApplicationId</td>
 
-                        </td>
+                            <td>
 
-                        <td>
+                                <a asp-controller="manageraccount" asp-action="viewapplication" asp-route-id="@application.ApplicationId">View</a>
+                            </td>
 
-                            <a asp-controller="manageraccount" asp-action="applicationedit" asp-route-id="@application.ApplicationId" class="fp-applylink">Edit</a>
+                            <td>
 
-                        </td>
+                                <a asp-controller="manageraccount" asp-action="applicationedit" asp-route-id="@application.ApplicationId">Edit</a>
+                            </td>
 
+                            <td>
 
-
-
-
-
-                        <td>
-
-                            <a asp-controller="manageraccount" asp-action="applicationdelete" asp-route-id="@application.ApplicationId" class="fp-applylink">Delete</a>
-
-                        </td>
-
-
-                        <td>
+                                <a asp-controller="manageraccount" asp-action="applicationdelete" asp-route-id="@application.ApplicationId">Delete</a>
+                            </td>
 
                             @if (application.isApproved)
                             {
 
-                                <img src="/images/appapprovedplaceholder.jpg" class="img-fluid" />
+                        <td>
+                            <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
+
+                            <a asp-controller="manageraccount" asp-action="unapproveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Unapprove</a>
+                        </td>
+
+                            }
+                            else if (application.isUnApproved)
+                            {
+                                <td>
+                                   
+                                    <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
+
+                                    @*<a asp-controller="manageraccount" asp-action="approveapplication" asp-route-id="@application.AptUserId" asp-route-ssn="@application.SSN" asp-route-aptnumber="@application.AptNumber" asp-route-aptprice="@application.Price" asp-route-appid="@application.ApplicationId" class="fp-applylink">Reapprove</a>*@
+
+                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Reapprove</a>
+                                </td>
+
                             }
                             else
                             {
-                        <td>
+                                <td>
 
-                                <a asp-controller="manageraccount" asp-action="approveapplication" asp-route-id="@application.AptUserId" asp-route-ssn="@application.SSN" asp-route-aptnumber="@application.AptNumber" asp-route-aptprice="@application.Price" asp-route-appid="@application.ApplicationId" class="fp-applylink">Approve</a>
-                            </td>
+                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams">Approve</a>
+                                </td>
+
                             }
                         </tr>
                     }
@@ -83,4 +99,3 @@
         }
     }
 </div>
-

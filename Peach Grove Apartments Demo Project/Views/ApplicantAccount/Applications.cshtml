@@ -11,8 +11,6 @@
 <br />
 <h1>Your Applications</h1>
 
-
-
 <hr />
 <div class="container">
     @{
@@ -26,7 +24,6 @@
                         <th scope="col">SQ Feet</th>
                         <th scope="col">Price</th>
                         <th scope="col">Status</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -34,29 +31,20 @@
 
                     {
                         <tr>
-                            <td>@application.DateApplied</td>
+                            <td>@application.DateApplied.ToString("MM/dd/yyyy")</td>
                             <td>@application.AptNumber</td>
-                            <td>@application.Area</td>
-                            <td>@application.Price</td>
+                            <td>@application.Area SF</td>
+                            <td>$@application.Price</td>
                             <td>
                                 @if (application.isApproved)
                                 {
-                                    <div style="background: lightgreen; border: 3px solid green; color: black;text-align: center;padding: 10px 30px;">
-
-                                        <b>Approved</b>
-
-                                    </div>
+                                    <span class="text-success"><i class="fa fa-check text-success"></i> Approved</span>
                                 }
                                 else
                                 {
-                                    <div style="background: #ff3333; border: 3px solid yellow; color: white;text-align: center; padding: 10px 30px;">
-
-                                        <b>Pending Approval</b>
-
-                                    </div>
+                                    <span><i class="fa fa-clock-o"></i> Pending Approval</span>
 
                                 }
-
                             </td>
                         </tr>
                     }

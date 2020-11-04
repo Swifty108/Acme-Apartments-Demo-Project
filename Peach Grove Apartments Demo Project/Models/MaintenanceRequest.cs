@@ -14,6 +14,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         public int Id { get; set; }
         [Required]
         [DataType(DataType.Date)]
+        [Display(Name = "Date Requested")]
         public DateTime DateRequested { get; set; }
         [Required]
         [ForeignKey("AptUser")]

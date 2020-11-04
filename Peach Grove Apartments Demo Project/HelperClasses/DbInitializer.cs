@@ -35,6 +35,9 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                                 State = "PA",
                                 Zipcode = "15213",
                                 PhoneNumber = "412-555-1212",
+                                SSN = "189424545",
+                                AptNumber = "3185-335",
+                                AptPrice = "850", 
                                 DateRegistered = DateTime.Now
                             },
             new AptUser
@@ -50,6 +53,9 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                                 State = "PA",
                                 Zipcode = "15213",
                                 PhoneNumber = "412-555-2222",
+                                SSN = "189224142",
+                                AptNumber = "3185-209",
+                                AptPrice = "850",
                                 DateRegistered = DateTime.Now
                             },
             new AptUser
@@ -67,9 +73,6 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                                 PhoneNumber = "412-555-4444",
                                 DateRegistered = DateTime.Now
                             }
-
-
-
             };
         }
 

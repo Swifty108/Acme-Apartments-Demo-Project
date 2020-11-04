@@ -69,6 +69,15 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             var applications = (from userRecord in _context.Users
                                 join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
                                 select applicationRecord).ToList();
+
+            var parms = new Dictionary<string, string>
+                                        {
+                                        { "id", "fdsaf" }
+                                       };
+
+                             
+
+
             return View(new ApplicationViewModel
             {
                 Apps = applications,
@@ -178,6 +187,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 var app = await _context.Applications.FindAsync(appid);
 
                 app.isApproved = true;
+                app.isUnApproved = false;
+                
                 _context.Applications.Update(app);
 
 
@@ -197,13 +208,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public IActionResult ApproveApplicationSuccess()
         {
-            //ViewBag.ApproveApplicationSuccess = TempData["ApproveSuccessMessage"];
-            return View();
-        }
-
-        public IActionResult Test()
-        {
-            //ViewBag.ApproveApplicationSuccess = TempData["ApproveSuccessMessage"];
+          
             return View();
         }
 
@@ -217,6 +222,55 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             return _context.Applications.Any(e => e.ApplicationId == id);
         }
+
+        //todo-p: put the params into a view model or use all-route params in anchor tag helper
+        public async Task<IActionResult> UnApproveApplication(string id, string aptNumber, int appid)
+        {
+            try
+            {
+                var applicationUser = await _context.Users.FindAsync(id);
+
+                if(applicationUser.AptNumber == aptNumber)
+                {
+                    applicationUser.SSN = null;
+                    applicationUser.AptNumber = null;
+                    applicationUser.AptPrice = null;
+
+                    await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
+                    await _userManager.AddToRoleAsync(applicationUser, "Applicant");
+
+                    _context.Users.Update(applicationUser);
+                }
+
+                var app = await _context.Applications.FindAsync(appid);
+
+                app.isApproved = false;
+                app.isUnApproved = true;
+
+                _context.Applications.Update(app);
+
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                TempData["UnApproveFailedMessage"] = e.Message;
+                return RedirectToAction("UNApproveApplicationFailed");
+            }
+            return RedirectToAction("UnApproveApplicationSuccess");
+        }
+
+        public IActionResult UnApproveApplicationSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult UnApproveApplicationFailed()
+        {
+            ViewBag.UnApproveApplicationFailed = TempData["UNApproveFailedMessage"];
+            return View();
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> MaintenanceRequests()
