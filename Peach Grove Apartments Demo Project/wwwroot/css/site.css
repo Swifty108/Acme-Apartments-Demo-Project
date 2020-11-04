@@ -2,13 +2,13 @@
 for details on configuring this project to bundle and minify static web assets. */
 @import url(//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,800,700,900);
 
-@media (max-width: 768px){
-
+@media (max-width: 768px) {
     body {
         background-color: #ffff;
         font-family: Raleway, sans-serif;
         align-content: center;
     }
+
     aside {
         max-width: 80%;
         height: 100%;
@@ -26,7 +26,6 @@ for details on configuring this project to bundle and minify static web assets. 
     }
 
     .widgeticons li {
-
         width: 190px;
         border: 1px solid #ccc;
         background: #fcfcfc;
@@ -38,11 +37,9 @@ for details on configuring this project to bundle and minify static web assets. 
     }
 
     a.navbar-brand {
-    
-    margin-left: 60px;
-    margin-right: 30px;
-    margin-top:0;
-    
+        margin-left: 60px;
+        margin-right: 30px;
+        margin-top: 0;
     }
 
     [class*="col-"] {
@@ -52,80 +49,77 @@ for details on configuring this project to bundle and minify static web assets. 
 /*end media query*/
 
 @media (min-width: 768px) {
-
     a.navbar-brand {
-        margin-left: 320px; 
+        margin-left: 320px;
         margin-right: 300px;
     }
 
     .table {
         max-width: none !important;
     }
-
 }
 
 /*end media query*/
 
+html {
+    font-size: 16px;
+}
 
-    html {
-        font-size: 16px;
-    }
+body {
+    background-color: #ffff;
+    font-family: Raleway, sans-serif;
+}
 
-    body {
-        background-color: #ffff;
-        font-family: Raleway, sans-serif;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    * {
-        box-sizing: border-box;
-    }
-
-    textarea {
-        /*    width: 700px !important;
+textarea {
+    /*    width: 700px !important;
 */ height: 160px;
-    }
-    /* unvisited link */
-    /*a:link {
+}
+/* unvisited link */
+/*a:link {
    color: blue;
 }
 
 /* mouse over link */
-    a:hover {
-        color: #62b2ff;
-        text-decoration: none;
-    }
+a:hover {
+    color: #62b2ff;
+    text-decoration: none;
+}
 
-    /* selected link */
-    /*a:active {
+/* selected link */
+/*a:active {
     color: blue;
 }*/
-    .nav-header {
-        /*    position: -webkit-sticky;
+.nav-header {
+    /*    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 9999;*/
-        background-color: #fff;
-        border-bottom: 2px solid #cbcbcb;
-        border-top: 2px solid #cbcbcb;
-    }
+    background-color: #fff;
+    border-bottom: 2px solid #cbcbcb;
+    border-top: 2px solid #cbcbcb;
+}
 
-    .top-bar {
-        background: #3fa9f5;
-        height: 40px;
-        justify-content: center;
-        width: 100%;
-        margin: 0 auto;
-        padding: 0;
-        display: flex;
-        font-size: 14px !important;
-    }
+.top-bar {
+    background: #3fa9f5;
+    height: 40px;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    font-size: 14px !important;
+}
 
-    .bottom-menu-bar {
-        height: 50px;
-        display: inline;
-        background: white;
-    }
-    /*
+.bottom-menu-bar {
+    height: 50px;
+    display: inline;
+    background: white;
+}
+/*
 .navbar-nav {
     float: none;
     margin-left: 200px;
@@ -133,164 +127,161 @@ for details on configuring this project to bundle and minify static web assets. 
     text-align: center;
 }*/
 
-    .navbar-nav > li {
-        display: inline-block;
-        float: none;
-    }
+.navbar-nav > li {
+    display: inline-block;
+    float: none;
+}
 
-    nav .navbar-nav li a {
-        color: black !important;
-        font-size: 19px;
-    }
+nav .navbar-nav li a {
+    color: black !important;
+    font-size: 19px;
+}
 
-    aside {
-        max-width: 80%;
-        height: 100%;
-        padding-left: 2.3rem;
-        margin-left: 3rem;
-        border-left: 1px solid lightgray;
-    }
+aside {
+    max-width: 80%;
+    height: 100%;
+    padding-left: 2.3rem;
+    margin-left: 3rem;
+    border-left: 1px solid lightgray;
+}
 
-    p {
-        font-family: Raleway, sans-serif;
-    }
+p {
+    font-family: Raleway, sans-serif;
+}
 
+#contact-widget {
+    border-bottom: 1px solid lightgray;
+    width: 210px;
+    line-height: 130%;
+}
 
-    #contact-widget {
-        border-bottom: 1px solid lightgray;
-        width: 210px;
-        line-height: 130%;
-    }
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
 
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
 
-    .btn-primary {
-        color: #fff;
-        background-color: #1b6ec2;
-        border-color: #1861ac;
-    }
-
-    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-        color: #fff;
-        background-color: #1b6ec2;
-        border-color: #1861ac;
-    }
-
-    button.accept-policy {
-        font-size: 1rem;
-        line-height: inherit;
-    }
-
-    /* Sticky footer styles
+/* Sticky footer styles
 -------------------------------------------------- */
 
-    .footer {
-        position: relative;
-        width: 100%;
-        top: 0;
-        line-height: 30px; /* Vertically center the text there */
-        /*border-top: 2px solid #3fa9f5;*/
-        background: #333;
-        color: rgba(255,255,255,0.4);
-        font-size: 21px;
-        text-align: center;
+.footer {
+    position: relative;
+    width: 100%;
+    top: 0;
+    line-height: 30px; /* Vertically center the text there */
+    /*border-top: 2px solid #3fa9f5;*/
+    background: #333;
+    color: rgba(255,255,255,0.4);
+    font-size: 21px;
+    text-align: center;
+}
+
+    .footer a {
+        color: white;
+        text-decoration: none;
     }
 
-        .footer a {
+        .footer a:hover * {
             color: white;
             text-decoration: none;
         }
 
-            .footer a:hover * {
-                color: white;
-                text-decoration: none;
-            }
+.footer-address {
+    padding-top: 100px;
+    text-align: center;
+    font-size: 26px;
+    color: white;
+}
 
-    .footer-address {
-        padding-top: 100px;
-        text-align: center;
-        font-size: 26px;
-        color: white;
-    }
+ul.social-network {
+    list-style: none;
+    display: inline;
+    margin-left: 0 !important;
+    padding: 0;
+}
 
-    ul.social-network {
-        list-style: none;
+    ul.social-network li {
         display: inline;
-        margin-left: 0 !important;
-        padding: 0;
+        margin: 0 5px;
     }
 
-        ul.social-network li {
-            display: inline;
-            margin: 0 5px;
-        }
+.social-network a.icoRss:hover {
+    background-color: #F56505;
+}
 
-    .social-network a.icoRss:hover {
-        background-color: #F56505;
+.social-network a.icoFacebook:hover {
+    background-color: #3B5998;
+}
+
+.social-network a.icoTwitter:hover {
+    background-color: #33ccff;
+}
+
+.social-network a.icoGoogle:hover {
+    background-color: #BD3518;
+}
+
+.social-network a.icoVimeo:hover {
+    background-color: #0590B8;
+}
+
+.social-network a.icoLinkedin:hover {
+    background-color: #007bb7;
+}
+
+    .social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
+    .social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
+        color: #fff;
     }
 
-    .social-network a.icoFacebook:hover {
-        background-color: #3B5998;
-    }
+a.socialIcon:hover, .socialHoverClass {
+    color: #44BCDD;
+}
 
-    .social-network a.icoTwitter:hover {
-        background-color: #33ccff;
-    }
+.social-circle li a {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto 0 auto;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #C0C0C0;
+}
 
-    .social-network a.icoGoogle:hover {
-        background-color: #BD3518;
-    }
+.social-circle li i {
+    margin: 0;
+    line-height: 50px;
+    text-align: center;
+}
 
-    .social-network a.icoVimeo:hover {
-        background-color: #0590B8;
-    }
+.welcome-title-divider {
+    width: 32px;
+    border-bottom: 2px solid #3fa9f5;
+    content: "";
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}
 
-    .social-network a.icoLinkedin:hover {
-        background-color: #007bb7;
-    }
-
-        .social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
-        .social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
-            color: #fff;
-        }
-
-    a.socialIcon:hover, .socialHoverClass {
-        color: #44BCDD;
-    }
-
-    .social-circle li a {
-        display: inline-block;
-        position: relative;
-        margin: 0 auto 0 auto;
-        -moz-border-radius: 50%;
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
-        text-align: center;
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-        background-color: #C0C0C0;
-    }
-
-    .social-circle li i {
-        margin: 0;
-        line-height: 50px;
-        text-align: center;
-    }
-
-    .welcome-title-divider {
-        width: 32px;
-        border-bottom: 2px solid #3fa9f5;
-        content: "";
-        left: 50%;
-        position: absolute;
-        transform: translateX(-50%);
-    }
-
-    /*.tab-content {
+/*.tab-content {
     border: 1px solid #ddd;
     border-width: 0px 1px 1px;*/ /* Removes the top border */
-    /*padding: 40px;
+/*padding: 40px;
     margin: 0 auto;
 }
 
@@ -303,50 +294,48 @@ for details on configuring this project to bundle and minify static web assets. 
         margin-left: 2px;
     }*/
 
-
-    .tab-content {
-        border-left: 1px solid #ddd;
-        border-right: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        padding: 20px;
-    }
-    /*
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px;
+}
+/*
 .nav-tabs {
     border-color: #ddd;
     width: 100%;
 }*/
 
-    .nav-tabs > a {
-        color: #757575;
-        margin-right: 3px;
-        font-size: .8rem;
-        background-color: #f7f7f7;
-        border: 1px solid #ddd !important;
-        height: 40px;
-        width: 110px;
-        text-transform: uppercase;
-        text-align: center;
-    }
+.nav-tabs > a {
+    color: #757575;
+    margin-right: 3px;
+    font-size: .8rem;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd !important;
+    height: 40px;
+    width: 110px;
+    text-transform: uppercase;
+    text-align: center;
+}
 
-    .nav-tabs.mr > a {
-        width: 160px;
-        display: block;
-        text-align: center;
-    }
+.nav-tabs.mr > a {
+    width: 160px;
+    display: block;
+    text-align: center;
+}
 
-    .nav-tabs > a.active, .nav-tabs a.active:focus, .nav-tabs a.active:hover {
-        color: #222;
-        border-bottom-color: transparent !important;
-    }
+.nav-tabs > a.active, .nav-tabs a.active:focus, .nav-tabs a.active:hover {
+    color: #222;
+    border-bottom-color: transparent !important;
+}
 
-    .nav-tabs.fp > a:hover, .nav-tabs.mr > a:hover {
-        color: #222
-    }
+.nav-tabs.fp > a:hover, .nav-tabs.mr > a:hover {
+    color: #222
+}
 
-
-    /*table div.fp-applylink {
+/*table div.fp-applylink {
     display: inline-block;
     padding: 6px;
     width: 165px;
@@ -356,113 +345,100 @@ for details on configuring this project to bundle and minify static web assets. 
     transition: 0.3s;
 }*/
 
-
-
-
-    /*table .fp-applylink-outer {
-   
+/*table .fp-applylink-outer {
 }*/
 
+.fp-applylink {
+    display: table-cell;
+    padding: 10px 30px !important;
+    border: 3px solid #3fa9f5;
+    align-content: center;
+    vertical-align: middle;
+    transition: 0.3s;
+    max-height: 30px;
+}
 
+.paylink {
+    display: table-cell;
+    padding: 10px 20px;
+    border: 3px solid #3fa9f5;
+    align-content: center;
+    vertical-align: middle;
+    transition: 0.3s;
+}
 
-    .fp-applylink {
-        display: table-cell;
-        padding: 10px 30px !important;
-        border: 3px solid #3fa9f5;
-        align-content: center;
-        vertical-align: middle;
-        transition: 0.3s;
-        max-height: 30px;
-    }
+.fp-applylink:hover {
+    background-color: #3fa9f5;
+    text-decoration: none;
+    color: white;
+}
 
-    .paylink {
-        display: table-cell;
-        padding: 10px 20px;
-        border: 3px solid #3fa9f5;
-        align-content: center;
-        vertical-align: middle;
-        transition: 0.3s;
-    }
+.paylink:hover {
+    background-color: #3fa9f5;
+    text-decoration: none;
+    color: white;
+}
 
-    .fp-applylink:hover {
-        background-color: #3fa9f5;
-        text-decoration: none;
-        color: white;
-    }
+.fp-table tbody td {
+    vertical-align: middle;
+}
 
+#holder {
+    width: 100%;
+    position: relative;
+}
 
-    .paylink:hover {
-        background-color: #3fa9f5;
-        text-decoration: none;
-        color: white;
-    }
+#image-over {
+    position: relative;
+    width: 100%;
+}
 
-    .fp-table tbody td {
-        vertical-align: middle;
-    }
+#text {
+    z-index: 100;
+    position: absolute;
+    left: 179px;
+    top: 151px;
+    color: white;
+    font-size: 46px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px black;
+}
 
-
-    #holder {
-        width: 100%;
-        position: relative;
-    }
-
-    #image-over {
-        position: relative;
-        width: 100%;
-    }
-
-    #text {
-        z-index: 100;
-        position: absolute;
-        left: 179px;
-        top: 151px;
-        color: white;
-        font-size: 46px;
-        font-weight: bold;
-        text-shadow: 2px 2px 4px black;
-    }
-
-    /*for tab control
+/*for tab control
 */
-    div.login-logout-tab div.card-header {
-        padding: 0px 0px 12px 0px;
-    }
+div.login-logout-tab div.card-header {
+    padding: 0px 0px 12px 0px;
+}
 
-    div.login-logout-tab ul.nav-tabs {
-        margin: 0px 0px -12px 0px;
-    }
+div.login-logout-tab ul.nav-tabs {
+    margin: 0px 0px -12px 0px;
+}
 
-    div.login-logout-tab li.nav-item {
-        width: 50%;
-    }
+div.login-logout-tab li.nav-item {
+    width: 50%;
+}
 
-    div.login-logout-tab a.nav-link {
-        font-size: 25px;
-        color: #495057;
-        text-align: center;
-    }
+div.login-logout-tab a.nav-link {
+    font-size: 25px;
+    color: #495057;
+    text-align: center;
+}
 
-    div.card-content {
-        padding: 10px 20px;
-    }
-    /*
+div.card-content {
+    padding: 10px 20px;
+}
+/*
 login form*/
-    div.login-form-icon {
-        text-align: center;
-    }
+div.login-form-icon {
+    text-align: center;
+}
 
-    .form-actions {
-        /*    margin: 0;
+.form-actions {
+    /*    margin: 0;
     background-color: transparent;*/
-        text-align: center;
-    }
+    text-align: center;
+}
 
-    .default-val-none {
-        display: none;
-    }
-
-
-
-
-
+.default-val-none {
+    display: none;
+}
