@@ -70,14 +70,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                                 join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
                                 select applicationRecord).ToList();
 
-            var parms = new Dictionary<string, string>
-                                        {
-                                        { "id", "fdsaf" }
-                                       };
-
-                             
-
-
             return View(new ApplicationViewModel
             {
                 Apps = applications,

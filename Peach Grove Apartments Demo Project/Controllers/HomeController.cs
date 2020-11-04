@@ -60,7 +60,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(list);
         }
 
-        [Authorize(Roles = "Applicant")]
+        
+        [Authorize(Roles = "Applicant, Resident")]
         [HttpGet]
         public async Task<IActionResult> Apply(string aptNumber, string price, string area )
         {
@@ -74,7 +75,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(appViewModel);
         }
 
-        [Authorize(Roles = "Applicant")]
+        [Authorize(Roles = "Applicant, Resident")]
         [HttpPost]
         public async Task<IActionResult> Apply(ApplyViewModel applicationViewModel)
         {

@@ -186,43 +186,62 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber };
-                var result = await _userManager.CreateAsync(user, "Hotel5r@j");
-                if (result.Succeeded)
+                AptUser user = null;
+
+                if (Input.Role == "Applicant")
                 {
-                     await _userManager.AddToRoleAsync(user,
-                                        "Applicant");
+                    
+                    user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber };
 
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    return await CreateUser(returnUrl, user, Input.Role);
                 }
-                foreach (var error in result.Errors)
+                else if (Input.Role == "Resident")
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber, AptNumber = "3185-329", AptPrice = "1150", SSN = "153731495" };
+
+                    return await CreateUser(returnUrl, user, Input.Role);
                 }
             }
 
             // If we got this far, something failed, redisplay form
+            return Page();
+        }
+
+        private async Task<IActionResult> CreateUser(string returnUrl, AptUser user, string role)
+        {
+            var result = await _userManager.CreateAsync(user, "Hotel5r@j");
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user,role);
+
+                _logger.LogInformation("User created a new account with password.");
+
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Page(
+                    "/Account/ConfirmEmail",
+                    pageHandler: null,
+                    values: new { area = "Identity", userId = user.Id, code, returnUrl },
+                    protocol: Request.Scheme);
+
+                await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                {
+                    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                }
+                else
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
+                }
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
             return Page();
         }
     }
