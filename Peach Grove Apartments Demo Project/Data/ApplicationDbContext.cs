@@ -8,7 +8,7 @@ using Peach_Grove_Apartments_Demo_Project.Models;
 
 namespace Peach_Grove_Apartments_Demo_Project.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<AptUser>
+    public class ApplicationDbContext : IdentityDbContext<AptUser, IdentityRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

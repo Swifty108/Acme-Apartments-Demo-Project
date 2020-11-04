@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Peach_Grove_Apartments_Demo_Project.Data;
+using Peach_Grove_Apartments_Demo_Project.Models;
 
 [assembly: HostingStartup(typeof(Peach_Grove_Apartments_Demo_Project.Areas.Identity.IdentityHostingStartup))]
 namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity
@@ -16,8 +17,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity
         {
             builder.ConfigureServices((context, services) => {
             });
-
-
         }
     }
 }

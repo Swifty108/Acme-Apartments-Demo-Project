@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Peach_Grove_Apartments_Demo_Project.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Peach_Grove_Apartments_Demo_Project.Models;
+using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.HelperClasses;
-using AutoMapper;
+using Peach_Grove_Apartments_Demo_Project.Models;
 
 namespace Peach_Grove_Apartments_Demo_Project
 {
@@ -34,9 +28,9 @@ namespace Peach_Grove_Apartments_Demo_Project
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<AptUser, IdentityRole>(options => { options.SignIn.RequireConfirmedAccount = false; options.User.RequireUniqueEmail = true; options.Password.RequireLowercase = false; options.Password.RequireUppercase = false; })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddRoles<IdentityRole>();
 
             services.AddScoped<IDbInitializer, DbInitializer>();
@@ -44,7 +38,6 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,8 +62,6 @@ namespace Peach_Grove_Apartments_Demo_Project
             app.UseAuthentication();
             app.UseAuthorization();
 
-
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -82,8 +73,7 @@ namespace Peach_Grove_Apartments_Demo_Project
                 //    name: "maintenanceedit",
                 //    pattern: "{controller=manageraccount}/{action=approvemaintenance}/{uid}/{mid}");
                 //endpoints.MapRazorPages();
-
-        });
+            });
 
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (var scope = scopeFactory.CreateScope())
