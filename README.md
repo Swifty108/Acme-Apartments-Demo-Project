@@ -2,9 +2,9 @@
 
 This is a web app developed for Peach Grove Apartments, a fictional apartment complex.
 
-## Technology Stacks Used
+##Technology Stacks Used
 
-ASP.NET Core 3.1, EF Core 3.1, MVC architecture , SQL Server Express, HTML5, CSS, Bootstrap and Visual Studio 2019.
+Visual Studio 2019, ASP.NET Core 3.1, EF Core 3.1, MVC architecture, SQL Server Express, Microsoft SQL Server Management Studio, HTML5, CSS, Bootstrap, and Azure Devops for project management, and Git with Github for version control.
 
 ## Features
 
