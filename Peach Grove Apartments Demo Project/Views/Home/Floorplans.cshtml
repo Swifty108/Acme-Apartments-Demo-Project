@@ -57,7 +57,7 @@
                 <tbody>
 
                     @{
-
+                        
                         foreach (var fp in Model.StudioPlans)
                         {
 
@@ -70,12 +70,11 @@
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                     <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
-
                                 }
                                 else
                                 {
+                                    //todo-p: copy this asp-area link to the other spots in the app.
                                     <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?room=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
-
                                 }
 
                             </tr>

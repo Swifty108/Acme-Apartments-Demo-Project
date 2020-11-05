@@ -1,13 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Approve Application Success";
     Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
+    ViewBag.ApproveSuccess = "The application was unapproved successfully!";
 }
 <partial name="_LoggedInAsPartial" />
 <br />
+@{
+    //todo-p: test this
 
-<div style="background: lightgreen; border: 1px solid green; color: black; width: 600px;text-align: center;padding: 40px;">
-    <div style="display: inline-block;">
-        <b>The Application was unapproved!</b>
-    </div>
-</div>
+}
+
+<partial name="_ViewsStatusMessage" model="ViewBag.ApproveSuccess" />
+
+
+@*<div class="alert alert-success alert-dismissible" role="alert" style="max-width: 500px;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        The Application was unapproved!
+    </div>*@
+
+
+@*<div style="background: lightgreen; border: 1px solid green; color: black; width: 600px;text-align: center;padding: 40px;">
+        <div style="display: inline-block;">
+            <b>The Application was unapproved!</b>
+        </div>
+    </div>*@
 

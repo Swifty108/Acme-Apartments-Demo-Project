@@ -196,7 +196,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var application = await _context.Applications.FindAsync(id);
-            _context.Applications.Remove(application);
+            application.isCanceled = true; 
+            _context.Applications.Update(application);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -40,6 +40,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         public string Price { get; set; }
         public bool isApproved { get; set; }
         public bool isUnApproved { get; set; }
+        public bool isCanceled { get; set; }
 
 
     }

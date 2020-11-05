@@ -3,18 +3,26 @@
 @{
     ViewData["Title"] = "Maintenance Edit";
     Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
+    ViewBag.Success = "It was edited successfully!";
 }
 
 @if (ViewBag.MaintenanceEditSuccess != null && ViewBag.MaintenanceEditSuccess)
 {
 
-    <div style="background: lightgreen; border: 1px solid green; color: black; max-width: 600px;text-align: center;padding: 40px;">
-        <div style="display: inline-block;">
-            <b>It was edited successfully!</b>
+    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+
+    @*<div class="alert alert-success alert-dismissible" role="alert" style="max-width: 500px;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        It was edited successfully!
+    </div>*@
+
+    @*<div style="background: lightgreen; border: 1px solid green; color: black; max-width: 600px;text-align: center;padding: 40px;">
+            <div style="display: inline-block;">
+                <b>It was edited successfully!</b>
+            </div>
         </div>
-    </div>
-    <br />
-    <br />
+        <br />
+        <br />*@
 }
 
 <h1>Maintenace Edit</h1>
@@ -26,13 +34,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="control-label"  disabled />
-               
+                <input asp-for="Id" class="control-label" disabled />
             </div>
             <div class="form-group">
-                <label asp-for="AptUserId" class="control-label" ></label>
+                <label asp-for="AptUserId" class="control-label"></label>
                 <input asp-for="AptUserId" class="control-label" disabled />
-                
             </div>
             <div class="form-group">
                 <label asp-for="ProblemDescription" class="control-label"></label>
@@ -57,7 +63,6 @@
 <div>
     <a asp-action="maintenanceuser">Back to List</a>
 </div>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

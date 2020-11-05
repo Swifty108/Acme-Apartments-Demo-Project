@@ -74,6 +74,32 @@ body {
     box-sizing: border-box;
 }
 
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+alert-danger {
+    color: white;
+    background-color: darkred;
+    border-color: black;
+}
+
+.alert-dismissible {
+    padding-right: 4rem;
+}
+
+.alert {
+    position: relative;
+    padding: 28px 30px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    max-width: 500px !important;
+    text-align: center;
+}
+
 textarea {
     /*    width: 700px !important;
 */ height: 160px;
@@ -357,6 +383,20 @@ a.socialIcon:hover, .socialHoverClass {
     transition: 0.3s;
     max-height: 30px;
 }
+
+.manage-account-link {
+    padding: 10px 30px !important;
+    border: 3px solid #3fa9f5;
+    vertical-align: middle;
+    transition: 0.3s;
+    max-height: 30px;
+}
+
+    .manage-account-link:hover {
+        background-color: #3fa9f5;
+        text-decoration: none;
+        color: white;
+    }
 
 .paylink {
     display: table-cell;

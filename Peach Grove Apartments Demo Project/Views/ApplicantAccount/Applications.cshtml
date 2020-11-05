@@ -38,12 +38,15 @@
                             <td>
                                 @if (application.isApproved)
                                 {
-                                    <span class="text-success"><i class="fa fa-check text-success"></i> Approved</span>
+                                    <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
                                 }
-                                else
+                                else if (application.isUnApproved)
                                 {
-                                    <span><i class="fa fa-clock-o"></i> Pending Approval</span>
-
+                                    <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
+                                }
+                                else if(application.isCanceled)
+                                {
+                                    <span style="color: darkred"><i class="fa fa-ban"></i> Canceled</span>
                                 }
                             </td>
                         </tr>

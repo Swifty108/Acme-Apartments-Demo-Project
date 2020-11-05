@@ -3,22 +3,38 @@
 @{
     ViewData["Title"] = "Application Edit";
     Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
+    ViewBag.Success = "The application was edited successfully!";
 }
 
 <h1>Application Edit</h1>
 
 
-@if (ViewBag.AppEditSuccess != null && ViewBag.AppEditSuccess)
-{
+@{
+ 
+    //todo-p: test this
+    if (ViewBag.AppEditSuccess != null && ViewBag.AppEditSuccess)
+    {
 
-    <div style="background: lightgreen; border: 1px solid green; color: black; max-width: 600px;text-align: center;padding: 40px;">
-        <div style="display: inline-block;">
-            <b>Your message was sent successfully!</b>
+    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+
+    @*<div class="alert alert-success alert-dismissible" role="alert" style="max-width: 500px;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        The application was edited successfully!
+    </div>*@
+
+    @*<div style="background: lightgreen; border: 1px solid green; color: black; max-width: 600px;text-align: center;padding: 40px;">
+            <div style="display: inline-block;">
+                <b>Your message was sent successfully!</b>
+            </div>
         </div>
-    </div>
-    <br />
-    <br />
-}
+        <br />
+        <br />*@
+
+        }
+    
+    }
+
+
 
 <hr />
 <div class="row">

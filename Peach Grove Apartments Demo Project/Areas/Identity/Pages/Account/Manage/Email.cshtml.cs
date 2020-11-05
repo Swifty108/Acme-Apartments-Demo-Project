@@ -94,18 +94,58 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account.Manag
             {
                 var userId = await _userManager.GetUserIdAsync(user);
                 var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
-                var callbackUrl = Url.Page(
-                    "/Account/ConfirmEmailChange",
-                    pageHandler: null,
-                    values: new { userId = userId, email = Input.NewEmail, code = code },
-                    protocol: Request.Scheme);
-                await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                //var callbackUrl = Url.Page(
+                //    "/Account/ConfirmEmailChange",
+                //    pageHandler: null,
+                //    values: new { userId = userId, email = Input.NewEmail, code = code },
+                //    protocol: Request.Scheme);
+                //await _emailSender.SendEmailAsync(
+                //    Input.NewEmail,
+                //    "Confirm your email",
+                //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                //StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                //return RedirectToPage();
+
+
+
+               // transfered from identity's emailchange page
+
+                if (userId == null || email == null || code == null)
+                {
+                    StatusMessage = "Your email is unchanged.";
+                    return RedirectToPage();
+                }
+
+                //var user = await _userManager.FindByIdAsync(userId);
+                if (user == null)
+                {
+                    return NotFound($"Unable to load user with ID '{userId}'.");
+                }
+
+         
+                //code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+                var result = await _userManager.ChangeEmailAsync(user, Input.NewEmail, code);
+                if (!result.Succeeded)
+                {
+                    StatusMessage = "Error changing email.";
+                    return Page();
+                }
+
+                // In our UI email and user name are one and the same, so when we update the email
+                // we need to update the user name.
+                var setUserNameResult = await _userManager.SetUserNameAsync(user, email);
+                if (!setUserNameResult.Succeeded)
+                {
+                    StatusMessage = "Error changing user name.";
+                    return Page();
+                }
+                //todo-p: use this RefreshSignInAsync() for refreshing page after manager approve app
+                await _signInManager.RefreshSignInAsync(user);
+                StatusMessage = "Your email has been updated!";
                 return RedirectToPage();
+
+                //return RedirectToPage("/Account/ConfirmEmailChange", new { userId = userId, email = Input.NewEmail, code = code });
             }
 
             StatusMessage = "Your email is unchanged.";

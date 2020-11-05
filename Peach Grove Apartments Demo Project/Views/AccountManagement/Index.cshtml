@@ -1,89 +1,11 @@
-﻿@model IEnumerable<Peach_Grove_Apartments_Demo_Project.Models.Application>
-
-    <a asp-action="Create">Create New</a>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AptUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateApplied)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Occupation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Income)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReasonForMoving)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SSN)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AptNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.isApproved)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.isUnApproved)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AptUser.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateApplied)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Occupation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Income)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReasonForMoving)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SSN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AptNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isApproved)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isUnApproved)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ApplicationId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ApplicationId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ApplicationId">Delete</a>
-            </td>
-        </tr>
+﻿
+@{
+    ViewData["Title"] = "Manage Account";
 }
-    </tbody>
-</table>
+<partial name="_LoggedInAsPartial" />
+<h1>Manage Account</h1>
 
+<hr />
+
+<a href="/Identity/Account/Manage/ChangePassword" class="manage-account-link">Change Password</a>
+<a href="/Identity/Account/Manage/Email" class="manage-account-link" style="margin-left: 20px !important;">Change Email</a>

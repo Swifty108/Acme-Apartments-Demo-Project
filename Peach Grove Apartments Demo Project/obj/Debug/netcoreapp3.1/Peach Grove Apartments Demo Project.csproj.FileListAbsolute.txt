@@ -228,7 +228,6 @@ D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Floorplans.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Gallery.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Original FloorPlans View.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\_ViewStart.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationDelete.cshtml.g.cs
@@ -285,3 +284,5 @@ D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\AccountManagement\Index.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_AccountManagementLayout.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\AccountManagement\_ViewStart.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ViewStart.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ViewsStatusMessage.cshtml.g.cs

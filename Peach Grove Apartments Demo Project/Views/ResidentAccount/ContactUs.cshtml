@@ -3,19 +3,21 @@
 @{
     ViewData["Title"] = "Contact Us";
     Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
+    ViewBag.Success = "Your message was sent successfully!";
 }
 <partial name="_LoggedInAsPartial" />
 <br />
 @if (ViewBag.ContactUsSuccess != null && ViewBag.ContactUsSuccess)
 {
-
-    <div style="background: lightgreen; border: 1px solid green; color: black; max-width: 600px;text-align: center;padding: 40px;">
+    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+   
+    @*<div style="background: lightgreen; border: 1px solid green; color: black; max-width: 600px;text-align: center;padding: 40px;">
         <div style="display: inline-block;">
             <b>Your message was sent successfully!</b>
         </div>
     </div>
     <br />
-    <br />
+    <br />*@
 
 }
 
@@ -29,9 +31,9 @@
 
             <div class="form-group">
                 <label asp-for="Subject" class="col-md-9 control-label"></label>
-                
-                    <input asp-for="Subject" class="col-md-9 form-control" />
-            
+
+                <input asp-for="Subject" class="col-md-9 form-control" />
+
                 <span asp-validation-for="Subject" class="text-danger"></span>
             </div>
             <div class="form-group">
