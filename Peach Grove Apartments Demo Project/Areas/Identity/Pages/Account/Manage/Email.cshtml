@@ -1,13 +1,17 @@
 ﻿@page
 @model EmailModel
-@{
-    ViewData["Title"] = "Manage Email";
-    ViewData["ActivePage"] = ManageNavPages.Email;
-}
-
-
+@{ ViewData["Title"] = "Manage Email";
+    ViewData["ActivePage"] = ManageNavPages.Email; }
 
 <div class="row">
+   
+    
+    
+    @{ 
+        //reminder use margin: 0 auto to center align child elements 
+    
+        
+        }
     <div class="col-md-6" style="margin: 0 auto;">
 
         <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -29,8 +33,10 @@
     </div> }
 else
 {
-    <input asp-for="Email" class="form-control" disabled />
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>}
+<input asp-for="Email" class="form-control" disabled />
+                @*<button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>*@
+                
+                }
             </div>
             <div class="form-group">
                 <label asp-for="Input.NewEmail"></label>
@@ -41,6 +47,7 @@ else
         </form>
     </div>
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
