@@ -27,8 +27,11 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<AptUser, IdentityRole>(options => { options.SignIn.RequireConfirmedAccount = false; options.SignIn.RequireConfirmedEmail = false;
-                options.SignIn.RequireConfirmedPhoneNumber = false; options.User.RequireUniqueEmail = true; options.Password.RequireLowercase = false; options.Password.RequireUppercase = false; })
+            services.AddIdentity<AptUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false; options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false; options.User.RequireUniqueEmail = true; options.Password.RequireLowercase = false; options.Password.RequireUppercase = false;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
@@ -39,6 +42,14 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));
+            services.AddAuthentication().AddGoogle(options =>
+           {
+               IConfigurationSection googleAuthNSection =
+                   Configuration.GetSection("Authentication:Google");
+
+               options.ClientId = googleAuthNSection["ClientId"];
+               options.ClientSecret = googleAuthNSection["ClientSecret"];
+           });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

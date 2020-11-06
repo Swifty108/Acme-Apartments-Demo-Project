@@ -183,6 +183,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                     Response.Redirect(returnUrl);
             }
 
+            //TODO-P: check on why this assignment is here
             IsDirectRegister = false;
 
             //var tempUser = await _userManager.FindByNameAsync(Input.Email);
@@ -224,7 +225,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
         //TODO-P: look at how the returnurl is wired up here after user registers
         private async Task<IActionResult> CreateUser(string returnUrl, AptUser user, string role)
         {
-            var result = await _userManager.CreateAsync(user, "Hotel5r@j");
+            var result = await _userManager.CreateAsync(user, Input.Password);
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, role);
