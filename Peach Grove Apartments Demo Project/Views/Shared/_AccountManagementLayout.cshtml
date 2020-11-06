@@ -169,11 +169,11 @@
             <aside id="sidebar">
                 @{
 
-                    var splitAptNum = (@UserManager.GetUserAsync(User).Result.AptNumber).Split("-");
-                    var AptNum = splitAptNum[1];
+
 
                     if (User.IsInRole("Applicant"))
                     {
+
                         <section style="width: 250px; border-bottom: 1px solid lightgray;">
 
                             <span style="font-weight: bold; font-size: 20px;">Your Address</span><br /><br />
@@ -226,6 +226,8 @@
                     }
                     else if (User.IsInRole("Resident"))
                     {
+                        var splitAptNum = (@UserManager.GetUserAsync(User).Result.AptNumber).Split("-");
+                        var AptNum = splitAptNum[1];
                         <section style="width: 250px; border-bottom: 1px solid lightgray;">
 
                             <span style="font-weight: bold; font-size: 20px;">Your Address</span><br /><br />

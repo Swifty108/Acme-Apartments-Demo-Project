@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -17,8 +7,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
 {
@@ -46,6 +42,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+        public bool IsDirectRegister { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -112,20 +109,21 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             new SelectListItem() { Text="Manager", Value="Manager"},
         };
 
-
         public class InputModel
         {
-
             [Required]
             [Display(Name = "First Name")]
             public string FName { get; set; }
+
             [Required]
             [Display(Name = "Last Name")]
             public string LName { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -136,26 +134,33 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
             [Required]
-           // [Column(TypeName = "date")]
+            // [Column(TypeName = "date")]
             [DataType(DataType.Date)]
             [Display(Name = "Date of Birth")]
             public DateTime DateOfBirth { get; set; }
+
             [Required]
             [Display(Name = "Street Address")]
             public string StreetAddress { get; set; }
+
             [Required]
             public string City { get; set; }
+
             [Required]
             public string State { get; set; }
+
             [Required]
             [Display(Name = "Zip Code")]
             public string Zipcode { get; set; }
+
             [Required]
             [Display(Name = "Phone Number")]
             [DataType(DataType.PhoneNumber)]
             [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
             public string PhoneNumber { get; set; }
+
             [Required]
             public string Role { get; set; }
         }
@@ -166,14 +171,19 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        //TODO-P: include isdirectregister paramater link in the login Page cs class file
+        public async Task<IActionResult> OnPostAsync(bool isDirectRegister = false, string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
+            string guid = System.Guid.NewGuid().ToString();
 
             if (User.Identity.IsAuthenticated)
             {
-                Response.Redirect(returnUrl);
+                if (Url.IsLocalUrl(returnUrl))
+                    Response.Redirect(returnUrl);
             }
+
+            IsDirectRegister = false;
 
             //var tempUser = await _userManager.FindByNameAsync(Input.Email);
 
@@ -190,30 +200,34 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
 
                 if (Input.Role == "Applicant")
                 {
-                    
-                    user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber };
+                    user = new AptUser { Id = guid, UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber };
 
-                    return await CreateUser(returnUrl, user, Input.Role);
+                    return await CreateUser(returnUrl, user, "Applicant");
                 }
                 else if (Input.Role == "Resident")
                 {
-                    user = new AptUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber, AptNumber = "3185-329", AptPrice = "1150", SSN = "153731495" };
+                    user = new AptUser { Id = guid, UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber, AptNumber = "3185-329", AptPrice = "1150", SSN = "153731495" };
 
-                    return await CreateUser(returnUrl, user, Input.Role);
+                    return await CreateUser(returnUrl, user, "Resident");
+                }
+                else if (Input.Role == "Manager")
+                {
+                    user = new AptUser { Id = guid, UserName = Input.Email, Email = Input.Email, FirstName = Input.FName, LastName = Input.LName, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber };
+
+                    return await CreateUser(returnUrl, user, "Manager");
                 }
             }
 
             // If we got this far, something failed, redisplay form
             return Page();
         }
-
+        //TODO-P: look at how the returnurl is wired up here after user registers
         private async Task<IActionResult> CreateUser(string returnUrl, AptUser user, string role)
         {
             var result = await _userManager.CreateAsync(user, "Hotel5r@j");
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user,role);
-
+                await _userManager.AddToRoleAsync(user, role);
                 _logger.LogInformation("User created a new account with password.");
 
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -234,14 +248,34 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                 else
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
+                    if (returnUrl != null && returnUrl != "/" && returnUrl != "~/" && Url.IsLocalUrl(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    else
+                    {
+                        // var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                        IList<string> roles = await _signInManager.UserManager.GetRolesAsync(user);
+
+                        if (roles.Contains("Applicant"))
+                        {
+                            return Redirect("~/applicantaccount/index");
+                        }
+                        else if (roles.Contains("Resident"))
+                        {
+                            return LocalRedirect("/residentaccount/index");
+                        }
+                        else if (roles.Contains("Manager"))
+                        {
+                            return LocalRedirect("/manageraccount/index");
+                        }
+                    }
                 }
             }
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
-
             return Page();
         }
     }

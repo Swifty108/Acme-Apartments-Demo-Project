@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using Newtonsoft.Json;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
+
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {
@@ -35,9 +33,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Applications()
+        {
+            var apps = await _context.Applications.Where(u => u.AptUserId == _userManager.GetUserAsync(User).Result.Id).ToListAsync();
+            return View(apps);
+        }
+
+        [HttpGet]
         public IActionResult Maintenance()
         {
- 
+
             ViewBag.MaintenanceSuccess = TempData["MaintenanceSuccess"];
 
             return View(new MaintenanceRequestViewModel());
@@ -53,7 +58,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
                 try
                 {
-                    
+
                     var user = await _userManager.GetUserAsync(User);
                     var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription };
                     await _context.MaintenanceRequests.AddAsync(maintReq);
@@ -78,8 +83,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<JsonResult> GetReqHistory()
         {
-           var user = await _userManager.GetUserAsync(User);
-           var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
+            var user = await _userManager.GetUserAsync(User);
+            var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
 
             // var result = JsonConvert.SerializeObject(maintReqs);
 
@@ -147,7 +152,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
-                var newReview = new Review { AptUser = user, DateReviewed = DateTime.Now, ReviewText = review.ReviewText  };
+                var newReview = new Review { AptUser = user, DateReviewed = DateTime.Now, ReviewText = review.ReviewText };
                 await _context.AddAsync(newReview);
                 await _context.SaveChangesAsync();
 

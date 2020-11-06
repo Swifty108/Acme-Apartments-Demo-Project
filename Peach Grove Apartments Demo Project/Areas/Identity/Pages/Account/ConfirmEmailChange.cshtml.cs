@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Peach_Grove_Apartments_Demo_Project.Models;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
 {
@@ -56,7 +53,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                 StatusMessage = "Error changing user name.";
                 return Page();
             }
-            //todo-p: use this RefreshSignInAsync() for refreshing page after manager approve app
+            //TODO-P: use this RefreshSignInAsync() for refreshing page after manager approve app
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Thank you for confirming your email change.";
             return Page();

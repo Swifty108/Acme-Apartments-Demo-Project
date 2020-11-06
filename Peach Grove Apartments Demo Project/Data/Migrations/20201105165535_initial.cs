@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Peach_Grove_Apartments_Demo_Project.Data.Migrations
+namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     public partial class initial : Migration
     {
@@ -111,7 +111,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Data.Migrations
                     Area = table.Column<string>(nullable: true),
                     Price = table.Column<string>(nullable: true),
                     isApproved = table.Column<bool>(nullable: false),
-                    isUnApproved = table.Column<bool>(nullable: false)
+                    isUnApproved = table.Column<bool>(nullable: false),
+                    isCanceled = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

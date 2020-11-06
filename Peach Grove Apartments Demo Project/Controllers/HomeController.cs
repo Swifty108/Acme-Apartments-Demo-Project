@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {
@@ -44,11 +42,12 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             return View();
         }
+
         public async Task<IActionResult> FloorPlans()
         {
-           var sPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "Studio").ToListAsync();
-           var oneBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "1Bed").ToListAsync();
-           var twoBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "2Bed").ToListAsync();
+            var sPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "Studio").ToListAsync();
+            var oneBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "1Bed").ToListAsync();
+            var twoBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "2Bed").ToListAsync();
 
             var list = new FloorPlansViewModel
             {
@@ -56,21 +55,20 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 OneBedPlans = oneBedPlans,
                 TwoBedPlans = twoBedPlans
             };
-           
+
             return View(list);
         }
 
-        
         [Authorize(Roles = "Applicant, Resident")]
         [HttpGet]
-        public async Task<IActionResult> Apply(string aptNumber, string price, string area )
+        public async Task<IActionResult> Apply(string aptNumber, string price, string area)
         {
             var appViewModel = new ApplyViewModel();
-                       var user = await _userManager.GetUserAsync(User);
-                    appViewModel.AptNumber = aptNumber;
-                    appViewModel.Price = price;
-                    appViewModel.User = user;
-                    appViewModel.Area = area;
+            var user = await _userManager.GetUserAsync(User);
+            appViewModel.AptNumber = aptNumber;
+            appViewModel.Price = price;
+            appViewModel.User = user;
+            appViewModel.Area = area;
 
             return View(appViewModel);
         }
@@ -79,17 +77,25 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Apply(ApplyViewModel applicationViewModel)
         {
-           var user = await _userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
 
             if (ModelState.IsValid)
-                {
-                    var app = new Application { AptUser = user, Income = applicationViewModel.Income, Occupation = applicationViewModel.Occupation, Price = applicationViewModel.Price, ReasonForMoving = applicationViewModel.ReasonForMoving, AptNumber = applicationViewModel.AptNumber, Area = applicationViewModel.Area, DateApplied = DateTime.Now, SSN = applicationViewModel.SSN };
-                    _db.Add(app);
+            {
+                var app = new Application { AptUser = user, Income = applicationViewModel.Income, Occupation = applicationViewModel.Occupation, Price = applicationViewModel.Price, ReasonForMoving = applicationViewModel.ReasonForMoving, AptNumber = applicationViewModel.AptNumber, Area = applicationViewModel.Area, DateApplied = DateTime.Now, SSN = applicationViewModel.SSN };
+                _db.Add(app);
 
-                    //await _db.AddAsync(app);
-                    await _db.SaveChangesAsync();
-                    return RedirectToAction("Index");
+                //await _db.AddAsync(app);
+                await _db.SaveChangesAsync();
+
+                if (User.IsInRole("Applicant"))
+                {
+                    return LocalRedirect("/applicantaccount/index");
                 }
+                else if (User.IsInRole("Resident"))
+                {
+                    return LocalRedirect("/residentaccount/index");
+                }
+            }
 
             return RedirectToAction("Apply", applicationViewModel.AptNumber, applicationViewModel.Price);
         }
@@ -114,7 +120,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpPost]
         public IActionResult ContactUs(AppUserContactViewModel viewModel)
         {
-
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;

@@ -23,13 +23,15 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly UserManager<AptUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
+        private SignInManager<AptUser> _signInManager;
 
-        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
+        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
+            _signInManager = signInManager;
 
         }
 
@@ -180,12 +182,14 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
                 app.isApproved = true;
                 app.isUnApproved = false;
-                
+
                 _context.Applications.Update(app);
 
 
                 await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
                 await _userManager.AddToRoleAsync(applicationUser, "Resident");
+
+                await _signInManager.RefreshSignInAsync(applicationUser);
 
                 await _context.SaveChangesAsync();
 
@@ -200,7 +204,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public IActionResult ApproveApplicationSuccess()
         {
-          
+
             return View();
         }
 
@@ -215,14 +219,14 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return _context.Applications.Any(e => e.ApplicationId == id);
         }
 
-        //todo-p: put the params into a view model or use all-route params in anchor tag helper
+        //TODO-P: put the params into a view model or use all-route params in anchor tag helper
         public async Task<IActionResult> UnApproveApplication(string id, string aptNumber, int appid)
         {
             try
             {
                 var applicationUser = await _context.Users.FindAsync(id);
 
-                if(applicationUser.AptNumber == aptNumber)
+                if (applicationUser.AptNumber == aptNumber)
                 {
                     applicationUser.SSN = null;
                     applicationUser.AptNumber = null;
@@ -367,7 +371,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // POST: ApplicantAccount/Delete/5
-        //todo-p: don't delete maint records, just mark as canceled.
+        //TODO-P: don't delete maint records, just mark as canceled.
 
         [HttpPost, ActionName("MaintenanceDelete")]
         [ValidateAntiForgeryToken]
@@ -381,7 +385,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
 
 
-        //Todo-p: rename mid and uid accord to name conv
+        //TODO-P: rename mid and uid accord to name conv
         public async Task<IActionResult> ApproveMaintenance(string uid, int mid)
         {
             try

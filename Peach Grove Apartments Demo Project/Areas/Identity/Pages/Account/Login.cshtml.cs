@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Peach_Grove_Apartments_Demo_Project.Models;
+using SQLitePCL;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+//TODO-P: stored procedure for azure sql db
 
 namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
 {
@@ -22,7 +22,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
         private readonly SignInManager<AptUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<AptUser> signInManager, 
+        public LoginModel(SignInManager<AptUser> signInManager,
             ILogger<LoginModel> logger,
             UserManager<AptUser> userManager)
         {
@@ -37,6 +37,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public string ReturnUrl { get; set; }
+        public bool IsDirectLogin { get; set; }
 
         [TempData]
         public string ErrorMessage { get; set; }
@@ -55,7 +56,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(bool isDirectLogin, string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
@@ -70,15 +71,22 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
+            if (isDirectLogin)
+            {
+                IsDirectLogin = true;
+            }
+
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null, bool isDirectLogin = false)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
 
             if (User.Identity.IsAuthenticated)
             {
-                Response.Redirect(returnUrl);
+                //Reminder: use this to check if url is local for security reasons. malformed urls can be security risk.
+                if (Url.IsLocalUrl(returnUrl))
+                    Response.Redirect(returnUrl);
             }
 
             if (ModelState.IsValid)
@@ -86,10 +94,33 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
+                    await _signInManager.RefreshSignInAsync(await _userManager.FindByNameAsync(Input.Email));
                     _logger.LogInformation("User logged in.");
+
+                    if (isDirectLogin)
+                    {
+                        var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                        IList<string> roles = await _signInManager.UserManager.GetRolesAsync(user);
+
+                        if (roles.Contains("Applicant"))
+                        {
+                            return Redirect("~/applicantaccount/index");
+                        }
+                        else if (roles.Contains("Resident"))
+                        {
+                            return LocalRedirect("/residentaccount/index");
+                        }
+                        else if (roles.Contains("Manager"))
+                        {
+                            return LocalRedirect("/manageraccount/index");
+                        }
+                    }
+
                     return LocalRedirect(returnUrl);
+
                 }
                 if (result.RequiresTwoFactor)
                 {

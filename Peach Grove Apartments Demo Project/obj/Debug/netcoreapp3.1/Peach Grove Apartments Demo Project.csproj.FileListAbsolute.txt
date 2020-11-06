@@ -286,3 +286,4 @@ D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\AccountManagement\_ViewStart.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ViewStart.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ViewsStatusMessage.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ResidentAccount\Applications.cshtml.g.cs
