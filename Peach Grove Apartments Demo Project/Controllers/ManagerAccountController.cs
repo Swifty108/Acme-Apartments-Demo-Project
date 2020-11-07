@@ -54,29 +54,21 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
         public async Task<IActionResult> ApplicationUsers()
         {
-            var applicationUsers = from userRecord in _context.Users
+            var applicationUsers = await (from userRecord in _context.Users
                                    join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
-                                   select userRecord;
-
-            var vf = await applicationUsers.ToListAsync();
-
-
-            return View(vf);
+                                   select userRecord).Distinct().ToListAsync();
+            return View(applicationUsers);
         }
 
 
-        public IActionResult ApplicationUser(string fname, string lname)
+        public async Task<IActionResult> ApplicationUserAsync(string userId)
         {
 
-            var applications = (from userRecord in _context.Users
-                                join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
-                                select applicationRecord).ToList();
+            var applications = await _context.Applications.Where(u => u.AptUserId == userId).ToListAsync(); 
 
             return View(new ApplicationViewModel
             {
-                Apps = applications,
-                FirstName = fname,
-                LastName = lname
+                Apps = applications
             });
         }
 
@@ -164,7 +156,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             var application = await _context.Applications.FindAsync(app.ApplicationId);
             _context.Applications.Remove(application);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(ApplicationUser));
+            return RedirectToAction(nameof(ApplicationUserAsync));
         }
 
         public async Task<IActionResult> ApproveApplication(string id, string ssn, string aptNumber, string aptPrice, int appid)
@@ -180,11 +172,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
                 var app = await _context.Applications.FindAsync(appid);
 
-                app.isApproved = true;
-                app.isUnApproved = false;
-
+                app.Status = "Approved";
+                
                 _context.Applications.Update(app);
-
 
                 await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
                 await _userManager.AddToRoleAsync(applicationUser, "Resident");
@@ -240,8 +230,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
                 var app = await _context.Applications.FindAsync(appid);
 
-                app.isApproved = false;
-                app.isUnApproved = true;
+                app.Status = "UnApproved";
 
                 _context.Applications.Update(app);
 
@@ -392,7 +381,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             {
                 var mRecord = await _context.MaintenanceRequests.FindAsync(mid);
                 mRecord.AptUserId = uid;
-                mRecord.isApproved = true;
+                mRecord.Status = "Approved";
 
                 _context.MaintenanceRequests.Update(mRecord);
                 await _context.SaveChangesAsync();

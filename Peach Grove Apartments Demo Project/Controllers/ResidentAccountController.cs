@@ -26,8 +26,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // GET: AppUserAccount
-        public IActionResult Index()
+        public IActionResult Index(bool isApplySuccess = false)
         {
+            if (isApplySuccess)
+                ViewBag.ApplySuccess = isApplySuccess;
 
             return View();
         }

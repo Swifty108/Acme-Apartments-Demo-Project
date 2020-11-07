@@ -11,52 +11,6 @@
 
 <h3>Are you sure you want to cancel the application?</h3>
 <div>
-    @*<h4>Application</h4>
-        <hr />
-        <dl class="row">
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.AptUser)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.AptUser.Id)
-            </dd class>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Occupation)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Occupation)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Income)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Income)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.ReasonForMoving)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.ReasonForMoving)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.SSN)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.SSN)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Room)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Room)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Price)
-            </dd>
-        </dl>*@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="ApplicationId" />

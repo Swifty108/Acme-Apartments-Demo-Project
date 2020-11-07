@@ -1588,3 +1588,19 @@
 
                 //StatusMessage = "Confirmation link to change email sent. Please check your email.";
                 //return RedirectToPage();
+
+	///////////////////// REFACTORING ///////////////////////////
+
+	application status
+
+        public bool Approved { get; set; }
+        public bool PendingApproval { get; set; }
+        public bool UnApproved { get; set; }
+        public bool Canceled { get; set; }
+
+	maintenance status
+
+        public bool Approved { get; set; }
+        public bool PendingApproval { get; set; }
+        public bool UnApproved { get; set; }
+        public bool Canceled { get; set; }

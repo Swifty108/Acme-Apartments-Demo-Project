@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
-using Peach_Grove_Apartments_Demo_Project.ViewModels;
-using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,7 +80,7 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
             {
                 using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
                 {
-                    context.Database.Migrate();
+                       context.Database.Migrate();
                 }
             }
         }

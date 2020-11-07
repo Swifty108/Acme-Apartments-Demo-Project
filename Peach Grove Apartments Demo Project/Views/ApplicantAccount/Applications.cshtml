@@ -36,15 +36,15 @@
                             <td>@application.Area SF</td>
                             <td>$@application.Price</td>
                             <td>
-                                @if (application.isApproved)
+                                @if (application.Status == "Approved")
                                 {
                                     <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
                                 }
-                                else if (application.isUnApproved)
+                                else if (application.Status == "UnApproved")
                                 {
                                     <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
                                 }
-                                else if (application.isCanceled)
+                                else if (application.Status == "Canceled")
                                 {
                                     <span style="color: darkred"><i class="fa fa-ban"></i> Canceled</span>
                                 }

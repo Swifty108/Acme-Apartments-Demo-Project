@@ -18,20 +18,20 @@
         { <table class="table fp-table">
 
                 <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Application Id</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </tr>
+                    <tr>
+                        <th scope="col">Application Id</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var application in @Model.Apps)
 
                     {
                         routeParams = new Dictionary<string, string>
-                                        {
+                                            {
                                         { "id", application.AptUserId },
                                         { "aptnumber", application.AptNumber },
                                         { "aptprice", application.Price },
@@ -58,23 +58,21 @@
                                 <a asp-controller="manageraccount" asp-action="applicationdelete" asp-route-id="@application.ApplicationId">Delete</a>
                             </td>
 
-                            @if (application.isApproved)
+                            @if (application.Status == "Approved")
                             {
 
-                        <td>
-                            <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
+                                <td>
+                                    <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
-                            <a asp-controller="manageraccount" asp-action="unapproveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Unapprove</a>
-                        </td>
+                                    <a asp-controller="manageraccount" asp-action="unapproveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Unapprove</a>
+                                </td>
 
                             }
-                            else if (application.isUnApproved)
+                            else if (application.Status == "UnApproved")
                             {
                                 <td>
-                                   
-                                    <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
 
-                                    @*<a asp-controller="manageraccount" asp-action="approveapplication" asp-route-id="@application.AptUserId" asp-route-ssn="@application.SSN" asp-route-aptnumber="@application.AptNumber" asp-route-aptprice="@application.Price" asp-route-appid="@application.ApplicationId" class="fp-applylink">Reapprove</a>*@
+                                    <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
 
                                     <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Reapprove</a>
                                 </td>

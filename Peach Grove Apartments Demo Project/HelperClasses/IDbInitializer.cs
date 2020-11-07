@@ -7,15 +7,11 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
 {
     interface IDbInitializer
     {
-        /// <summary>
-        /// Applies any pending migrations for the context to the database.
-        /// Will create the database if it does not already exist.
-        /// </summary>
+        /* Applies any pending migrations for the context to the database.
+         Will create the database if it does not already exist. */
         void Initialize();
 
-        /// <summary>
-        /// Adds some default values to the Db
-        /// </summary>
+        // add seed data to the database
         Task SeedData();
     }
 }

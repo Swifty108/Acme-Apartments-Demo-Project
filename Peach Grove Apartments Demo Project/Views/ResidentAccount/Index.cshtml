@@ -2,6 +2,14 @@
 @{
     ViewData["Title"] = "Account Home";
     Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
+    ViewBag.SuccessMessage = "Your application was submitted successfully!";
+}
+
+@if (ViewBag.ApplySuccess != null && ViewBag.ApplySuccess)
+{
+    //TODO-P: model param should be string but is bool.. change it
+    
+    <partial name = "_ViewsStatusMessage" model = "ViewBag.SuccessMessage" />
 }
 
 <partial name="_LoggedInAsPartial" />

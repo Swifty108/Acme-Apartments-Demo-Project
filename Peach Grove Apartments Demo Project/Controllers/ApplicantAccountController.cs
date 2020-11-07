@@ -24,8 +24,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // GET: ApplicantAccount
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(bool isApplySuccess = false)
         {
+            if (isApplySuccess)
+                ViewBag.ApplySuccess = isApplySuccess;
+
             var applicationDbContext = _context.Applications.Include(a => a.AptUser);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -40,14 +43,14 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
 
         [HttpPost]
-        public IActionResult ContactUs(ApplicantContactViewModel viewModel)
+        public IActionResult ContactUs(ApplicantContactViewModel appContactViewModel)
         {
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
                 return RedirectToAction("ContactUs");
             }
-            return View(viewModel);
+            return View(appContactViewModel);
         }
 
         [HttpGet]
@@ -56,24 +59,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             var apps = await _context.Applications.Where(u => u.AptUserId == _userManager.GetUserAsync(User).Result.Id).ToListAsync();
             return View(apps);
         }
-
-        /// <summary>
-        /// //////////////
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-
-        /// <summary>
-        /// //////////////
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-
-        /// <summary>
-        /// //////////////
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
 
         // GET: ApplicantAccount/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -196,7 +181,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var application = await _context.Applications.FindAsync(id);
-            application.isCanceled = true; 
+            application.Status = "Canceled"; 
             _context.Applications.Update(application);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

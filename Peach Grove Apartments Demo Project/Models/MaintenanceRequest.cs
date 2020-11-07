@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Models
 {
@@ -23,7 +19,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Models
         [Required]
         public string ProblemDescription { get; set; }
         public bool isAllowedToEnter { get; set; }
-        public bool isApproved { get; set; }
+        public string Status { get; set; }
 
     }
 }

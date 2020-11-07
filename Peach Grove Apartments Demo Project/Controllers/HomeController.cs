@@ -16,14 +16,12 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private ApplicationDbContext _db;
         private readonly UserManager<AptUser> _userManager;
         private readonly ApplicationDbContext _context;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context)
         {
             _logger = logger;
-            _db = db;
             _userManager = userManager;
             _context = context;
         }
@@ -45,13 +43,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> FloorPlans()
         {
-            var sPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "Studio").ToListAsync();
-            var oneBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "1Bed").ToListAsync();
-            var twoBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "2Bed").ToListAsync();
+            var studioPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "Studio" && f.Status == "Available").ToListAsync();
+            var oneBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "1Bed" && f.Status == "Available").ToListAsync();
+            var twoBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "2Bed" && f.Status == "Available").ToListAsync();
 
             var list = new FloorPlansViewModel
             {
-                StudioPlans = sPlans,
+                StudioPlans = studioPlans,
                 OneBedPlans = oneBedPlans,
                 TwoBedPlans = twoBedPlans
             };
@@ -78,22 +76,27 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> Apply(ApplyViewModel applicationViewModel)
         {
             var user = await _userManager.GetUserAsync(User);
+                
+            if(await _context.Applications.FindAsync(applicationViewModel.AptNumber) != null)
+            {
+                return RedirectToAction("index", "applicantaccount", new { IsApplySuccess = true });
+            }
 
             if (ModelState.IsValid)
             {
                 var app = new Application { AptUser = user, Income = applicationViewModel.Income, Occupation = applicationViewModel.Occupation, Price = applicationViewModel.Price, ReasonForMoving = applicationViewModel.ReasonForMoving, AptNumber = applicationViewModel.AptNumber, Area = applicationViewModel.Area, DateApplied = DateTime.Now, SSN = applicationViewModel.SSN };
-                _db.Add(app);
+                _context.Add(app);
 
-                //await _db.AddAsync(app);
-                await _db.SaveChangesAsync();
+                //await _context.AddAsync(app);
+                await _context.SaveChangesAsync();
 
                 if (User.IsInRole("Applicant"))
                 {
-                    return LocalRedirect("/applicantaccount/index");
+                    return RedirectToAction("index", "applicantaccount", new { IsApplySuccess = true });
                 }
                 else if (User.IsInRole("Resident"))
                 {
-                    return LocalRedirect("/residentaccount/index");
+                    return RedirectToAction("index", "residentaccount", new { IsApplySuccess = true });
                 }
             }
 
