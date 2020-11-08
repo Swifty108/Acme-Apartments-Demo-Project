@@ -6,7 +6,7 @@ This is an ASP.NET Core Web App developed for Peach Grove Apartments, a fictiona
 
 Visual Studio 2019, ASP.NET Core 3.1, EF Core 3.1, MVC architecture, SQL Server Express, Microsoft SQL Server Management Studio, HTML5, CSS, Bootstrap, Azure Devops for project management, and Github with Git for version control.
 
-In the coming days, the project will be refactored to implement the Clean Architeture Pattern and other patterns like the Factory Design Pattern. [More about Clean Architecture Pattern](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures) 
+In the coming days, the project will be refactored to implement the Clean Architeture Pattern and other patterns like the Factory Design Pattern. [More about Clean Architecture Pattern](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures).
 
 ## Features
 
