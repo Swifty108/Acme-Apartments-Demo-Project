@@ -11,3 +11,7 @@ In the coming days, the project will be refactored to implement the Clean Archit
 ## Features
 
 The app is front faced by static informational pages. A user starts out as an Applicant and, once approved, is promoted to Resident status. Manager accounts have special privilages.
+
+## Licence
+
+Feel free to fork this project if you wish. You can use the code base unresricted.
