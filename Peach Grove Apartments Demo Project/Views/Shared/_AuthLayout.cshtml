@@ -2,31 +2,35 @@
 
     Layout = "~/Views/Shared/_ParentAuthLayout.cshtml";
 
-
 }
 
 
-<div class="row justify-content-center">
-    <div class="card login-logout-tab">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" href='/Identity/Account/Login?isDirectLogin=@true'>Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href='/Identity/Account/Register?isDirectRegister=@true'>Register</a>
-                </li>
-            </ul>
-        </div>
-        <div class="card-content">
-            <div class="col-md-12">
+@{var isDirectLogin = true; }
 
-                @RenderBody()
+<div class="row">
+    <div class="col-md-8 offset-md-3">
+        <div class="card login-logout-tab">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Login">Login</a>
+                        @*<a class="nav-link active" asp-area="Identity" asp-page="/Account/Login/" asp-route-isDirectLogin="@isDirectLogin">Login</a>*@
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Register">Register</a>
+                        @*<a class="nav-link" asp-area="Identity" asp-page="/Account/Register" asp-route-isDirectRegister="@isDirectLogin">Register</a>*@
+                    </li>
+                </ul>
+            </div>
+            <div class="card-content">
+                <div class="col-md-12">
+
+                    @RenderBody()
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 @RenderSection("Scripts", required: false)
 
@@ -42,3 +46,100 @@
     })
 </script>
 
+@*<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card login-logout-tab">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href='/Identity/Account/Login?isDirectLogin=@true'>Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href='/Identity/Account/Register?isDirectRegister=@true'>Register</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-content">
+                <div class="col-md-12">
+
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@*<nav>
+        <div class="nav nav-tabs mr" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-newrequest-tab" data-toggle="tab" href="#nav-newrequest" role="tab" aria-controls="nav-newrequest" aria-selected="true">Login</a>
+            <a class="nav-item nav-link" id="nav-reqhistory-tab" data-toggle="tab" href="#nav-reqhistory" role="tab" aria-controls="nav-reqhistory" aria-selected="false">Request History</a>
+        </div>
+    </nav>*@
+
+@*<div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <nav>
+                <div class="nav nav-tabs mr" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link" id="nav-newrequest-tab" href='/identity/account/login?isdirectlogin=@true' aria-selected="true">login</a>
+                    <a class="nav-item nav-link" id="nav-reqhistory-tab" href='/identity/account/register?isdirectregister=@true' aria-selected="false">request history</a>
+                </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabcontent">
+
+                <div class="tab-pane fade show active" role="tabpanel">
+
+                    <div class="col-md-12">
+
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@*@RenderSection("Scripts", required: false)*@
+
+@*<script>
+
+
+    $(function () {
+        var current = location.pathname;
+        $('.nav-tabs li a').each(function () {
+            var $this = $(this);
+
+            $this.click(function () {
+                $this.addClass('active');
+                // $(this).prop('aria-selected', true);
+                //window.location.href = $this.attr('href');
+
+
+            }
+
+            //if (current.indexOf($this.attr('href')) !== -1) {
+            //    $this.addClass('active');
+            //}
+        })
+    })
+
+    //$(function () {
+    //    var current = location.pathname;
+    //    $('.nav-tabs a').each(function () {
+    //        var $this = $(this);
+    //        $this.click(function () {
+    //            $this.addClass('active');
+    //            $(this).prop('aria-selected', true);
+    //            window.location.href = $this.attr('href');
+
+
+    //        }
+    //            );
+    //        //if (current.indexOf($this.attr('href')) !== -1) {
+    //        ////;
+    //        ////
+    //        //window.location.href = "google.com";
+    //        //}
+    //    })
+    //})
+</script>*@

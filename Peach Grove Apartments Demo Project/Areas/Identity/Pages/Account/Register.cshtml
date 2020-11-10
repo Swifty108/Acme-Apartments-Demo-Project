@@ -3,10 +3,10 @@
 @{ ViewData["Title"] = "Register";
     // Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
 
-    Layout = "~/Views/Shared/_AuthLayout.cshtml"; }
+     }
 
 
-<form asp-route-returnUrl="@Model.ReturnUrl" asp-route-isdirectregister="@Model.IsDirectRegister" method="post" style="min-width: 335px;">
+<form asp-route-returnUrl="@Model.ReturnUrl" asp-route-isdirectregister="@Model.IsDirectRegister" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <div class="col-md-6">

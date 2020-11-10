@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
@@ -82,14 +81,13 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
             {
                 using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
                 {
-                    if (!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
-                    {
-                        (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Create();
-                       
-                    }
-
+                    context.Database.EnsureCreated();
                     context.Database.Migrate();
 
+                    //if (!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
+                    //{
+                    //    (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Create();
+                    //}
                 }
             }
         }
@@ -157,7 +155,7 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                             foreach (var user in users)
                             {
                                 IdentityResult result = await userManager.CreateAsync
-                                (user, "Hotel5r@j");
+                                (user, "P@ssword1");
 
                                 if (result.Succeeded)
                                 {

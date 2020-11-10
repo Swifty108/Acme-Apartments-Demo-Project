@@ -79,6 +79,15 @@ namespace Peach_Grove_Apartments_Demo_Project
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(name: "register",
+              pattern: "identity/pages/account/login/{isdirectregister?}");
+
+                endpoints.MapControllerRoute(name: "login",
+             pattern: "identity/pages/account/login/{isdirectlogin?}");
+
+
+
                 endpoints.MapRazorPages();
 
                 //endpoints.MapControllerRoute(
