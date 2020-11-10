@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj": {}
+    "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj": {}
   },
   "projects": {
-    "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj": {
+    "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
+        "projectUniqueName": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
         "projectName": "Peach Grove Apartments Demo Project",
-        "projectPath": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
+        "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
         "packagesPath": "C:\\Users\\Raj\\.nuget\\packages\\",
-        "outputPath": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\obj\\",
+        "outputPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\Peach Grove Apartments Demo Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Raj\\AppData\\Roaming\\NuGet\\NuGet.Config",

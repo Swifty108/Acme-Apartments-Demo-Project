@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "UnApproveMaintenanceFailed";
+    Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
+    ViewBag.UnApproveFailed = "There was an error processing your request. Please try again later.";
+}
+
+<partial name="_LoggedInAsPartial" />
+<br />
+@{
+    //TODO-P: test this
+
+}
+
+<partial name="_ViewsStatusMessage" model="ViewBag.UnApproveFailed" />
+

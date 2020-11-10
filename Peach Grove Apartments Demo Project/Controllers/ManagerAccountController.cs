@@ -25,6 +25,21 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly IMapper _mapper;
         private SignInManager<AptUser> _signInManager;
 
+        public enum MaintenanceStatus
+        {
+            Approved,
+            Unapproved,
+            PendingApproval
+        }
+
+        public enum ApplicationStatus
+        {
+            Approved,
+            Unapproved,
+            Canceled,
+            PendingApproval
+        }
+
         public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager)
         {
             _context = context;
@@ -240,7 +255,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             catch (Exception e)
             {
                 TempData["UnApproveFailedMessage"] = e.Message;
-                return RedirectToAction("UNApproveApplicationFailed");
+                return RedirectToAction("UnApproveApplicationFailed");
             }
             return RedirectToAction("UnApproveApplicationSuccess");
         }
@@ -252,9 +267,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public IActionResult UnApproveApplicationFailed()
         {
-            ViewBag.UnApproveApplicationFailed = TempData["UNApproveFailedMessage"];
+            ViewBag.UnApproveApplicationFailed = TempData["UnApproveFailedMessage"];
             return View();
         }
+
+
+
+
 
 
         [HttpGet]
@@ -373,7 +392,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
 
-
         //TODO-P: rename mid and uid accord to name conv
         public async Task<IActionResult> ApproveMaintenance(string uid, int mid)
         {
@@ -413,6 +431,36 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private bool MaintenanceRequestExists(int id)
         {
             return _context.MaintenanceRequests.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> UnApproveMaintenance(string userId, int maintenanceId)
+        {
+            try
+            {
+                var maintenanceRecord = await _context.MaintenanceRequests.FindAsync(maintenanceId);
+                maintenanceRecord.AptUserId = userId;
+                maintenanceRecord.Status = "UnApproved";
+
+                _context.MaintenanceRequests.Update(maintenanceRecord);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                TempData["UnApproveFailedMessage"] = e.Message;
+                return RedirectToAction("UNApproveApplicationFailed");
+            }
+            return RedirectToAction("UnApproveApplicationSuccess");
+        }
+
+        public IActionResult UnApproveMaintenanceSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult UnApproveMaintenanceFailed()
+        {
+            ViewBag.UnApproveMaintenanceFailed = TempData["UNApproveFailedMessage"];
+            return View();
         }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zo2WR8bD1J57WEx+T/kP8mphoHGh4UpFY6XXGSsINHmhyGkHdM7fEzvfl0iccxJw/pJDiGS4QZnF9CaTgpDbOA==",
+  "dgSpecHash": "gBf66/AIZOtT2H9SJ+MQY4AeNJSw2CDbaAJFHMHY1s+hrBtn/eWqtFs2usdeXZeQ1lcYDOE3+5zzEp5k1gzaMQ==",
   "success": true,
-  "projectFilePath": "D:\\DevProjects\\VS Projects\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
+  "projectFilePath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\Peach Grove Apartments Demo Project\\Peach Grove Apartments Demo Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Raj\\.nuget\\packages\\automapper\\10.1.0\\automapper.10.1.0.nupkg.sha512",
     "C:\\Users\\Raj\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "UnApproveMaintenanceSuccess";
+    Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
+    ViewBag.UnApproveSuccess = "The maintenance request was unapproved successfully!";
+}
+
+<partial name="_LoggedInAsPartial" />
+<br />
+@{
+
+    //TODO-P: test this
+
+
+}
+
+<partial name="_ViewsStatusMessage" model="ViewBag.UnApproveSuccess" />
+
