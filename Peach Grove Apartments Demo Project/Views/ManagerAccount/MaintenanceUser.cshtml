@@ -73,44 +73,6 @@
                     </td>
 
                 }
-
-                @*@if (mRecord.Status == "Approved")
-                {
-
-                    <td>
-                        <img src="/images/appapprovedplaceholder.jpg" class="img-fluid" />
-                    </td>
-                }
-                else
-                {
-                    <td>
-
-                        <a class="fp-applylink" asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
-                    </td>
-                }
-
-                <td>
-
-                    <a asp-controller="manageraccount" asp-action="maintenancedelete" asp-route-id="@mRecord.Id" class="fp-applylink">Delete</a>
-                </td>
-
-                <td>
-                    @if (mRecord.isApproved)
-                    {
-                        <div style="background: lightgreen; border: 3px solid green; color: black;text-align: center;padding: 10px 30px;">
-
-                            <b>Approved</b>
-                        </div>
-                    }
-                    else
-                    {
-                        <div style="background: #ff3333; border: 3px solid yellow; color: white;text-align: center; padding: 10px 30px;">
-
-                            <b>Needs Approval</b>
-                        </div>
-
-                    }
-                </td>*@
             </tr>
 
             }
