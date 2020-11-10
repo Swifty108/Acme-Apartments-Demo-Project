@@ -76,14 +76,18 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
 
-        public async Task<IActionResult> ApplicationUserAsync(string userId)
+        public async Task<IActionResult> ApplicationUser(string userId)
         {
 
-            var applications = await _context.Applications.Where(u => u.AptUserId == userId).ToListAsync(); 
+            var applications = await _context.Applications.Where(u => u.AptUserId == userId).ToListAsync();
+            var user = await _context.Users.FindAsync(userId);
 
             return View(new ApplicationViewModel
             {
-                Apps = applications
+                Apps = applications,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+
             });
         }
 
@@ -144,7 +148,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // GET: ApplicantAccount/Delete/5
-        public async Task<IActionResult> ApplicationDelete(int? id)
+        public async Task<IActionResult> ApplicationCancel(int? id)
         {
             if (id == null)
             {
@@ -164,14 +168,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // POST: ApplicantAccount/Delete/5
-        [HttpPost, ActionName("AppDelete")]
+        [HttpPost, ActionName("AppCancel")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteApplicationConfirmed(Application app)
+        public async Task<IActionResult> CancelApplicationConfirmed(Application app)
         {
             var application = await _context.Applications.FindAsync(app.ApplicationId);
-            _context.Applications.Remove(application);
+            application.Status = "Canceled";
+
+            _context.Applications.Update(application);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(ApplicationUserAsync));
+            return RedirectToAction("ApplicationUser", new { userId = application.AptUserId });
         }
 
         public async Task<IActionResult> ApproveApplication(string id, string ssn, string aptNumber, string aptPrice, int appid)
@@ -194,7 +200,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
                 await _userManager.AddToRoleAsync(applicationUser, "Resident");
 
-                await _signInManager.RefreshSignInAsync(applicationUser);
+               // await _signInManager.RefreshSignInAsync(applicationUser);
 
                 await _context.SaveChangesAsync();
 
@@ -447,9 +453,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             catch (Exception e)
             {
                 TempData["UnApproveFailedMessage"] = e.Message;
-                return RedirectToAction("UNApproveApplicationFailed");
+                return RedirectToAction("UnApproveMaintenanceFailed");
             }
-            return RedirectToAction("UnApproveApplicationSuccess");
+            return RedirectToAction("UnApproveMaintenanceSuccess");
         }
 
         public IActionResult UnApproveMaintenanceSuccess()
@@ -459,7 +465,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public IActionResult UnApproveMaintenanceFailed()
         {
-            ViewBag.UnApproveMaintenanceFailed = TempData["UNApproveFailedMessage"];
+            ViewBag.UnApproveMaintenanceFailed = TempData["UnApproveFailedMessage"];
             return View();
         }
     }

@@ -50,8 +50,8 @@
                     case "problemDescription":
                         tr.append("<td> " + value + " </td>");
                         break;
-                    case "isApproved":
-                        var toAppend = (value == true) ? "<td> Approved </td>" : "<td> <i class='fa fa-clock-o'></i> Pending Approval </td>";
+                    case "status":
+                        var toAppend = (value == "Approved") ? "<td> Approved </td>" : "<td> <i class='fa fa-clock-o'></i> Pending Approval </td>";
                         tr.append(toAppend);
                         break;
                 }

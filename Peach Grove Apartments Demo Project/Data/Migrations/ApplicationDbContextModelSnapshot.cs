@@ -188,14 +188,8 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isApproved")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isCanceled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isUnApproved")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ApplicationId");
 
@@ -358,6 +352,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("FloorPlans");
@@ -381,10 +378,10 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isAllowedToEnter")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isApproved")
+                    b.Property<bool>("isAllowedToEnter")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

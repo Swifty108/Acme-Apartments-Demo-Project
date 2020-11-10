@@ -40,53 +40,75 @@
 
                                 };
 
-                        <tr>
-                            <td>@application.ApplicationId</td>
+                    <tr>
+                        <td>@application.ApplicationId</td>
+
+                        <td>
+
+                            <a asp-controller="manageraccount" asp-action="viewapplication" asp-route-id="@application.ApplicationId">View</a>
+                        </td>
+
+                        <td>
+
+                            <a asp-controller="manageraccount" asp-action="applicationedit" asp-route-id="@application.ApplicationId">Edit</a>
+                        </td>
+                        @if (application.Status == "Canceled")
+                        {
+                        <td>
+
+                            <span style="color: lightgray"> Cancel</span>
+
+                        </td>
+
+                        }
+                        else{
+
+                        <td>
+
+                            <a asp-controller="manageraccount" asp-action="applicationcancel" asp-route-id="@application.ApplicationId">Cancel</a>
+                        </td>
+                        }
+
+
+                        @if (application.Status == "Approved")
+                        {
 
                             <td>
+                                <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
-                                <a asp-controller="manageraccount" asp-action="viewapplication" asp-route-id="@application.ApplicationId">View</a>
+                                <a asp-controller="manageraccount" asp-action="unapproveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Unapprove</a>
                             </td>
 
+                        }
+                        else if (application.Status == "UnApproved")
+                        {
                             <td>
 
-                                <a asp-controller="manageraccount" asp-action="applicationedit" asp-route-id="@application.ApplicationId">Edit</a>
+                                <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
+
+                                <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Reapprove</a>
                             </td>
 
+                        }
+                        else if (application.Status == "Canceled")
+                        {
                             <td>
 
-                                <a asp-controller="manageraccount" asp-action="applicationdelete" asp-route-id="@application.ApplicationId">Delete</a>
+                                <span style="color: darkred"><i class="fa fa-ban"></i> Canceled</span>
+
+                                <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Approve</a>
                             </td>
 
-                            @if (application.Status == "Approved")
-                            {
+                        }
+                        else
+                        {
+                            <td>
 
-                                <td>
-                                    <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
+                                <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams">Approve</a>
+                            </td>
 
-                                    <a asp-controller="manageraccount" asp-action="unapproveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Unapprove</a>
-                                </td>
-
-                            }
-                            else if (application.Status == "UnApproved")
-                            {
-                                <td>
-
-                                    <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
-
-                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Reapprove</a>
-                                </td>
-
-                            }
-                            else
-                            {
-                                <td>
-
-                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams">Approve</a>
-                                </td>
-
-                            }
-                        </tr>
+                        }
+                    </tr>
                     }
                 </tbody>
             </table>

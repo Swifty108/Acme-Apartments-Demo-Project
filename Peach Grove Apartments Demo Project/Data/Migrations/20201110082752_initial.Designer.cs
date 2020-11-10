@@ -10,7 +10,7 @@ using Peach_Grove_Apartments_Demo_Project.Data;
 namespace Peach_Grove_Apartments_Demo_Project.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201105165535_initial")]
+    [Migration("20201110082752_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,14 +190,8 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isApproved")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isCanceled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isUnApproved")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ApplicationId");
 
@@ -360,6 +354,9 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("FloorPlans");
@@ -383,10 +380,10 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isAllowedToEnter")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isApproved")
+                    b.Property<bool>("isAllowedToEnter")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

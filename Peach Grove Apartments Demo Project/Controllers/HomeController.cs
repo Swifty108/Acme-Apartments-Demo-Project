@@ -43,9 +43,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> FloorPlans()
         {
-            var studioPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "Studio" && f.Status == "Available").ToListAsync();
-            var oneBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "1Bed" && f.Status == "Available").ToListAsync();
-            var twoBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "2Bed" && f.Status == "Available").ToListAsync();
+            var studioPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "Studio").ToListAsync();
+            var oneBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "1Bed").ToListAsync();
+            var twoBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "2Bed").ToListAsync();
 
             var list = new FloorPlansViewModel
             {
@@ -77,17 +77,22 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
                 
-            if(await _context.Applications.FindAsync(applicationViewModel.AptNumber) != null)
-            {
-                return RedirectToAction("index", "applicantaccount", new { IsApplySuccess = true });
-            }
+            //if(_context.Applications.Where(a => a.AptNumber == applicationViewModel.AptNumber) != null)
+            //{
+            //    return RedirectToAction("index", "applicantaccount", new { IsApplySuccess = true });
+            //}
 
             if (ModelState.IsValid)
             {
                 var app = new Application { AptUser = user, Income = applicationViewModel.Income, Occupation = applicationViewModel.Occupation, Price = applicationViewModel.Price, ReasonForMoving = applicationViewModel.ReasonForMoving, AptNumber = applicationViewModel.AptNumber, Area = applicationViewModel.Area, DateApplied = DateTime.Now, SSN = applicationViewModel.SSN };
                 _context.Add(app);
 
-                //await _context.AddAsync(app);
+                //Memo: applied apartments should not be marked "Unavailable" after application is approved since they will all disappear from the availibility table.
+                //var fp = await _context.FloorPlans.Where(f => f.AptNumber == applicationViewModel.AptNumber).FirstOrDefaultAsync();
+                //fp.Status = "UnAvailable";
+
+                //_context.FloorPlans.Update(fp);
+
                 await _context.SaveChangesAsync();
 
                 if (User.IsInRole("Applicant"))
@@ -108,6 +113,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
+        //TODO-P: implement caching like this in other areas of the app instead of using Redis cache framework. simpler.
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

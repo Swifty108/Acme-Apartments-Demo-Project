@@ -67,7 +67,8 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     AptNumber = table.Column<string>(nullable: false),
                     DateAvailable = table.Column<DateTime>(nullable: false),
                     SF = table.Column<string>(nullable: false),
-                    Price = table.Column<string>(nullable: false)
+                    Price = table.Column<string>(nullable: false),
+                    Status = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -110,9 +111,7 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     AptNumber = table.Column<string>(nullable: true),
                     Area = table.Column<string>(nullable: true),
                     Price = table.Column<string>(nullable: true),
-                    isApproved = table.Column<bool>(nullable: false),
-                    isUnApproved = table.Column<bool>(nullable: false),
-                    isCanceled = table.Column<bool>(nullable: false)
+                    Status = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -241,7 +240,7 @@ namespace Peach_Grove_Apartments_Demo_Project.data.migrations
                     AptUserId = table.Column<string>(nullable: false),
                     ProblemDescription = table.Column<string>(nullable: false),
                     isAllowedToEnter = table.Column<bool>(nullable: false),
-                    isApproved = table.Column<bool>(nullable: false)
+                    Status = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

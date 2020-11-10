@@ -62,7 +62,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 {
 
                     var user = await _userManager.GetUserAsync(User);
-                    var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription };
+                    var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription, Status = "Pending Approval"};
                     await _context.MaintenanceRequests.AddAsync(maintReq);
                     await _context.SaveChangesAsync();
 

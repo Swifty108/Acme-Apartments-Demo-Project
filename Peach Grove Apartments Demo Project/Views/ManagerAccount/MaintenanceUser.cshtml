@@ -37,12 +37,12 @@
 
                 <td>
 
-                    <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id" class="fp-applylink">View</a>
+                    <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id">View</a>
                 </td>
 
                 <td>
 
-                    <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id" class="fp-applylink">Edit</a>
+                    <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id">Edit</a>
                 </td>
 
                 @if (mRecord.Status == "Approved")
@@ -51,7 +51,7 @@
                     <td>
                         <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
-                        <a asp-controller="manageraccount" asp-action="unapprovemaintenance" asp-route-maintenanceid="@mRecord.Id" style="margin-left:30px;">Unapprove</a>
+                        <a asp-controller="manageraccount" asp-action="unapprovemaintenance" asp-route-userid="@mRecord.AptUserId" asp-route-maintenanceid="@mRecord.Id" style="margin-left:30px;">Unapprove</a>
                     </td>
 
                 }
@@ -61,7 +61,7 @@
 
                         <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
 
-                        <a class="fp-applylink" asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">ReApprove</a>
+                        <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id" style="margin-left:30px;">ReApprove</a>
                     </td>
 
                 }
@@ -69,7 +69,7 @@
                 {
                     <td>
 
-                        <a class="fp-applylink" asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
+                        <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
                     </td>
 
                 }

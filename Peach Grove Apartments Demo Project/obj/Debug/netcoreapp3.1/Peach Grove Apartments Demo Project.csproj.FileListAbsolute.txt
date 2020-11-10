@@ -515,7 +515,6 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\_ViewStart.cshtml.g.cs
-D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationDelete.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationEdit.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationUser.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationUsers.cshtml.g.cs
@@ -567,3 +566,5 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.dll
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.pdb
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.genruntimeconfig.cache
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csprojAssemblyReference.cache
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationCancel.cshtml.g.cs
