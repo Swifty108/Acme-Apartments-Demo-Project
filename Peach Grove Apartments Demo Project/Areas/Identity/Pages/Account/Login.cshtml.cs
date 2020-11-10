@@ -5,13 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Peach_Grove_Apartments_Demo_Project.Models;
-using SQLitePCL;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
-//TODO-P: stored procedure for azure sql db
 
 namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
 {

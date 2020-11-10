@@ -216,7 +216,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return _context.Applications.Any(e => e.ApplicationId == id);
         }
 
-        //TODO-P: put the params into a view model or use all-route params in anchor tag helper
         public async Task<IActionResult> UnApproveApplication(string id, string aptNumber, int appid)
         {
             try
@@ -370,9 +369,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(mRecord);
         }
 
-        // POST: ApplicantAccount/Delete/5
-        //TODO-P: don't delete maint records, just mark as canceled.
-
         [HttpPost, ActionName("MaintenanceDelete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteMaintenaceConfirmed(MaintenanceRequest request)
@@ -383,8 +379,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return RedirectToAction(nameof(MaintenanceUser));
         }
 
-
-        //TODO-P: rename mid and uid accord to name conv
         public async Task<IActionResult> ApproveMaintenance(string uid, int mid)
         {
             try

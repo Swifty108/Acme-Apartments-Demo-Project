@@ -10,8 +10,7 @@
 
 @if (ViewBag.ContactUsSuccess != null && ViewBag.ContactUsSuccess)
 {
-    //TODO-P: model param should be string but is bool.. change it
-    <partial name="_ViewsStatusMessage" model="ViewBag.ContactUsSuccess" />
+    <partial name="_ViewsStatusMessage" model="ViewBag.SuccessMessage" />
 }
 
 <h1>Contact Us</h1>

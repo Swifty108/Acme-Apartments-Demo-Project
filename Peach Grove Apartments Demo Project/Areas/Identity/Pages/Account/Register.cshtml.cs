@@ -171,7 +171,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        //TODO-P: include isdirectregister paramater link in the login Page cs class file
         public async Task<IActionResult> OnPostAsync(bool isDirectRegister = false, string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -183,16 +182,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                     Response.Redirect(returnUrl);
             }
 
-            //TODO-P: check on why this assignment is here
             IsDirectRegister = false;
-
-            //var tempUser = await _userManager.FindByNameAsync(Input.Email);
-
-            //if (tempUser != null)
-            //{
-            //    ModelState.AddModelError("Email", "User with this email already exists");
-            //   //return await this.OnGetAsync();
-            //}
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
@@ -222,7 +212,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
-        //TODO-P: look at how the returnurl is wired up here after user registers
+
         private async Task<IActionResult> CreateUser(string returnUrl, AptUser user, string role)
         {
             var result = await _userManager.CreateAsync(user, Input.Password);

@@ -53,7 +53,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                 StatusMessage = "Error changing user name.";
                 return Page();
             }
-            //TODO-P: use this RefreshSignInAsync() for refreshing page after manager approve app
+            
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Thank you for confirming your email change.";
             return Page();

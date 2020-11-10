@@ -7,7 +7,6 @@
 @{
     ViewData["Title"] = "Floor Plans";
 
-    //TODO-P: check if application is already in db. if yes, disable apply button. use a caching mechanism to prevent repeated db calls.
 }
 
 <h1>Our Floor Plans</h1>
@@ -70,8 +69,7 @@
                                     <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
                                 }
                                 else
-                                {
-                                    //TODO-P: copy this asp-area link to the other spots in the app.
+                                { 
                                     <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?room=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
                                 }
 

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
-using SQLitePCL;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -106,7 +105,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account.Manag
                     StatusMessage = "Error changing user name.";
                     return Page();
                 }
-                //TODO-P: use this RefreshSignInAsync() for refreshing page after manager approve app
+                
                 await _signInManager.RefreshSignInAsync(user);
                 StatusMessage = "Your email has been updated!";
                 return RedirectToPage();
