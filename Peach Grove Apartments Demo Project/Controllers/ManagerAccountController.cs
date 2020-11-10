@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Peach_Grove_Apartments_Demo_Project.Data;
+using Peach_Grove_Apartments_Demo_Project.HelperClasses;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
 using System;
@@ -24,21 +25,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private SignInManager<AptUser> _signInManager;
-
-        public enum MaintenanceStatus
-        {
-            Approved,
-            Unapproved,
-            PendingApproval
-        }
-
-        public enum ApplicationStatus
-        {
-            Approved,
-            Unapproved,
-            Canceled,
-            PendingApproval
-        }
 
         public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager)
         {
@@ -173,7 +159,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> CancelApplicationConfirmed(Application app)
         {
             var application = await _context.Applications.FindAsync(app.ApplicationId);
-            application.Status = "Canceled";
+            application.Status = ApplicationStatus.CANCELED;
 
             _context.Applications.Update(application);
             await _context.SaveChangesAsync();
@@ -193,7 +179,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
                 var app = await _context.Applications.FindAsync(appid);
 
-                app.Status = "Approved";
+                app.Status = ApplicationStatus.APPROVED;
                 
                 _context.Applications.Update(app);
 
@@ -251,7 +237,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
                 var app = await _context.Applications.FindAsync(appid);
 
-                app.Status = "UnApproved";
+                app.Status = ApplicationStatus.UNAPPROVED;
 
                 _context.Applications.Update(app);
 
@@ -405,7 +391,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             {
                 var mRecord = await _context.MaintenanceRequests.FindAsync(mid);
                 mRecord.AptUserId = uid;
-                mRecord.Status = "Approved";
+                mRecord.Status = MaintenanceRequestStatus.APPROVED;
 
                 _context.MaintenanceRequests.Update(mRecord);
                 await _context.SaveChangesAsync();
@@ -445,7 +431,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             {
                 var maintenanceRecord = await _context.MaintenanceRequests.FindAsync(maintenanceId);
                 maintenanceRecord.AptUserId = userId;
-                maintenanceRecord.Status = "UnApproved";
+                maintenanceRecord.Status = MaintenanceRequestStatus.UNAPPROVED;
 
                 _context.MaintenanceRequests.Update(maintenanceRecord);
                 await _context.SaveChangesAsync();

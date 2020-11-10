@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Peach_Grove_Apartments_Demo_Project.Data;
+using Peach_Grove_Apartments_Demo_Project.HelperClasses;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
 using System;
@@ -62,7 +63,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 {
 
                     var user = await _userManager.GetUserAsync(User);
-                    var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription, Status = "Pending Approval"};
+                    var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription, Status = MaintenanceRequestStatus.PENDINGAPPROVAL};
                     await _context.MaintenanceRequests.AddAsync(maintReq);
                     await _context.SaveChangesAsync();
 

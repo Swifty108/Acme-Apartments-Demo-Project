@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Peach_Grove_Apartments_Demo_Project.HelperClasses
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 @model Peach_Grove_Apartments_Demo_Project.ViewModels.MaintenanceRequestViewModel
@@ -32,48 +33,48 @@
         <tbody>
             @foreach (var mRecord in Model.mRequests)
             {
-            <tr>
-                <td>@mRecord.Id</td>
-
-                <td>
-
-                    <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id">View</a>
-                </td>
-
-                <td>
-
-                    <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id">Edit</a>
-                </td>
-
-                @if (mRecord.Status == "Approved")
-                {
+                <tr>
+                    <td>@mRecord.Id</td>
 
                     <td>
-                        <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
-                        <a asp-controller="manageraccount" asp-action="unapprovemaintenance" asp-route-userid="@mRecord.AptUserId" asp-route-maintenanceid="@mRecord.Id" style="margin-left:30px;">Unapprove</a>
+                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id">View</a>
                     </td>
 
-                }
-                else if (mRecord.Status == "UnApproved")
-                {
                     <td>
 
-                        <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
-
-                        <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id" style="margin-left:30px;">ReApprove</a>
+                        <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id">Edit</a>
                     </td>
 
-                }
-                else
-                {
-                    <td>
+                    @if (mRecord.Status == MaintenanceRequestStatus.APPROVED)
+                    {
 
-                        <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
-                    </td>
+                        <td>
+                            <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
-                }
-            </tr>
+                            <a asp-controller="manageraccount" asp-action="unapprovemaintenance" asp-route-userid="@mRecord.AptUserId" asp-route-maintenanceid="@mRecord.Id" style="margin-left:30px;">Unapprove</a>
+                        </td>
+
+                    }
+                    else if (mRecord.Status == MaintenanceRequestStatus.UNAPPROVED)
+                    {
+                        <td>
+
+                            <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
+
+                            <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id" style="margin-left:30px;">ReApprove</a>
+                        </td>
+
+                    }
+                    else
+                    {
+                        <td>
+
+                            <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
+                        </td>
+
+                    }
+                </tr>
 
             }
         </tbody>

@@ -87,22 +87,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 var app = new Application { AptUser = user, Income = applicationViewModel.Income, Occupation = applicationViewModel.Occupation, Price = applicationViewModel.Price, ReasonForMoving = applicationViewModel.ReasonForMoving, AptNumber = applicationViewModel.AptNumber, Area = applicationViewModel.Area, DateApplied = DateTime.Now, SSN = applicationViewModel.SSN };
                 _context.Add(app);
 
-                //Memo: applied apartments should not be marked "Unavailable" after application is approved since they will all disappear from the availibility table.
-                //var fp = await _context.FloorPlans.Where(f => f.AptNumber == applicationViewModel.AptNumber).FirstOrDefaultAsync();
-                //fp.Status = "UnAvailable";
-
-                //_context.FloorPlans.Update(fp);
-
                 await _context.SaveChangesAsync();
 
-                if (User.IsInRole("Applicant"))
-                {
-                    return RedirectToAction("index", "applicantaccount", new { IsApplySuccess = true });
-                }
-                else if (User.IsInRole("Resident"))
-                {
-                    return RedirectToAction("index", "residentaccount", new { IsApplySuccess = true });
-                }
+                var userRole = _userManager.GetRolesAsync(user).Result.FirstOrDefault();
+
+                return RedirectToAction("index", $"{userRole}account", new { IsApplySuccess = true });
             }
 
             return RedirectToAction("Apply", applicationViewModel.AptNumber, applicationViewModel.Price);

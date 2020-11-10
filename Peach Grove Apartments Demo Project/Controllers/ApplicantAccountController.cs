@@ -34,26 +34,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpGet]
-        public IActionResult ContactUs()
-        {
-            ViewBag.ContactUsSuccess = TempData["ContactUsSuccess"];
-            return View();
-        }
-
-
-
-        [HttpPost]
-        public IActionResult ContactUs(ApplicantContactViewModel appContactViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                TempData["ContactUsSuccess"] = true;
-                return RedirectToAction("ContactUs");
-            }
-            return View(appContactViewModel);
-        }
-
-        [HttpGet]
         public async Task<IActionResult> Applications()
         {
             var apps = await _context.Applications.Where(u => u.AptUserId == _userManager.GetUserAsync(User).Result.Id).ToListAsync();
@@ -191,5 +171,26 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             return _context.Applications.Any(e => e.ApplicationId == id);
         }
+
+        [HttpGet]
+        public IActionResult ContactUs()
+        {
+            ViewBag.ContactUsSuccess = TempData["ContactUsSuccess"];
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public IActionResult ContactUs(ApplicantContactViewModel appContactViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                TempData["ContactUsSuccess"] = true;
+                return RedirectToAction("ContactUs");
+            }
+            return View(appContactViewModel);
+        }
+
     }
 }
