@@ -78,20 +78,14 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
 
         public void Initialize()
         {
-            using (var serviceScope = _scopeFactory.CreateScope())
+            using var serviceScope = _scopeFactory.CreateScope();
+            using var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            
+
+            if (!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
             {
-                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
-                {
-                    //context.Database.EnsureCreated();
-
-                    if (!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
-                    {
-                        (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Create();
-                        context.Database.Migrate();
-                    }
-
-                    
-                }
+                context.Database.EnsureCreated();
+                context.Database.Migrate();
             }
         }
 
@@ -158,7 +152,7 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                             foreach (var user in users)
                             {
                                 IdentityResult result = await userManager.CreateAsync
-                                (user, "Password1");
+                                (user, "Apt5helix!");
 
                                 if (result.Succeeded)
                                 {
