@@ -488,16 +488,18 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ViewStart.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ResetPassword.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_StatusMessage.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_ViewStart.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Error.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
-D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStartttttt.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ApplicantAccount\Applications.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ApplicantAccount\ContactUs.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ApplicantAccount\Create.cshtml.g.cs
@@ -514,6 +516,7 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\Home\_ViewStart.cshtml.g.cs
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationCancel.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationEdit.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationUser.cshtml.g.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationUsers.cshtml.g.cs
@@ -566,5 +569,3 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.pdb
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.genruntimeconfig.cache
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csprojAssemblyReference.cache
-D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Views\ManagerAccount\ApplicationCancel.cshtml.g.cs
-D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ViewStart.cshtml.g.cs
