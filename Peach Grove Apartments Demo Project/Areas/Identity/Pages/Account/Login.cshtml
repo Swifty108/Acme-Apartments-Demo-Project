@@ -61,9 +61,7 @@
                     <div class="form-group form-actions">
                         <button type="submit" class="btn btn-primary col-md-6">Log in</button>
                     </div>
-                    @{
-                        //TODO-P: fix return url malformed with register link below
-                    }
+
                     <div class="form-group" style="display: flex; justify-content: center;">
                         <p>
                             <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
@@ -85,7 +83,7 @@
                         {
                             <div style="display: flex; justify-content: center;">
                                 <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                                    <button class="btn btn-light" type="submit" name="provider" value="@provider.Name" style="background-color: #F5F5F5;cursor:pointer;border-radius: 5px;margin: 0 auto;">Login using <img src="~/images/googlelogo.png" style="max-width: 16px; height: 16px;margin-top: 0;" /> Google</button>
+                                    <button class="btn btn-light" type="submit" name="provider" value="@provider.Name" style="background-color: #E8E8E8;cursor:pointer;border-radius: 30px;min-width:300px;">Login using <img src="~/images/googlelogo.png" style="max-width: 16px; height: auto;" /> Google</button>
                                 </form>
                             </div>
                         }
