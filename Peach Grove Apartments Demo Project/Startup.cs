@@ -44,19 +44,18 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));
+           
+                //services.AddAuthentication().AddGoogle(options =>
+                //{
+                //    IConfigurationSection googleAuthNSection =
+                //        Configuration.GetSection("Authentication:Google");
 
-            if (CurrentEnvironment.IsDevelopment())
-            {
-                services.AddAuthentication().AddGoogle(options =>
-                {
-                    IConfigurationSection googleAuthNSection =
-                        Configuration.GetSection("Authentication:Google");
-
-                    options.ClientId = googleAuthNSection["ClientId"];
-                    options.ClientSecret = googleAuthNSection["ClientSecret"];
-                });
-            }
-
+                //    options.ClientId = googleAuthNSection["ClientId"];
+                //    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                //});
+            
+        
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,8 +91,6 @@ namespace Peach_Grove_Apartments_Demo_Project
 
                 endpoints.MapControllerRoute(name: "login",
              pattern: "identity/pages/account/login/{isdirectlogin?}");
-
-
 
                 endpoints.MapRazorPages();
 

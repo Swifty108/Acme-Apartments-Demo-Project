@@ -451,9 +451,6 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.AssemblyInfoInputs.cache
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.AssemblyInfo.cs
-D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csproj.CoreCompileInputs.cache
-D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cs
-D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cache
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.RazorAssemblyInfo.cache
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.RazorAssemblyInfo.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.TagHelpers.input.cache
@@ -569,3 +566,17 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.pdb
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.genruntimeconfig.cache
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csprojAssemblyReference.cache
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Azure.KeyVault.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Azure.KeyVault.WebKey.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Azure.Services.AppAuthentication.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.AzureKeyVault.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Rest.ClientRuntime.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Microsoft.Rest.ClientRuntime.Azure.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csproj.CoreCompileInputs.cache
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cs
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cache
