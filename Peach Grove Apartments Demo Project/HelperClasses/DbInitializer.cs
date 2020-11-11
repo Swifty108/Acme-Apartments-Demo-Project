@@ -76,7 +76,7 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
             };
         }
 
-        public void Initialize()
+        public async void InitializeAsync()
         {
             using (var serviceScope = _scopeFactory.CreateScope())
             {
@@ -84,10 +84,15 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                 {
                     //context.Database.EnsureCreated();
 
-                    if (!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
+                    if ((context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
                     {
-                        (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Create();
+                        await SeedData();
+                    }
+                    else if(!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
+                    {
+                       // (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Create();
                         context.Database.Migrate();
+                        await SeedData();
                     }
                 }
             }
