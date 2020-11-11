@@ -165,9 +165,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             public string Role { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null, bool isDirectRegister = false)
         {
-            ReturnUrl = returnUrl;
+            ReturnUrl = returnUrl ?? Url.Content("~/");
+            IsDirectRegister = isDirectRegister;
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
@@ -176,13 +178,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             string guid = System.Guid.NewGuid().ToString();
 
-            if (User.Identity.IsAuthenticated)
-            {
-                if (Url.IsLocalUrl(returnUrl))
-                    Response.Redirect(returnUrl);
-            }
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    if (Url.IsLocalUrl(returnUrl))
+            //        Response.Redirect(returnUrl);
+            //}
 
-            IsDirectRegister = false;
+            IsDirectRegister = isDirectRegister;
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)

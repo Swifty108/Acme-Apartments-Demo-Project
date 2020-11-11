@@ -63,9 +63,20 @@
                     </div>
 
                     <div class="form-group" style="display: flex; justify-content: center;">
-                        <p>
-                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                        </p>
+
+                        @if (Model.ReturnUrl != null && Model.ReturnUrl != "")
+                        {
+                            <p>
+                                <a asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                <a asp-area="Identity" asp-page="/Account/Register" asp-route-isdirectregister="@true">Register as a new user</a>
+                            </p>
+                        }
+
                     </div>
                 </form>
 

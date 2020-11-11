@@ -287,7 +287,6 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json
-D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.peachgroveapartments - Web Deploy.json
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\peachgroveapartments - Web Deploy\profile.arm.json
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.StaticWebAssets.xml
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.exe
@@ -566,7 +565,8 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.pdb
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.genruntimeconfig.cache
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csprojAssemblyReference.cache
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.peachgroveapartments - Web Deploy.json
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\peachgroveapartments - Web Deploy\mssql1.arm.json
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csproj.CoreCompileInputs.cache
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cs
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.MvcApplicationPartsAssemblyInfo.cache
-D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\peachgroveapartments - Web Deploy\mssql1.arm.json

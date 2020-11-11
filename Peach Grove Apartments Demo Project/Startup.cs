@@ -104,8 +104,8 @@ namespace Peach_Grove_Apartments_Demo_Project
             using (var scope = scopeFactory.CreateScope())
             {
                 var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
-                dbInitializer.InitializeAsync();
-               // dbInitializer.SeedData();
+                dbInitializer.Initialize();
+                dbInitializer.SeedData();
             }
         }
     }

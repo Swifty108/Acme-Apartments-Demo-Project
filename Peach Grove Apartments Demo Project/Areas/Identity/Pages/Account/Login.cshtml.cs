@@ -53,38 +53,32 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(bool isDirectLogin, string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null, bool isDirectLogin = false)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? Url.Content("~/");
+            ReturnUrl = returnUrl ?? Url.Content("~/");
+            IsDirectLogin = isDirectLogin;
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            ReturnUrl = returnUrl;
-            if (isDirectLogin)
-            {
-                IsDirectLogin = true;
-            }
-
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null, bool isDirectLogin = false)
+        public async Task<IActionResult> OnPostAsync(bool isDirectLogin = false, string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
 
-            if (User.Identity.IsAuthenticated)
-            {
-                //Reminder: use this to check if url is local for security reasons. malformed urls can be security risk.
-                if (Url.IsLocalUrl(returnUrl))
-                    Response.Redirect(returnUrl);
-            }
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    //Reminder: use this to check if url is local for security reasons. malformed urls can be security risk.
+            //    if (Url.IsLocalUrl(returnUrl))
+            //        Response.Redirect(returnUrl);
+            //}
 
             if (ModelState.IsValid)
             {
@@ -115,6 +109,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                             return LocalRedirect("/manageraccount/index");
                         }
                     }
+                    returnUrl = returnUrl ?? Url.Content("~/");
 
                     return LocalRedirect(returnUrl);
 
