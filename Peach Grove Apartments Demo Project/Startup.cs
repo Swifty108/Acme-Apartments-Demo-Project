@@ -14,12 +14,14 @@ namespace Peach_Grove_Apartments_Demo_Project
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            CurrentEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment CurrentEnvironment { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -42,14 +44,19 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));
-            services.AddAuthentication().AddGoogle(options =>
-           {
-               IConfigurationSection googleAuthNSection =
-                   Configuration.GetSection("Authentication:Google");
 
-               options.ClientId = googleAuthNSection["ClientId"];
-               options.ClientSecret = googleAuthNSection["ClientSecret"];
-           });
+            if (CurrentEnvironment.IsDevelopment())
+            {
+                services.AddAuthentication().AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
+            }
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
