@@ -82,7 +82,7 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
             {
                 using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
                 {
-                    //context.Database.EnsureCreated();
+                    context.Database.EnsureCreated();
 
                     //if ((context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
                     //{
@@ -90,12 +90,12 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                     //}
                     //else 
                     
-                    if(!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
-                    {
-                       // (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Create();
-                        context.Database.Migrate();
+                    //if(!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
+                    //{
+                    //   // (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Create();
+                    //    context.Database.Migrate();
                        
-                    }
+                    //}
                 }
             }
         }
