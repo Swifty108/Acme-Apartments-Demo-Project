@@ -106,8 +106,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             {
                 try
                 {
+                   // var appRecord = _context.Applications.FindAsync(application.ApplicationId).Result;
                     var app = _mapper.Map<Application>(application);
-
                     _context.Update(app);
                     await _context.SaveChangesAsync();
                 }
@@ -279,7 +279,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(vf);
         }
 
-        public async Task<IActionResult> MaintenanceUser(int Id, string fName, string lName)
+        public async Task<IActionResult> MaintenanceUser(string firstName, string lastName)
         {
             // var user = _userManager.GetUserAsync(User).Result;
             var mURecords = await (from userRecord in _context.Users
@@ -289,15 +289,15 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             var mViewModel = new MaintenanceRequestViewModel
             {
                 mRequests = mURecords,
-                userFName = fName,
-                userLName = lName
+                userFName = firstName,
+                userLName = lastName
             };
 
-
+            ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
             return View(mViewModel);
         }
 
-        public async Task<IActionResult> ViewMaintenanceRequest(int Id)
+        public async Task<IActionResult> ViewMaintenanceRequest(int Id, string firstName, string lastName)
         {
             var mRecord = await _context.MaintenanceRequests.FindAsync(Id);
             if (mRecord == null)
@@ -305,19 +305,21 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 return NotFound();
             }
 
-            return View(mRecord);
+            return View(new MaintenanceRequestViewModel{
+                mRequest = mRecord,
+                userFName = firstName,
+                userLName = lastName });
 
         }
 
 
-        public async Task<IActionResult> MaintenanceEdit(int? Id)
+        public async Task<IActionResult> MaintenanceEdit(int? Id, string firstName, string lastName)
         {
             var mRecord = await _context.MaintenanceRequests.FindAsync(Id);
 
-            var mRecordMapped = _mapper.Map<MaintenanceRequestViewModel>(mRecord);
+            //var mRecordMapped = _mapper.Map<MaintenanceRequestViewModel>(mRecord);
 
-            ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
-            return View(mRecordMapped);
+            return View(new MaintenanceRequestViewModel { Id = mRecord.Id, AptUserId = mRecord.AptUserId, ProblemDescription = mRecord.ProblemDescription, isAllowedToEnter = mRecord.isAllowedToEnter, userFName = firstName, userLName = lastName });
         }
 
         // POST: ApplicantAccount/Edit/5
@@ -341,7 +343,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
 
                 TempData["MaintenanceEditSuccess"] = true;
-                return RedirectToAction("MaintenanceEdit");
+                return RedirectToAction("MaintenanceUser", new { firstName = mViewModel.userFName, lastName = mViewModel.userLName });
             }
 
             //ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", mViewModel.Id);

@@ -5,6 +5,12 @@
 @model Peach_Grove_Apartments_Demo_Project.ViewModels.MaintenanceRequestViewModel
 @{
     ViewData["Title"] = "Maintenace User";
+    ViewBag.Success = "The maintenance request was edited successfully!";
+}
+@if (ViewBag.MaintenanceEditSuccess != null && ViewBag.MaintenanceEditSuccess)
+{
+
+    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
 }
 
 <partial name="_LoggedInAsPartial" />
@@ -14,7 +20,7 @@
 <hr />
 <div class="container">
 
-    <table class="table fp-table table-responsive-md table-responsive-sm">
+    <table class="table fp-table table-responsive-md ">
 
         <thead class="thead-light">
             <tr>
@@ -23,7 +29,7 @@
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
-                <th scope="col"></th>
+
             </tr>
         </thead>
         <tbody>
@@ -33,13 +39,11 @@
                     <td>@mRecord.Id</td>
 
                     <td>
-
-                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id">View</a>
+                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@mRecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">View</a>
                     </td>
 
                     <td>
-
-                        <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id">Edit</a>
+                        <a asp-controller="manageraccount" asp-action="maintenanceedit" asp-route-id="@mRecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">Edit</a>
                     </td>
 
                     @if (mRecord.Status == MaintenanceRequestStatus.APPROVED)
@@ -55,7 +59,6 @@
                     else if (mRecord.Status == MaintenanceRequestStatus.UNAPPROVED)
                     {
                         <td>
-
                             <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
 
                             <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id" style="margin-left:30px;">ReApprove</a>
@@ -65,7 +68,6 @@
                     else
                     {
                         <td>
-
                             <a asp-controller="manageraccount" asp-action="approvemaintenance" asp-route-uid="@mRecord.AptUserId" asp-route-mid="@mRecord.Id">Approve</a>
                         </td>
 

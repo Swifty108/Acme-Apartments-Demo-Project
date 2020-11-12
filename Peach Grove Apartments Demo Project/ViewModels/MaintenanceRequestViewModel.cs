@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Peach_Grove_Apartments_Demo_Project.Models;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Peach_Grove_Apartments_Demo_Project.Models;
 
 namespace Peach_Grove_Apartments_Demo_Project.ViewModels
 {
@@ -19,6 +19,7 @@ namespace Peach_Grove_Apartments_Demo_Project.ViewModels
         public string userFName { get; set; }
         public string userLName { get; set; }
 
+        public MaintenanceRequest mRequest { get; set; }
         public List<MaintenanceRequest> mRequests { get; set; }
     }
 }

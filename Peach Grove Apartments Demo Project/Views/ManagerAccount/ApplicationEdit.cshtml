@@ -27,6 +27,7 @@
     <div class="col-md-4">
         <form asp-action="ApplicationEdit" id="applicationedit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(x => x.Status)
             <div class="form-group">
                 <label asp-for="ApplicationId" class="control-label"></label>
                 <input asp-for="ApplicationId" class="form-control" disabled />
@@ -82,7 +83,7 @@
 </div>
 
 <div>
-    <a asp-action="applicationuser">Back to List</a>
+    <a asp-action="applicationuser" asp-route-userid="@Model.AptUserId">Back to List</a>
 </div>
 
 

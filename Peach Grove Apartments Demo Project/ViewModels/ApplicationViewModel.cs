@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.ViewModels
 {
@@ -36,5 +34,7 @@ namespace Peach_Grove_Apartments_Demo_Project.ViewModels
         public string AptNumber { get; set; }
         public string Area { get; set; }
         public string Price { get; set; }
+        public string Status { get; set; }
+
     }
 }
