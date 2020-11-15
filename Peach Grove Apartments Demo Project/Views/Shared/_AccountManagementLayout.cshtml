@@ -47,7 +47,7 @@
                                 <a class="nav-link" asp-controller="applicantaccount" asp-action="index">HOME <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="applicantaccount" asp-action="applications">APPLICATIONS</a>
+                                <a class="nav-link" asp-controller="applicantaccount" asp-action="showapplications">APPLICATIONS</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="applicantaccount" asp-action="contactus">CONTACT US</a>
@@ -83,13 +83,13 @@
                                 <a class="nav-link" asp-controller="residentaccount" asp-action="index">HOME <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="residentaccount" asp-action="payments">PAYMENTS</a>
+                                <a class="nav-link" asp-controller="residentaccount" asp-action="showpayments">PAYMENTS</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="residentaccount" asp-action="maintenance">MAINTENANCE</a>
+                                <a class="nav-link" asp-controller="residentaccount" asp-action="submitmaintenancerequest">MAINTENANCE</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="residentaccount" asp-action="writereview">WRITE A REVIEW</a>
+                                <a class="nav-link" asp-controller="residentaccount" asp-action="writeraeview">WRITE A REVIEW</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="residentaccount" asp-action="contactus">CONTACT US</a>
@@ -97,7 +97,6 @@
 
                             <li class="nav-item">
                                 <a class="nav-link" href="/Identity/Account/Manage">ACCOUNT SETTINGS</a>
-                                @*<a class="nav-link" asp-controller="accountmanagement" asp-action="index">ACCOUNT SETTINGS</a>*@
                             </li>
                         </ul>
                     </div>
@@ -127,11 +126,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="manageraccount" asp-action="applicationusers">APPLICATIONS</a>
+                                <a class="nav-link" asp-controller="manageraccount" asp-action="showapplicationusers">APPLICATIONS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="manageraccount" asp-action="maintenancerequests">MAINTENANCE REQUESTS</a>
+                                <a class="nav-link" asp-controller="manageraccount" asp-action="showmaintenancerequestsusers">MAINTENANCE REQUESTS</a>
                             </li>
 
                             <li class="nav-item">
@@ -151,7 +150,6 @@
 
         <div class="col-md-6">
 
-
             <h2>Manage your account</h2>
 
             <div>
@@ -168,11 +166,8 @@
             </div>
 
             @*@section Scripts {
-                @RenderSection("Scripts", required: false)
-            }*@
-
-
-
+                    @RenderSection("Scripts", required: false)
+                }*@
 
             @RenderBody()
         </div>
@@ -181,8 +176,6 @@
 
             <aside id="sidebar">
                 @{
-
-
 
                     if (User.IsInRole("Applicant"))
                     {

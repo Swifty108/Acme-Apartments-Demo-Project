@@ -31,17 +31,17 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-        public IActionResult Amenities()
+        public IActionResult ShowAmenities()
         {
             return View();
         }
 
-        public IActionResult Gallery()
+        public IActionResult ShowGallery()
         {
             return View();
         }
 
-        public async Task<IActionResult> FloorPlans()
+        public async Task<IActionResult> ShowFloorPlans()
         {
             var studioPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "Studio").ToListAsync();
             var oneBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "1Bed").ToListAsync();
@@ -76,7 +76,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> Apply(ApplyViewModel applicationViewModel)
         {
             var user = await _userManager.GetUserAsync(User);
-                
+
             //if(_context.Applications.Where(a => a.AptNumber == applicationViewModel.AptNumber) != null)
             //{
             //    return RedirectToAction("index", "applicantaccount", new { IsApplySuccess = true });

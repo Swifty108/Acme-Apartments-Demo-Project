@@ -34,7 +34,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Applications()
+        public async Task<IActionResult> ShowApplications()
         {
             var apps = await _context.Applications.Where(u => u.AptUserId == _userManager.GetUserAsync(User).Result.Id).ToListAsync();
             return View(apps);
@@ -161,7 +161,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var application = await _context.Applications.FindAsync(id);
-            application.Status = "Canceled"; 
+            application.Status = "Canceled";
             _context.Applications.Update(application);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -179,8 +179,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public IActionResult ContactUs(ApplicantContactViewModel appContactViewModel)
         {
@@ -191,6 +189,5 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             }
             return View(appContactViewModel);
         }
-
     }
 }

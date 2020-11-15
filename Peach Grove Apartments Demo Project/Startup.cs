@@ -44,18 +44,15 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));
-           
-                //services.AddAuthentication().AddGoogle(options =>
-                //{
-                //    IConfigurationSection googleAuthNSection =
-                //        Configuration.GetSection("Authentication:Google");
 
-                //    options.ClientId = googleAuthNSection["ClientId"];
-                //    options.ClientSecret = googleAuthNSection["ClientSecret"];
-                //});
-            
-        
-            
+            //services.AddAuthentication().AddGoogle(options =>
+            //{
+            //    IConfigurationSection googleAuthNSection =
+            //        Configuration.GetSection("Authentication:Google");
+
+            //    options.ClientId = googleAuthNSection["ClientId"];
+            //    options.ClientSecret = googleAuthNSection["ClientSecret"];
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,20 +90,15 @@ namespace Peach_Grove_Apartments_Demo_Project
              pattern: "identity/pages/account/login/{isdirectlogin?}");
 
                 endpoints.MapRazorPages();
-
-                //endpoints.MapControllerRoute(
-                //    name: "maintenanceedit",
-                //    pattern: "{controller=manageraccount}/{action=approvemaintenance}/{uid}/{mid}");
-                //endpoints.MapRazorPages();
             });
 
-            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
-            using (var scope = scopeFactory.CreateScope())
-            {
-                var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
-                dbInitializer.Initialize();
-                dbInitializer.SeedData();
-            }
+            //var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            //using (var scope = scopeFactory.CreateScope())
+            //{
+            //    var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
+            //    dbInitializer.Initialize();
+            //    dbInitializer.SeedData();
+            //}
         }
     }
 }

@@ -72,14 +72,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(bool isDirectLogin = false, string returnUrl = null)
         {
-
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    //Reminder: use this to check if url is local for security reasons. malformed urls can be security risk.
-            //    if (Url.IsLocalUrl(returnUrl))
-            //        Response.Redirect(returnUrl);
-            //}
-
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -129,8 +121,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                     return Page();
                 }
             }
-
-            // If we got this far, something failed, redisplay form
             return Page();
         }
     }

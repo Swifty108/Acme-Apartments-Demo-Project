@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.Models;
@@ -21,10 +20,8 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
         {
             _scopeFactory = scopeFactory;
             _users = new List<AptUser> {
-
             new AptUser
                             {
-
                                 UserName = "john.doe@applicant.com",
                                 Email = "john.doe@applicant.com",
                                 FirstName = "John",
@@ -37,12 +34,11 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                                 PhoneNumber = "412-555-1212",
                                 SSN = "189424545",
                                 AptNumber = "3185-335",
-                                AptPrice = "850", 
+                                AptPrice = "850",
                                 DateRegistered = DateTime.Now
                             },
             new AptUser
                             {
-
                                 UserName = "tom.higgins@resident.com",
                                 Email = "tom.higgins@resident.com",
                                 FirstName = "Tom",
@@ -60,7 +56,6 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                             },
             new AptUser
                             {
-
                                 UserName = "jamie.jackson@manager.com",
                                 Email = "jamie.jackson@manager.com",
                                 FirstName = "Jamie",
@@ -82,20 +77,7 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
             {
                 using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
                 {
-                    context.Database.EnsureCreated();
-
-                    //if ((context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
-                    //{
-                    //    await SeedData();
-                    //}
-                    //else 
-                    
-                    //if(!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
-                    //{
-                    //   // (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Create();
-                    //    context.Database.Migrate();
-                       
-                    //}
+                    context.Database.Migrate();
                 }
             }
         }
@@ -124,7 +106,6 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                             CreateAsync(role);
                         }
 
-
                         if (!await roleManager.RoleExistsAsync
                     ("Resident"))
                         {
@@ -143,7 +124,6 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                             CreateAsync(role);
                         }
                     }
-
                 }
             }
         }
@@ -167,7 +147,6 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
 
                                 if (result.Succeeded)
                                 {
-
                                     if (user.Email.Contains("applicant"))
                                     {
                                         await userManager.AddToRoleAsync(user,
@@ -209,7 +188,6 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                     {
                         var fpList = new List<FloorPlan>()
                     {
-
                         new FloorPlan { FloorPlanType = "Studio", AptNumber = "5475-315", DateAvailable = aDate.Next(), SF = "750", Price = "850"  },
                         new FloorPlan { FloorPlanType = "Studio", AptNumber = "5475-720", DateAvailable = aDate.Next(), SF = "750", Price = "850"  },
                         new FloorPlan { FloorPlanType = "Studio", AptNumber = "5475-403", DateAvailable = aDate.Next(), SF = "750", Price = "850"  },
@@ -219,19 +197,13 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                         new FloorPlan { FloorPlanType = "2Bed", AptNumber = "5475-310", DateAvailable = aDate.Next(), SF = "1050", Price = "1,250"  },
                         new FloorPlan { FloorPlanType = "2Bed", AptNumber = "5475-419", DateAvailable = aDate.Next(), SF = "1050", Price = "1,250"  },
                         new FloorPlan { FloorPlanType = "2Bed", AptNumber = "5475-328", DateAvailable = aDate.Next(), SF = "1050", Price = "1,250"  }
-
                     };
 
-                       await context.FloorPlans.AddRangeAsync(fpList);
-                       await context.SaveChangesAsync();
+                        await context.FloorPlans.AddRangeAsync(fpList);
+                        await context.SaveChangesAsync();
                     }
-                    
                 }
             }
-
         }
     }
-
 }
-
-

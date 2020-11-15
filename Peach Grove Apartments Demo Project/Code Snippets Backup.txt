@@ -1427,11 +1427,6 @@
 	<link rel="stylesheet" href="~/css/site.css" />
 	<link rel="stylesheet" href="~/css/useraccount.css" />
 
-
-
-
-
-
 	@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -1604,3 +1599,22 @@
         public bool PendingApproval { get; set; }
         public bool UnApproved { get; set; }
         public bool Canceled { get; set; }
+
+		///////////////////////////// DBINITIALIZER ////////////////////////////////////
+
+
+
+	 context.Database.EnsureCreated();
+
+                    if ((context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
+                    {
+                        await SeedData();
+                    }
+                    else
+
+                    if (!(context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
+                    {
+                        // (context.Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Create();
+                        context.Database.Migrate();
+
+                    }

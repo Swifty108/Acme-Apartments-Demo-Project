@@ -10,8 +10,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
 {
     [Authorize(Roles = "Resident")]
@@ -35,49 +33,40 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Applications()
+        public async Task<IActionResult> ShowApplications()
         {
             var apps = await _context.Applications.Where(u => u.AptUserId == _userManager.GetUserAsync(User).Result.Id).ToListAsync();
             return View(apps);
         }
 
-        [HttpGet]
-        public IActionResult Maintenance()
+        public IActionResult SubmitMaintenanceRequest()
         {
-
             ViewBag.MaintenanceSuccess = TempData["MaintenanceSuccess"];
 
             return View(new MaintenanceRequestViewModel());
-
         }
 
         [HttpPost]
-        public async Task<IActionResult> Maintenance(MaintenanceRequestViewModel maintReqViewModel)
+        public async Task<IActionResult> SubmitMaintenanceRequest(MaintenanceRequestViewModel maintReqViewModel)
         {
-
             if (ModelState.IsValid)
             {
-
                 try
                 {
-
                     var user = await _userManager.GetUserAsync(User);
-                    var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription, Status = MaintenanceRequestStatus.PENDINGAPPROVAL};
+                    var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription, Status = MaintenanceRequestStatus.PENDINGAPPROVAL };
                     await _context.MaintenanceRequests.AddAsync(maintReq);
                     await _context.SaveChangesAsync();
 
                     TempData["MaintenanceSuccess"] = true;
 
-                    return RedirectToAction("Maintenance");
-
+                    return RedirectToAction("SubmitMaintenanceRequest");
                 }
                 catch (Exception e)
                 {
                     TempData["MaintenanceSuccess"] = false;
                     return View(maintReqViewModel);
                 }
-
             }
 
             return View(maintReqViewModel);
@@ -88,70 +77,56 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
-
-            // var result = JsonConvert.SerializeObject(maintReqs);
-
-            // var maintReqViewModel = new MaintenanceReqHistoryViewModel { Requests = maintReqs };
-
-
-
-            // TempData["SuccessMessage"] = "";
-
-
             return Json(new
             {
                 list = maintReqs
             });
-
         }
 
-
-        public async Task<IActionResult> Payments()
+        public async Task<IActionResult> ShowPayments()
         {
             var user = await _userManager.GetUserAsync(User);
 
             var waterBill = await _context.WaterBills.FirstOrDefaultAsync();
             var electricBill = await _context.ElectricBills.FirstOrDefaultAsync();
-            var wbill = new WaterBill();
-            var ebill = new ElectricBill();
+            var newWaterBill = new WaterBill();
+            var newElectricBill = new ElectricBill();
 
             if (waterBill == null)
             {
-                wbill = new WaterBill { AptUser = user, Amount = 42.53M, DateDue = DateTime.Now.AddDays(20) };
-                await _context.AddAsync(wbill);
+                newWaterBill = new WaterBill { AptUser = user, Amount = 42.53M, DateDue = DateTime.Now.AddDays(20) };
+                await _context.AddAsync(newWaterBill);
                 await _context.SaveChangesAsync();
             }
 
             if (electricBill == null)
             {
-                ebill = new ElectricBill { AptUser = user, Amount = 96.53M, DateDue = DateTime.Now.AddDays(20) };
-                await _context.AddAsync(ebill);
+                newElectricBill = new ElectricBill { AptUser = user, Amount = 96.53M, DateDue = DateTime.Now.AddDays(20) };
+                await _context.AddAsync(newElectricBill);
                 await _context.SaveChangesAsync();
             }
 
             var app = await _context.Applications.Where(u => u.AptUserId == user.Id).FirstOrDefaultAsync();
 
-
             var payViewModel = new PaymentsViewModel
             {
                 AptUser = user,
-                WaterBill = waterBill ?? wbill,
-                ElectricBill = electricBill ?? ebill
+                WaterBill = waterBill ?? newWaterBill,
+                ElectricBill = electricBill ?? newElectricBill
             };
 
             return View(payViewModel);
         }
 
-        public IActionResult WriteReview()
+        public IActionResult WriteAReview()
         {
             ViewBag.ReviewSuccess = TempData["ReviewSuccess"];
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> WriteReview(ReviewViewModel review)
+        public async Task<IActionResult> WriteAReview(ReviewViewModel review)
         {
-
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -160,14 +135,12 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 await _context.SaveChangesAsync();
 
                 TempData["ReviewSuccess"] = true;
-                return RedirectToAction("WriteReview");
-
+                return RedirectToAction("WriteAReview");
             }
             return View();
         }
 
         [HttpGet]
-
         public IActionResult ContactUs()
         {
             ViewBag.ContactUsSuccess = TempData["ContactUsSuccess"];
@@ -177,7 +150,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpPost]
         public IActionResult ContactUs(AppUserContactViewModel viewModel)
         {
-
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;

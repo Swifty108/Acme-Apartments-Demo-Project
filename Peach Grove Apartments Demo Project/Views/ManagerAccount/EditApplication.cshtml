@@ -8,24 +8,21 @@
 
 <h1>Application Edit</h1>
 
-
 @{
- 
+
     if (ViewBag.AppEditSuccess != null && ViewBag.AppEditSuccess)
     {
 
-    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+        <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
 
-        }
-    
     }
 
-
+}
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="ApplicationEdit" id="applicationedit">
+        <form asp-action="EditApplication" id="editapplication">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(x => x.Status)
             <div class="form-group">
@@ -83,18 +80,17 @@
 </div>
 
 <div>
-    <a asp-action="applicationuser" asp-route-userid="@Model.AptUserId">Back to List</a>
+    <a asp-action="showapplications" asp-route-userid="@Model.AptUserId">Back to List</a>
 </div>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
 
 <script>
-    $('#applicationedit').on('submit', function () {
+    $('#editapplication').on('submit', function () {
         //event.preventDefault();
-        if ($('#applicationedit').valid()) {
+        if ($('#editapplication').valid()) {
             $('input, select').prop('disabled', false);
             return true;
         }

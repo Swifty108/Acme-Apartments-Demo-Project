@@ -13,14 +13,12 @@
                         </li>
                         <partial name="_LoginPartial" />
                     </ul>
-
                 </div>
             </div>
         </nav>
     </div>
 
     <div class="bottom-menu-bar">
-
 
         <nav class="navbar navbar-light navbar-expand-md">
 
@@ -40,22 +38,17 @@
                         <a class="nav-link" asp-controller="home" asp-action="index">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="home" asp-action="amenities">AMENITIES</a>
+                        <a class="nav-link" asp-controller="home" asp-action="showamenities">AMENITIES</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="home" asp-action="floorplans">FLOOR PLANS</a>
+                        <a class="nav-link" asp-controller="home" asp-action="showfloorplans">FLOOR PLANS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="home" asp-action="gallery">PHOTOS & TOUR</a>
+                        <a class="nav-link" asp-controller="home" asp-action="showgallery">PHOTOS & TOUR</a>
                     </li>
-
                 </ul>
             </div>
-
         </nav>
-
-
-
     </div>
 </header>
 
@@ -77,7 +70,6 @@
                     <span>(412) 555-1212</span><br />
                     <a asp-controller="Home" asp-action="contactus">Email Us</a>
 
-
                     <br />
 
                     <br />
@@ -92,12 +84,10 @@
                     <br />
                 </section>
 
-
                 <section id="contact-widget">
 
                     <br /><br />
                     <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
-
 
                     1201 Peach Grove Blvd.<br />
                     Pittsburgh, PA 15213<br />
@@ -113,17 +103,13 @@
                     <br />
                     <br />
                     <br />
-
                 </section>
-
 
                 <br />
                 <br />
                 <br />
             </aside>
         </div>
-
-
     </div>
 </div>
 
@@ -149,6 +135,5 @@
         </div>
     </div>
 </div>
-
 
 @RenderSection("Scripts", required: false)

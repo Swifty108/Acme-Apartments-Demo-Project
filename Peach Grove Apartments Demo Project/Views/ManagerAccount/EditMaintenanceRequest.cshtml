@@ -6,13 +6,12 @@
     ViewBag.Success = "It was edited successfully!";
 }
 
-
 <h1>Maintenace Edit</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-10">
-        <form asp-action="maintenanceedit" id="maintenance-edit">
+        <form asp-action="editmaintenancerequest" id="maintenance-edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(x => x.userFName)
             @Html.HiddenFor(x => x.userLName)
@@ -45,7 +44,7 @@
 </div>
 
 <div>
-    <a asp-action="maintenanceuser" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">Back to List</a>
+    <a asp-action="showmaintenancerequests" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">Back to List</a>
 </div>
 
 @section Scripts {

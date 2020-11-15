@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <header class="nav-header">
     <div class="top-bar">
         <nav class="navbar navbar-expand">
@@ -17,7 +16,6 @@
                         </li>
                         <partial name="_LoginPartial" />
                     </ul>
-
                 </div>
             </div>
         </nav>
@@ -43,11 +41,11 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="manageraccount" asp-action="applicationusers">APPLICATIONS</a>
+                        <a class="nav-link" asp-controller="manageraccount" asp-action="showapplicationusers">APPLICATIONS</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="manageraccount" asp-action="maintenancerequests">MAINTENANCE REQUESTS</a>
+                        <a class="nav-link" asp-controller="manageraccount" asp-action="showmaintenancerequestsusers">MAINTENANCE REQUESTS</a>
                     </li>
 
                     <li class="nav-item">
@@ -70,5 +68,3 @@
 <br />
 
 @RenderSection("Scripts", required: false)
-
-
