@@ -17,7 +17,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
-
         public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager)
         {
             _context = context;

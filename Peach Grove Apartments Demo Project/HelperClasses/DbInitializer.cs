@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Peach_Grove_Apartments_Demo_Project.Data;
+using Peach_Grove_Apartments_Demo_Project.Interfaces;
 using Peach_Grove_Apartments_Demo_Project.Models;
 using System;
 using System.Collections.Generic;

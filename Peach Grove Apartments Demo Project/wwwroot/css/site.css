@@ -13,7 +13,7 @@ for details on configuring this project to bundle and minify static web assets. 
         max-width: 80%;
         height: 100%;
         padding-left: 2.3rem;
-        margin-left: 3rem;
+        /*margin-left: 3rem;*/
         margin-top: 50px;
         border-left: 0px !important;
     }
@@ -167,7 +167,7 @@ aside {
     max-width: 80%;
     height: 100%;
     padding-left: 2.3rem;
-    margin-left: 3rem;
+    /*margin-left: 3rem;*/
     border-left: 1px solid lightgray;
 }
 

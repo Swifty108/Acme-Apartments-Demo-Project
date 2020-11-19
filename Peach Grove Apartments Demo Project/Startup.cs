@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Peach_Grove_Apartments_Demo_Project.Data;
 using Peach_Grove_Apartments_Demo_Project.HelperClasses;
+using Peach_Grove_Apartments_Demo_Project.Interfaces;
 using Peach_Grove_Apartments_Demo_Project.Models;
 
 namespace Peach_Grove_Apartments_Demo_Project
@@ -44,6 +45,9 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService, EmailService>();
 
             //services.AddAuthentication().AddGoogle(options =>
             //{
@@ -92,13 +96,13 @@ namespace Peach_Grove_Apartments_Demo_Project
                 endpoints.MapRazorPages();
             });
 
-            //var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
-            //using (var scope = scopeFactory.CreateScope())
-            //{
-            //    var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
-            //    dbInitializer.Initialize();
-            //    dbInitializer.SeedData();
-            //}
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
+                dbInitializer.Initialize();
+                dbInitializer.SeedData();
+            }
         }
     }
 }

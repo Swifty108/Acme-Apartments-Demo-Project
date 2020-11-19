@@ -1,15 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 
 @{
 
-    @if (User.Identity.IsAuthenticated)
+    //var user = await UserManager.GetUserAsync(User);
 
+    if (User.Identity.IsAuthenticated)
     {
-
-        var user = await UserManager.GetUserAsync(User);
-
         <li class="nav-item">
 
             @if (User.IsInRole("Applicant"))
@@ -42,5 +39,4 @@
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Login" asp-route-isdirectlogin="@true"><span class="text-white" style="font-size: 15px;"> <i class="fa fa-user-circle text-white" style="font-size: 15px;"></i>  Login</span></a>
         </li>
     }
-
 }
