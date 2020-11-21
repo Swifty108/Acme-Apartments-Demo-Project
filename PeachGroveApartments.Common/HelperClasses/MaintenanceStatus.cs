@@ -1,4 +1,4 @@
-﻿namespace PeachGroveApartments.BLL.HelperClasses
+﻿namespace PeachGroveApartments.Common.HelperClasses
 {
     public struct MaintenanceRequestStatus
     {

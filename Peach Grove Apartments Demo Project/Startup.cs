@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Peach_Grove_Apartments_Demo_Project.Data;
+using PeachGroveApartments.Infrastructure.Data;
 using PeachGroveApartments.Infrastructure.Models;
 using System.Threading.Tasks;
 
@@ -83,11 +83,12 @@ namespace Peach_Grove_Apartments_Demo_Project
                 endpoints.MapRazorPages();
             });
 
+            //Todo-p: move this to main method in the program.cs file
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (var scope = scopeFactory.CreateScope())
             {
                 var dbInitializer = scope.ServiceProvider.GetService<DbInitializer>();
-                await dbInitializer.Initialize();
+                dbInitializer.Initialize();
                 await dbInitializer.SeedData();
             }
         }

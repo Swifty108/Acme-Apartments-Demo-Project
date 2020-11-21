@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Peach_Grove_Apartments_Demo_Project.HelperClasses;
-using Peach_Grove_Apartments_Demo_Project.Models;
+using PeachGroveApartments.Core.Models;
+using PeachGroveApartments.Infrastructure.Models;
 
-namespace Peach_Grove_Apartments_Demo_Project.Data
+namespace PeachGroveApartments.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext<AptUser, IdentityRole, string>
-    { 
+    {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
         }
 
         public DbSet<AptUser> AptUsers { get; set; }
@@ -23,6 +20,5 @@ namespace Peach_Grove_Apartments_Demo_Project.Data
         public DbSet<MaintenanceRequest> MaintenanceRequests { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<FloorPlan> FloorPlans { get; set; }
-
     }
 }

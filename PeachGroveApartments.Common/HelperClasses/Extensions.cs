@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PeachGroveApartments.BLL.HelperClasses
+namespace PeachGroveApartments.Common.HelperClasses
 {
     public static class Extensions
     {

@@ -1,4 +1,4 @@
-﻿using Peach_Grove_Apartments_Demo_Project.Models;
+﻿using PeachGroveApartments.Infrastructure.Models;
 using System.Collections.Generic;
 
 namespace Peach_Grove_Apartments_Demo_Project.ViewModels
