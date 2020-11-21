@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
-using Peach_Grove_Apartments_Demo_Project.Models;
-using Peach_Grove_Apartments_Demo_Project.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using PeachGroveApartments.BLL.Entities;
+using PeachGroveApartments.Common.ViewModels;
 
-namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
+namespace PeachGroveApartments.BLL.HelperClasses
 {
     public class AutoMappingProfile : Profile
     {

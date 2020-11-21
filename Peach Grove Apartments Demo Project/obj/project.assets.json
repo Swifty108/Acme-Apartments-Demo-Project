@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "AutoMapper/10.1.0": {
+      "AutoMapper/10.1.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
@@ -3034,18 +3034,53 @@
         "runtime": {
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         }
+      },
+      "PeachGroveApartments.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "AutoMapper": "10.1.1",
+          "PeachGroveApartments.Common": "1.0.0",
+          "PeachGroveApartments.DAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/PeachGroveApartments.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PeachGroveApartments.BLL.dll": {}
+        }
+      },
+      "PeachGroveApartments.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/PeachGroveApartments.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PeachGroveApartments.Common.dll": {}
+        }
+      },
+      "PeachGroveApartments.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/PeachGroveApartments.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PeachGroveApartments.DAL.dll": {}
+        }
       }
     }
   },
   "libraries": {
-    "AutoMapper/10.1.0": {
-      "sha512": "qxn9+PpQJD53PAUHGXW3HTcq6Rxbv3Pyq/jTcc60ZYwOygyqUfHIY3HBChKbDwtTHdlwlQqJeJ1ckVcaoytxxw==",
+    "AutoMapper/10.1.1": {
+      "sha512": "uMgbqOdu9ZG5cIOty0C85hzzayBH2i9BthnS5FlMqKtMSHDv4ts81a2jS1VFaDBVhlBeIqJ/kQKjQY95BZde9w==",
       "type": "package",
-      "path": "automapper/10.1.0",
+      "path": "automapper/10.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "automapper.10.1.0.nupkg.sha512",
+        "automapper.10.1.1.nupkg.sha512",
         "automapper.nuspec",
         "icon.png",
         "lib/net461/AutoMapper.dll",
@@ -9656,6 +9691,21 @@
         "xunit.extensibility.execution.2.4.1.nupkg.sha512",
         "xunit.extensibility.execution.nuspec"
       ]
+    },
+    "PeachGroveApartments.BLL/1.0.0": {
+      "type": "project",
+      "path": "../PeachGroveApartments.BLL/PeachGroveApartments.BLL.csproj",
+      "msbuildProject": "../PeachGroveApartments.BLL/PeachGroveApartments.BLL.csproj"
+    },
+    "PeachGroveApartments.Common/1.0.0": {
+      "type": "project",
+      "path": "../PeachGroveApartments.Common/PeachGroveApartments.Common.csproj",
+      "msbuildProject": "../PeachGroveApartments.Common/PeachGroveApartments.Common.csproj"
+    },
+    "PeachGroveApartments.DAL/1.0.0": {
+      "type": "project",
+      "path": "../PeachGroveApartments.DAL/PeachGroveApartments.DAL.csproj",
+      "msbuildProject": "../PeachGroveApartments.DAL/PeachGroveApartments.DAL.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -9671,6 +9721,8 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.9",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.9",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
+      "PeachGroveApartments.BLL >= 1.0.0",
+      "PeachGroveApartments.Common >= 1.0.0",
       "xunit >= 2.4.1"
     ]
   },
@@ -9700,7 +9752,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.BLL\\PeachGroveApartments.BLL.csproj": {
+              "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.BLL\\PeachGroveApartments.BLL.csproj"
+            },
+            "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Common\\PeachGroveApartments.Common.csproj": {
+              "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Common\\PeachGroveApartments.Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

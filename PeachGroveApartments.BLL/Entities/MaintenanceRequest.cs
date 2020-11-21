@@ -1,27 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Peach_Grove_Apartments_Demo_Project.Models
+namespace PeachGroveApartments.BLL.Entities
 {
-    public class Review
+    public class MaintenanceRequest
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
-        public DateTime DateReviewed { get; set; }
+        [Display(Name = "Date Requested")]
+        public DateTime DateRequested { get; set; }
+
         [Required]
         [ForeignKey("AptUser")]
         public string AptUserId { get; set; }
+
         public AptUser AptUser { get; set; }
+
         [Required]
-        [MaxLength(10000)]
-        [DisplayName("Review Text")]
-        public string ReviewText { get; set; }
+        public string ProblemDescription { get; set; }
+
+        public bool isAllowedToEnter { get; set; }
+        public string Status { get; set; }
     }
 }

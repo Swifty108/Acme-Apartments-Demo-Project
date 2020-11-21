@@ -7,13 +7,12 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
+namespace PeachGroveApartments.BLL.HelperClasses
 
 {
     public class DbInitializerold
 
-    { 
-
+    {
         public static async Task SeedData
   (UserManager<AptUser> userManager,
   RoleManager<IdentityRole> roleManager, ApplicationDbContext dbcontext)
@@ -28,8 +27,8 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
             if (await userManager.FindByNameAsync
         ("john.doe@applicant.com") == null)
             {
-                var user = new AptUser {
-
+                var user = new AptUser
+                {
                     UserName = "john.doe@applicant.com",
                     Email = "john.doe@applicant.com",
                     FirstName = "John",
@@ -48,8 +47,8 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
 
                 if (result.Succeeded)
                 {
-                   await userManager.AddToRoleAsync(user,
-                                        "Applicant");
+                    await userManager.AddToRoleAsync(user,
+                                         "Applicant");
 
                     var ebill = await _context.ElectricBills.Where(a => a.AptUserId == user.Id).FirstOrDefaultAsync();
                     var wbill = await _context.WaterBills.Where(a => a.AptUserId == user.Id).FirstOrDefaultAsync();
@@ -71,7 +70,6 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
             {
                 var user = new AptUser
                 {
-
                     UserName = "tom.higgins@resident.com",
                     Email = "tom.higgins@resident.com",
                     FirstName = "Tom",
@@ -113,7 +111,6 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
             {
                 var user = new AptUser
                 {
-
                     UserName = "jamie.jackson@manager.com",
                     Email = "jamie.jackson@manager.com",
                     FirstName = "Jamie",
@@ -132,8 +129,8 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
 
                 if (result.Succeeded)
                 {
-                   await userManager.AddToRoleAsync(user,
-                                        "Manager");
+                    await userManager.AddToRoleAsync(user,
+                                         "Manager");
                 }
             }
         }
@@ -149,7 +146,6 @@ namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
                 IdentityResult roleResult = await roleManager.
                 CreateAsync(role);
             }
-
 
             if (!await roleManager.RoleExistsAsync
         ("Resident"))

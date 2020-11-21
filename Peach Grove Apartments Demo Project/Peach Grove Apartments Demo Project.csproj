@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -52,6 +52,11 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PeachGroveApartments.BLL\PeachGroveApartments.BLL.csproj" />
+    <ProjectReference Include="..\PeachGroveApartments.Common\PeachGroveApartments.Common.csproj" />
   </ItemGroup>
 
 </Project>
