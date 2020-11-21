@@ -568,3 +568,8 @@ D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apart
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\MimeKit.dll
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
 D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\obj\Debug\netcoreapp3.1\Peach Grove Apartments Demo Project.csprojAssemblyReference.cache
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\PeachGroveApartments.Common.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\PeachGroveApartments.Core.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\PeachGroveApartments.Infrastructure.dll
+D:\DevProjects\VS Projects\Peach-Grove-Apartments-Demo-Project\Peach Grove Apartments Demo Project\bin\Debug\netcoreapp3.1\PeachGroveApartments.Infrastructure.pdb

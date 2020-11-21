@@ -11,6 +11,7 @@
     <PackageReference Include="MailKit" Version="2.9.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
@@ -52,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PeachGroveApartments.Common\PeachGroveApartments.Common.csproj" />
     <ProjectReference Include="..\PeachGroveApartments.Core\PeachGroveApartments.Core.csproj" />
     <ProjectReference Include="..\PeachGroveApartments.Infrastructure\PeachGroveApartments.Infrastructure.csproj" />
   </ItemGroup>

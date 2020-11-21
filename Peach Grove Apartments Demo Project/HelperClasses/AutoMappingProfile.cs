@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
 using PeachGroveApartments.Core.Models;
+using PeachGroveApartments.Infrastructure.Models;
 
-namespace PeachGroveApartments.Common.HelperClasses
+namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
 {
     public class AutoMappingProfile : Profile
     {
