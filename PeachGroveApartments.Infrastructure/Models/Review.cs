@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PeachGroveApartments.Core.Models
+namespace PeachGroveApartments.Infrastructure.Models
 {
     public class Review
     {

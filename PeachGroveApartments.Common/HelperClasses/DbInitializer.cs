@@ -1,18 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using Peach_Grove_Apartments_Demo_Project.Data;
-using Peach_Grove_Apartments_Demo_Project.Interfaces;
-using Peach_Grove_Apartments_Demo_Project.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PeachGroveApartments.BLL.HelperClasses
 {
-    public class DbInitializer : IDbInitializer
+    public class DbInitializer : DbInitializer
     {
         private readonly IServiceScopeFactory _scopeFactory;
         private IList<AptUser> _users;
@@ -72,13 +65,13 @@ namespace PeachGroveApartments.BLL.HelperClasses
             };
         }
 
-        public void Initialize()
+        public async Task Initialize()
         {
             using (var serviceScope = _scopeFactory.CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
                 {
-                    context.Database.Migrate();
+                    await context.Database.Migrate();
                 }
             }
         }

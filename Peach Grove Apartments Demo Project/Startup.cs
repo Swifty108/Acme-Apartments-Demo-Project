@@ -7,9 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Peach_Grove_Apartments_Demo_Project.Data;
-using Peach_Grove_Apartments_Demo_Project.HelperClasses;
-using Peach_Grove_Apartments_Demo_Project.Interfaces;
-using Peach_Grove_Apartments_Demo_Project.Models;
+using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project
 {
@@ -48,7 +46,7 @@ namespace Peach_Grove_Apartments_Demo_Project
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async Task Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -87,9 +85,9 @@ namespace Peach_Grove_Apartments_Demo_Project
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (var scope = scopeFactory.CreateScope())
             {
-                var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
-                dbInitializer.Initialize();
-                dbInitializer.SeedData();
+                var dbInitializer = scope.ServiceProvider.GetService<DbInitializer>();
+                await dbInitializer.Initialize();
+                await dbInitializer.SeedData();
             }
         }
     }

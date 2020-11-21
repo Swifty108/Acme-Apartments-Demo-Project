@@ -2,7 +2,7 @@
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
 using PeachGroveApartments.Core.Models;
 
-namespace PeachGroveApartments.BLL.HelperClasses
+namespace PeachGroveApartments.Common.HelperClasses
 {
     public class AutoMappingProfile : Profile
     {
