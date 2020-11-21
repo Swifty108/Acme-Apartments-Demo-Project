@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PeachGroveApartments.BLL.Entities
+namespace PeachGroveApartments.Core.Models
 {
     public class Application
     {

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace PeachGroveApartments.BLL.Entities
+namespace PeachGroveApartments.Core.Models
 {
     public class AptUser : IdentityUser
     {

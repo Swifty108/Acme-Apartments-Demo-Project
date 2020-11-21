@@ -55,8 +55,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PeachGroveApartments.BLL\PeachGroveApartments.BLL.csproj" />
-    <ProjectReference Include="..\PeachGroveApartments.Common\PeachGroveApartments.Common.csproj" />
+    <ProjectReference Include="..\PeachGroveApartments.Core\PeachGroveApartments.Core.csproj" />
+    <ProjectReference Include="..\PeachGroveApartments.Infrastructure\PeachGroveApartments.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

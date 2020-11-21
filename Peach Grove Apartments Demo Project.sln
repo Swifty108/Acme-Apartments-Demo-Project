@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peach Grove Apartments Demo Project", "Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project.csproj", "{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.BLL", "PeachGroveApartments.BLL\PeachGroveApartments.BLL.csproj", "{737C5176-3521-4375-BD32-1107AB7189E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.Common", "PeachGroveApartments.Common\PeachGroveApartments.Common.csproj", "{64240D8E-6FBD-4658-A614-F4B8CE93AF23}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.DAL", "PeachGroveApartments.DAL\PeachGroveApartments.DAL.csproj", "{C48E0A8D-4506-4642-A959-31D9C834115D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeachGroveApartments.Core", "PeachGroveApartments.Core\PeachGroveApartments.Core.csproj", "{DB06F141-2292-4C1D-9382-31152B896C45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeachGroveApartments.Common", "PeachGroveApartments.Common\PeachGroveApartments.Common.csproj", "{64240D8E-6FBD-4658-A614-F4B8CE93AF23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeachGroveApartments.Infrastructure", "PeachGroveApartments.Infrastructure\PeachGroveApartments.Infrastructure.csproj", "{1B31FFD5-5D52-445E-84FB-BE4785DCDB62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +21,18 @@ Global
 		{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}.Release|Any CPU.Build.0 = Release|Any CPU
-		{737C5176-3521-4375-BD32-1107AB7189E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{737C5176-3521-4375-BD32-1107AB7189E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{737C5176-3521-4375-BD32-1107AB7189E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{737C5176-3521-4375-BD32-1107AB7189E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C48E0A8D-4506-4642-A959-31D9C834115D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C48E0A8D-4506-4642-A959-31D9C834115D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C48E0A8D-4506-4642-A959-31D9C834115D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C48E0A8D-4506-4642-A959-31D9C834115D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{64240D8E-6FBD-4658-A614-F4B8CE93AF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{64240D8E-6FBD-4658-A614-F4B8CE93AF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64240D8E-6FBD-4658-A614-F4B8CE93AF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64240D8E-6FBD-4658-A614-F4B8CE93AF23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB06F141-2292-4C1D-9382-31152B896C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB06F141-2292-4C1D-9382-31152B896C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB06F141-2292-4C1D-9382-31152B896C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB06F141-2292-4C1D-9382-31152B896C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B31FFD5-5D52-445E-84FB-BE4785DCDB62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B31FFD5-5D52-445E-84FB-BE4785DCDB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B31FFD5-5D52-445E-84FB-BE4785DCDB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B31FFD5-5D52-445E-84FB-BE4785DCDB62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

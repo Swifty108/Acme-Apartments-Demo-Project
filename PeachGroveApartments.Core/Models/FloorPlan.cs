@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PeachGroveApartments.BLL.Entities
+namespace PeachGroveApartments.Core.Models
 {
     public class FloorPlan
     {

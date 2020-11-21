@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PeachGroveApartments.BLL.Entities
+namespace PeachGroveApartments.Core.Models
 {
-    public class WaterBill
+    public class ElectricBill
     {
         [Key]
-        public int WaterBillId { get; set; }
+        public int ElectricBillId { get; set; }
 
         [Required]
         [ForeignKey("AptUser")]

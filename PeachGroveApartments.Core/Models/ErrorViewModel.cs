@@ -1,4 +1,4 @@
-namespace PeachGroveApartments.BLL.Entities
+namespace PeachGroveApartments.Core.Models
 {
     public class ErrorViewModel
     {
