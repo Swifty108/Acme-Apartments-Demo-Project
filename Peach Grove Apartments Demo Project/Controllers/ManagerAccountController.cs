@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using PeachGroveApartments.ApplicationLayer.Interfaces;
+using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Infrastructure.Data;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Models;
@@ -24,8 +26,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly IMapper _mapper;
         private SignInManager<AptUser> _signInManager;
         private readonly IRepository _repository;
+        private readonly IDomainLogic _applicationLayer;
 
-        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager, IRepository repository)
+        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager, IRepository repository, IDomainLogic applicationLayer)
         {
             _context = context;
             _userManager = userManager;
@@ -33,6 +36,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             _mapper = mapper;
             _signInManager = signInManager;
             _repository = repository;
+            _applicationLayer = applicationLayer;
         }
 
         // GET: ManagerAccount
@@ -43,7 +47,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> ViewApplication(int Id)
         {
-            var application = await _context.Applications.FindAsync(Id);
+            var application = await _repository.GetApplication(Id);
             if (application == null)
             {
                 return NotFound();
@@ -54,10 +58,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> ShowApplicationUsers()
         {
-            var applicationUsers = await (from userRecord in _context.Users
-                                          join applicationRecord in _context.Applications on userRecord.Id equals applicationRecord.AptUserId
-                                          select userRecord).Distinct().ToListAsync();
-            return View(applicationUsers);
+            return View(await _repository.GetApplicationUsers());
         }
 
         public async Task<IActionResult> ShowApplications(string userId)
@@ -65,9 +66,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(_mapper.Map<ApplicationViewModel>(await _repository.GetApplications(userId)));
         }
 
-        public async Task<IActionResult> EditApplication(int? Id)
+        public async Task<IActionResult> EditApplication(int Id)
         {
-            var application = await _context.Applications.FindAsync(Id);
+            var application = await _repository.GetApplication(Id);
             if (application == null)
             {
                 return NotFound();
@@ -113,16 +114,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // GET: ApplicantAccount/Delete/5
-        public async Task<IActionResult> CancelApplication(int? id)
+        public async Task<IActionResult> CancelApplication(int Id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //var application = await _context.Applications
+            //    .Include(a => a.AptUser)
+            //    .FirstOrDefaultAsync(m => m.ApplicationId == id);
 
-            var application = await _context.Applications
-                .Include(a => a.AptUser)
-                .FirstOrDefaultAsync(m => m.ApplicationId == id);
+            var application = await _repository.GetApplication(Id);
 
             if (application == null)
             {
@@ -137,37 +135,17 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CancelApplicationConfirmed(Application app)
         {
-            var application = await _context.Applications.FindAsync(app.ApplicationId);
-            application.Status = ApplicationStatus.CANCELED;
+            var application = await _applicationLayer.CancelApplication(app.ApplicationId);
 
-            _context.Applications.Update(application);
-            await _context.SaveChangesAsync();
             return RedirectToAction("ShowApplications", new { userId = application.AptUserId });
         }
 
-        public async Task<IActionResult> ApproveApplication(string id, string ssn, string aptNumber, string aptPrice, int appid)
+        public async Task<IActionResult> ApproveApplication(string userId, string appid, string ssn, string aptNumber, string aptPrice)
         {
             try
             {
-                var applicationUser = await _context.Users.FindAsync(id);
-
-                applicationUser.SSN = ssn;
-                applicationUser.AptNumber = aptNumber;
-                applicationUser.AptPrice = aptPrice;
-                _context.Users.Update(applicationUser);
-
-                var app = await _context.Applications.FindAsync(appid);
-
-                app.Status = ApplicationStatus.APPROVED;
-
-                _context.Applications.Update(app);
-
-                await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
-                await _userManager.AddToRoleAsync(applicationUser, "Resident");
-
-                // await _signInManager.RefreshSignInAsync(applicationUser);
-
-                await _context.SaveChangesAsync();
+                int appIdint = int.Parse(appid);
+                await _applicationLayer.ApproveApplication(userId, "fds", ssn, aptNumber, aptPrice);
             }
             catch (Exception e)
             {

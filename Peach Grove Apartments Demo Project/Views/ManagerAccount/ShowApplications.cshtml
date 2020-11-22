@@ -32,12 +32,11 @@
 
                     {
                         routeParams = new Dictionary<string, string>
-                                                                            {
-                                        { "id", application.AptUserId },
+                                                                                        {
+                                        { "userid", application.AptUserId },
                                         { "aptnumber", application.AptNumber },
                                         { "aptprice", application.Price },
-                                        { "ssn", application.SSN },
-                                        { "appid", application.ApplicationId.ToString() }
+                                        { "ssn", application.SSN }
 
                                 };
 
@@ -87,7 +86,7 @@
 
                                     <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
 
-                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Reapprove</a>
+                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Reapprove</a>
                                 </td>
 
                             }
@@ -98,7 +97,7 @@
                                 <td>
                                     <span style="color: darkred"><i class="fa fa-ban"></i> Canceled</span>
 
-                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Approve</a>
+                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;" asp-route-applicationId="@application.ApplicationId">Approve</a>
                                 </td>
 
                             }
@@ -106,7 +105,7 @@
                             {
                                 <td>
 
-                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams">Approve</a>
+                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId">Approve</a>
                                 </td>
 
                             }

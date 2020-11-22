@@ -28,6 +28,9 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
+              "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.ApplicationLayer\\PeachGroveApartments.ApplicationLayer.csproj": {
+                "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.ApplicationLayer\\PeachGroveApartments.ApplicationLayer.csproj"
+              },
               "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Common\\PeachGroveApartments.Common.csproj": {
                 "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Common\\PeachGroveApartments.Common.csproj"
               },
@@ -103,6 +106,64 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.ApplicationLayer\\PeachGroveApartments.ApplicationLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.ApplicationLayer\\PeachGroveApartments.ApplicationLayer.csproj",
+        "projectName": "PeachGroveApartments.ApplicationLayer",
+        "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.ApplicationLayer\\PeachGroveApartments.ApplicationLayer.csproj",
+        "packagesPath": "C:\\Users\\Raj\\.nuget\\packages\\",
+        "outputPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.ApplicationLayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Raj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Infrastructure\\PeachGroveApartments.Infrastructure.csproj": {
+                "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Infrastructure\\PeachGroveApartments.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

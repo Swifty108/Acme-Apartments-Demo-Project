@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,14 +24,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IRepository _repository;
         private readonly IEmailService _emailService;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context, IRepository repository, IEmailService emailService)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context, IRepository repository, IEmailService emailService, IMapper mapper)
         {
             _logger = logger;
             _userManager = userManager;
             _context = context;
             _repository = repository;
             _emailService = emailService;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -50,7 +53,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> ShowFloorPlans()
         {
-            return View(await _repository.GetFloorPlans());
+            return View(_mapper.Map<FloorPlansViewModel>(await _repository.GetFloorPlans()));
         }
 
         [Authorize(Roles = "Applicant, Resident")]

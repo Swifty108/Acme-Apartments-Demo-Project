@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peach Grove Apartments Demo Project", "Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project.csproj", "{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeachGroveApartments.Core", "PeachGroveApartments.Core\PeachGroveApartments.Core.csproj", "{564411A6-B0C2-4707-8F7B-895EDF4BF993}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.Core", "PeachGroveApartments.Core\PeachGroveApartments.Core.csproj", "{564411A6-B0C2-4707-8F7B-895EDF4BF993}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeachGroveApartments.Common", "PeachGroveApartments.Common\PeachGroveApartments.Common.csproj", "{75B1D755-C5C6-459E-B25F-EE12B57FC61A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.Common", "PeachGroveApartments.Common\PeachGroveApartments.Common.csproj", "{75B1D755-C5C6-459E-B25F-EE12B57FC61A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeachGroveApartments.Infrastructure", "PeachGroveApartments.Infrastructure\PeachGroveApartments.Infrastructure.csproj", "{B5A7612C-A51E-4273-9BA2-84E2249C8958}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.Infrastructure", "PeachGroveApartments.Infrastructure\PeachGroveApartments.Infrastructure.csproj", "{B5A7612C-A51E-4273-9BA2-84E2249C8958}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeachGroveApartments.ApplicationLayer", "PeachGroveApartments.ApplicationLayer\PeachGroveApartments.ApplicationLayer.csproj", "{C944C965-5C9B-4910-B611-66DCE45E1EA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B5A7612C-A51E-4273-9BA2-84E2249C8958}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5A7612C-A51E-4273-9BA2-84E2249C8958}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5A7612C-A51E-4273-9BA2-84E2249C8958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C944C965-5C9B-4910-B611-66DCE45E1EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C944C965-5C9B-4910-B611-66DCE45E1EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C944C965-5C9B-4910-B611-66DCE45E1EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C944C965-5C9B-4910-B611-66DCE45E1EA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

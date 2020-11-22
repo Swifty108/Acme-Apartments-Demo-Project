@@ -3442,6 +3442,19 @@
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         }
       },
+      "PeachGroveApartments.ApplicationLayer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "PeachGroveApartments.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/PeachGroveApartments.ApplicationLayer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PeachGroveApartments.ApplicationLayer.dll": {}
+        }
+      },
       "PeachGroveApartments.Common/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -10523,6 +10536,11 @@
         "xunit.extensibility.execution.nuspec"
       ]
     },
+    "PeachGroveApartments.ApplicationLayer/1.0.0": {
+      "type": "project",
+      "path": "../PeachGroveApartments.ApplicationLayer/PeachGroveApartments.ApplicationLayer.csproj",
+      "msbuildProject": "../PeachGroveApartments.ApplicationLayer/PeachGroveApartments.ApplicationLayer.csproj"
+    },
     "PeachGroveApartments.Common/1.0.0": {
       "type": "project",
       "path": "../PeachGroveApartments.Common/PeachGroveApartments.Common.csproj",
@@ -10549,6 +10567,7 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.9",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.9",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
+      "PeachGroveApartments.ApplicationLayer >= 1.0.0",
       "PeachGroveApartments.Common >= 1.0.0",
       "PeachGroveApartments.Core >= 1.0.0",
       "PeachGroveApartments.Infrastructure >= 1.0.0",
@@ -10582,6 +10601,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
+            "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.ApplicationLayer\\PeachGroveApartments.ApplicationLayer.csproj": {
+              "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.ApplicationLayer\\PeachGroveApartments.ApplicationLayer.csproj"
+            },
             "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Common\\PeachGroveApartments.Common.csproj": {
               "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Common\\PeachGroveApartments.Common.csproj"
             },

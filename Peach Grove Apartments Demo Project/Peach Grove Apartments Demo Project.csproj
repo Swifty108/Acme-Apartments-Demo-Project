@@ -48,6 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PeachGroveApartments.ApplicationLayer\PeachGroveApartments.ApplicationLayer.csproj" />
     <ProjectReference Include="..\PeachGroveApartments.Common\PeachGroveApartments.Common.csproj" />
     <ProjectReference Include="..\PeachGroveApartments.Core\PeachGroveApartments.Core.csproj" />
     <ProjectReference Include="..\PeachGroveApartments.Infrastructure\PeachGroveApartments.Infrastructure.csproj" />
