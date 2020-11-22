@@ -7,6 +7,7 @@ using Peach_Grove_Apartments_Demo_Project.ViewModels;
 using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Core.Models;
 using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Inerfaces;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Models;

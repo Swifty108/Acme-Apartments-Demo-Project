@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PeachGroveApartments.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace PeachGroveApartments.Infrastructure.Models
+namespace PeachGroveApartments.Infrastructure.Identity
 {
     public class AptUser : IdentityUser
     {

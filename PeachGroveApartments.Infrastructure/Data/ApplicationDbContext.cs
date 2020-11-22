@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PeachGroveApartments.Core.Models;
+using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Models;
 
 namespace PeachGroveApartments.Infrastructure.Data

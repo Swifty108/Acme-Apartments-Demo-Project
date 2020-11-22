@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PeachGroveApartments.Infrastructure.DTOs;
+using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Models;
 using System.Collections.Generic;
@@ -54,6 +55,22 @@ namespace PeachGroveApartments.Infrastructure.Data
                 OneBedPlans = oneBedPlans,
                 TwoBedPlans = twoBedPlans
             };
+        }
+
+        public async Task<List<AptUser>> GetMaintenanceRequestsUsers()
+        {
+            var users = (from userRecord in _dbContext.Users
+                         join mRecord in _dbContext.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
+                         select userRecord).Distinct();
+
+            return await users.ToListAsync();
+        }
+
+        public async Task<List<MaintenanceRequest>> GetMaintenanceUserRequests()
+        {
+            return await (from userRecord in _dbContext.Users
+                          join mRecord in _dbContext.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
+                          select mRecord).ToListAsync();
         }
     }
 }

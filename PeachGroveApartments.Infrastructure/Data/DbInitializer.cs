@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Core.Interfaces;
 using PeachGroveApartments.Core.Models;
+using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Models;
 using System;
 using System.Collections.Generic;

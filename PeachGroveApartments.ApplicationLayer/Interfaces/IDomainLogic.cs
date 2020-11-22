@@ -7,6 +7,8 @@ namespace PeachGroveApartments.ApplicationLayer.Interfaces
     {
         public Task<Application> CancelApplication(int ApplicationId);
 
-        public Task ApproveApplication(string userId, string appId, string ssn, string aptNumber, string aptPrice)
+        public Task ApproveApplication(string userId, int appId, string ssn, string aptNumber, string aptPrice);
+
+        public Task UnApproveApplication(string id, string aptNumber, int appid);
     }
 }

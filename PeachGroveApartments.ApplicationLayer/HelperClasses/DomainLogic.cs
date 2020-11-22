@@ -2,6 +2,7 @@
 using PeachGroveApartments.ApplicationLayer.Interfaces;
 using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Models;
 using System.Threading.Tasks;
@@ -50,6 +51,30 @@ namespace PeachGroveApartments.ApplicationLayer.HelperClasses
 
             await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
             await _userManager.AddToRoleAsync(applicationUser, "Resident");
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UnApproveApplication(string id, string aptNumber, int appid)
+        {
+            var applicationUser = await _dbContext.Users.FindAsync(id);
+
+            if (applicationUser.AptNumber == aptNumber)
+            {
+                applicationUser.SSN = null;
+                applicationUser.AptNumber = null;
+                applicationUser.AptPrice = null;
+
+                await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
+                await _userManager.AddToRoleAsync(applicationUser, "Applicant");
+
+                _dbContext.Users.Update(applicationUser);
+            }
+            var app = await _dbContext.Applications.FindAsync(appid);
+
+            app.Status = ApplicationStatus.UNAPPROVED;
+
+            _dbContext.Applications.Update(app);
 
             await _dbContext.SaveChangesAsync();
         }

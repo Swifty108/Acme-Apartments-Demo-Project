@@ -8,10 +8,10 @@ using Peach_Grove_Apartments_Demo_Project.ViewModels;
 using PeachGroveApartments.ApplicationLayer.Interfaces;
 using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -140,12 +140,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return RedirectToAction("ShowApplications", new { userId = application.AptUserId });
         }
 
-        public async Task<IActionResult> ApproveApplication(string userId, string appid, string ssn, string aptNumber, string aptPrice)
+        public async Task<IActionResult> ApproveApplication(string userId, int applicationId, string ssn, string aptNumber, string aptPrice)
         {
             try
             {
-                int appIdint = int.Parse(appid);
-                await _applicationLayer.ApproveApplication(userId, "fds", ssn, aptNumber, aptPrice);
+                await _applicationLayer.ApproveApplication(userId, applicationId, ssn, aptNumber, aptPrice);
             }
             catch (Exception e)
             {
@@ -171,31 +170,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return _context.Applications.Any(e => e.ApplicationId == id);
         }
 
-        public async Task<IActionResult> UnApproveApplication(string id, string aptNumber, int appid)
+        public async Task<IActionResult> UnApproveApplication(string userId, string aptNumber, int appId)
         {
             try
             {
-                var applicationUser = await _context.Users.FindAsync(id);
-
-                if (applicationUser.AptNumber == aptNumber)
-                {
-                    applicationUser.SSN = null;
-                    applicationUser.AptNumber = null;
-                    applicationUser.AptPrice = null;
-
-                    await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
-                    await _userManager.AddToRoleAsync(applicationUser, "Applicant");
-
-                    _context.Users.Update(applicationUser);
-                }
-
-                var app = await _context.Applications.FindAsync(appid);
-
-                app.Status = ApplicationStatus.UNAPPROVED;
-
-                _context.Applications.Update(app);
-
-                await _context.SaveChangesAsync();
+                await _applicationLayer.UnApproveApplication(userId, aptNumber, appId);
             }
             catch (Exception e)
             {
@@ -219,25 +198,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowMaintenanceRequestsUsers()
         {
-            var userRecords = (from userRecord in _context.Users
-                               join mRecord in _context.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
-                               select userRecord).Distinct();
-
-            var vf = await userRecords.ToListAsync();
-
-            return View(vf);
+            return View(await _repository.GetMaintenanceRequestsUsers());
         }
 
         public async Task<IActionResult> ShowMaintenanceRequests(string firstName, string lastName)
         {
-            // var user = _userManager.GetUserAsync(User).Result;
-            var mURecords = await (from userRecord in _context.Users
-                                   join mRecord in _context.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
-                                   select mRecord).ToListAsync();
+            var MaintenanceRecords = await _repository.GetMaintenanceUserRequests();
 
             var mViewModel = new MaintenanceRequestViewModel
             {
-                mRequests = mURecords,
+                mRequests = MaintenanceRecords,
                 userFName = firstName,
                 userLName = lastName
             };
