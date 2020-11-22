@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using PeachGroveApartments.ApplicationLayer.Interfaces;
+using PeachGroveApartments.ApplicationLayer.ViewModels;
+using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Infrastructure.Data;
 using PeachGroveApartments.Infrastructure.Identity;
+using PeachGroveApartments.Infrastructure.Interfaces;
+using PeachGroveApartments.Infrastructure.Models;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
@@ -15,11 +18,15 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
+        private readonly IResidentRepository _residentRepository;
+        private readonly IResidentLogic _residentLogic;
 
-        public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager)
+        public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IResidentRepository residentRepository, IResidentLogic residentLogic)
         {
             _context = context;
             _userManager = userManager;
+            _residentRepository = residentRepository;
+            _residentLogic = residentLogic;
         }
 
         // GET: AppUserAccount
@@ -35,7 +42,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             var userId = _userManager.GetUserAsync(User).Result.Id;
 
-            return View(await _residetRepository.GetApplications(userId));
+            return View(await _residentRepository.GetApplications(userId));
         }
 
         public IActionResult SubmitMaintenanceRequest()
@@ -53,9 +60,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 try
                 {
                     var user = await _userManager.GetUserAsync(User);
-                    var maintReq = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription, Status = MaintenanceRequestStatus.PENDINGAPPROVAL };
-                    await _context.MaintenanceRequests.AddAsync(maintReq);
-                    await _context.SaveChangesAsync();
+                    var maintenanceRequest = new MaintenanceRequest { AptUser = user, DateRequested = DateTime.Now, isAllowedToEnter = maintReqViewModel.isAllowedToEnter, ProblemDescription = maintReqViewModel.ProblemDescription, Status = MaintenanceRequestStatus.PENDINGAPPROVAL };
+
+                    await _residentRepository.AddMaintenanceRequest(maintenanceRequest);
 
                     TempData["MaintenanceSuccess"] = true;
 
@@ -74,11 +81,15 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<JsonResult> GetReqHistory()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
+            //todo-p: get this out
+
+            //var user = await _userManager.GetUserAsync(User);
+            //var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
+
+            var maintenanceRequests = await _residentRepository.GetMaintenanceUserRequests();
             return Json(new
             {
-                list = maintReqs
+                list = maintenanceRequests
             });
         }
 
@@ -86,33 +97,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
-            var waterBill = await _context.WaterBills.FirstOrDefaultAsync();
-            var electricBill = await _context.ElectricBills.FirstOrDefaultAsync();
-            var newWaterBill = new WaterBill();
-            var newElectricBill = new ElectricBill();
-
-            if (waterBill == null)
-            {
-                newWaterBill = new WaterBill { AptUser = user, Amount = 42.53M, DateDue = DateTime.Now.AddDays(20) };
-                await _context.AddAsync(newWaterBill);
-                await _context.SaveChangesAsync();
-            }
-
-            if (electricBill == null)
-            {
-                newElectricBill = new ElectricBill { AptUser = user, Amount = 96.53M, DateDue = DateTime.Now.AddDays(20) };
-                await _context.AddAsync(newElectricBill);
-                await _context.SaveChangesAsync();
-            }
-
-            var app = await _context.Applications.Where(u => u.AptUserId == user.Id).FirstOrDefaultAsync();
-
-            var payViewModel = new PaymentsViewModel
-            {
-                AptUser = user,
-                WaterBill = waterBill ?? newWaterBill,
-                ElectricBill = electricBill ?? newElectricBill
-            };
+            var payViewModel = await _residentLogic.GetBills(user);
 
             return View(payViewModel);
         }
@@ -129,9 +114,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
+
                 var newReview = new Review { AptUser = user, DateReviewed = DateTime.Now, ReviewText = review.ReviewText };
-                await _context.AddAsync(newReview);
-                await _context.SaveChangesAsync();
+
+                await _residentLogic.AddReview(newReview);
 
                 TempData["ReviewSuccess"] = true;
                 return RedirectToAction("WriteAReview");

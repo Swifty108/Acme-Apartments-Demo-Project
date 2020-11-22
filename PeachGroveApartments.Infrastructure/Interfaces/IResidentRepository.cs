@@ -1,5 +1,4 @@
 ﻿using PeachGroveApartments.Infrastructure.DTOs;
-using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,9 +11,7 @@ namespace PeachGroveApartments.Infrastructure.Interfaces
 
         public Task<Application> GetApplication(int applicationId);
 
-        public Task<List<AptUser>> GetApplicationUsers();
-
-        public Task<List<AptUser>> GetMaintenanceRequestsUsers();
+        public Task AddMaintenanceRequest(MaintenanceRequest maintenanceRequest);
 
         public Task<List<MaintenanceRequest>> GetMaintenanceUserRequests();
 

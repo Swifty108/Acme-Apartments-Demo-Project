@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PeachGroveApartments.Infrastructure.Identity;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

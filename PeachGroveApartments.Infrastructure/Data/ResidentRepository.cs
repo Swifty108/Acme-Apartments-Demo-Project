@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PeachGroveApartments.Infrastructure.DTOs;
-using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Models;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.Infrastructure.Data
 {
-    public class ResidentRepository : IManagerRepository
+    public class ResidentRepository : IResidentRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -36,26 +35,10 @@ namespace PeachGroveApartments.Infrastructure.Data
             };
         }
 
-        public async Task<List<AptUser>> GetApplicationUsers()
+        public async Task AddMaintenanceRequest(MaintenanceRequest maintenanceRequest)
         {
-            return await (from userRecord in _dbContext.Users
-                          join applicationRecord in _dbContext.Applications on userRecord.Id equals applicationRecord.AptUserId
-                          select userRecord).Distinct().ToListAsync();
-        }
-
-        public async Task EditApplication(Application application)
-        {
-            _dbContext.Update(application);
+            await _dbContext.MaintenanceRequests.AddAsync(maintenanceRequest);
             await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task<List<AptUser>> GetMaintenanceRequestsUsers()
-        {
-            var users = (from userRecord in _dbContext.Users
-                         join mRecord in _dbContext.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
-                         select userRecord).Distinct();
-
-            return await users.ToListAsync();
         }
 
         public async Task<List<MaintenanceRequest>> GetMaintenanceUserRequests()
@@ -68,6 +51,11 @@ namespace PeachGroveApartments.Infrastructure.Data
         public async Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId)
         {
             return await _dbContext.MaintenanceRequests.FindAsync(maintenanceId);
+        }
+
+        public Task EditApplication(Application application)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
