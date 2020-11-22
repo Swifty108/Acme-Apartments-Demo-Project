@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using PeachGroveApartments.Infrastructure.Identity
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 @inject RoleManager<IdentityRole> RoleManager
@@ -16,7 +17,6 @@
             <span><b>Logged in as: </b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName - </span>
             <span>3495 Peach Grove Blvd.</span>
             <span>Pittsburgh, PA 15213</span>
-
         </div>
     }
     else if (User.IsInRole("Resident"))
@@ -31,7 +31,6 @@
             <span><b>Logged in as: </b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName - </span>
             <span>3495 Peach Grove Blvd. Apt @AptNum</span>
             <span>Pittsburgh, PA 15213</span>
-
         </div>
     }
     else if (User.IsInRole("Applicant"))
@@ -40,7 +39,6 @@
             <span><b>Logged in as: </b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName - </span>
             <span>3495 Peach Grove Blvd.</span>
             <span>Pittsburgh, PA 15213</span>
-
         </div>
     }
 }

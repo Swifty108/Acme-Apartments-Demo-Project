@@ -13,7 +13,6 @@ using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Inerfaces;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Services;
-using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project
 {
@@ -60,7 +59,7 @@ namespace Peach_Grove_Apartments_Demo_Project
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async Task Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -97,13 +96,13 @@ namespace Peach_Grove_Apartments_Demo_Project
             });
 
             //Todo-p: move this to main method in the program.cs file
-            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
-            using (var scope = scopeFactory.CreateScope())
-            {
-                var dbInitializer = scope.ServiceProvider.GetService<DbInitializer>();
-                dbInitializer.Initialize();
-                await dbInitializer.SeedData();
-            }
+            //var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            //using (var scope = scopeFactory.CreateScope())
+            //{
+            //    var dbInitializer = scope.ServiceProvider.GetService<DbInitializer>();
+            //    dbInitializer.Initialize();
+            //    dbInitializer.SeedData();
+            //}
         }
     }
 }

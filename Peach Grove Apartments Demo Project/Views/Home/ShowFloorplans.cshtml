@@ -1,8 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using PeachGroveApartments.Infrastructure.Identity
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 @inject RoleManager<IdentityRole> roleManager
-@model Peach_Grove_Apartments_Demo_Project.ViewModels.FloorPlansViewModel
+@model PeachGroveApartments.ApplicationLayer.ViewModels.FloorPlansViewModel
 
 @{
     ViewData["Title"] = "Floor Plans";
@@ -69,14 +70,12 @@
                                     <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
                                 }
                                 else
-                                { 
+                                {
                                     <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
                                 }
-
                             </tr>
                         }
                     }
-
                 </tbody>
             </table>
         </div>
@@ -122,15 +121,12 @@
                                     <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
 
                                 }
-
                             </tr>
                         }
                     }
                 </tbody>
             </table>
         </div>
-
-
 
         <div class="tab-pane fade" id="nav-2bed" role="tabpanel" aria-labelledby="nav-2bed-tab">
             <br>
@@ -172,14 +168,11 @@
                                 {
                                     <td><a class="fp-applylink" asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF">Apply Now!</a></td>
                                 }
-
                             </tr>
                         }
                     }
                 </tbody>
             </table>
-
         </div>
-
     </div>
 </div>

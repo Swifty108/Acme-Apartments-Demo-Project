@@ -1,4 +1,4 @@
-﻿@model Peach_Grove_Apartments_Demo_Project.Models.Application
+﻿@model PeachGroveApartments.Infrastructure.Models.Application
 
 @{
     ViewData["Title"] = "Create";
@@ -15,7 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="AptUserId" class="control-label"></label>
-                <select asp-for="AptUserId" class ="form-control" asp-items="ViewBag.AptUserId"></select>
+                <select asp-for="AptUserId" class="form-control" asp-items="ViewBag.AptUserId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Occupation" class="control-label"></label>
@@ -57,4 +57,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

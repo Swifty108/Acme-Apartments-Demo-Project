@@ -1,4 +1,4 @@
-﻿@model Peach_Grove_Apartments_Demo_Project.ViewModels.ApplyViewModel
+﻿@model PeachGroveApartments.ApplicationLayer.ViewModels.ApplyViewModel
 
 @{
     ViewData["Title"] = "Apply";
@@ -14,47 +14,38 @@
             <div class="form-group">
                 <label class="control-label"></label>
                 <input class="form-control" value="@Model.User.FirstName" disabled />
-
             </div>
             <div class="form-group">
                 <label class="control-label"></label>
                 <input class="form-control" value="@Model.User.LastName" disabled />
-
             </div>
             <div class="form-group">
                 <label class="control-label">Date of Birth</label>
                 <input class="form-control" value="@Model.User.DateOfBirth" disabled />
-
             </div>
             <div class="form-group">
                 <label class="control-label">Email</label>
                 <input class="form-control" value="@Model.User.Email" disabled />
-
             </div>
             <div class="form-group">
                 <label class="control-label">Phone Number</label>
                 <input class="form-control" value="@Model.User.PhoneNumber" disabled />
-
             </div>
             <div class="form-group">
                 <label class="control-label"></label>
                 <input class="form-control" value="@Model.User.StreetAddress" disabled />
-
             </div>
             <div class="form-group">
                 <label class="control-label"></label>
                 <input class="form-control" value="@Model.User.City" disabled />
-
             </div>
             <div class="form-group">
                 <label class="control-label"></label>
                 <input class="form-control" value="@Model.User.State" disabled />
-
             </div>
             <div class="form-group">
                 <label class="control-label"></label>
                 <input class="form-control" value="@Model.User.Zipcode" disabled />
-
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Occupation" class="control-label"></label>
@@ -113,5 +104,3 @@
     </script>
 
 }
-
-
