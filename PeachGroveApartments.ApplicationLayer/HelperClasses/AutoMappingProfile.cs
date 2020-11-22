@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using PeachGroveApartments.ApplicationLayer.ViewModels;
 using PeachGroveApartments.Infrastructure.DTOs;
 using PeachGroveApartments.Infrastructure.Models;
 

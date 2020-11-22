@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Peach_Grove_Apartments_Demo_Project.Data;
-using Peach_Grove_Apartments_Demo_Project.HelperClasses;
-using Peach_Grove_Apartments_Demo_Project.Models;
+using PeachGroveApartments.Common.HelperClasses;
+using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Identity;
+using PeachGroveApartments.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -113,9 +114,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             new SelectListItem() { Text="WI", Value="WI"},
             new SelectListItem() { Text="WY", Value="WY"}
         };
+
         public class InputModel
         {
-
             [Required]
             [Display(Name = "First Name")]
             public string FName { get; set; }
@@ -123,6 +124,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Last Name")]
             public string LName { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -226,7 +228,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
         {
-
             returnUrl = returnUrl ?? Url.Content("~/");
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();
@@ -239,7 +240,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 AptUser user = null;
-              
+
                 if (Input.Role == "Applicant")
                 {
                     user = new AptUser { FirstName = Input.FName, LastName = Input.LName, UserName = Input.Email, Email = Input.Email, DateRegistered = DateTime.Now, DateOfBirth = Input.DateOfBirth, StreetAddress = Input.StreetAddress, City = Input.City, State = Input.State, Zipcode = Input.Zipcode, PhoneNumber = Input.PhoneNumber };
@@ -259,7 +260,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
-
                         await _userManager.AddToRoleAsync(user, Input.Role);
 
                         var rDate = new RandomDateTime();
@@ -303,7 +303,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             return Page();
 
             //returnUrl = returnUrl ?? Url.Content("~/");
-            
+
             //// Get the information about the user from the external login provider
             //var info = await _signInManager.GetExternalLoginInfoAsync();
             //if (info == null)

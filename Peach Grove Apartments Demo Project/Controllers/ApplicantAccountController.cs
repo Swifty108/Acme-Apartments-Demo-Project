@@ -21,7 +21,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // GET: ApplicantAccount
-        public async Task<IActionResult> Index(bool isApplySuccess = false)
+        public IActionResult Index(bool isApplySuccess = false)
         {
             if (isApplySuccess)
                 ViewBag.ApplySuccess = isApplySuccess;

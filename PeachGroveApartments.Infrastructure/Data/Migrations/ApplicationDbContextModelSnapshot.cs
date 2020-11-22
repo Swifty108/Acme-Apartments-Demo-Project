@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Peach_Grove_Apartments_Demo_Project.Data;
+using PeachGroveApartments.Infrastructure.Data;
 
 namespace Peach_Grove_Apartments_Demo_Project.Data.Migrations
 {

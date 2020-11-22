@@ -68,7 +68,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
                     return RedirectToAction("SubmitMaintenanceRequest");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     TempData["MaintenanceSuccess"] = false;
                     return View(maintReqViewModel);

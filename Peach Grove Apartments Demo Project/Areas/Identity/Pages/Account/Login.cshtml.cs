@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Peach_Grove_Apartments_Demo_Project.Models;
+using PeachGroveApartments.Infrastructure.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -67,7 +67,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
         }
 
         public async Task<IActionResult> OnPostAsync(bool isDirectLogin = false, string returnUrl = null)
@@ -104,7 +103,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                     returnUrl = returnUrl ?? Url.Content("~/");
 
                     return LocalRedirect(returnUrl);
-
                 }
                 if (result.RequiresTwoFactor)
                 {

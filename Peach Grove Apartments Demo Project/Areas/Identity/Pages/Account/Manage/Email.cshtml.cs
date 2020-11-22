@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Peach_Grove_Apartments_Demo_Project.Data;
-using Peach_Grove_Apartments_Demo_Project.Models;
+using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -18,6 +18,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account.Manag
         private readonly SignInManager<AptUser> _signInManager;
         private readonly UserManager<AptUser> _userManager;
         private readonly ApplicationDbContext _context;
+
         public EmailModel(
             UserManager<AptUser> userManager,
             SignInManager<AptUser> signInManager,
@@ -31,14 +32,17 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account.Manag
         }
 
         public string Email { get; set; }
+
         [BindProperty]
         public InputModel Input { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
+
         [TempData]
         public string StatusMessage { get; set; }
 
         public string Username { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -85,11 +89,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account.Manag
                     return NotFound($"Unable to load user with ID '{userId}'.");
                 }
 
-
                 //code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
                 var result = await _userManager.ChangeEmailAsync(user, Input.NewEmail, code);
                 await _context.SaveChangesAsync();
-                
+
                 if (!result.Succeeded)
                 {
                     StatusMessage = "Error changing email.";
@@ -105,7 +108,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account.Manag
                     StatusMessage = "Error changing user name.";
                     return Page();
                 }
-                
+
                 await _signInManager.RefreshSignInAsync(user);
                 StatusMessage = "Your email has been updated!";
                 return RedirectToPage();

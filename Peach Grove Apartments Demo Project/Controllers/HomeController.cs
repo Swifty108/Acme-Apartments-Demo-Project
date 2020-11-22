@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using PeachGroveApartments.ApplicationLayer.ViewModels;
 using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Core.Models;
 using PeachGroveApartments.Infrastructure.Data;
