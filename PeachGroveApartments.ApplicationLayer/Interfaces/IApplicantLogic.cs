@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.ApplicationLayer.Interfaces
 {
-    public interface IDomainLogic
+    public interface IApplicantLogic
     {
         public Task<Application> CancelApplication(int ApplicationId);
 

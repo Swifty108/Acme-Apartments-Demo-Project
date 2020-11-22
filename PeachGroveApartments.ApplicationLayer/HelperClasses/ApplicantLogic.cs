@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.ApplicationLayer.HelperClasses
 {
-    public class DomainLogic : IDomainLogic
+    public class ApplicantLogic : IManagerLogic
     {
         private readonly IManagerRepository _repository;
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
         private readonly IManagerRepository _managerRepository;
 
-        public DomainLogic(IManagerRepository repository, ApplicationDbContext dbContext, UserManager<AptUser> userManager, IManagerRepository managerRepository)
+        public ApplicantLogic(IManagerRepository repository, ApplicationDbContext dbContext, UserManager<AptUser> userManager, IManagerRepository managerRepository)
         {
             _repository = repository;
             _dbContext = dbContext;

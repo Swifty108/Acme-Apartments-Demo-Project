@@ -19,23 +19,23 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     [Authorize(Roles = "Manager")]
     public class ManagerAccountController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private SignInManager<AptUser> _signInManager;
         private readonly IManagerRepository _managerRepository;
-        private readonly IDomainLogic _applicationLayer;
+        private readonly IManagerLogic _applicationLayer;
+        private readonly ApplicationDbContext _context;
 
-        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager, IManagerRepository managerRepository, IDomainLogic applicationLayer)
+        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager, IManagerRepository managerRepository, IManagerLogic applicationLayer)
         {
-            _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
             _signInManager = signInManager;
             _managerRepository = managerRepository;
             _applicationLayer = applicationLayer;
+            _context = context;
         }
 
         // GET: ManagerAccount
@@ -87,14 +87,12 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             {
                 try
                 {
-                    // var appRecord = _context.Applications.FindAsync(application.ApplicationId).Result;
                     var app = _mapper.Map<Application>(application);
-                    _context.Update(app);
-                    await _context.SaveChangesAsync();
+                    await _managerRepository.EditApplication(app);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ApplicationExists(application.ApplicationId))
+                    if (ApplicationExists(application.ApplicationId) != null)
                     {
                         return NotFound();
                     }
@@ -164,9 +162,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-        private bool ApplicationExists(int id)
+        private async Task<Application> ApplicationExists(int id)
         {
-            return _context.Applications.Any(e => e.ApplicationId == id);
+            return await _managerRepository.GetApplication(id) ?? null;
         }
 
         public async Task<IActionResult> UnApproveApplication(string userId, string aptNumber, int appId)
@@ -257,6 +255,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
             return View(maintenanceViewModel);
         }
+
+        //todo-p: remove this commented section
 
         // GET: ApplicantAccount/Delete/5
         //public async Task<IActionResult> DeleteMaintenanceRequest(int? maintenanceId)

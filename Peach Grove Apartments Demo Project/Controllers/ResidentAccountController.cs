@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Peach_Grove_Apartments_Demo_Project.Data;
-using Peach_Grove_Apartments_Demo_Project.HelperClasses;
-using Peach_Grove_Apartments_Demo_Project.Models;
-using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Identity;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +15,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
+
         public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager)
         {
             _context = context;
@@ -34,8 +33,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> ShowApplications()
         {
-            var apps = await _context.Applications.Where(u => u.AptUserId == _userManager.GetUserAsync(User).Result.Id).ToListAsync();
-            return View(apps);
+            var userId = _userManager.GetUserAsync(User).Result.Id;
+
+            return View(await _residetRepository.GetApplications(userId));
         }
 
         public IActionResult SubmitMaintenanceRequest()

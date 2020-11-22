@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.Infrastructure.Interfaces
 {
-    public interface IManagerRepository
+    public interface IResidentRepository
     {
         public Task<ApplicationViewModelDTO> GetApplications(string userId);
 

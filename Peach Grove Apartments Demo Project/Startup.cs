@@ -44,9 +44,13 @@ namespace Peach_Grove_Apartments_Demo_Project
                 .AddDefaultUI()
                 .AddRoles<IdentityRole>();
 
-            services.AddScoped<DbInitializer, DbInitializer>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
+
             services.AddScoped<IHomeRepository, HomeRepository>();
             services.AddScoped<IManagerRepository, ManagerRepository>();
+            services.AddScoped<IApplicantRepository, ApplicantRepository>();
+            services.AddScoped<IHomeRepository, HomeRepository>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));

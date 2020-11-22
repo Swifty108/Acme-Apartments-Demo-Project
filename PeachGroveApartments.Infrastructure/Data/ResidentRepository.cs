@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.Infrastructure.Data
 {
-    public class ManagerRepository : IManagerRepository
+    public class ResidentRepository : IManagerRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public ManagerRepository(ApplicationDbContext dbContext)
+        public ResidentRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
