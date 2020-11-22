@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.Infrastructure.Data
 {
-    public class Repository : IRepository
+    public class ManagerRepository : IManagerRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public Repository(ApplicationDbContext dbContext)
+        public ManagerRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -43,20 +43,6 @@ namespace PeachGroveApartments.Infrastructure.Data
                           select userRecord).Distinct().ToListAsync();
         }
 
-        public async Task<FloorPlansViewModelDTO> GetFloorPlans()
-        {
-            var studioPlans = await _dbContext.FloorPlans.Where(f => f.FloorPlanType == "Studio").ToListAsync();
-            var oneBedPlans = await _dbContext.FloorPlans.Where(f => f.FloorPlanType == "1Bed").ToListAsync();
-            var twoBedPlans = await _dbContext.FloorPlans.Where(f => f.FloorPlanType == "2Bed").ToListAsync();
-
-            return new FloorPlansViewModelDTO
-            {
-                StudioPlans = studioPlans,
-                OneBedPlans = oneBedPlans,
-                TwoBedPlans = twoBedPlans
-            };
-        }
-
         public async Task<List<AptUser>> GetMaintenanceRequestsUsers()
         {
             var users = (from userRecord in _dbContext.Users
@@ -71,6 +57,11 @@ namespace PeachGroveApartments.Infrastructure.Data
             return await (from userRecord in _dbContext.Users
                           join mRecord in _dbContext.MaintenanceRequests on userRecord.Id equals mRecord.AptUserId
                           select mRecord).ToListAsync();
+        }
+
+        public async Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId)
+        {
+            return await _dbContext.MaintenanceRequests.FindAsync(maintenanceId);
         }
     }
 }

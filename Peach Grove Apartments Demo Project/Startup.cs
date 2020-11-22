@@ -9,9 +9,9 @@ using Microsoft.Extensions.Hosting;
 using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Core.Interfaces;
 using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Inerfaces;
 using PeachGroveApartments.Infrastructure.Interfaces;
-using PeachGroveApartments.Infrastructure.Models;
 using PeachGroveApartments.Infrastructure.Services;
 using System.Threading.Tasks;
 
@@ -45,7 +45,8 @@ namespace Peach_Grove_Apartments_Demo_Project
                 .AddRoles<IdentityRole>();
 
             services.AddScoped<DbInitializer, DbInitializer>();
-            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IHomeRepository, HomeRepository>();
+            services.AddScoped<IManagerRepository, ManagerRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));

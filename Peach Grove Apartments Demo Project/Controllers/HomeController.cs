@@ -23,16 +23,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<AptUser> _userManager;
         private readonly ApplicationDbContext _context;
-        private readonly IRepository _repository;
+        private readonly IHomeRepository _repository;
         private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context, IRepository repository, IEmailService emailService, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context, IHomeRepository homeRepository, IEmailService emailService, IMapper mapper)
         {
             _logger = logger;
             _userManager = userManager;
             _context = context;
-            _repository = repository;
+            _repository = homeRepository;
             _emailService = emailService;
             _mapper = mapper;
         }

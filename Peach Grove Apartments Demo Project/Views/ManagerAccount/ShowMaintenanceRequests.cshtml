@@ -1,8 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using Peach_Grove_Apartments_Demo_Project.HelperClasses
+@using PeachGroveApartments.Infrastructure.Identity
+@using PeachGroveApartments.Common.HelperClasses
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
-@model Peach_Grove_Apartments_Demo_Project.ViewModels.MaintenanceRequestViewModel
+@model PeachGroveApartments.ApplicationLayer.ViewModels.MaintenanceRequestViewModel
 @{
     ViewData["Title"] = "Maintenace User";
     ViewBag.Success = "The maintenance request was edited successfully!";
@@ -38,11 +39,11 @@
                     <td>@maintenancerecord.Id</td>
 
                     <td>
-                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-id="@maintenancerecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">View</a>
+                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">View</a>
                     </td>
 
                     <td>
-                        <a asp-controller="manageraccount" asp-action="editmaintenancerequest" asp-route-id="@maintenancerecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">Edit</a>
+                        <a asp-controller="manageraccount" asp-action="editmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">Edit</a>
                     </td>
 
                     @if (maintenancerecord.Status == MaintenanceRequestStatus.APPROVED)

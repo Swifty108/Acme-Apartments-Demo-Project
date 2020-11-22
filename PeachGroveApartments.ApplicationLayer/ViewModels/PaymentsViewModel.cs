@@ -1,6 +1,7 @@
-﻿using Peach_Grove_Apartments_Demo_Project.Models;
+﻿using PeachGroveApartments.Infrastructure.Identity;
+using PeachGroveApartments.Infrastructure.Models;
 
-namespace Peach_Grove_Apartments_Demo_Project.ViewModels
+namespace PeachGroveApartments.ApplicationLayer.ViewModels
 {
     public class PaymentsViewModel
     {

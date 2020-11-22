@@ -3,7 +3,7 @@ using Peach_Grove_Apartments_Demo_Project.ViewModels;
 using PeachGroveApartments.Infrastructure.DTOs;
 using PeachGroveApartments.Infrastructure.Models;
 
-namespace Peach_Grove_Apartments_Demo_Project.HelperClasses
+namespace PeachGroveApartments.ApplicationLayer.HelperClasses
 {
     public class AutoMappingProfile : Profile
     {

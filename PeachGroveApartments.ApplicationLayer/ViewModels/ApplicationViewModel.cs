@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Peach_Grove_Apartments_Demo_Project.ViewModels
+namespace PeachGroveApartments.ApplicationLayer.ViewModels
 {
     public class ApplicationViewModel
     {

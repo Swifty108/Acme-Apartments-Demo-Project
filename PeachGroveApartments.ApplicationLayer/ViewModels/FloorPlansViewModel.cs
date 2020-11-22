@@ -1,7 +1,7 @@
 ﻿using PeachGroveApartments.Core.Models;
 using System.Collections.Generic;
 
-namespace Peach_Grove_Apartments_Demo_Project.ViewModels
+namespace PeachGroveApartments.ApplicationLayer.ViewModels
 {
     public class FloorPlansViewModel
     {

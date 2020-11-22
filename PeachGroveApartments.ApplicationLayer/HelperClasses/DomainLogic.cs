@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using PeachGroveApartments.ApplicationLayer.Interfaces;
+using PeachGroveApartments.ApplicationLayer.ViewModels;
 using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Infrastructure.Data;
 using PeachGroveApartments.Infrastructure.Identity;
@@ -11,15 +12,17 @@ namespace PeachGroveApartments.ApplicationLayer.HelperClasses
 {
     public class DomainLogic : IDomainLogic
     {
-        private readonly IRepository _repository;
+        private readonly IManagerRepository _repository;
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
+        private readonly IManagerRepository _managerRepository;
 
-        public DomainLogic(IRepository repository, ApplicationDbContext dbContext, UserManager<AptUser> userManager)
+        public DomainLogic(IManagerRepository repository, ApplicationDbContext dbContext, UserManager<AptUser> userManager, IManagerRepository managerRepository)
         {
             _repository = repository;
             _dbContext = dbContext;
             _userManager = userManager;
+            _managerRepository = managerRepository;
         }
 
         public async Task<Application> CancelApplication(int ApplicationId)
@@ -43,7 +46,7 @@ namespace PeachGroveApartments.ApplicationLayer.HelperClasses
             applicationUser.AptPrice = aptPrice;
             _dbContext.Users.Update(applicationUser);
 
-            var app = await _dbContext.Applications.FindAsync(appId);
+            var app = await _dbContext.Applications.FindAsync(appIdint);
 
             app.Status = ApplicationStatus.APPROVED;
 
@@ -76,6 +79,40 @@ namespace PeachGroveApartments.ApplicationLayer.HelperClasses
 
             _dbContext.Applications.Update(app);
 
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)
+        {
+            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceViewModel.Id);
+
+            maintenanceRecord.ProblemDescription = maintenanceViewModel.ProblemDescription;
+            maintenanceRecord.isAllowedToEnter = maintenanceViewModel.isAllowedToEnter;
+            //  var mRecord = _mapper.Map<MaintenanceRequest>(mViewModel);
+
+            _dbContext.Update(maintenanceRecord);
+            await _dbContext.SaveChangesAsync();
+
+            return maintenanceRecord;
+        }
+
+        public async Task ApproveMaintenanceRequest(string userId, int maintenanceId)
+        {
+            var mRecord = await _dbContext.MaintenanceRequests.FindAsync(maintenanceId);
+            mRecord.AptUserId = userId;
+            mRecord.Status = MaintenanceRequestStatus.APPROVED;
+
+            _dbContext.MaintenanceRequests.Update(mRecord);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UnApproveMaintenanceRequest(string userId, int maintenanceId)
+        {
+            var maintenanceRecord = await _dbContext.MaintenanceRequests.FindAsync(maintenanceId);
+            maintenanceRecord.AptUserId = userId;
+            maintenanceRecord.Status = MaintenanceRequestStatus.UNAPPROVED;
+
+            _dbContext.MaintenanceRequests.Update(maintenanceRecord);
             await _dbContext.SaveChangesAsync();
         }
     }

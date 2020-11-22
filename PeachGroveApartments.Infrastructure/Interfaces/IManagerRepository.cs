@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.Infrastructure.Interfaces
 {
-    public interface IRepository
+    public interface IManagerRepository
     {
         public Task<ApplicationViewModelDTO> GetApplications(string userId);
-
-        public Task<FloorPlansViewModelDTO> GetFloorPlans();
 
         public Task<Application> GetApplication(int applicationId);
 
@@ -18,6 +16,8 @@ namespace PeachGroveApartments.Infrastructure.Interfaces
 
         public Task<List<AptUser>> GetMaintenanceRequestsUsers();
 
-        public Task<List<MaintenanceRequest>> GetMaintenanceUserRequests()
+        public Task<List<MaintenanceRequest>> GetMaintenanceUserRequests();
+
+        public Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId);
     }
 }
