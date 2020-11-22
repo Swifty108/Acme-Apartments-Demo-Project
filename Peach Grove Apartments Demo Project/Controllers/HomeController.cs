@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Peach_Grove_Apartments_Demo_Project.Data;
-using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using PeachGroveApartments.Common.HelperClasses;
+using PeachGroveApartments.Core.Models;
+using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Inerfaces;
+using PeachGroveApartments.Infrastructure.Interfaces;
+using PeachGroveApartments.Infrastructure.Models;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -18,12 +21,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<AptUser> _userManager;
         private readonly ApplicationDbContext _context;
+        private readonly IRepository _repository;
+        private readonly IEmailService _emailService;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context, IRepository repository, IEmailService emailService)
         {
             _logger = logger;
             _userManager = userManager;
             _context = context;
+            _repository = repository;
+            _emailService = emailService;
         }
 
         public IActionResult Index()
@@ -43,18 +50,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> ShowFloorPlans()
         {
-            var studioPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "Studio").ToListAsync();
-            var oneBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "1Bed").ToListAsync();
-            var twoBedPlans = await _context.FloorPlans.Where(f => f.FloorPlanType == "2Bed").ToListAsync();
-
-            var list = new FloorPlansViewModel
-            {
-                StudioPlans = studioPlans,
-                OneBedPlans = oneBedPlans,
-                TwoBedPlans = twoBedPlans
-            };
-
-            return View(list);
+            return View(await _repository.GetFloorPlans());
         }
 
         [Authorize(Roles = "Applicant, Resident")]
@@ -121,6 +117,25 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
+                _emailService.Send(new EmailMessage
+                {
+                    FromAddresses = new EmailAddress
+                    {
+                        Name = viewModel.Name,
+                        Address = viewModel.EmailAddress
+                    },
+
+                    ToAddresses = new EmailAddress
+                    {
+                        Name = "Raj Narayanan",
+                        Address = "rajnarayanan2020@gmail.com"
+                    },
+
+                    Subject = viewModel.Subject,
+                    Content = viewModel.Message
+                }
+                );
+
                 return RedirectToAction("ContactUs");
             }
             return View(viewModel);

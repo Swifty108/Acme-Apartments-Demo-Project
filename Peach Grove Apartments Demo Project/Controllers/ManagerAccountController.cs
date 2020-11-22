@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Peach_Grove_Apartments_Demo_Project.Data;
-using Peach_Grove_Apartments_Demo_Project.HelperClasses;
-using Peach_Grove_Apartments_Demo_Project.Models;
 using Peach_Grove_Apartments_Demo_Project.ViewModels;
+using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Interfaces;
+using PeachGroveApartments.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +23,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private SignInManager<AptUser> _signInManager;
+        private readonly IRepository _repository;
 
-        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager)
+        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager, IRepository repository)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
             _signInManager = signInManager;
+            _repository = repository;
         }
 
         // GET: ManagerAccount
@@ -60,15 +62,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> ShowApplications(string userId)
         {
-            var applications = await _context.Applications.Where(u => u.AptUserId == userId).ToListAsync();
-            var user = await _context.Users.FindAsync(userId);
-
-            return View(new ApplicationViewModel
-            {
-                Apps = applications,
-                FirstName = user.FirstName,
-                LastName = user.LastName
-            });
+            return View(_mapper.Map<ApplicationViewModel>(await _repository.GetApplications(userId)));
         }
 
         public async Task<IActionResult> EditApplication(int? Id)

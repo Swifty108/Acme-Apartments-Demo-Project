@@ -1,9 +1,9 @@
 ﻿using PeachGroveApartments.Core.Models;
 using System.Collections.Generic;
 
-namespace Peach_Grove_Apartments_Demo_Project.ViewModels
+namespace PeachGroveApartments.Infrastructure.DTOs
 {
-    public class FloorPlansViewModel
+    public class FloorPlansViewModelDTO
     {
         public IList<FloorPlan> StudioPlans { get; set; }
         public IList<FloorPlan> OneBedPlans { get; set; }

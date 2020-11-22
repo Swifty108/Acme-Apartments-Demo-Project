@@ -6,8 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PeachGroveApartments.Common.HelperClasses;
+using PeachGroveApartments.Core.Interfaces;
 using PeachGroveApartments.Infrastructure.Data;
+using PeachGroveApartments.Infrastructure.Inerfaces;
+using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Models;
+using PeachGroveApartments.Infrastructure.Services;
 using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project
@@ -40,10 +45,13 @@ namespace Peach_Grove_Apartments_Demo_Project
                 .AddRoles<IdentityRole>();
 
             services.AddScoped<DbInitializer, DbInitializer>();
-
+            services.AddScoped<IRepository, Repository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));
+            //Todo-p: test email
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

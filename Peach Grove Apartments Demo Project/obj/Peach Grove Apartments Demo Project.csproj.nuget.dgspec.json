@@ -134,7 +134,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Core\\PeachGroveApartments.Core.csproj": {
+                "projectPath": "D:\\DevProjects\\VS Projects\\Peach-Grove-Apartments-Demo-Project\\PeachGroveApartments.Core\\PeachGroveApartments.Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -268,6 +272,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.10.0, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.0, )"
