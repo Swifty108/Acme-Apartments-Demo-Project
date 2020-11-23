@@ -23,7 +23,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<AptUser> _userManager;
         private readonly ApplicationDbContext _context;
-        private readonly IHomeRepository _repository;
+        private readonly IHomeRepository _homeRepository;
         private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
 
@@ -32,7 +32,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             _logger = logger;
             _userManager = userManager;
             _context = context;
-            _repository = homeRepository;
+            _homeRepository = homeRepository;
             _emailService = emailService;
             _mapper = mapper;
         }
@@ -54,7 +54,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> ShowFloorPlans()
         {
-            return View(_mapper.Map<FloorPlansViewModel>(await _repository.GetFloorPlans()));
+            var floorPlans = await _homeRepository.GetFloorPlans();
+            var mappedFloorPlansViewModel = _mapper.Map<FloorPlansViewModel>(floorPlans);
+            return View(mappedFloorPlansViewModel);
         }
 
         [Authorize(Roles = "Applicant, Resident")]

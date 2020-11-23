@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PeachGroveApartments.ApplicationLayer.HelperClasses;
+using PeachGroveApartments.ApplicationLayer.Interfaces;
 using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Core.Interfaces;
 using PeachGroveApartments.Infrastructure.Data;
@@ -47,6 +49,7 @@ namespace Peach_Grove_Apartments_Demo_Project
 
             services.AddScoped<IHomeRepository, HomeRepository>();
             services.AddScoped<IManagerRepository, ManagerRepository>();
+            services.AddScoped<IManagerLogic, ManagerLogic>();
             services.AddScoped<IApplicantRepository, ApplicantRepository>();
             services.AddScoped<IHomeRepository, HomeRepository>();
 

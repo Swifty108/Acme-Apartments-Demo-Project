@@ -24,17 +24,22 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly IMapper _mapper;
         private SignInManager<AptUser> _signInManager;
         private readonly IManagerRepository _managerRepository;
-        private readonly IManagerLogic _applicationLayer;
+        private readonly IManagerLogic _managerLogic;
         private readonly ApplicationDbContext _context;
 
-        public ManagerAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, SignInManager<AptUser> signInManager, IManagerRepository managerRepository, IManagerLogic applicationLayer)
+        public ManagerAccountController(ApplicationDbContext context,
+            UserManager<AptUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            IMapper mapper, SignInManager<AptUser> signInManager,
+            IManagerRepository managerRepository,
+            IManagerLogic managerLogic)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
             _signInManager = signInManager;
             _managerRepository = managerRepository;
-            _applicationLayer = applicationLayer;
+            _managerLogic = managerLogic;
             _context = context;
         }
 
@@ -132,7 +137,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CancelApplicationConfirmed(Application app)
         {
-            var application = await _applicationLayer.CancelApplication(app.ApplicationId);
+            var application = await _managerLogic.CancelApplication(app.ApplicationId);
 
             return RedirectToAction("ShowApplications", new { userId = application.AptUserId });
         }
@@ -141,7 +146,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             try
             {
-                await _applicationLayer.ApproveApplication(userId, applicationId, ssn, aptNumber, aptPrice);
+                await _managerLogic.ApproveApplication(userId, applicationId, ssn, aptNumber, aptPrice);
             }
             catch (Exception e)
             {
@@ -171,7 +176,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             try
             {
-                await _applicationLayer.UnApproveApplication(userId, aptNumber, appId);
+                await _managerLogic.UnApproveApplication(userId, aptNumber, appId);
             }
             catch (Exception e)
             {
@@ -246,7 +251,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _applicationLayer.EditMaintenanceRequest(maintenanceViewModel);
+                await _managerLogic.EditMaintenanceRequest(maintenanceViewModel);
                 TempData["MaintenanceEditSuccess"] = true;
                 return RedirectToAction("ShowMaintenanceRequests", new { firstName = maintenanceViewModel.userFName, lastName = maintenanceViewModel.userLName });
             }
@@ -290,7 +295,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             try
             {
-                await _applicationLayer.ApproveMaintenanceRequest(userId, maintenanceId);
+                await _managerLogic.ApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception e)
             {
@@ -321,7 +326,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             try
             {
-                await _applicationLayer.UnApproveMaintenanceRequest(userId, maintenanceId);
+                await _managerLogic.UnApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception e)
             {

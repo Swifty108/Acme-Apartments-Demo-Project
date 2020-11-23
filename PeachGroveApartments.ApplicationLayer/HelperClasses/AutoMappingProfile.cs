@@ -14,6 +14,7 @@ namespace PeachGroveApartments.ApplicationLayer.HelperClasses
             CreateMap<MaintenanceRequest, MaintenanceRequestViewModel>();
             CreateMap<MaintenanceRequestViewModel, MaintenanceRequest>();
             CreateMap<FloorPlansViewModel, FloorPlansViewModelDTO>();
+            CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>();
             CreateMap<ApplicationViewModel, ApplicationViewModelDTO>();
         }
     }
