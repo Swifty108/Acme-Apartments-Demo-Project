@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PeachGroveApartments.ApplicationLayer.ViewModels;
-using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Core.Models;
 using PeachGroveApartments.Infrastructure.Data;
 using PeachGroveApartments.Infrastructure.Identity;
@@ -118,40 +117,24 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ContactUs(AppUserContactViewModel viewModel)
+        public IActionResult ContactUs(AppUserContactViewModel viewMessage)
         {
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
-                await _emailService.SendEmailAsync(new MailRequest
-                {
-                    ToEmail = viewModel.EmailAddress,
-                    Body = viewModel.Message,
-                    Subject = viewModel.Subject
-                });
 
-                //_emailService.Send(new EmailMessage
+                //await _emailService.SendEmailAsync(new MailMessage
                 //{
-                //    FromAddresses = new EmailAddress
-                //    {
-                //        Name = viewModel.Name,
-                //        Address = viewModel.EmailAddress
-                //    },
-
-                //    ToAddresses = new EmailAddress
-                //    {
-                //        Name = "Raj Narayanan",
-                //        Address = "rajnarayanan579@gmail.com"
-                //    },
-
-                //    Subject = viewModel.Subject,
-                //    Content = viewModel.Message
+                //    FromEmailAddress = viewMessage.FromEmailAddress,
+                //    SenderName = viewMessage.SenderName,
+                //    Subject = viewMessage.Subject,
+                //    Message = viewMessage.Message
                 //}
-                // );
+                //  );
 
                 return RedirectToAction("ContactUs");
             }
-            return View(viewModel);
+            return View(viewMessage);
         }
     }
 }

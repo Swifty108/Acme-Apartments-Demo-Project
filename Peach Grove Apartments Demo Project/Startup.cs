@@ -57,7 +57,7 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(c => c.AddProfile<AutoMappingProfile>(), typeof(Startup));
-            //Todo-p: test email
+
             // services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             //services.AddTransient<IEmailService, EmailService>();

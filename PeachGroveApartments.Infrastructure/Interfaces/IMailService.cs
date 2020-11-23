@@ -5,6 +5,6 @@ namespace PeachGroveApartments.Infrastructure.Inerfaces
 {
     public interface IMailService
     {
-        public Task SendEmailAsync(MailRequest mailRequest);
+        public Task SendEmailAsync(MailMessage mailRequest);
     }
 }

@@ -6,11 +6,11 @@ namespace PeachGroveApartments.ApplicationLayer.ViewModels
     {
         [Required]
         [Display(Name = "Your Name")]
-        public string Name { get; set; }
+        public string SenderName { get; set; }
 
         [Required]
         [Display(Name = "Your Email Address")]
-        public string EmailAddress { get; set; }
+        public string FromEmailAddress { get; set; }
 
         [Required]
         [MaxLength(10000)]

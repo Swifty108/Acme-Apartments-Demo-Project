@@ -167,11 +167,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return await _managerRepository.GetApplication(id) ?? null;
         }
 
-        public async Task<IActionResult> UnApproveApplication(string userId, string aptNumber, int appId)
+        public async Task<IActionResult> UnApproveApplication(string userId, string aptNumber, int applicationId)
         {
             try
             {
-                await _managerLogic.UnApproveApplication(userId, aptNumber, appId);
+                await _managerLogic.UnApproveApplication(userId, aptNumber, applicationId);
             }
             catch (Exception e)
             {
@@ -255,36 +255,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
             return View(maintenanceViewModel);
         }
-
-        //todo-p: remove this commented section
-
-        // GET: ApplicantAccount/Delete/5
-        //public async Task<IActionResult> DeleteMaintenanceRequest(int? maintenanceId)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(Id)
-
-        //    if (maintenanceRecord == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(maintenanceRecord);
-        //}
-
-        //[HttpPost, ActionName("MaintenanceDelete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteMaintenaceConfirmed(MaintenanceRequest request)
-        //{
-        //    var maintenanceRecord = await _context.MaintenanceRequests.FindAsync(request.Id);
-        //    _context.MaintenanceRequests.Remove(maintenanceRecord);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(ShowMaintenanceRequests));
-        //}
 
         public async Task<IActionResult> ApproveMaintenanceRequest(string userId, int maintenanceId)
         {

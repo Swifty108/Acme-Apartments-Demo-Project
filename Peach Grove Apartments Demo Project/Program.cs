@@ -1,15 +1,25 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PeachGroveApartments.Core.Interfaces;
+using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project
 {
     public class Program
     {
-
-
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
+                dbInitializer.Initialize();
+                await dbInitializer.SeedData();
+            }
+
             host.Run();
         }
 
@@ -19,42 +29,5 @@ namespace Peach_Grove_Apartments_Demo_Project
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-
-
-        //public static void Main(string[] args)
-        //{
-        //    CreateHostBuilder(args).Run();
-        //}
-
-
-
-        //public static IWebHost CreateHostBuilder(string[] args)
-        //{
-
-        //    return WebHost.CreateDefaultBuilder(args)
-        //       .ConfigureAppConfiguration((ctx, builder) =>
-        //       {
-        //           var keyVaultEndpoint = GetdKeyVaultEndpoint();
-        //           if (!string.IsNullOrEmpty(keyVaultEndpoint))
-        //           {
-        //               var azureServiceTokenProvider = new AzureServiceTokenProvider();
-        //               var keyVaultClient = new KeyVaultClient(
-        //                   new KeyVaultClient.AuthenticationCallback(
-        //                       azureServiceTokenProvider.KeyVaultTokenCallback));
-        //               builder.AddAzureKeyVault(
-        //                   keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
-        //           }
-        //       }
-        //    ).UseStartup<Startup>()
-        //     .Build();
-        //}
-
-        //private static string GetdKeyVaultEndpoint() => "https://peachgrovekeyvault.vault.azure.net/"; 
-
-        ////ConfigureWebHostDefaults(webBuilder =>
-        ////        {
-        ////            webBuilder.UseStartup<Startup>();
-        ////        });
     }
-
 }

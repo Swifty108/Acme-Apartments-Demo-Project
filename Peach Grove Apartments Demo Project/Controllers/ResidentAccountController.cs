@@ -88,11 +88,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<JsonResult> GetReqHistory()
         {
-            //todo-p: get this out
-
-            //var user = await _userManager.GetUserAsync(User);
-            //var maintReqs = await _context.MaintenanceRequests.Where(a => a.AptUserId == user.Id).ToListAsync();
-
             var maintenanceRequests = await _residentRepository.GetMaintenanceUserRequests();
             return Json(new
             {
@@ -140,21 +135,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ContactUs(AppUserContactViewModel appContactViewModel)
+        public IActionResult ContactUs(ApplicantContactViewModel viewMessage)
         {
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
-                await _emailService.SendEmailAsync(new MailRequest
-                {
-                    ToEmail = appContactViewModel.EmailAddress,
-                    Body = appContactViewModel.Message,
-                    Subject = appContactViewModel.Subject
-                });
+                // await _emailService.SendEmailAsync(viewMessage);
 
                 return RedirectToAction("ContactUs");
             }
-            return View(appContactViewModel);
+            return View(viewMessage);
         }
     }
 }

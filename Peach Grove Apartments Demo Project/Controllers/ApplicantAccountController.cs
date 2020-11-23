@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PeachGroveApartments.ApplicationLayer.ViewModels;
-using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Inerfaces;
 using PeachGroveApartments.Infrastructure.Interfaces;
@@ -56,21 +55,16 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ContactUs(AppUserContactViewModel appContactViewModel)
+        public IActionResult ContactUs(ApplicantContactViewModel viewMessage)
         {
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
-                await _emailService.SendEmailAsync(new MailRequest
-                {
-                    ToEmail = appContactViewModel.EmailAddress,
-                    Body = appContactViewModel.Message,
-                    Subject = appContactViewModel.Subject
-                });
+                //await _emailService.SendEmailAsync(viewMessage);
 
                 return RedirectToAction("ContactUs");
             }
-            return View(appContactViewModel);
+            return View(viewMessage);
         }
     }
 }

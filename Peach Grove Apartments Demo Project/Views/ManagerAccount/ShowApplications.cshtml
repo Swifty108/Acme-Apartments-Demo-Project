@@ -5,7 +5,7 @@
 @inject UserManager<AptUser> UserManager
 @model PeachGroveApartments.ApplicationLayer.ViewModels.ApplicationViewModel
 @{
-    ViewData["Title"] = "Application User";
+    ViewData["Title"] = "User Application";
     var routeParams = new Dictionary<string, string>();
 }
 
@@ -33,7 +33,7 @@
 
                     {
                         routeParams = new Dictionary<string, string>
-                                                                                                                    {
+                                                                                                                                {
                                         { "userid", application.AptUserId },
                                         { "aptnumber", application.AptNumber },
                                         { "aptprice", application.Price },
@@ -77,7 +77,7 @@
                                 <td>
                                     <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
-                                    <a asp-controller="manageraccount" asp-action="unapproveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;">Unapprove</a>
+                                    <a asp-controller="manageraccount" asp-action="unapproveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Unapprove</a>
                                 </td>
 
                             }
