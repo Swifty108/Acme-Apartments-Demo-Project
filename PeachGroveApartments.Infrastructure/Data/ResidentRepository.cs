@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PeachGroveApartments.Infrastructure.DTOs;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Models;
 using System.Collections.Generic;
@@ -22,17 +21,9 @@ namespace PeachGroveApartments.Infrastructure.Data
             return await _dbContext.Applications.FindAsync(applicationId);
         }
 
-        public async Task<ApplicationViewModelDTO> GetApplications(string userId)
+        public async Task<List<Application>> GetApplications(string userId)
         {
-            var applications = await _dbContext.Applications.Where(u => u.AptUserId == userId).ToListAsync();
-            var user = await _dbContext.Users.FindAsync(userId);
-
-            return new ApplicationViewModelDTO
-            {
-                Applications = applications,
-                FirstName = user.FirstName,
-                LastName = user.LastName
-            };
+            return await _dbContext.Applications.Where(u => u.AptUserId == userId).ToListAsync();
         }
 
         public async Task AddMaintenanceRequest(MaintenanceRequest maintenanceRequest)

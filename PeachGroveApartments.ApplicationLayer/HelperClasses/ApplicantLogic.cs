@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.ApplicationLayer.HelperClasses
 {
-    public class ApplicantLogic : IManagerLogic
+    public class ApplicantLogic : IApplicantLogic
     {
         private readonly IManagerRepository _repository;
         private readonly ApplicationDbContext _dbContext;

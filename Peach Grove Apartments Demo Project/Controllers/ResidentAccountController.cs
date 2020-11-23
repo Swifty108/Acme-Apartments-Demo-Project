@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PeachGroveApartments.ApplicationLayer.Interfaces;
@@ -6,6 +7,7 @@ using PeachGroveApartments.ApplicationLayer.ViewModels;
 using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Infrastructure.Data;
 using PeachGroveApartments.Infrastructure.Identity;
+using PeachGroveApartments.Infrastructure.Inerfaces;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Models;
 using System;
@@ -20,13 +22,17 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly UserManager<AptUser> _userManager;
         private readonly IResidentRepository _residentRepository;
         private readonly IResidentLogic _residentLogic;
+        private readonly IMapper _mapper;
+        private readonly IMailService _emailService;
 
-        public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IResidentRepository residentRepository, IResidentLogic residentLogic)
+        public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IResidentRepository residentRepository, IResidentLogic residentLogic, IMapper mapper, IMailService emailService)
         {
             _context = context;
             _userManager = userManager;
             _residentRepository = residentRepository;
             _residentLogic = residentLogic;
+            _mapper = mapper;
+            _emailService = emailService;
         }
 
         // GET: AppUserAccount
@@ -41,8 +47,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> ShowApplications()
         {
             var userId = _userManager.GetUserAsync(User).Result.Id;
+            var applications = await _residentRepository.GetApplications(userId);
 
-            return View(await _residentRepository.GetApplications(userId));
+            return View(applications);
         }
 
         public IActionResult SubmitMaintenanceRequest()
@@ -133,14 +140,21 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactUs(AppUserContactViewModel viewModel)
+        public async Task<IActionResult> ContactUs(AppUserContactViewModel appContactViewModel)
         {
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
+                await _emailService.SendEmailAsync(new MailRequest
+                {
+                    ToEmail = appContactViewModel.EmailAddress,
+                    Body = appContactViewModel.Message,
+                    Subject = appContactViewModel.Subject
+                });
+
                 return RedirectToAction("ContactUs");
             }
-            return View(viewModel);
+            return View(appContactViewModel);
         }
     }
 }

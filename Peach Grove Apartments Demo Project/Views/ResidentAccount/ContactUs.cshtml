@@ -3,13 +3,13 @@
 @{
     ViewData["Title"] = "Contact Us";
     Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
-    ViewBag.Success = "Your message was sent successfully!";
+    ViewBag.SuccessMessage = "Your message was sent successfully!";
 }
 <partial name="_LoggedInAsPartial" />
 <br />
 @if (ViewBag.ContactUsSuccess != null && ViewBag.ContactUsSuccess)
 {
-    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+    <partial name="_ViewsStatusMessage" model="ViewBag.SuccessMessage" />
 }
 
 <h1>Contact Us</h1>

@@ -1,13 +1,12 @@
-﻿@model PeachGroveApartments.ApplicationLayer.ViewModels.ApplicantContactViewModel
+﻿@model PeachGroveApartments.ApplicationLayer.ViewModels.AppUserContactViewModel
 
 @{
     ViewData["Title"] = "Contact Us";
     Layout = "~/Views/Shared/_ApplicantAccountLayout.cshtml";
     ViewBag.SuccessMessage = "Your message was sent successfully!";
 }
-
 <partial name="_LoggedInAsPartial" />
-
+<br />
 @if (ViewBag.ContactUsSuccess != null && ViewBag.ContactUsSuccess)
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.SuccessMessage" />

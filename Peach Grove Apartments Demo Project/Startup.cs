@@ -46,19 +46,22 @@ namespace Peach_Grove_Apartments_Demo_Project
                 .AddRoles<IdentityRole>();
 
             services.AddScoped<IDbInitializer, DbInitializer>();
-
             services.AddScoped<IHomeRepository, HomeRepository>();
+            services.AddScoped<IApplicantRepository, ApplicantRepository>();
+            services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IManagerRepository, ManagerRepository>();
             services.AddScoped<IManagerLogic, ManagerLogic>();
-            services.AddScoped<IApplicantRepository, ApplicantRepository>();
-            services.AddScoped<IHomeRepository, HomeRepository>();
+            services.AddScoped<IApplicantLogic, ApplicantLogic>();
+            services.AddScoped<IResidentLogic, ResidentLogic>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(c => c.AddProfile<AutoMappingProfile>(), typeof(Startup));
             //Todo-p: test email
-            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
-            services.AddTransient<IEmailService, EmailService>();
+            // services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            //services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IMailService, MailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

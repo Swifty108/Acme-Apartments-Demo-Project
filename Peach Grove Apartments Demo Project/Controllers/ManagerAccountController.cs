@@ -49,17 +49,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ViewApplication(int Id)
-        {
-            var application = await _managerRepository.GetApplication(Id);
-            if (application == null)
-            {
-                return NotFound();
-            }
-
-            return View(application);
-        }
-
         public async Task<IActionResult> ShowApplicationUsers()
         {
             return View(await _managerRepository.GetApplicationUsers());
@@ -68,6 +57,12 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> ShowApplications(string userId)
         {
             return View(_mapper.Map<ApplicationViewModel>(await _managerRepository.GetApplications(userId)));
+        }
+
+        public async Task<IActionResult> ViewApplication(int Id)
+        {
+            var application = await _managerRepository.GetApplication(Id);
+            return View(application);
         }
 
         public async Task<IActionResult> EditApplication(int Id)

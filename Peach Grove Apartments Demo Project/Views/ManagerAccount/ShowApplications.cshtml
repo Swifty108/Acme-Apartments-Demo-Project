@@ -16,7 +16,7 @@
 <hr />
 <div class="container">
     @{
-        if (@Model.Apps.Count != 0)
+        if (@Model.Applications.Count > 0)
         { <table class="table fp-table table-responsive-md">
 
                 <thead class="thead-light">
@@ -29,11 +29,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var application in @Model.Apps)
+                    @foreach (var application in @Model.Applications)
 
                     {
                         routeParams = new Dictionary<string, string>
-                                                                                                    {
+                                                                                                                    {
                                         { "userid", application.AptUserId },
                                         { "aptnumber", application.AptNumber },
                                         { "aptprice", application.Price },

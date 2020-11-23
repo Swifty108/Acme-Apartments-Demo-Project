@@ -7,7 +7,7 @@ namespace PeachGroveApartments.ApplicationLayer.ViewModels
 {
     public class ApplicationViewModel
     {
-        public IList<Application> Apps { get; set; }
+        public IList<Application> Applications { get; set; }
 
         [Display(Name = "Applicantion ID")]
         public int ApplicationId { get; set; }

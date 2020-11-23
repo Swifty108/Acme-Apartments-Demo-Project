@@ -5,7 +5,7 @@ namespace PeachGroveApartments.Infrastructure.DTOs
 {
     public class ApplicationViewModelDTO
     {
-        public List<Application> Applications { get; set; }
+        public IList<Application> Applications { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }

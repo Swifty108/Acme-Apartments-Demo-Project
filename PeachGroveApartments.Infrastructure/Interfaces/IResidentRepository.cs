@@ -1,5 +1,4 @@
-﻿using PeachGroveApartments.Infrastructure.DTOs;
-using PeachGroveApartments.Infrastructure.Models;
+﻿using PeachGroveApartments.Infrastructure.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,7 +6,7 @@ namespace PeachGroveApartments.Infrastructure.Interfaces
 {
     public interface IResidentRepository
     {
-        public Task<ApplicationViewModelDTO> GetApplications(string userId);
+        public Task<List<Application>> GetApplications(string userId);
 
         public Task<Application> GetApplication(int applicationId);
 

@@ -24,10 +24,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly UserManager<AptUser> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly IHomeRepository _homeRepository;
-        private readonly IEmailService _emailService;
+        private readonly IMailService _emailService;
         private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context, IHomeRepository homeRepository, IEmailService emailService, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context, IHomeRepository homeRepository, IMailService emailService, IMapper mapper)
         {
             _logger = logger;
             _userManager = userManager;
@@ -118,29 +118,36 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactUs(AppUserContactViewModel viewModel)
+        public async Task<IActionResult> ContactUs(AppUserContactViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
-                _emailService.Send(new EmailMessage
+                await _emailService.SendEmailAsync(new MailRequest
                 {
-                    FromAddresses = new EmailAddress
-                    {
-                        Name = viewModel.Name,
-                        Address = viewModel.EmailAddress
-                    },
+                    ToEmail = viewModel.EmailAddress,
+                    Body = viewModel.Message,
+                    Subject = viewModel.Subject
+                });
 
-                    ToAddresses = new EmailAddress
-                    {
-                        Name = "Raj Narayanan",
-                        Address = "rajnarayanan2020@gmail.com"
-                    },
+                //_emailService.Send(new EmailMessage
+                //{
+                //    FromAddresses = new EmailAddress
+                //    {
+                //        Name = viewModel.Name,
+                //        Address = viewModel.EmailAddress
+                //    },
 
-                    Subject = viewModel.Subject,
-                    Content = viewModel.Message
-                }
-                );
+                //    ToAddresses = new EmailAddress
+                //    {
+                //        Name = "Raj Narayanan",
+                //        Address = "rajnarayanan579@gmail.com"
+                //    },
+
+                //    Subject = viewModel.Subject,
+                //    Content = viewModel.Message
+                //}
+                // );
 
                 return RedirectToAction("ContactUs");
             }

@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PeachGroveApartments.ApplicationLayer.ViewModels;
+using PeachGroveApartments.Common.HelperClasses;
 using PeachGroveApartments.Infrastructure.Identity;
+using PeachGroveApartments.Infrastructure.Inerfaces;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using System.Threading.Tasks;
 
@@ -13,11 +15,13 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     {
         private readonly UserManager<AptUser> _userManager;
         private readonly IApplicantRepository _applicantRepository;
+        private readonly IMailService _emailService;
 
-        public ApplicantAccountController(UserManager<AptUser> userManager, IApplicantRepository applicantRepository)
+        public ApplicantAccountController(UserManager<AptUser> userManager, IApplicantRepository applicantRepository, IMailService emailService)
         {
             _userManager = userManager;
             _applicantRepository = applicantRepository;
+            _emailService = emailService;
         }
 
         // GET: ApplicantAccount
@@ -52,11 +56,18 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactUs(ApplicantContactViewModel appContactViewModel)
+        public async Task<IActionResult> ContactUs(AppUserContactViewModel appContactViewModel)
         {
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
+                await _emailService.SendEmailAsync(new MailRequest
+                {
+                    ToEmail = appContactViewModel.EmailAddress,
+                    Body = appContactViewModel.Message,
+                    Subject = appContactViewModel.Subject
+                });
+
                 return RedirectToAction("ContactUs");
             }
             return View(appContactViewModel);
