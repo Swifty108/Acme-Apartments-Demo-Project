@@ -1,6 +1,6 @@
 # Peach Grove Apartments Demo Web App
 
-This is an ASP.NET Core Web App developed for Peach Grove Apartments, a fictional apartment complex.
+This is an ASP.NET Core Web App I developed for Peach Grove Apartments, a fictional apartment complex.
 
 ## Technology Stacks Used
 
