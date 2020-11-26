@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using PeachGroveApartments.Infrastructure.Identity
+@using PeachGroveApartments.Common.HelperClasses
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 @inject RoleManager<IdentityRole> roleManager
@@ -17,9 +18,33 @@
 
     <nav>
         <div class="nav nav-tabs fp" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
-            <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
-            <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+            @if (Model.FloorPlanType != null)
+            {
+                if (Model.FloorPlanType == FloorPlanType.Studio)
+                {
+                    <a class="nav-item nav-link active" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
+                    <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
+                    <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+                }
+                else if (Model.FloorPlanType == FloorPlanType.OneBed)
+                {
+                    <a class="nav-item nav-link" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
+                    <a class="nav-item nav-link active" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
+                    <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+                }
+                else if (Model.FloorPlanType == FloorPlanType.TwoBed)
+                {
+                    <a class="nav-item nav-link" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
+                    <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
+                    <a class="nav-item nav-link active" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+                }
+            }
+            else
+            {
+                <a class="nav-item nav-link active" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
+                <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
+                <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+            }
         </div>
     </nav>
 
@@ -67,11 +92,11 @@
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
+                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="studio" class="fp-applylink">Apply Now!</a></td>
                                 }
                                 else
                                 {
-                                    <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
+                                    <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF&floorplantype=studio" class="fp-applylink">Apply Now!</a></td>
                                 }
                             </tr>
                         }
@@ -114,11 +139,11 @@
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
+                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="onebed" class="fp-applylink">Apply Now!</a></td>
                                 }
                                 else
                                 {
-                                    <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF" class="fp-applylink">Apply Now!</a></td>
+                                    <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF&floorplantype=onebed" class="fp-applylink">Apply Now!</a></td>
 
                                 }
                             </tr>
@@ -162,11 +187,11 @@
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" class="fp-applylink">Apply Now!</a></td>
+                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="twobed" class="fp-applylink">Apply Now!</a></td>
                                 }
                                 else
                                 {
-                                    <td><a class="fp-applylink" asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF">Apply Now!</a></td>
+                                    <td><a class="fp-applylink" asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF&floorplantype=twobed">Apply Now!</a></td>
                                 }
                             </tr>
                         }

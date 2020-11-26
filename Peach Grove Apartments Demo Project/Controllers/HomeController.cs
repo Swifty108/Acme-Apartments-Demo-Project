@@ -51,16 +51,17 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ShowFloorPlans()
+        public async Task<IActionResult> ShowFloorPlans(string floorPlanType = null)
         {
             var floorPlans = await _homeRepository.GetFloorPlans();
-            var mappedFloorPlansViewModel = _mapper.Map<FloorPlansViewModel>(floorPlans);
-            return View(mappedFloorPlansViewModel);
+            var floorPlansViewModel = _mapper.Map<FloorPlansViewModel>(floorPlans);
+            floorPlansViewModel.FloorPlanType = floorPlanType;
+            return View(floorPlansViewModel);
         }
 
         [Authorize(Roles = "Applicant, Resident")]
         [HttpGet]
-        public async Task<IActionResult> Apply(string aptNumber, string price, string area)
+        public async Task<IActionResult> Apply(string aptNumber, string price, string area, string floorPlanType)
         {
             var appViewModel = new ApplyViewModel();
             var user = await _userManager.GetUserAsync(User);
@@ -68,6 +69,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             appViewModel.Price = price;
             appViewModel.User = user;
             appViewModel.Area = area;
+            appViewModel.FloorPlanType = floorPlanType;
 
             return View(appViewModel);
         }

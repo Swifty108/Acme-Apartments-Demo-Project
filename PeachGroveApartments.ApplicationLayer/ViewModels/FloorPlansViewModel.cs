@@ -8,5 +8,6 @@ namespace PeachGroveApartments.ApplicationLayer.ViewModels
         public IList<FloorPlan> StudioPlans { get; set; }
         public IList<FloorPlan> OneBedPlans { get; set; }
         public IList<FloorPlan> TwoBedPlans { get; set; }
+        public string FloorPlanType { get; set; }
     }
 }
