@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PeachGroveApartments.Infrastructure.Identity
+@using PeachGroveApartments.Common.HelperClasses
+@inject SignInManager<AptUser> SignInManager
+@inject UserManager<AptUser> UserManager
+@model PeachGroveApartments.ApplicationLayer.ViewModels.MaintenanceRequestViewModel
+@{
+    ViewData["Title"] = "User Maintenace";
+    ViewBag.Success = "The maintenance request was edited successfully!";
+}
+@if (ViewBag.MaintenanceEditSuccess != null && ViewBag.MaintenanceEditSuccess)
+{
+
+    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+}
+
+<partial name="_LoggedInAsPartial" />
+<br />
+<h1>Maintenance Requests for @Model.userFName @Model.userLName</h1>
+
+<hr />
+<div class="container">
+
+    <table class="table fp-table table-responsive-md ">
+
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Maintenance Id</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var maintenancerecord in Model.mRequests)
+            {
+                <tr>
+                    <td>@maintenancerecord.Id</td>
+
+                    <td>
+                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">View</a>
+                    </td>
+
+                    <td>
+                        <a asp-controller="manageraccount" asp-action="editmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">Edit</a>
+                    </td>
+
+                    @if (maintenancerecord.Status == MaintenanceRequestStatus.APPROVED)
+                    {
+
+                        <td>
+                            <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
+
+                            <a asp-controller="manageraccount" asp-action="unapprovemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">Unapprove</a>
+                        </td>
+
+                    }
+                    else if (maintenancerecord.Status == MaintenanceRequestStatus.UNAPPROVED)
+                    {
+                        <td>
+                            <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
+
+                            <a asp-controller="manageraccount" asp-action="approvemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">ReApprove</a>
+                        </td>
+
+                    }
+                    else
+                    {
+                        <td>
+                            <a asp-controller="manageraccount" asp-action="approvemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id">Approve</a>
+                        </td>
+
+                    }
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>

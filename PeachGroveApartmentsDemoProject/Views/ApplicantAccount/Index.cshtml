@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Account Home";
+    ViewBag.SuccessMessage = "Your application was submitted successfully!";
+}
+<partial name="_LoggedInAsPartial" />
+<h1>My Applicant Account Home</h1>
+
+@if (ViewBag.ApplySuccess != null && ViewBag.ApplySuccess)
+{
+
+    <partial name="_ViewsStatusMessage" model="ViewBag.SuccessMessage" />
+}
+
+<hr />
+
+<ul class="widgeticons">
+    <li><a asp-controller="applicantaccount" asp-action="showapplications"><img class="img-fluid" src="~/images/applicationicon.png" style="width: 64px; height: 64px;" alt="My applications" /><br />My Applications</a></li>
+    <li><a asp-controller="applicantaccount" asp-action="contactus"><img class="img-fluid" src="~/images/ua-email.png" alt="Email Us" /><br />Contact Us</a></li>
+</ul>

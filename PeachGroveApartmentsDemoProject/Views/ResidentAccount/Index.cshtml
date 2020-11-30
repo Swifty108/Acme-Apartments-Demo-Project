@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Account Home";
+    Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
+    ViewBag.SuccessMessage = "Your application was submitted successfully!";
+}
+
+@if (ViewBag.ApplySuccess != null && ViewBag.ApplySuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.SuccessMessage" />
+}
+
+<partial name="_LoggedInAsPartial" />
+<h1>My Resident Account Home</h1>
+
+<hr />
+
+<ul class="widgeticons">
+    <li><a asp-controller="residentaccount" asp-action="showpayments"><img class="img-fluid" src="~/images/ua-money.png" alt="Make a Payment" /><br />Payments</a></li>
+    <li><a asp-controller="residentaccount" asp-action="submitmaintenancerequest"><img class="img-fluid" src="~/images/ua-maintenance.png" alt="Request Maintenance" /><br />Maintenance</a></li>
+    <li><a asp-controller="residentaccount" asp-action="writeareview"><img class="img-fluid" src="~/images/ua-review.png" alt="Leave Feedback" /><br />Write a Review</a></li>
+    <li><a asp-controller="residentaccount" asp-action="contactus"><img class="img-fluid" src="~/images/ua-email.png" alt="Email Us" /><br />Contact Us</a></li>
+</ul>

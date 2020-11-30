@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PeachGroveApartments.Infrastructure.Identity
+@inject SignInManager<AptUser> SignInManager
+@inject UserManager<AptUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+@{
+    Layout = null;
+    var user = UserManager.GetUserAsync(User).Result;
+}
+
+@{
+
+    if (User.IsInRole("Manager"))
+    {
+        <div style="background-color: #e0e0e0; color: black; font-size: 16px;padding: 15px; padding: 10px;">
+
+            <span><b>Logged in as: </b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName - </span>
+            <span>3495 Peach Grove Blvd.</span>
+            <span>Pittsburgh, PA 15213</span>
+        </div>
+    }
+    else if (User.IsInRole("Resident"))
+    {
+        <div style="background-color: #e0e0e0; color: black; font-size: 16px;padding: 15px; padding: 10px;">
+
+            @{
+                var splitAptNum = (@UserManager.GetUserAsync(User).Result.AptNumber).Split("-");
+                var AptNum = splitAptNum[1];
+            }
+
+            <span><b>Logged in as: </b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName - </span>
+            <span>3495 Peach Grove Blvd. Apt @AptNum</span>
+            <span>Pittsburgh, PA 15213</span>
+        </div>
+    }
+    else if (User.IsInRole("Applicant"))
+    {
+        <div style="background-color: #e0e0e0; color: black; font-size: 16px;padding: 15px; padding: 10px;">
+            <span><b>Logged in as: </b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName - </span>
+            <span>3495 Peach Grove Blvd.</span>
+            <span>Pittsburgh, PA 15213</span>
+        </div>
+    }
+}
+
+<br />

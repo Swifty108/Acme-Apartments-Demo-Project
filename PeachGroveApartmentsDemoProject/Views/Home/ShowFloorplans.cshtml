@@ -1,0 +1,203 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PeachGroveApartments.Infrastructure.Identity
+@using PeachGroveApartments.Common.HelperClasses
+@inject SignInManager<AptUser> SignInManager
+@inject UserManager<AptUser> UserManager
+@inject RoleManager<IdentityRole> roleManager
+@model PeachGroveApartments.ApplicationLayer.ViewModels.FloorPlansViewModel
+
+@{
+    ViewData["Title"] = "Floor Plans";
+
+}
+
+<h1>Our Floor Plans</h1>
+
+<br />
+<div class="container">
+
+    <nav>
+        <div class="nav nav-tabs fp" id="nav-tab" role="tablist">
+            @if (Model.FloorPlanType != null)
+            {
+                if (Model.FloorPlanType == FloorPlanType.Studio)
+                {
+                    <a class="nav-item nav-link active" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
+                    <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
+                    <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+                }
+                else if (Model.FloorPlanType == FloorPlanType.OneBed)
+                {
+                    <a class="nav-item nav-link" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
+                    <a class="nav-item nav-link active" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
+                    <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+                }
+                else if (Model.FloorPlanType == FloorPlanType.TwoBed)
+                {
+                    <a class="nav-item nav-link" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
+                    <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
+                    <a class="nav-item nav-link active" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+                }
+            }
+            else
+            {
+                <a class="nav-item nav-link active" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
+                <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
+                <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
+            }
+        </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="nav-studio" role="tabpanel" aria-labelledby="nav-studio-tab">
+
+            <br>
+            <h3>Studio Floor Plan</h3>
+
+            <br />
+
+            @{
+                //reminder: center align child images with text-align: centere;
+            }
+            <div style="text-align:center;">
+                <img class="img-fluid" src="~/images/studiofp.jpg" alt="Studio Floor Plan" />
+            </div>
+            <br />
+            <br />
+            <h3>Availability</h3>
+            <br />
+            <table class="table fp-table table-hover table-responsive-sm table-responsive-md">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Apartment Number</th>
+                        <th scope="col">Date Available</th>
+                        <th scope="col">SF</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+
+                        foreach (var fp in Model.StudioPlans)
+                        {
+
+                            <tr>
+                                <td>@fp.AptNumber</td>
+                                <td>@fp.DateAvailable</td>
+                                <td>@fp.SF</td>
+                                <td>$@fp.Price</td>
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="studio" class="fp-applylink">Apply Now!</a></td>
+                                }
+                                else
+                                {
+                                    <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF&floorplantype=studio" class="fp-applylink">Apply Now!</a></td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="nav-1bed" class="container tab-pane fade" role="tabpanel" aria-labelledby="nav-1bed-tab">
+            <br>
+            <h3>1 Bed/1 Bath Floor Plan</h3>
+
+            <br />
+            <div style="text-align:center;">
+                <img class="img-fluid" src="~/images/1bedfp.jpg" alt="Studio Floor Plan" />
+            </div>            <br />
+            <br />
+            <h3>Availability</h3>
+            <br />
+            <table class="table fp-table table-hover table-responsive-sm table-responsive-md">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Apartment Number</th>
+                        <th scope="col">Date Available</th>
+                        <th scope="col">SF</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+
+                        foreach (var fp in Model.OneBedPlans)
+                        {
+
+                            <tr>
+                                <td>@fp.AptNumber</td>
+                                <td>@fp.DateAvailable</td>
+                                <td>@fp.SF</td>
+                                <td>$@fp.Price</td>
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="onebed" class="fp-applylink">Apply Now!</a></td>
+                                }
+                                else
+                                {
+                                    <td><a asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF&floorplantype=onebed" class="fp-applylink">Apply Now!</a></td>
+
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tab-pane fade" id="nav-2bed" role="tabpanel" aria-labelledby="nav-2bed-tab">
+            <br>
+            <h3>2 Bed/2 Bath Floor Plan</h3>
+
+            <br />
+            <div style="text-align:center;"><img class="img-fluid" src="~/images/2bedfp.jpg" alt="Studio Floor Plan" /></div>
+            <br />
+            <br />
+            <h3>Availability</h3>
+            <br />
+            <table class="table fp-table table-hover table-responsive-sm table-responsive-md">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Apartment Number</th>
+                        <th scope="col">Date Available</th>
+                        <th scope="col">SF</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+
+                        foreach (var fp in Model.TwoBedPlans)
+                        {
+
+                            <tr>
+                                <td>@fp.AptNumber</td>
+                                <td>@fp.DateAvailable</td>
+                                <td>@fp.SF</td>
+                                <td>$@fp.Price</td>
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="twobed" class="fp-applylink">Apply Now!</a></td>
+                                }
+                                else
+                                {
+                                    <td><a class="fp-applylink" asp-area="Identity" asp-page="/Account/Login" asp-route-returnurl="/home/apply?aptnumber=@fp.AptNumber&price=@fp.Price&area=@fp.SF&floorplantype=twobed">Apply Now!</a></td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

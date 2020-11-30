@@ -1,0 +1,47 @@
+﻿/*User Account Styles*/
+
+/*Global Account Styles*/
+
+/*Applicant Account*/
+
+/*ul.widgeticons, .widgeticons li {
+    margin: 0;
+    padding: 0;
+}
+*/
+
+ul.widgeticons {
+    list-style-type: none;
+    margin-top: 30px;
+    padding: 0;
+    justify-content: center;
+}
+
+.widgeticons li {
+    width: 190px;
+    border: 1px solid #ccc;
+    background: #fcfcfc;
+    text-align: center !important;
+    text-decoration: none !important;
+    padding: 20px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+/*Resident Account*/
+
+/*.nav-tabs.mp li a {
+    color: #757575;
+    padding-top: 10px;
+    padding-left: 38px;
+    margin-right: 3px;
+    font-size: .8rem;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    height: 40px;
+    width: 190px;
+    text-transform: uppercase;
+    align-content: center;
+}*/
+
+/*End Custom styles*/

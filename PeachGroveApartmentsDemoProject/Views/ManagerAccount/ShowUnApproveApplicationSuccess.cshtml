@@ -1,0 +1,8 @@
+﻿@{
+    ViewData["Title"] = "Approve Application Success";
+    Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
+    ViewBag.ApproveSuccess = "The application was unapproved successfully!";
+}
+<partial name="_LoggedInAsPartial" />
+<br />
+<partial name="_ViewsStatusMessage" model="ViewBag.ApproveSuccess" />
