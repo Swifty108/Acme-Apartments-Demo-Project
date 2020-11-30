@@ -9,6 +9,24 @@ for details on configuring this project to bundle and minify static web assets. 
         align-content: center;
     }
 
+    .top-bar a.nav-link {
+        font-size: 13px !important;
+    }
+
+    /*    .top-bar form {
+        margin-left: 9px !important;
+    }*/
+
+    .top-bar .logout-button {
+        font-size: 13px !important;
+        margin-top: 8px !important;
+    }
+
+    .bottom-menu-bar a.nav-link {
+        font-size: 14px !important;
+        margin-left: 9px !important;
+    }
+
     aside {
         max-width: 80%;
         height: 100%;
@@ -37,7 +55,7 @@ for details on configuring this project to bundle and minify static web assets. 
     }
 
     a.navbar-brand {
-        margin-left: 60px;
+        margin-left: 35px;
         margin-right: 30px;
         margin-top: 0;
     }
@@ -52,10 +70,6 @@ for details on configuring this project to bundle and minify static web assets. 
     a.navbar-brand {
         margin-left: 320px;
         margin-right: 190px;
-    }
-
-    .table {
-        max-width: none !important;
     }
 }
 
@@ -72,6 +86,10 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+.table {
+    max-width: none !important;
 }
 
 .alert-success {
@@ -137,14 +155,30 @@ a:hover {
     margin: 0 auto;
     padding: 0;
     display: flex;
-    font-size: 14px !important;
 }
+
+    .top-bar a.nav-link {
+        font-size: 15px;
+    }
+
+    .top-bar form {
+        margin-left: 9px;
+    }
+
+    .top-bar .logout-button {
+        font-size: 15px;
+        margin-top: 7px;
+    }
 
 .bottom-menu-bar {
     height: 50px;
     display: inline;
     background: white;
 }
+
+    .bottom-menu-bar .nav-link {
+        font-size: 19px;
+    }
 /*
 .navbar-nav {
     float: none;
@@ -160,7 +194,6 @@ a:hover {
 
 nav .navbar-nav li a {
     color: black !important;
-    font-size: 19px;
 }
 
 aside {

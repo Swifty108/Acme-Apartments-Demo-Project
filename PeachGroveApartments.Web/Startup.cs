@@ -35,7 +35,7 @@ namespace Peach_Grove_Apartments_Demo_Project
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("VultrConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<AptUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false; options.SignIn.RequireConfirmedEmail = false;
