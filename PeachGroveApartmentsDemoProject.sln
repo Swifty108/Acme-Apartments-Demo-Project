@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Peach Grove Apartments Demo Project", "Peach Grove Apartments Demo Project\Peach Grove Apartments Demo Project.csproj", "{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.Web", "PeachGroveApartments.Web\PeachGroveApartments.Web.csproj", "{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.Core", "PeachGroveApartments.Core\PeachGroveApartments.Core.csproj", "{564411A6-B0C2-4707-8F7B-895EDF4BF993}"
 EndProject
