@@ -177,120 +177,226 @@
             @RenderBody()
         </div>
 
-        <div class="col-md-3 order-2">
+        @if (User.IsInRole("Applicant"))
+        {
 
-            <aside id="sidebar">
-                @{
+            <div class="col-md-2 col-sm-12 aside-top-no-hr">
 
-                    if (User.IsInRole("Applicant"))
-                    {
+                <aside>
 
-                        <section style="width: 250px; border-bottom: 1px solid lightgray;">
+                    <section style="width: 250px; border-bottom: 1px solid lightgray;">
 
-                            <span style="font-weight: bold; font-size: 20px;">Your Address</span><br /><br />
+                        <span style="font-weight: bold; font-size: 20px;">Your Address</span><br /><br />
 
-                            <span><b>@user.FirstName @user.LastName</b></span><br />
-                            <span>
-                                @user.StreetAddress
-                            </span>
-                            <span>@user.City, @user.State @user.Zipcode</span>
+                        <span><b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName</b></span><br />
+                        <span>3495 Peach Grove Blvd.</span>
+                        <span>Pittsburgh, PA 15213</span>
 
-                            <br />
-
-                            <br />
-                        </section>
-
-                        <section id="contact-widget">
-                            <br />
-                            <br />
-                            <span style="font-weight: bold; font-size: 20px;">Pet Policy</span>                      <br /><br />
-                            <a href="#petPolicyModal" data-toggle="modal" data-target="#petPolicyModal">View Our Pet Policy</a>
-                            <br />
-                            <br />
-                            <br />
-                        </section>
-
-                        <section id="contact-widget">
-
-                            <br /><br />
-                            <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
-
-                            1201 Peach Grove Blvd.<br />
-                            Pittsburgh, PA 15213<br />
-                            <br /><br />
-                        </section>
-                        <br />
                         <br />
 
-                        <section style="width: 280px; border-bottom: 1px solid lightgray;">
-                            <span style="font-weight: bold; font-size: 20px;">Offie Hours</span><br /><br />
-                            Monday - Friday 9:00am to 6:00pm <br />
-                            Saturday By Appointment
-                            <br />
-                            <br />
-                            <br />
-                        </section>
+                        <br />
+                    </section>
 
+                    <section id="contact-widget">
+                        <br />
+                        <br />
+                        <span style="font-weight: bold; font-size: 20px;">Pet Policy</span>                      <br /><br />
+                        <a href="#petPolicyModal" data-toggle="modal" data-target="#petPolicyModal">View Our Pet Policy</a>
                         <br />
                         <br />
                         <br />
-                    }
-                    else if (User.IsInRole("Resident"))
-                    {
-                        var splitAptNum = (@UserManager.GetUserAsync(User).Result.AptNumber).Split("-");
-                        var AptNum = splitAptNum[1];
-                        <section style="width: 250px; border-bottom: 1px solid lightgray;">
+                    </section>
 
-                            <span style="font-weight: bold; font-size: 20px;">Your Address</span><br /><br />
-                            <span><b>@user.FirstName @user.LastName</b></span><br />
-                            <span>
-                                3495 Peach Grove Blvd. @AptNum
-                            </span>
-                            <span>Pittsburgh, PA 15213</span>
+                    <section id="contact-widget">
 
-                            <br />
+                        <br /><br />
+                        <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
 
-                            <br />
-                        </section>
+                        1201 Peach Grove Blvd.<br />
+                        Pittsburgh, PA 15213<br />
+                        <br /><br />
+                    </section>
+                    <br />
+                    <br />
 
-                        <section id="contact-widget">
-                            <br />
-                            <br />
-                            <span style="font-weight: bold; font-size: 20px;">Pet Policy</span>                      <br /><br />
-                            <a href="#petPolicyModal" data-toggle="modal" data-target="#petPolicyModal">View Our Pet Policy</a>
-                            <br />
-                            <br />
-                            <br />
-                        </section>
-
-                        <section id="contact-widget">
-
-                            <br /><br />
-                            <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
-
-                            1201 Peach Grove Blvd.<br />
-                            Pittsburgh, PA 15213<br />
-                            <br /><br />
-                        </section>
-                        <br />
-                        <br />
-
-                        <section style="width: 280px; border-bottom: 1px solid lightgray;">
-                            <span style="font-weight: bold; font-size: 20px;">Offie Hours</span><br /><br />
-                            Monday - Friday 9:00am to 6:00pm <br />
-                            Saturday By Appointment
-                            <br />
-                            <br />
-                            <br />
-                        </section>
-
+                    <section style="width: 280px; border-bottom: 1px solid lightgray;">
+                        <span style="font-weight: bold; font-size: 20px;">Offie Hours</span><br /><br />
+                        Monday - Friday 9:00am to 6:00pm <br />
+                        Saturday By Appointment
                         <br />
                         <br />
                         <br />
-                    }
-                }
-            </aside>
-        </div>
+                    </section>
+
+                    <br />
+                    <br />
+                    <br />
+                </aside>
+            </div>
+
+            <div class="col-md-2 col-sm-12 aside-top-hr">
+
+                <aside>
+
+                    <section style="width: 250px; border-bottom: 1px solid lightgray;">
+
+                        <span style="font-weight: bold; font-size: 20px;">Your Address</span><br /><br />
+
+                        <span><b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName</b></span><br />
+                        <span>3495 Peach Grove Blvd.</span>
+                        <span>Pittsburgh, PA 15213</span>
+
+                        <br />
+
+                        <br />
+                    </section>
+
+                    <section id="contact-widget">
+                        <br />
+                        <br />
+                        <span style="font-weight: bold; font-size: 20px;">Pet Policy</span>                      <br /><br />
+                        <a href="#petPolicyModal" data-toggle="modal" data-target="#petPolicyModal">View Our Pet Policy</a>
+                        <br />
+                        <br />
+                        <br />
+                    </section>
+
+                    <section id="contact-widget">
+
+                        <br /><br />
+                        <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
+
+                        1201 Peach Grove Blvd.<br />
+                        Pittsburgh, PA 15213<br />
+                        <br /><br />
+                    </section>
+                    <br />
+                    <br />
+
+                    <section style="width: 280px; border-bottom: 1px solid lightgray;">
+                        <span style="font-weight: bold; font-size: 20px;">Offie Hours</span><br /><br />
+                        Monday - Friday 9:00am to 6:00pm <br />
+                        Saturday By Appointment
+                        <br />
+                        <br />
+                        <br />
+                    </section>
+
+                    <br />
+                    <br />
+                    <br />
+                </aside>
+            </div>
+        }
+        else if (User.IsInRole("Resident"))
+        {
+            <div class="col-md-2 col-sm-12 aside-top-no-hr">
+
+                <aside>
+                    <section style="width: 250px; border-bottom: 1px solid lightgray;">
+
+                        <span style="font-weight: bold; font-size: 20px;">Your Address</span><br /><br />
+
+                        @{
+                            var splitAptNum = (@UserManager.GetUserAsync(User).Result.AptNumber).Split("-");
+                            var AptNum = splitAptNum[1];
+                        }
+
+                        <span><b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName</b></span><br />
+                        <span>
+                            3495 Peach Grove Blvd. Apt @AptNum
+                        </span>
+                        <span>Pittsburgh, PA 15213</span>
+
+                        <br />
+
+                        <br />
+                    </section>
+
+                    <section id="contact-widget">
+                        <br />
+                        <br />
+                        <span style="font-weight: bold; font-size: 20px;">Pet Policy</span>                      <br /><br />
+                        <a href="#petPolicyModal" data-toggle="modal" data-target="#petPolicyModal">View Our Pet Policy</a>
+                        <br />
+                        <br />
+                        <br />
+                    </section>
+
+                    <section id="contact-widget">
+
+                        <br /><br />
+                        <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
+
+                        1201 Peach Grove Blvd.<br />
+                        Pittsburgh, PA 15213<br />
+                        <br /><br />
+                    </section>
+                    <br />
+                    <br />
+
+                    <section style="width: 280px; border-bottom: 1px solid lightgray;">
+                        <span style="font-weight: bold; font-size: 20px;">Offie Hours</span><br /><br />
+                        Monday - Friday 9:00am to 6:00pm <br />
+                        Saturday By Appointment
+                        <br />
+                        <br />
+                        <br />
+                    </section>
+                </aside>
+            </div>
+
+            <div class="col-md-2 col-sm-12 aside-top-hr">
+
+                <aside>
+                    <section style="width: 250px; border-bottom: 1px solid lightgray;">
+
+                        <span style="font-weight: bold; font-size: 20px;">Your Address</span><br /><br />
+
+                        <span><b>@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName</b></span><br />
+                        <span>
+                            3495 Peach Grove Blvd. Apt @AptNum
+                        </span>
+                        <span>Pittsburgh, PA 15213</span>
+
+                        <br />
+
+                        <br />
+                    </section>
+
+                    <section id="contact-widget">
+                        <br />
+                        <br />
+                        <span style="font-weight: bold; font-size: 20px;">Pet Policy</span>                      <br /><br />
+                        <a href="#petPolicyModal" data-toggle="modal" data-target="#petPolicyModal">View Our Pet Policy</a>
+                        <br />
+                        <br />
+                        <br />
+                    </section>
+
+                    <section id="contact-widget">
+
+                        <br /><br />
+                        <span style="font-weight: bold; font-size: 20px;">Location</span><br /><br />
+
+                        1201 Peach Grove Blvd.<br />
+                        Pittsburgh, PA 15213<br />
+                        <br /><br />
+                    </section>
+                    <br />
+                    <br />
+
+                    <section style="width: 280px; border-bottom: 1px solid lightgray;">
+                        <span style="font-weight: bold; font-size: 20px;">Offie Hours</span><br /><br />
+                        Monday - Friday 9:00am to 6:00pm <br />
+                        Saturday By Appointment
+                        <br />
+                        <br />
+                        <br />
+                    </section>
+                </aside>
+            </div>
+        }
     </div>
 </div>
 
