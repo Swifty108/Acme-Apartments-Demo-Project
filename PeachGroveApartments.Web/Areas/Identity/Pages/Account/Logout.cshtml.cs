@@ -28,14 +28,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            if (returnUrl != null)
-            {
-                return LocalRedirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToPage();
-            }
+
+            return RedirectToPage("Login", new { isLoggedout = true });
         }
     }
 }

@@ -35,6 +35,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
         public bool IsDirectLogin { get; set; }
+        public bool IsLogOutSuccess { get; set; }
 
         [TempData]
         public string ErrorMessage { get; set; }
@@ -53,7 +54,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null, bool isDirectLogin = false)
+        public async Task OnGetAsync(string returnUrl = null, bool isDirectLogin = false, bool isLoggedOut = false)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
@@ -67,6 +68,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            if (isLoggedOut)
+                IsLogOutSuccess = isLoggedOut;
         }
 
         public async Task<IActionResult> OnPostAsync(bool isDirectLogin = false, string returnUrl = null)
