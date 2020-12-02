@@ -34,7 +34,7 @@ namespace Peach_Grove_Apartments_Demo_Project
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = null;
-            connectionString = CurrentEnvironment.IsDevelopment() ? "DefaultConnection" : "VultrConnection";
+            connectionString = CurrentEnvironment.IsDevelopment() ? "DefaultConnection" : "VPSConnection";
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -109,15 +109,6 @@ namespace Peach_Grove_Apartments_Demo_Project
 
                 endpoints.MapRazorPages();
             });
-
-            //Todo-p: move this to main method in the program.cs file
-            //var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
-            //using (var scope = scopeFactory.CreateScope())
-            //{
-            //    var dbInitializer = scope.ServiceProvider.GetService<DbInitializer>();
-            //    dbInitializer.Initialize();
-            //    dbInitializer.SeedData();
-            //}
         }
     }
 }

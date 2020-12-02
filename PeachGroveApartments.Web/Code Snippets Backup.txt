@@ -1645,3 +1645,14 @@ public class MailController : ControllerBase
             
     }
 }
+
+////////////// DBINITIALIZER STARUP CLASS //////////////////
+
+//Todo-p: move this to main method in the program.cs file
+            //var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            //using (var scope = scopeFactory.CreateScope())
+            //{
+            //    var dbInitializer = scope.ServiceProvider.GetService<DbInitializer>();
+            //    dbInitializer.Initialize();
+            //    dbInitializer.SeedData();
+            //}
