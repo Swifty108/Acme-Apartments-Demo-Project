@@ -16,6 +16,7 @@ using PeachGroveApartments.Infrastructure.Identity;
 using PeachGroveApartments.Infrastructure.Inerfaces;
 using PeachGroveApartments.Infrastructure.Interfaces;
 using PeachGroveApartments.Infrastructure.Services;
+using System;
 
 namespace Peach_Grove_Apartments_Demo_Project
 {
@@ -66,6 +67,13 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             //services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IMailService, MailService>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                //options.Cookie.Expiration = TimeSpan.FromDays(14);
+                options.ExpireTimeSpan = TimeSpan.FromDays(14);
+                options.SlidingExpiration = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

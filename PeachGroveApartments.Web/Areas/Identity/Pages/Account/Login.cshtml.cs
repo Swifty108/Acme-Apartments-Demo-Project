@@ -83,7 +83,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    await _signInManager.RefreshSignInAsync(await _userManager.FindByNameAsync(Input.Email));
+                    // await _signInManager.RefreshSignInAsync(await _userManager.FindByNameAsync(Input.Email));
                     _logger.LogInformation("User logged in.");
 
                     if (isDirectLogin)
