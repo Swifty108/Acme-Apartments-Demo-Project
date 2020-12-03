@@ -487,8 +487,8 @@ div.login-form-icon {
 
     .aside-top-hr {
         display: block;
-        border-top: 1px solid lightgray;
-        margin-top: 40px;
+        /*  border-top: 1px solid lightgray;*/
+        margin-top: 20px;
     }
 
     .aside-top-no-hr {

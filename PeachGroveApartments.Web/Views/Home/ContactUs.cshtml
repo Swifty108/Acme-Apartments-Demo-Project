@@ -12,43 +12,44 @@
     <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
 }
 
-<span style="font-size: 17px;">** For demo purposes only. No message is sent to the site administrator. **</span>
-<br />
-<br />
+<div class="row justify-content-center">
+    <div class="col-md-8 col-sm-12">
 
-<h1>Contact Us</h1>
-<hr />
-<div class="row">
-    <div class="col-md-12">
+        <span style="font-size: 17px;">** For demo purposes only. No message is sent to the site administrator. **</span>
+        <br />
+        <br />
+
+        <h1>Contact Us</h1>
+        <hr />
         <form asp-action="contactus">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="SenderName" class="col-md-9 control-label"></label>
+                <label asp-for="SenderName" class="control-label"></label>
 
-                <input asp-for="SenderName" class="col-md-9 form-control" />
+                <input asp-for="SenderName" class="form-control" />
 
                 <span asp-validation-for="SenderName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="FromEmailAddress" class="col-md-9 control-label"></label>
+                <label asp-for="FromEmailAddress" class="control-label"></label>
 
-                <input asp-for="FromEmailAddress" class="col-md-9 form-control" />
+                <input asp-for="FromEmailAddress" class="form-control" />
 
                 <span asp-validation-for="FromEmailAddress" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Subject" class="col-md-9 control-label"></label>
+                <label asp-for="Subject" class="control-label"></label>
 
-                <input asp-for="Subject" class="col-md-9 form-control" />
+                <input asp-for="Subject" class="form-control" />
 
                 <span asp-validation-for="Subject" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Message" class="col-md-9 control-label"></label>
-                <textarea asp-for="Message" class="col-md-9 form-control" required></textarea>
+                <label asp-for="Message" class="control-label"></label>
+                <textarea asp-for="Message" class="form-control" required></textarea>
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <div class="form-group">
