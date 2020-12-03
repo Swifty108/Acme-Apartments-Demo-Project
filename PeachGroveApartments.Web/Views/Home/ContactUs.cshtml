@@ -6,14 +6,13 @@
     ViewBag.Success = "Your message was sent successfully!";
 }
 
-<br />
-@if (ViewBag.ContactUsSuccess != null && ViewBag.ContactUsSuccess)
-{
-    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
-}
-
 <div class="row justify-content-center">
     <div class="col-md-8 col-sm-12">
+
+        @if (ViewBag.ContactUsSuccess != null && ViewBag.ContactUsSuccess)
+        {
+            <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+        }
 
         <span style="font-size: 17px;">** For demo purposes only. No message is sent to the site administrator. **</span>
         <br />
