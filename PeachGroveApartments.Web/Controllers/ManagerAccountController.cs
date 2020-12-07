@@ -50,7 +50,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         public async Task<IActionResult> ShowApplicationUsers()
-        {
+        {//put whats in paraenth into own var better for debug and readablility
             return View(await _managerRepository.GetApplicationUsers());
         }
 
@@ -66,7 +66,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         public async Task<IActionResult> EditApplication(int Id)
-        {
+        {//if(Id == null) {
+   //         BadRequest("Id not found")
+     //   }
             var application = await _managerRepository.GetApplication(Id);
             if (application == null)
             {

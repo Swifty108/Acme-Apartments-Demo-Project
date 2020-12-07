@@ -24,6 +24,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // GET: ApplicantAccount
+        //Todo-p use [HTTPGet] attribute here 
         public IActionResult Index(bool isApplySuccess = false)
         {
             if (isApplySuccess)
@@ -41,6 +42,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         // GET: ApplicantAccount/Details/5
+        //Todo-p use [HTTPDelete] attribute here 
+        //todo-p addrroute attribute here as alias afte rchanging method name to ShowDetails()
         public async Task<IActionResult> Details(int id)
         {
             var application = await _applicantRepository.GetApplication(id);

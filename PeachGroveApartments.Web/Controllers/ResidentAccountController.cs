@@ -45,7 +45,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         public async Task<IActionResult> ShowApplications()
-        {
+        {//dont use resultl.Id use await
             var userId = _userManager.GetUserAsync(User).Result.Id;
             var applications = await _residentRepository.GetApplications(userId);
 
@@ -98,7 +98,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> ShowPayments()
         {
             var user = await _userManager.GetUserAsync(User);
-
+            //rename logic to something else
             var payViewModel = await _residentLogic.GetBills(user);
 
             return View(payViewModel);

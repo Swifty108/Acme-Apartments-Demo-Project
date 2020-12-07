@@ -42,13 +42,15 @@ namespace Peach_Grove_Apartments_Demo_Project
                     Configuration.GetConnectionString(connectionString)));
             services.AddIdentity<AptUser, IdentityRole>(options =>
             {
+                //separtate l;ine for each semicolon
                 options.SignIn.RequireConfirmedAccount = false; options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false; options.User.RequireUniqueEmail = true; options.Password.RequireLowercase = false; options.Password.RequireUppercase = false;
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders()
-                .AddDefaultUI()
-                .AddRoles<IdentityRole>();
+
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders()
+            .AddDefaultUI()
+            .AddRoles<IdentityRole>();
 
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<IHomeRepository, HomeRepository>();

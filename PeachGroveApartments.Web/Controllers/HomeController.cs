@@ -26,6 +26,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly IMailService _emailService;
         private readonly IMapper _mapper;
 
+        //todo-p new lines aftre each param
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<AptUser> userManager, ApplicationDbContext context, IHomeRepository homeRepository, IMailService emailService, IMapper mapper)
         {
             _logger = logger;
@@ -62,7 +63,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [Authorize(Roles = "Applicant, Resident")]
         [HttpGet]
         public async Task<IActionResult> Apply(string aptNumber, string price, string area, string floorPlanType)
-        {
+        {//js interaction? sam said
             var appViewModel = new ApplyViewModel();
             var user = await _userManager.GetUserAsync(User);
             appViewModel.AptNumber = aptNumber;
