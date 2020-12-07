@@ -23,8 +23,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private SignInManager<AptUser> _signInManager;
-        private readonly IManagerRepository _managerRepository;
-        private readonly IManagerAccountLogic _managerAccountLogic;
+
+        // private readonly IManagerRepository _managerAccount;
+        private readonly IManagerAccount _managerAccount;
+
         private readonly ApplicationDbContext _context;
 
         public ManagerAccountController(ApplicationDbContext context,
@@ -32,14 +34,14 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             RoleManager<IdentityRole> roleManager,
             IMapper mapper, SignInManager<AptUser> signInManager,
             IManagerRepository managerRepository,
-            IManagerAccountLogic managerLogic)
+            IManagerAccount managerAccount)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
             _signInManager = signInManager;
-            _managerRepository = managerRepository;
-            _managerAccountLogic = managerLogic;
+            //   _managerAccount = managerRepository;
+            _managerAccount = managerAccount;
             _context = context;
         }
 
@@ -52,19 +54,19 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowApplicationUsers()
         {//put whats in paraenth into own var better for debug and readablility
-            return View(await _managerRepository.GetApplicationUsers());
+            return View(await _managerAccount.GetApplicationUsers());
         }
 
         [HttpGet]
         public async Task<IActionResult> ShowApplications(string userId)
         {
-            return View(_mapper.Map<ApplicationViewModel>(await _managerRepository.GetApplications(userId)));
+            return View(_mapper.Map<ApplicationViewModel>(await _managerAccount.GetApplications(userId)));
         }
 
         [HttpGet]
         public async Task<IActionResult> ViewApplication(int Id)
         {
-            var application = await _managerRepository.GetApplication(Id);
+            var application = await _managerAccount.GetApplication(Id);
             return View(application);
         }
 
@@ -73,7 +75,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {//if(Id == null) {
          //         BadRequest("Id not found")
          //   }
-            var application = await _managerRepository.GetApplication(Id);
+            var application = await _managerAccount.GetApplication(Id);
             if (application == null)
             {
                 return NotFound();
@@ -94,7 +96,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                 try
                 {
                     var app = _mapper.Map<Application>(application);
-                    await _managerRepository.EditApplication(app);
+                    await _managerAccount.EditApplication(app);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,7 +120,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         public async Task<IActionResult> CancelApplication(int Id)
         {
-            var application = await _managerRepository.GetApplication(Id);
+            var application = await _managerAccount.GetApplication(Id);
 
             if (application == null)
             {
@@ -133,7 +135,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CancelApplicationConfirmed(Application app)
         {
-            var application = await _managerAccountLogic.CancelApplication(app.ApplicationId);
+            var application = await _managerAccount.CancelApplication(app.ApplicationId);
 
             return RedirectToAction("ShowApplications", new { userId = application.AptUserId });
         }
@@ -142,7 +144,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             try
             {
-                await _managerAccountLogic.ApproveApplication(
+                await _managerAccount.ApproveApplication(
                     approveViewModel.UserId,
                     approveViewModel.ApplicationId,
                     approveViewModel.SSN,
@@ -171,14 +173,14 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         private async Task<Application> ApplicationExists(int id)
         {
-            return await _managerRepository.GetApplication(id) ?? null;
+            return await _managerAccount.GetApplication(id) ?? null;
         }
 
         public async Task<IActionResult> UnApproveApplication(string userId, string aptNumber, int applicationId)
         {
             try
             {
-                await _managerAccountLogic.UnApproveApplication(userId, aptNumber, applicationId);
+                await _managerAccount.UnApproveApplication(userId, aptNumber, applicationId);
             }
             catch (Exception e)
             {
@@ -202,12 +204,12 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowMaintenanceRequestsUsers()
         {
-            return View(await _managerRepository.GetMaintenanceRequestsUsers());
+            return View(await _managerAccount.GetMaintenanceRequestsUsers());
         }
 
         public async Task<IActionResult> ShowMaintenanceRequests(string firstName, string lastName)
         {
-            var MaintenanceRecords = await _managerRepository.GetMaintenanceUserRequests();
+            var MaintenanceRecords = await _managerAccount.GetMaintenanceUserRequests();
 
             var mViewModel = new MaintenanceRequestViewModel
             {
@@ -223,7 +225,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ViewMaintenanceRequest(int maintenanceId, string firstName, string lastName)
         {
-            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
 
             if (maintenanceRecord == null)
             {
@@ -241,7 +243,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> EditMaintenanceRequest(int maintenanceId, string firstName, string lastName)
         {
-            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
 
             return View(new MaintenanceRequestViewModel
             {
@@ -263,7 +265,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _managerAccountLogic.EditMaintenanceRequest(maintenanceViewModel);
+                await _managerAccount.EditMaintenanceRequest(maintenanceViewModel);
                 TempData["MaintenanceEditSuccess"] = true;
                 return RedirectToAction("ShowMaintenanceRequests", new
                 {
@@ -281,7 +283,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             try
             {
-                await _managerAccountLogic.ApproveMaintenanceRequest(userId, maintenanceId);
+                await _managerAccount.ApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception e)
             {
@@ -312,7 +314,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             try
             {
-                await _managerAccountLogic.UnApproveMaintenanceRequest(userId, maintenanceId);
+                await _managerAccount.UnApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception e)
             {

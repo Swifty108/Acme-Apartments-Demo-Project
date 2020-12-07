@@ -20,10 +20,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
         private readonly IResidentRepository _residentRepository;
-        private readonly IResidentAccountLogic _residentAccountLogic;
+        private readonly IResidentAccount _residentAccountLogic;
         private readonly IMapper _mapper;
 
-        public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IResidentRepository residentRepository, IResidentAccountLogic residentLogic, IMapper mapper)
+        public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IResidentRepository residentRepository, IResidentAccount residentLogic, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;

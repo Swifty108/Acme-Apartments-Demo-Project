@@ -67,6 +67,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         [Authorize(Roles = "Applicant, Resident")]
         [HttpGet]
+        //todo-p: test with frombody
         public async Task<IActionResult> Apply([Bind("AptNumber, Price, Area, FloorPlanType")] ApplyViewModel applyViewModel)
         {
             ModelState.Clear();

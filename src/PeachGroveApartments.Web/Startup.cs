@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -56,8 +55,8 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddScoped<IApplicantRepository, ApplicantRepository>();
             services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IManagerRepository, ManagerRepository>();
-            services.AddScoped<IManagerAccountLogic, ManagerAccountLogic>();
-            services.AddScoped<IResidentAccountLogic, ResidentAccountLogic>();
+            services.AddScoped<IManagerAccount, ManagerAccount>();
+            services.AddScoped<IResidentAccount, ResidentAccount>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
