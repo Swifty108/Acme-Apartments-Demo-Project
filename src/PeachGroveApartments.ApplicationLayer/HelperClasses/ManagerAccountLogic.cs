@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.ApplicationLayer.HelperClasses
 {
-    public class ApplicantLogic : IApplicantLogic
+    public class ManagerAccountLogic : IManagerAccountLogic
     {
         private readonly IManagerRepository _repository;
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
         private readonly IManagerRepository _managerRepository;
 
-        public ApplicantLogic(IManagerRepository repository,
+        public ManagerAccountLogic(IManagerRepository repository,
             ApplicationDbContext dbContext,
             UserManager<AptUser> userManager,
             IManagerRepository managerRepository)
@@ -26,17 +26,6 @@ namespace PeachGroveApartments.ApplicationLayer.HelperClasses
             _dbContext = dbContext;
             _userManager = userManager;
             _managerRepository = managerRepository;
-        }
-
-        public async Task<Application> CancelApplication(int ApplicationId)
-        {
-            var application = await _repository.GetApplication(ApplicationId);
-            application.Status = ApplicationStatus.CANCELED;
-
-            _dbContext.Applications.Update(application);
-            await _dbContext.SaveChangesAsync();
-
-            return application;
         }
 
         public async Task ApproveApplication(
@@ -89,6 +78,17 @@ namespace PeachGroveApartments.ApplicationLayer.HelperClasses
             _dbContext.Applications.Update(app);
 
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<Application> CancelApplication(int ApplicationId)
+        {
+            var application = await _repository.GetApplication(ApplicationId);
+            application.Status = ApplicationStatus.CANCELED;
+
+            _dbContext.Applications.Update(application);
+            await _dbContext.SaveChangesAsync();
+
+            return application;
         }
 
         public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)

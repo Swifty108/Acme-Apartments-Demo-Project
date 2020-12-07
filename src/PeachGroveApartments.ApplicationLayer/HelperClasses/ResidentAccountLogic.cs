@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.ApplicationLayer.HelperClasses
 {
-    public class ResidentLogic : IResidentLogic
+    public class ResidentAccountLogic : IResidentAccountLogic
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
         private readonly IResidentRepository _residentRepository;
 
-        public ResidentLogic(
+        public ResidentAccountLogic(
             ApplicationDbContext dbContext,
             UserManager<AptUser> userManager,
             IResidentRepository residentRepository

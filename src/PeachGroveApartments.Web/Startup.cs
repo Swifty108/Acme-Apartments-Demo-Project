@@ -16,7 +16,7 @@ using PeachGroveApartments.Infrastructure.Interfaces;
 using System;
 
 namespace Peach_Grove_Apartments_Demo_Project
-{//todo-p: add github wiki
+{
     public class Startup
     {
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
@@ -56,9 +56,8 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddScoped<IApplicantRepository, ApplicantRepository>();
             services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IManagerRepository, ManagerRepository>();
-            services.AddScoped<IManagerLogic, ManagerLogic>();
-            services.AddScoped<IApplicantLogic, ApplicantLogic>();
-            services.AddScoped<IResidentLogic, ResidentLogic>();
+            services.AddScoped<IManagerAccountLogic, ManagerAccountLogic>();
+            services.AddScoped<IResidentAccountLogic, ResidentAccountLogic>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

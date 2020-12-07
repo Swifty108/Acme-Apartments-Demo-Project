@@ -24,7 +24,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly IHomeRepository _homeRepository;
         private readonly IMapper _mapper;
 
-        //todo-p new lines aftre each param
         public HomeController(ILogger<HomeController> logger,
             ApplicationDbContext db,
             UserManager<AptUser> userManager,
@@ -39,21 +38,25 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult ShowAmenities()
         {
             return View();
         }
 
+        [HttpGet]
         public IActionResult ShowGallery()
         {
             return View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> ShowFloorPlans(string floorPlanType = null)
         {
             var floorPlans = await _homeRepository.GetFloorPlans();
@@ -61,21 +64,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             floorPlansViewModel.FloorPlanType = floorPlanType;
             return View(floorPlansViewModel);
         }
-
-        //[Authorize(Roles = "Applicant, Resident")]
-        //[HttpGet]
-        //public async Task<IActionResult> Apply(string aptNumber, string price, string area, string floorPlanType)
-        //{//js interaction? sam said
-        //    var appViewModel = new ApplyViewModel();
-        //    var user = await _userManager.GetUserAsync(User);
-        //    appViewModel.AptNumber = aptNumber;
-        //    appViewModel.Price = price;
-        //    appViewModel.User = user;
-        //    appViewModel.Area = area;
-        //    appViewModel.FloorPlanType = floorPlanType;
-
-        //    return View(appViewModel);
-        //}
 
         [Authorize(Roles = "Applicant, Resident")]
         [HttpGet]
@@ -93,11 +81,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> ApplyPost(ApplyViewModel applicationViewModel)
         {
             var user = await _userManager.GetUserAsync(User);
-
-            //if(_context.Applications.Where(a => a.AptNumber == applicationViewModel.AptNumber) != null)
-            //{
-            //    return RedirectToAction("index", "applicantaccount", new { IsApplySuccess = true });
-            //}
 
             if (ModelState.IsValid)
             {
@@ -125,6 +108,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return RedirectToAction("Apply", applicationViewModel.AptNumber, applicationViewModel.Price);
         }
 
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
@@ -136,6 +120,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [HttpGet]
         public IActionResult ContactUs()
         {
             ViewBag.ContactUsSuccess = TempData["ContactUsSuccess"];

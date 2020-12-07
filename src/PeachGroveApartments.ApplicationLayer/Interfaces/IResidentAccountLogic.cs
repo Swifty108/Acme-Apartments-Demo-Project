@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PeachGroveApartments.ApplicationLayer.Interfaces
 {
-    public interface IResidentLogic
+    public interface IResidentAccountLogic
     {
         public Task<PaymentsViewModel> GetBills(AptUser user);
 

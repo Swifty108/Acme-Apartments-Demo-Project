@@ -20,19 +20,19 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
         private readonly IResidentRepository _residentRepository;
-        private readonly IResidentLogic _residentLogic;
+        private readonly IResidentAccountLogic _residentAccountLogic;
         private readonly IMapper _mapper;
 
-        public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IResidentRepository residentRepository, IResidentLogic residentLogic, IMapper mapper)
+        public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IResidentRepository residentRepository, IResidentAccountLogic residentLogic, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
             _residentRepository = residentRepository;
-            _residentLogic = residentLogic;
+            _residentAccountLogic = residentLogic;
             _mapper = mapper;
         }
 
-        // GET: AppUserAccount
+        [HttpGet]
         public IActionResult Index(bool isApplySuccess = false)
         {
             if (isApplySuccess)
@@ -41,6 +41,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> ShowApplications()
         {//dont use resultl.Id use await
             var userId = _userManager.GetUserAsync(User).Result.Id;
@@ -49,6 +50,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View(applications);
         }
 
+        [HttpGet]
         public IActionResult SubmitMaintenanceRequest()
         {
             ViewBag.MaintenanceSuccess = TempData["MaintenanceSuccess"];
@@ -99,15 +101,17 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             });
         }
 
+        [HttpGet]
         public async Task<IActionResult> ShowPayments()
         {
             var user = await _userManager.GetUserAsync(User);
             //rename logic to something else
-            var payViewModel = await _residentLogic.GetBills(user);
+            var payViewModel = await _residentAccountLogic.GetBills(user);
 
             return View(payViewModel);
         }
 
+        [HttpGet]
         public IActionResult WriteAReview()
         {
             ViewBag.ReviewSuccess = TempData["ReviewSuccess"];
@@ -128,7 +132,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                     ReviewText = review.ReviewText
                 };
 
-                await _residentLogic.AddReview(newReview);
+                await _residentAccountLogic.AddReview(newReview);
 
                 TempData["ReviewSuccess"] = true;
                 return RedirectToAction("WriteAReview");
