@@ -1,12 +1,12 @@
-# Peach Grove Apartments Demo Web App
+# Acme Apartments Demo Web App
 
-This is an ASP.NET Core MVC Web App used to manage a fictional apartment complex.
+This is an ASP.NET Core MVC demo Web App used to manage a fictional apartment complex.
 
 ## Technology Stacks Used
 
 ASP.NET Core MVC 3.1, EF Core 3.1, Automapper 10.1.1, SQL Server, HTML5, CSS, Bootstrap, Microsoft SQL Server Management Studio, Git for Version Control, Azure DevOps for project management, and Microsoft Teams for code reviews.  
 
-For productivity purposes, the following Visual Studio extensions were used: Productivity Power Tools, CodeMaid, Github extension for VS 2019, Snippet Designer, and Web Essentials. Also, these Android apps were used to facilitate effective time management: Microsoft To-Do app, Trello app, and the Pomodoro app.
+For productivity purposes, the following Visual Studio extensions were used: Productivity Power Tools, CodeMaid, Github extension for VS 2019, Snippet Designer, and Web Essentials. Also, these Android apps were used to facilitate effective project time management: Microsoft To-Do app, Trello app, and the Pomodoro app.
 
 The architectural pattern used for this project is the Three-Layer Architecture.
 
