@@ -1,4 +1,4 @@
-﻿namespace PeachGroveApartments.BLL.HelperClasses
+﻿namespace AcmeApartments.Common.HelperClasses
 {
     public struct Roles
     {

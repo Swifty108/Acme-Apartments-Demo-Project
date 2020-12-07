@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.Infras
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.ApplicationLayer", "src\PeachGroveApartments.ApplicationLayer\PeachGroveApartments.ApplicationLayer.csproj", "{C944C965-5C9B-4910-B611-66DCE45E1EA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcmeApartments.BLL", "AcmeApartments.BLL\AcmeApartments.BLL.csproj", "{F679AB72-A3EF-4E46-A746-E4FA6ED8A4A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcmeApartments.BLL", "src\AcmeApartments.BLL\AcmeApartments.BLL.csproj", "{F679AB72-A3EF-4E46-A746-E4FA6ED8A4A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcmeApartments.DAL", "AcmeApartments.DAL\AcmeApartments.DAL.csproj", "{FC46A12A-D715-4334-968D-CC393313F5FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcmeApartments.DAL", "src\AcmeApartments.DAL\AcmeApartments.DAL.csproj", "{FC46A12A-D715-4334-968D-CC393313F5FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

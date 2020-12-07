@@ -1,4 +1,4 @@
-﻿namespace PeachGroveApartments.Common.HelperClasses
+﻿namespace AcmeApartments.Common.HelperClasses
 {
     public struct FloorPlanType
     {
