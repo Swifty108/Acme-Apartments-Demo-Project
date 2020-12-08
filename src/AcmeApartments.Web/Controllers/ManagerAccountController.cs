@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AcmeApartments.Common.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         private readonly UserManager<AptUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
+        private readonly IApplicationService _applicationService;
+
         private SignInManager<AptUser> _signInManager;
 
         // private readonly IManagerRepository _managerAccount;
@@ -30,7 +33,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             RoleManager<IdentityRole> roleManager,
             IMapper mapper, SignInManager<AptUser> signInManager,
             IManagerRepository managerRepository,
-            IManagerAccount managerAccount)
+            IManagerAccount managerAccount, IApplicationService applicationService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -39,6 +42,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             //   _managerAccount = managerRepository;
             _managerAccount = managerAccount;
             _context = context;
+            _applicationService = applicationService;
         }
 
         [HttpGet]
@@ -50,19 +54,22 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowApplicationUsers()
         {//todo-p: put whats in paraenth into own var better for debug and readablility
-            return View(await _managerAccount.GetApplicationUsers());
+            var appUsers = await _applicationService.GetApplicationUsers();
+            return View(appUsers);
         }
 
         [HttpGet]
         public async Task<IActionResult> ShowApplications(string userId)
         {
-            return View(_mapper.Map<ApplicationViewModel>(await _managerAccount.GetApplications(userId)));
+            var apps = await _applicationService.GetApplications(userId);
+            var appsViewModel = _mapper.Map<ApplicationViewModel>(apps);
+            return View(apps);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewApplication(int Id)
+        public async Task<IActionResult> ViewApplication(int applicationId)
         {
-            var application = await _managerAccount.GetApplication(Id);
+            var application = await _applicationService.GetApplication(applicationId);
             return View(application);
         }
 

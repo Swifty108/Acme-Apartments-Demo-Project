@@ -5,7 +5,6 @@ using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
 using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AcmeApartments.BLL.HelperClasses
@@ -122,16 +121,6 @@ namespace AcmeApartments.BLL.HelperClasses
             maintenanceRecord.Status = MaintenanceRequestStatus.UNAPPROVED;
 
             _repository.UpdateMaintenaceRequest(maintenanceRecord);
-        }
-
-        public async Task<List<AptUser>> GetApplicationUsers()
-        {
-            return _managerRepository.GetApplicationUsers();
-        }
-
-        public async Task<ApplicationViewModelDTO> GetApplications(string userId)
-        {
-            return _managerRepository.GetApplications(userId);
         }
 
         public async Task EditApplication(Application application)

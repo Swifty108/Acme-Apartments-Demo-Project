@@ -11,6 +11,8 @@ namespace AcmeApartments.DAL.Interfaces
 
         public void UpdateUser(AptUser user);
 
+        public Task<Application> GetApplication(int appId);
+
         public void UpdateApplication(Application app);
 
         public Task<List<Application>> GetApplications(string userId);

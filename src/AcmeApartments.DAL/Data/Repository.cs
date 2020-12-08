@@ -29,6 +29,12 @@ namespace AcmeApartments.DAL.Data
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<Application> GetApplication(int appId)
+        {
+            var application = await _dbContext.Applications.Where(u => u.ApplicationId == appId).FirstOrDefaultAsync();
+            return application;
+        }
+
         public async Task<List<Application>> GetApplications(string userId)
         {
             return await _dbContext.Applications.Where(u => u.AptUserId == userId).ToListAsync();
