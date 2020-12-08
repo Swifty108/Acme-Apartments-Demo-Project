@@ -1,22 +1,22 @@
-﻿using AcmeApartments.BLL.DTOs;
+﻿using AcmeApartments.DAL.Identity;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AcmeApartments.Web.ViewModels
+namespace AcmeApartments.BLL.DTOs
 {
-    public class ApplicationViewModel
+    internal class ApplicationEntityDTO
     {
-        public IList<ApplicationDTO> Applications { get; set; }
-
+        [Key]
         [Display(Name = "Applicantion ID")]
         public int ApplicationId { get; set; }
 
+        [Required]
+        [ForeignKey(nameof(AptUser))]
         [Display(Name = "Applicant ID")]
         public string AptUserId { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public AptUser AptUser { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Date Applied")]

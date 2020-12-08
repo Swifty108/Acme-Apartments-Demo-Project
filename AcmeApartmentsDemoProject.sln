@@ -5,13 +5,7 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcmeApartments.Web", "src\AcmeApartments.Web\AcmeApartments.Web.csproj", "{29BBF7B7-D675-45A9-AAD0-B5CB92C47911}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.Core", "src\PeachGroveApartments.Core\PeachGroveApartments.Core.csproj", "{564411A6-B0C2-4707-8F7B-895EDF4BF993}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcmeApartments.Common", "src\AcmeApartments.Common\AcmeApartments.Common.csproj", "{75B1D755-C5C6-459E-B25F-EE12B57FC61A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.Infrastructure", "src\PeachGroveApartments.Infrastructure\PeachGroveApartments.Infrastructure.csproj", "{B5A7612C-A51E-4273-9BA2-84E2249C8958}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeachGroveApartments.ApplicationLayer", "src\PeachGroveApartments.ApplicationLayer\PeachGroveApartments.ApplicationLayer.csproj", "{C944C965-5C9B-4910-B611-66DCE45E1EA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcmeApartments.BLL", "src\AcmeApartments.BLL\AcmeApartments.BLL.csproj", "{F679AB72-A3EF-4E46-A746-E4FA6ED8A4A8}"
 EndProject

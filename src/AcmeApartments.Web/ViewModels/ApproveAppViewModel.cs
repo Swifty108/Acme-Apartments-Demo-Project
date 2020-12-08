@@ -1,4 +1,4 @@
-﻿namespace PeachGroveApartments.ApplicationLayer.ViewModels
+﻿namespace AcmeApartments.Web.ViewModels
 {
     public class ApproveAppViewModel
     {

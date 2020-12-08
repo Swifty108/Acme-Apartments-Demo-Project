@@ -1,10 +1,10 @@
 ﻿using AcmeApartments.BLL.Interfaces;
+using AcmeApartments.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PeachGroveApartments.ApplicationLayer.ViewModels;
 using System.Threading.Tasks;
 
-namespace Peach_Grove_Apartments_Demo_Project.Controllers
+namespace AcmeApartments.Controllers
 {
     [Authorize(Roles = "Applicant")]
     public class ApplicantAccountController : Controller

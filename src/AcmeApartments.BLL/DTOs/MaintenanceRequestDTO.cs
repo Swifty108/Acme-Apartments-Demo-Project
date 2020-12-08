@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcmeApartments.Web.ViewModels
+namespace AcmeApartments.BLL.DTOs
 {
-    public class MaintenanceRequestViewModel
+    public class MaintenanceRequestDTO
     {
         public int Id { get; set; }
         public string AptUserId { get; set; }

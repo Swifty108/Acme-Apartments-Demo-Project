@@ -1,16 +1,17 @@
-﻿using AcmeApartments.BLL.HelperClasses;
+﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
+using AcmeApartments.Common.DTOs;
 using AcmeApartments.Common.Interfaces;
+using AcmeApartments.DAL.Models;
+using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PeachGroveApartments.ApplicationLayer.ViewModels;
-using PeachGroveApartments.Core.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Peach_Grove_Apartments_Demo_Project.Controllers
+namespace AcmeApartments.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -66,7 +67,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             ModelState.Clear();
             var user = await _userService.GetUser();
-            applyViewModel.User = user;
+            var aptUser = _mapper.Map<AptUserDTO>(user);
+            applyViewModel.User = aptUser;
 
             return View(applyViewModel);
         }

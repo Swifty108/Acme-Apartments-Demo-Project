@@ -1,7 +1,10 @@
-﻿using PeachGroveApartments.Core.Interfaces;
-using PeachGroveApartments.Core.Models;
-using PeachGroveApartments.Infrastructure.Identity;
-using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.Common.HelperClasses;
+using AcmeApartments.DAL.Identity;
+using AcmeApartments.DAL.Interfaces;
+using AcmeApartments.DAL.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;

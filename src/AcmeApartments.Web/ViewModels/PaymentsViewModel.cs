@@ -1,12 +1,11 @@
-﻿using PeachGroveApartments.Infrastructure.Identity;
-using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.Common.DTOs;
 
-namespace PeachGroveApartments.ApplicationLayer.ViewModels
+namespace AcmeApartments.Web.ViewModels
 {
     public class PaymentsViewModel
     {
-        public WaterBill WaterBill { get; set; }
-        public ElectricBill ElectricBill { get; set; }
-        public AptUser AptUser { get; set; }
+        public WaterBillDTO WaterBill { get; set; }
+        public ElectricBillDTO ElectricBill { get; set; }
+        public AptUserDTO AptUser { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.DAL.Models;
 using System.Collections.Generic;
 
-namespace PeachGroveApartments.ApplicationLayer.ViewModels
+namespace AcmeApartments.Web.ViewModels
 {
     public class CompositeMaintRequestViewModel
     {

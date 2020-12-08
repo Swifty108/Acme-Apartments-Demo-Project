@@ -1,17 +1,17 @@
-﻿using AcmeApartments.BLL.HelperClasses;
+﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.Interfaces;
 using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
+using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PeachGroveApartments.ApplicationLayer.ViewModels;
 using System;
 using System.Threading.Tasks;
 
-namespace Peach_Grove_Apartments_Demo_Project.Controllers
+namespace AcmeApartments.Web.Controllers
 {
     [Authorize(Roles = "Resident")]
     public class ResidentAccountController : Controller

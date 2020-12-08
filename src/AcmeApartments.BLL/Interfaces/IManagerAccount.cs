@@ -1,4 +1,4 @@
-﻿using AcmeApartments.BLL.HelperClasses;
+﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Models;
 using System.Collections.Generic;

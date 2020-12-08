@@ -1,11 +1,11 @@
-﻿using PeachGroveApartments.Infrastructure.Identity;
+﻿using AcmeApartments.Common.DTOs;
 using System.ComponentModel.DataAnnotations;
 
-namespace PeachGroveApartments.ApplicationLayer.ViewModels
+namespace AcmeApartments.Web.ViewModels
 {
     public class ApplyViewModel
     {
-        public AptUser User { get; set; }
+        public AptUserDTO User { get; set; }
 
         [Required]
         public string Occupation { get; set; }

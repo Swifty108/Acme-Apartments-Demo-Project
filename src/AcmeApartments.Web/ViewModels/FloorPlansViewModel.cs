@@ -1,13 +1,13 @@
-﻿using PeachGroveApartments.Core.Models;
+﻿using AcmeApartments.Common.DTOs;
 using System.Collections.Generic;
 
-namespace PeachGroveApartments.ApplicationLayer.ViewModels
+namespace AcmeApartments.Web.ViewModels
 {
     public class FloorPlansViewModel
     {
-        public IList<FloorPlan> StudioPlans { get; set; }
-        public IList<FloorPlan> OneBedPlans { get; set; }
-        public IList<FloorPlan> TwoBedPlans { get; set; }
+        public IList<FloorPlanDTO> StudioPlans { get; set; }
+        public IList<FloorPlanDTO> OneBedPlans { get; set; }
+        public IList<FloorPlanDTO> TwoBedPlans { get; set; }
         public string FloorPlanType { get; set; }
     }
 }

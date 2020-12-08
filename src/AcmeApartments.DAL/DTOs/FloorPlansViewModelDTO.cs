@@ -1,4 +1,4 @@
-﻿using PeachGroveApartments.Core.Models;
+﻿using AcmeApartments.DAL.Models;
 using System.Collections.Generic;
 
 namespace AcmeApartments.DAL.DTOs

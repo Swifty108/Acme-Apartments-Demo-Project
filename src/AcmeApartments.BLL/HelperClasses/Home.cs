@@ -1,4 +1,5 @@
-﻿using AcmeApartments.BLL.Interfaces;
+﻿using AcmeApartments.BLL.DTOs;
+using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.Interfaces;
 using AcmeApartments.DAL.DTOs;
 using AcmeApartments.DAL.Identity;

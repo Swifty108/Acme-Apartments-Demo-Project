@@ -1,10 +1,10 @@
-﻿using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.BLL.DTOs;
 using System.Collections.Generic;
 
-namespace PeachGroveApartments.ApplicationLayer.ViewModels
+namespace AcmeApartments.Web.ViewModels
 {
     public class MaintenanceReqHistoryViewModel
     {
-        public List<MaintenanceRequest> Requests { get; set; }
+        public List<MaintenanceRequestDTO> Requests { get; set; }
     }
 }

@@ -1,20 +1,19 @@
-﻿using AcmeApartments.DAL.Identity;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AcmeApartments.DAL.Models
+namespace AcmeApartments.Common.DTOs
 {
-    public class WaterBill
+    public class ElectricBillDTO
     {
         [Key]
-        public int WaterBillId { get; set; }
+        public int ElectricBillId { get; set; }
 
         [Required]
         [ForeignKey("AptUser")]
         public string AptUserId { get; set; }
 
-        public AptUser AptUser { get; set; }
+        public AptUserDTO AptUser { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]

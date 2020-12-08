@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcmeApartments.Web.ViewModels
+namespace AcmeApartments.BLL.DTOs
 {
-    public class ReviewViewModel
+    public class ReviewViewModelDTO
     {
         [Required]
         [MaxLength(10000)]

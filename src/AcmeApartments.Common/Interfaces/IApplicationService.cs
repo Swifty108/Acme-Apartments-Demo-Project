@@ -10,5 +10,7 @@ namespace AcmeApartments.Common.Interfaces
         public Task<List<AptUser>> GetApplicationUsers();
 
         Task<Application> GetApplication(int applicationId);
+
+        public Task<List<Application>> GetApplications(string userId);
     }
 }

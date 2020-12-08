@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace AcmeApartments.DAL.Data.Migrations
 {

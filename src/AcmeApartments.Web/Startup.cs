@@ -1,8 +1,14 @@
+using AcmeApartments.BLL.HelperClasses;
+using AcmeApartments.BLL.Interfaces;
+using AcmeApartments.DAL.Data;
+using AcmeApartments.DAL.Identity;
+using AcmeApartments.DAL.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

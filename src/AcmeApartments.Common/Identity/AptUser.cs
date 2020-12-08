@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcmeApartments.DAL.Identity
+namespace AcmeApartments.Common.Identity
 {
     public class AptUser : IdentityUser
     {

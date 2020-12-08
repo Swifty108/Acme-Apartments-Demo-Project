@@ -1,15 +1,15 @@
-﻿using AcmeApartments.BLL.HelperClasses;
+﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.Interfaces;
+using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PeachGroveApartments.ApplicationLayer.ViewModels;
 using System;
 using System.Threading.Tasks;
 
-namespace Peach_Grove_Apartments_Demo_Project.Controllers
+namespace AcmeApartments.Web.Controllers
 {
     [Authorize(Roles = "Manager")]
     public class ManagerAccountController : Controller

@@ -1,12 +1,11 @@
 ﻿using AcmeApartments.DAL.Models;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcmeApartments.DAL.Identity
+namespace AcmeApartments.Common.DTOs
 {
-    public class AptUser : IdentityUser
+    public class AptUserDTO
     {
         [Required]
         public string FirstName { get; set; }
