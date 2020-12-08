@@ -1,6 +1,6 @@
-﻿using AcmeApartments.DAL.Identity;
+﻿using AcmeApartments.DAL.DTOs;
+using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Models;
-using PeachGroveApartments.Infrastructure.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

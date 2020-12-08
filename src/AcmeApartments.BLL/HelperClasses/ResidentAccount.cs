@@ -111,10 +111,5 @@ namespace AcmeApartments.BLL.HelperClasses
         {
             return await _residentRepository.GetMaintenanceUserRequests();
         }
-
-        public Task<PaymentsViewModel> GetBills(AptUser user)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

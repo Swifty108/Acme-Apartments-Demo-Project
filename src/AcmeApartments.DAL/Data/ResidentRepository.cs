@@ -1,4 +1,5 @@
-﻿using AcmeApartments.DAL.Models;
+﻿using AcmeApartments.DAL.Interfaces;
+using AcmeApartments.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,11 +37,6 @@ namespace AcmeApartments.DAL.Data
         public async Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId)
         {
             return await _dbContext.MaintenanceRequests.FindAsync(maintenanceId);
-        }
-
-        public Task EditApplication(Application application)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

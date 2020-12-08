@@ -1,4 +1,7 @@
-﻿using AcmeApartments.DAL.Models;
+﻿using AcmeApartments.DAL.DTOs;
+using AcmeApartments.DAL.Interfaces;
+using AcmeApartments.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 

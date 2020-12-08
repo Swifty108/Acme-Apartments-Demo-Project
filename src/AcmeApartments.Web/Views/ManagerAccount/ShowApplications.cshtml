@@ -1,8 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using PeachGroveApartments.Infrastructure.Identity
-@using PeachGroveApartments.Common.HelperClasses
-@inject SignInManager<AptUser> SignInManager
-@inject UserManager<AptUser> UserManager
+﻿@using AcmeApartments.BLL.HelperClasses
+
 @model PeachGroveApartments.ApplicationLayer.ViewModels.ApplicationViewModel
 @{
     ViewData["Title"] = "User Application";
@@ -33,7 +30,7 @@
 
                     {
                         routeParams = new Dictionary<string, string>
-                                                                                                                                {
+                                                                                                                                    {
                                         { "userid", application.AptUserId },
                                         { "aptnumber", application.AptNumber },
                                         { "aptprice", application.Price },

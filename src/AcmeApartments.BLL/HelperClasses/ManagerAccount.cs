@@ -101,6 +101,12 @@ namespace AcmeApartments.BLL.HelperClasses
             return application;
         }
 
+        public async Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId)
+        {
+            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceId);
+            return maintenanceRecord;
+        }
+
         public async Task<List<AptUser>> GetMaintenanceRequestsUsers()
         {
             var maintenanceRequests = await _managerRepository.GetMaintenanceRequestsUsers();
@@ -113,13 +119,12 @@ namespace AcmeApartments.BLL.HelperClasses
             return maintenanceUserRequests;
         }
 
-        public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)
+        public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestDTO maintenanceViewModelDTO)
         {
-            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceViewModel.Id);
+            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceViewModelDTO.Id);
 
-            maintenanceRecord.ProblemDescription = maintenanceViewModel.ProblemDescription;
-            maintenanceRecord.isAllowedToEnter = maintenanceViewModel.isAllowedToEnter;
-            //  var mRecord = _mapper.Map<MaintenanceRequest>(mViewModel);
+            maintenanceRecord.ProblemDescription = maintenanceViewModelDTO.ProblemDescription;
+            maintenanceRecord.isAllowedToEnter = maintenanceViewModelDTO.isAllowedToEnter;
 
             _dbContext.Update(maintenanceRecord);
             await _dbContext.SaveChangesAsync();

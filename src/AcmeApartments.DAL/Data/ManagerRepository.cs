@@ -1,4 +1,5 @@
-﻿using AcmeApartments.DAL.Identity;
+﻿using AcmeApartments.DAL.DTOs;
+using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +68,12 @@ namespace AcmeApartments.DAL.Data
         public async Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId)
         {
             return await _dbContext.MaintenanceRequests.FindAsync(maintenanceId);
+        }
+
+        public async Task EditMaintenanceRequest(MaintenanceRequest maintenanceRequest)
+        {
+            _dbContext.Update(maintenanceRequest);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

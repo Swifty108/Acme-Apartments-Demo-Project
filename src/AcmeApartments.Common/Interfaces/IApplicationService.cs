@@ -7,8 +7,6 @@ namespace AcmeApartments.Common.Interfaces
 {
     public interface IApplicationService
     {
-        public Task<List<AptUser>> GetApplications(string userId);
-
         public Task<List<AptUser>> GetApplicationUsers();
 
         Task<Application> GetApplication(int applicationId);

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PeachGroveApartments.ApplicationLayer.ViewModels;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
@@ -234,7 +233,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _managerAccount.EditMaintenanceRequest(maintenanceViewModel);
+                var maintenanceRequestDTO = _mapper.Map<MaintenanceRequestDTO>(maintenanceViewModel);
+
+                await _managerAccount.EditMaintenanceRequest(maintenanceRequestDTO);
                 TempData["MaintenanceEditSuccess"] = true;
                 return RedirectToAction("ShowMaintenanceRequests", new
                 {
@@ -242,8 +243,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                     lastName = maintenanceViewModel.userLName
                 });
             }
-
-            //ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", mViewModel.Id);
 
             return View(maintenanceViewModel);
         }
@@ -272,11 +271,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             ViewBag.ApproveMaintenanceFailed = TempData["ApproveFailedMessage"];
             return View();
-        }
-
-        private bool MaintenanceRequestExists(int id)
-        {
-            return _context.MaintenanceRequests.Any(e => e.Id == id);
         }
 
         public async Task<IActionResult> UnApproveMaintenanceRequest(string userId, int maintenanceId)

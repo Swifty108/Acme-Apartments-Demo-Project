@@ -1,4 +1,4 @@
-﻿using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.BLL.HelperClasses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ namespace PeachGroveApartments.ApplicationLayer.ViewModels
 {
     public class ApplicationViewModel
     {
-        public IList<Application> Applications { get; set; }
+        public IList<ApplicationDTO> Applications { get; set; }
 
         [Display(Name = "Applicantion ID")]
         public int ApplicationId { get; set; }
