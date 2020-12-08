@@ -1,4 +1,5 @@
 ﻿using AcmeApartments.BLL.Interfaces;
+using AcmeApartments.Common.Interfaces;
 using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
@@ -18,6 +19,7 @@ namespace AcmeApartments.BLL.HelperClasses
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
         private readonly IHttpContextAccessor _accessor;
+        private readonly IUserService _userService;
 
         public ApplicantAccount(
             ApplicationDbContext dbContext,
@@ -25,21 +27,21 @@ namespace AcmeApartments.BLL.HelperClasses
             IManagerRepository managerRepository,
             IRepository repository,
             IApplicantRepository applicantRepository,
-            IHttpContextAccessor accessor)
+            IHttpContextAccessor accessor,
+            IUserService userService)
         {
             _managerRepository = managerRepository;
             _dbContext = dbContext;
             _userManager = userManager;
             _repository = repository;
+            _userService = userService;
             _accessor = accessor;
             _applicantRepository = applicantRepository;
         }
 
         public async Task<List<Application>> GetApplications()
         {
-            var user = _accessor?.HttpContext.User;
-
-            var userId = _userManager.GetUserId(user);
+            var userId = _userService.GetUserId();
 
             return await _applicantRepository.GetApplications(userId);
         }

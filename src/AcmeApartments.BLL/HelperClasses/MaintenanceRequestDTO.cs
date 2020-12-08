@@ -1,11 +1,13 @@
-﻿using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
-namespace PeachGroveApartments.ApplicationLayer.ViewModels
+namespace AcmeApartments.BLL.HelperClasses
 {
-    public class MaintenanceRequestViewModel
+    public class MaintenanceRequestDTO
     {
         public int Id { get; set; }
         public string AptUserId { get; set; }

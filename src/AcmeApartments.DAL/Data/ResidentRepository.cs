@@ -1,5 +1,5 @@
-﻿using PeachGroveApartments.Infrastructure.Interfaces;
-using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,11 +18,6 @@ namespace AcmeApartments.DAL.Data
         public async Task<Application> GetApplication(int applicationId)
         {
             return await _dbContext.Applications.FindAsync(applicationId);
-        }
-
-        public async Task<List<Application>> GetApplications(string userId)
-        {
-            return await _dbContext.Applications.Where(u => u.AptUserId == userId).ToListAsync();
         }
 
         public async Task AddMaintenanceRequest(MaintenanceRequest maintenanceRequest)

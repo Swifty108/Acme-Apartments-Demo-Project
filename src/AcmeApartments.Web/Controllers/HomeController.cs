@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+﻿using AcmeApartments.BLL.HelperClasses;
+using AcmeApartments.BLL.Interfaces;
+using AcmeApartments.Common.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PeachGroveApartments.ApplicationLayer.ViewModels;
 using PeachGroveApartments.Core.Models;
-using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
@@ -15,22 +15,20 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserManager<AptUser> _userManager;
-        private readonly ApplicationDbContext _context;
-        private readonly IHomeRepository _homeRepository;
+        private readonly IHome _homeControllerLogic;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
         public HomeController(ILogger<HomeController> logger,
-            ApplicationDbContext db,
-            UserManager<AptUser> userManager,
-            ApplicationDbContext context,
-            IHomeRepository homeRepository,
+            IHome homeControllerLogic,
+            IUserService userService,
             IMapper mapper)
         {
             _logger = logger;
-            _userManager = userManager;
-            _context = context;
-            _homeRepository = homeRepository;
+
+            _homeControllerLogic = homeControllerLogic;
+            _userService = userService;
+
             _mapper = mapper;
         }
 
@@ -55,8 +53,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowFloorPlans(string floorPlanType = null)
         {
-            var floorPlans = await _homeRepository.GetFloorPlans();
-            var floorPlansViewModel = _mapper.Map<FloorPlansViewModel>(floorPlans);
+            var floorPlansViewModelDTO = await _homeControllerLogic.GetFloorPlans();
+            var floorPlansViewModel = _mapper.Map<FloorPlansViewModel>(floorPlansViewModelDTO);
             floorPlansViewModel.FloorPlanType = floorPlanType;
             return View(floorPlansViewModel);
         }
@@ -67,7 +65,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         public async Task<IActionResult> Apply([Bind("AptNumber, Price, Area, FloorPlanType")] ApplyViewModel applyViewModel)
         {
             ModelState.Clear();
-            var user = await _userManager.GetUserAsync(User);
+            var user = await _userService.GetUser();
             applyViewModel.User = user;
 
             return View(applyViewModel);
@@ -77,27 +75,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> ApplyPost(ApplyViewModel applicationViewModel)
         {
-            var user = await _userManager.GetUserAsync(User);
-
             if (ModelState.IsValid)
             {
-                var app = new Application
-                {
-                    AptUser = user,
-                    Income = applicationViewModel.Income,
-                    Occupation = applicationViewModel.Occupation,
-                    Price = applicationViewModel.Price,
-                    ReasonForMoving = applicationViewModel.ReasonForMoving,
-                    AptNumber = applicationViewModel.AptNumber,
-                    Area = applicationViewModel.Area,
-                    DateApplied = DateTime.Now,
-                    SSN = applicationViewModel.SSN
-                };
-                _context.Add(app);
-
-                await _context.SaveChangesAsync();
-
-                var userRole = _userManager.GetRolesAsync(user).Result.FirstOrDefault();
+                var applicationDTO = _mapper.Map<ApplicationDTO>(applicationViewModel);
+                var userRole = await _homeControllerLogic.Apply(applicationDTO);
 
                 return RedirectToAction("index", $"{userRole}account", new { IsApplySuccess = true });
             }

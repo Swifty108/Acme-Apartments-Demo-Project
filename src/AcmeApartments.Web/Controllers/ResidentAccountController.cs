@@ -1,14 +1,13 @@
-﻿using AutoMapper;
+﻿using AcmeApartments.BLL.HelperClasses;
+using AcmeApartments.BLL.Interfaces;
+using AcmeApartments.Common.Interfaces;
+using AcmeApartments.DAL.Data;
+using AcmeApartments.DAL.Identity;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PeachGroveApartments.ApplicationLayer.Interfaces;
 using PeachGroveApartments.ApplicationLayer.ViewModels;
-using PeachGroveApartments.Common.HelperClasses;
-using PeachGroveApartments.Infrastructure.Data;
-using PeachGroveApartments.Infrastructure.Identity;
-using PeachGroveApartments.Infrastructure.Interfaces;
-using PeachGroveApartments.Infrastructure.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -19,16 +18,25 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AptUser> _userManager;
-        private readonly IResidentRepository _residentRepository;
         private readonly IResidentAccount _residentAccountLogic;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
+        private readonly IApplicationService _applicationService;
 
-        public ResidentAccountController(ApplicationDbContext context, UserManager<AptUser> userManager, IResidentRepository residentRepository, IResidentAccount residentLogic, IMapper mapper)
+        public ResidentAccountController(
+            ApplicationDbContext context,
+            UserManager<AptUser> userManager,
+            IResidentAccount residentLogic,
+            IMapper mapper,
+            IUserService userService,
+            IApplicationService applicationService)
         {
             _context = context;
             _userManager = userManager;
-            _residentRepository = residentRepository;
+            _userService = userService;
+            _applicationService = applicationService;
             _residentAccountLogic = residentLogic;
+
             _mapper = mapper;
         }
 
@@ -42,10 +50,10 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplications()
+        public IActionResult ShowApplications()
         {//dont use resultl.Id use await
-            var userId = _userManager.GetUserAsync(User).Result.Id;
-            var applications = await _residentRepository.GetApplications(userId);
+            var userId = _userService.GetUserId();
+            var applications = _applicationService.GetApplications(userId);
 
             return View(applications);
         }
@@ -65,17 +73,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             {
                 try
                 {
-                    var user = await _userManager.GetUserAsync(User);
-                    var maintenanceRequest = new MaintenanceRequest
-                    {
-                        AptUser = user,
-                        DateRequested = DateTime.Now,
-                        isAllowedToEnter = maintReqViewModel.isAllowedToEnter,
-                        ProblemDescription = maintReqViewModel.ProblemDescription,
-                        Status = MaintenanceRequestStatus.PENDINGAPPROVAL
-                    };
-
-                    await _residentRepository.AddMaintenanceRequest(maintenanceRequest);
+                    var maintenanceRequestDTO = _mapper.Map<MaintenanceRequestDTO>(maintReqViewModel);
+                    await _residentAccountLogic.SubmitMaintenanceRequest(maintenanceRequestDTO);
 
                     TempData["MaintenanceSuccess"] = true;
 
@@ -94,7 +93,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<JsonResult> GetReqHistory()
         {
-            var maintenanceRequests = await _residentRepository.GetMaintenanceUserRequests();
+            var maintenanceRequests = await _residentAccountLogic.GetMaintenanceRequests();
             return Json(new
             {
                 list = maintenanceRequests
@@ -104,7 +103,7 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowPayments()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await _userService.GetUser();
             //rename logic to something else
             var payViewModel = await _residentAccountLogic.GetBills(user);
 
@@ -123,16 +122,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.GetUserAsync(User);
-
-                var newReview = new Review
-                {
-                    AptUser = user,
-                    DateReviewed = DateTime.Now,
-                    ReviewText = review.ReviewText
-                };
-
-                await _residentAccountLogic.AddReview(newReview);
+                var reviewViewModelDTO = _mapper.Map<ReviewViewModelDTO>(review);
+                await _residentAccountLogic.AddReview(reviewViewModelDTO);
 
                 TempData["ReviewSuccess"] = true;
                 return RedirectToAction("WriteAReview");

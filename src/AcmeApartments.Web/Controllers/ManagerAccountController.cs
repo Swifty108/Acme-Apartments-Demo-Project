@@ -24,7 +24,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
 
         private readonly ApplicationDbContext _context;
 
-        public ManagerAccountController(ApplicationDbContext context,
+        public ManagerAccountController(
+            ApplicationDbContext context,
             UserManager<AptUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IMapper mapper, SignInManager<AptUser> signInManager,

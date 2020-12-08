@@ -1,7 +1,10 @@
 ﻿using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AcmeApartments.DAL.Data
 {
@@ -24,6 +27,11 @@ namespace AcmeApartments.DAL.Data
         {
             _dbContext.Users.Update(user);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<Application>> GetApplications(string userId)
+        {
+            return await _dbContext.Applications.Where(u => u.AptUserId == userId).ToListAsync();
         }
 
         public async void UpdateApplication(Application app)

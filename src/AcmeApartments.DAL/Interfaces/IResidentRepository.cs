@@ -1,4 +1,5 @@
-﻿using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.DAL.Models;
+using PeachGroveApartments.Infrastructure.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

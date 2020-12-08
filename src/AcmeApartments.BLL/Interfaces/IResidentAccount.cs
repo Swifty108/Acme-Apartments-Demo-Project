@@ -1,13 +1,19 @@
-﻿using PeachGroveApartments.Infrastructure.Identity;
-using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.BLL.HelperClasses;
+using AcmeApartments.DAL.Identity;
+using AcmeApartments.DAL.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AcmeApartments.BLL.Interfaces
 {
     public interface IResidentAccount
     {
-        public Task<PaymentsViewModel> GetBills(AptUser user);
+        public Task<PaymentsViewModelDTO> GetBills(AptUser user);
 
-        public Task AddReview(Review review);
+        public Task AddReview(ReviewViewModelDTO review);
+
+        public Task SubmitMaintenanceRequest(MaintenanceRequestDTO maintenanceRequestDTO);
+
+        public Task<List<MaintenanceRequest>> GetMaintenanceRequests();
     }
 }

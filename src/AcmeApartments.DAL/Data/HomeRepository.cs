@@ -1,4 +1,4 @@
-﻿using PeachGroveApartments.Infrastructure.DTOs;
+﻿using AcmeApartments.DAL.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,6 +25,12 @@ namespace AcmeApartments.DAL.Data
                 OneBedPlans = oneBedPlans,
                 TwoBedPlans = twoBedPlans
             };
+        }
+
+        public void AddApplication(Application app)
+        {
+            _dbContext.Add(app);
+            _dbContext.SaveChangesAsync();
         }
     }
 }

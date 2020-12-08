@@ -1,5 +1,7 @@
 ﻿using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AcmeApartments.DAL.Interfaces
 {
@@ -10,6 +12,8 @@ namespace AcmeApartments.DAL.Interfaces
         public void UpdateUser(AptUser user);
 
         public void UpdateApplication(Application app);
+
+        public Task<List<Application>> GetApplications(string userId);
 
         public void UpdateMaintenaceRequest(MaintenanceRequest mRequest);
     }
