@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AcmeApartments.DAL.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using PeachGroveApartments.Infrastructure.Identity;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
+namespace AcmeApartments.Web.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel

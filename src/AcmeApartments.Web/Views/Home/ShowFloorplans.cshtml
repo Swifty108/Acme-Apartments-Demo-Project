@@ -1,10 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using PeachGroveApartments.Infrastructure.Identity
-@using PeachGroveApartments.Common.HelperClasses
+@using AcmeApartments.DAL.Identity
+@using AcmeApartments.Common.HelperClasses
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 @inject RoleManager<IdentityRole> roleManager
-@model PeachGroveApartments.ApplicationLayer.ViewModels.FloorPlansViewModel
+@model AcmeApartments.Web.ViewModels.FloorPlansViewModel
 
 @{
     ViewData["Title"] = "Floor Plans";

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 
-[assembly: HostingStartup(typeof(Peach_Grove_Apartments_Demo_Project.Areas.Identity.IdentityHostingStartup))]
+[assembly: HostingStartup(typeof(AcmeApartments.Web.Areas.Identity.IdentityHostingStartup))]
 
-namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity
+namespace AcmeApartments.Web.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

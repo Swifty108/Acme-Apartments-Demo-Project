@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AcmeApartments.DAL.Identity;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using PeachGroveApartments.Infrastructure.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +16,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
+namespace AcmeApartments.Web.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -178,12 +178,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             string guid = System.Guid.NewGuid().ToString();
 
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    if (Url.IsLocalUrl(returnUrl))
-            //        Response.Redirect(returnUrl);
-            //}
-
             IsDirectRegister = isDirectRegister;
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -292,7 +286,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        // var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
                         IList<string> roles = await _signInManager.UserManager.GetRolesAsync(user);
 
                         if (roles.Contains("Applicant"))

@@ -1,9 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using PeachGroveApartments.Infrastructure.Identity
-@using PeachGroveApartments.Common.HelperClasses
+@using AcmeApartments.DAL.Identity
+@using AcmeApartments.Common.HelperClasses
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
-@model PeachGroveApartments.ApplicationLayer.ViewModels.MaintenanceRequestViewModel
+@model AcmeApartments.Web.ViewModels.MaintenanceRequestViewModel
 @{
     ViewData["Title"] = "User Maintenace";
     ViewBag.Success = "The maintenance request was edited successfully!";

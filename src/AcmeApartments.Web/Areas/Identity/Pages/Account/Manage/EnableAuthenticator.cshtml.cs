@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AcmeApartments.DAL.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using PeachGroveApartments.Infrastructure.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
