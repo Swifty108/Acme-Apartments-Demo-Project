@@ -1,9 +1,9 @@
-﻿using AcmeApartments.Common.Interfaces;
+﻿using AcmeApartments.BLL.HelperClasses;
+using AcmeApartments.BLL.Interfaces;
+using AcmeApartments.Common.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PeachGroveApartments.ApplicationLayer.ViewModels;
 using System;
@@ -15,33 +15,19 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     [Authorize(Roles = "Manager")]
     public class ManagerAccountController : Controller
     {
-        private readonly UserManager<AptUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly IApplicationService _applicationService;
 
-        private SignInManager<AptUser> _signInManager;
-
-        // private readonly IManagerRepository _managerAccount;
         private readonly IManagerAccount _managerAccount;
 
-        private readonly ApplicationDbContext _context;
-
         public ManagerAccountController(
-            ApplicationDbContext context,
-            UserManager<AptUser> userManager,
-            RoleManager<IdentityRole> roleManager,
-            IMapper mapper, SignInManager<AptUser> signInManager,
-            IManagerRepository managerRepository,
-            IManagerAccount managerAccount, IApplicationService applicationService)
+            IMapper mapper,
+            IManagerAccount managerAccount,
+            IApplicationService applicationService)
         {
-            _userManager = userManager;
-            _roleManager = roleManager;
             _mapper = mapper;
-            _signInManager = signInManager;
             //   _managerAccount = managerRepository;
             _managerAccount = managerAccount;
-            _context = context;
             _applicationService = applicationService;
         }
 
@@ -74,11 +60,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditApplication(int Id)
-        {//if(Id == null) {
-         //         BadRequest("Id not found")
-         //   }
-            var application = await _managerAccount.GetApplication(Id);
+        public async Task<IActionResult> EditApplication(int applicationId)
+        {
+            var application = await _applicationService.GetApplication(applicationId);
             if (application == null)
             {
                 return NotFound();
@@ -98,47 +82,33 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             {
                 try
                 {
-                    // var app = _mapper.Map<Application>(application);
-                    await _managerAccount.EditApplication(application);
+                    var applicationDTO = _mapper.Map<ApplicationDTO>(application);
+                    await _managerAccount.EditApplication(applicationDTO);
 
                     TempData["AppEditSuccess"] = true;
                     return RedirectToAction("EditApplication");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (ApplicationExists(application.ApplicationId) != null)
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
             }
 
-            ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
+            // ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
             return View(application);
         }
 
-        public async Task<IActionResult> CancelApplication(int Id)
+        public IActionResult CancelApplication(int applicationId)
         {
-            var application = await _managerAccount.GetApplication(Id);
-
-            if (application == null)
-            {
-                return NotFound();
-            }
-
-            return View(application);
+            return View(new { applicationId });
         }
 
         // POST: ApplicantAccount/Delete/5
         [HttpPost, ActionName("AppCancel")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CancelApplicationConfirmed(Application app)
+        public async Task<IActionResult> CancelApplicationConfirmed(int applicationId)
         {
-            var application = await _managerAccount.CancelApplication(app.ApplicationId);
+            var application = await _managerAccount.CancelApplication(applicationId);
 
             return RedirectToAction("ShowApplications", new { userId = application.AptUserId });
         }
@@ -174,11 +144,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             return View();
         }
 
-        private async Task<Application> ApplicationExists(int id)
-        {
-            return await _managerAccount.GetApplication(id) ?? null;
-        }
-
         public async Task<IActionResult> UnApproveApplication(string userId, string aptNumber, int applicationId)
         {
             try
@@ -207,7 +172,8 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowMaintenanceRequestsUsers()
         {
-            return View(await _managerAccount.GetMaintenanceRequestsUsers());
+            var maintenanceRequestsUsers = await _managerAccount.GetMaintenanceRequestsUsers();
+            return View(maintenanceRequestsUsers);
         }
 
         public async Task<IActionResult> ShowMaintenanceRequests(string firstName, string lastName)

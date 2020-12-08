@@ -4,7 +4,9 @@ using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AcmeApartments.BLL.HelperClasses
@@ -15,17 +17,20 @@ namespace AcmeApartments.BLL.HelperClasses
         private readonly IRepository _repository;
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
+        private readonly IMapper _mapper;
 
         public ManagerAccount(
             ApplicationDbContext dbContext,
             UserManager<AptUser> userManager,
             IManagerRepository managerRepository,
-            IRepository repository)
+            IRepository repository,
+            IMapper mapper)
         {
             _managerRepository = managerRepository;
             _dbContext = dbContext;
             _userManager = userManager;
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task ApproveApplication(
@@ -79,6 +84,12 @@ namespace AcmeApartments.BLL.HelperClasses
             _repository.UpdateApplication(app);
         }
 
+        public async Task EditApplication(ApplicationDTO application)
+        {
+            var applicationEntity = _mapper.Map<Application>(application);
+            await _managerRepository.EditApplication(applicationEntity);
+        }
+
         public async Task<Application> CancelApplication(int ApplicationId)
         {
             var application = await _managerRepository.GetApplication(ApplicationId);
@@ -88,6 +99,18 @@ namespace AcmeApartments.BLL.HelperClasses
             await _dbContext.SaveChangesAsync();
 
             return application;
+        }
+
+        public async Task<List<AptUser>> GetMaintenanceRequestsUsers()
+        {
+            var maintenanceRequests = await _managerRepository.GetMaintenanceRequestsUsers();
+            return maintenanceRequests;
+        }
+
+        public async Task<List<MaintenanceRequest>> GetMaintenanceUserRequests()
+        {
+            var maintenanceUserRequests = await _managerRepository.GetMaintenanceUserRequests();
+            return maintenanceUserRequests;
         }
 
         public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)
@@ -121,11 +144,6 @@ namespace AcmeApartments.BLL.HelperClasses
             maintenanceRecord.Status = MaintenanceRequestStatus.UNAPPROVED;
 
             _repository.UpdateMaintenaceRequest(maintenanceRecord);
-        }
-
-        public async Task EditApplication(Application application)
-        {
-            await _managerRepository.EditApplication(application);
         }
     }
 }
