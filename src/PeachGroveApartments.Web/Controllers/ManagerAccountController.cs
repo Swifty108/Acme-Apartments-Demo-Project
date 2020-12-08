@@ -4,12 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using PeachGroveApartments.ApplicationLayer.Interfaces;
 using PeachGroveApartments.ApplicationLayer.ViewModels;
-using PeachGroveApartments.Infrastructure.Data;
-using PeachGroveApartments.Infrastructure.Identity;
-using PeachGroveApartments.Infrastructure.Interfaces;
-using PeachGroveApartments.Infrastructure.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -95,8 +90,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
             {
                 try
                 {
-                    var app = _mapper.Map<Application>(application);
-                    await _managerAccount.EditApplication(app);
+                    // var app = _mapper.Map<Application>(application);
+                    await _managerAccount.EditApplication(application);
+
+                    TempData["AppEditSuccess"] = true;
+                    return RedirectToAction("EditApplication");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -109,9 +107,6 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
                         throw;
                     }
                 }
-
-                TempData["AppEditSuccess"] = true;
-                return RedirectToAction("EditApplication");
             }
 
             ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);

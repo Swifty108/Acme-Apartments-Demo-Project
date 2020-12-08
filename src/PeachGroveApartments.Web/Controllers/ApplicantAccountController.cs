@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using AcmeApartments.BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PeachGroveApartments.ApplicationLayer.ViewModels;
-using PeachGroveApartments.Infrastructure.Identity;
-using PeachGroveApartments.Infrastructure.Interfaces;
 using System.Threading.Tasks;
 
 namespace Peach_Grove_Apartments_Demo_Project.Controllers
@@ -11,13 +9,11 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
     [Authorize(Roles = "Applicant")]
     public class ApplicantAccountController : Controller
     {
-        private readonly UserManager<AptUser> _userManager;
-        private readonly IApplicantRepository _applicantRepository;
+        private readonly IApplicantAccount _applicantAccount;
 
-        public ApplicantAccountController(UserManager<AptUser> userManager, IApplicantRepository applicantRepository)
+        public ApplicantAccountController(IApplicantAccount applicantAccount)
         {
-            _userManager = userManager;
-            _applicantRepository = applicantRepository;
+            _applicantAccount = applicantAccount;
         }
 
         [HttpGet]
@@ -32,15 +28,9 @@ namespace Peach_Grove_Apartments_Demo_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowApplications()
         {
-            var userId = _userManager.GetUserAsync(User).Result.Id;
+            var userApplications = await _applicantAccount.GetApplications();
 
-            return View(await _applicantRepository.GetApplications(userId));
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var application = await _applicantRepository.GetApplication(id);
-            return View(application);
+            return View(userApplications);
         }
 
         [HttpGet]

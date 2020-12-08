@@ -58,6 +58,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\AcmeApartments.BLL\AcmeApartments.BLL.csproj" />
+    <ProjectReference Include="..\AcmeApartments.BLL\AcmeApartments.BLL.csproj" />
   </ItemGroup>
 
 </Project>

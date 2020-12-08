@@ -20,9 +20,21 @@ namespace AcmeApartments.DAL.Data
             return applicationUser;
         }
 
+        public async void UpdateUser(AptUser user)
+        {
+            _dbContext.Users.Update(user);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async void UpdateApplication(Application app)
         {
             _dbContext.Applications.Update(app);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async void UpdateMaintenaceRequest(MaintenanceRequest mRequest)
+        {
+            _dbContext.MaintenanceRequests.Update(mRequest);
             await _dbContext.SaveChangesAsync();
         }
     }

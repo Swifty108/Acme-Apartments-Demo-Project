@@ -3,7 +3,9 @@ using AcmeApartments.Common.HelperClasses;
 using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
+using AcmeApartments.DAL.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AcmeApartments.BLL.HelperClasses
@@ -53,7 +55,7 @@ namespace AcmeApartments.BLL.HelperClasses
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UnApproveApplication(string userId, string aptNumber, int appid)
+        public async Task UnApproveApplication(string userId, string aptNumber, int appId)
         {
             var applicationUser = _repository.GetAptUser(userId, aptNumber);
 
@@ -63,18 +65,19 @@ namespace AcmeApartments.BLL.HelperClasses
                 applicationUser.AptNumber = null;
                 applicationUser.AptPrice = null;
 
+                _repository.UpdateUser(applicationUser);
+
                 await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
                 await _userManager.AddToRoleAsync(applicationUser, "Applicant");
 
-                _dbContext.Users.Update(applicationUser);
+                await _dbContext.SaveChangesAsync();
             }
-            var app = await _dbContext.Applications.FindAsync(appid);
+
+            var app = await _managerRepository.GetApplication(appId);
 
             app.Status = ApplicationStatus.UNAPPROVED;
 
-            _dbContext.Applications.Update(app);
-
-            await _dbContext.SaveChangesAsync();
+            _repository.UpdateApplication(app);
         }
 
         public async Task<Application> CancelApplication(int ApplicationId)
@@ -82,7 +85,7 @@ namespace AcmeApartments.BLL.HelperClasses
             var application = await _managerRepository.GetApplication(ApplicationId);
             application.Status = ApplicationStatus.CANCELED;
 
-            _dbContext.Applications.Update(application);
+            _repository.UpdateApplication(application);
             await _dbContext.SaveChangesAsync();
 
             return application;
@@ -104,12 +107,12 @@ namespace AcmeApartments.BLL.HelperClasses
 
         public async Task ApproveMaintenanceRequest(string userId, int maintenanceId)
         {
-            var mRecord = await _dbContext.MaintenanceRequests.FindAsync(maintenanceId);
-            mRecord.AptUserId = userId;
-            mRecord.Status = MaintenanceRequestStatus.APPROVED;
+            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceId);
 
-            _dbContext.MaintenanceRequests.Update(mRecord);
-            await _dbContext.SaveChangesAsync();
+            maintenanceRecord.AptUserId = userId;
+            maintenanceRecord.Status = MaintenanceRequestStatus.APPROVED;
+
+            _repository.UpdateMaintenaceRequest(maintenanceRecord);
         }
 
         public async Task UnApproveMaintenanceRequest(string userId, int maintenanceId)
@@ -118,8 +121,7 @@ namespace AcmeApartments.BLL.HelperClasses
             maintenanceRecord.AptUserId = userId;
             maintenanceRecord.Status = MaintenanceRequestStatus.UNAPPROVED;
 
-            _dbContext.MaintenanceRequests.Update(maintenanceRecord);
-            await _dbContext.SaveChangesAsync();
+            _repository.UpdateMaintenaceRequest(maintenanceRecord);
         }
 
         public async Task<List<AptUser>> GetApplicationUsers()
@@ -132,14 +134,9 @@ namespace AcmeApartments.BLL.HelperClasses
             return _managerRepository.GetApplications(userId);
         }
 
-        public Task<Application> GetApplication(int applicationId)
-        {
-            return _managerRepository.GetApplication(applicationId);
-        }
-
         public async Task EditApplication(Application application)
         {
-            return _managerRepository.EditApplication(application);
+            await _managerRepository.EditApplication(application);
         }
     }
 }

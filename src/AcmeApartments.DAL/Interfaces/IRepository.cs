@@ -7,6 +7,10 @@ namespace AcmeApartments.DAL.Interfaces
     {
         public AptUser GetAptUser(string userId, string aptNumber);
 
+        public void UpdateUser(AptUser user);
+
         public void UpdateApplication(Application app);
+
+        public void UpdateMaintenaceRequest(MaintenanceRequest mRequest);
     }
 }

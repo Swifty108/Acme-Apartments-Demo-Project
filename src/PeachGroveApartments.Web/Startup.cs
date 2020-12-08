@@ -6,12 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PeachGroveApartments.ApplicationLayer.HelperClasses;
-using PeachGroveApartments.ApplicationLayer.Interfaces;
-using PeachGroveApartments.Core.Interfaces;
-using PeachGroveApartments.Infrastructure.Data;
-using PeachGroveApartments.Infrastructure.Identity;
-using PeachGroveApartments.Infrastructure.Interfaces;
 using System;
 
 namespace Peach_Grove_Apartments_Demo_Project
@@ -55,8 +49,10 @@ namespace Peach_Grove_Apartments_Demo_Project
             services.AddScoped<IApplicantRepository, ApplicantRepository>();
             services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IManagerRepository, ManagerRepository>();
+            services.AddScoped<IApplicantAccount, ApplicantAccount>();
             services.AddScoped<IManagerAccount, ManagerAccount>();
             services.AddScoped<IResidentAccount, ResidentAccount>();
+            services.AddHttpContextAccessor();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

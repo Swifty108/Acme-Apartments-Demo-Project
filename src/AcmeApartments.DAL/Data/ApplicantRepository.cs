@@ -1,6 +1,8 @@
-﻿using PeachGroveApartments.Infrastructure.Identity;
-using PeachGroveApartments.Infrastructure.Interfaces;
-using PeachGroveApartments.Infrastructure.Models;
+﻿using AcmeApartments.DAL.Identity;
+using AcmeApartments.DAL.Interfaces;
+using AcmeApartments.DAL.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
