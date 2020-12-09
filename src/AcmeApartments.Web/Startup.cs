@@ -29,12 +29,9 @@ namespace AcmeApartments.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = null;
-            connectionString = CurrentEnvironment.IsDevelopment() ? "DefaultConnection" : "VPSConnection";
-
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString(connectionString)));
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<AptUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
