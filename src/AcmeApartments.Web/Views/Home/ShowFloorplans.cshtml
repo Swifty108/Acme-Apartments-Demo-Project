@@ -1,6 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using AcmeApartments.DAL.Identity
-@using AcmeApartments.Common.HelperClasses
 @inject SignInManager<AptUser> SignInManager
 @inject UserManager<AptUser> UserManager
 @inject RoleManager<IdentityRole> roleManager
@@ -8,7 +6,6 @@
 
 @{
     ViewData["Title"] = "Floor Plans";
-
 }
 
 <h1>Our Floor Plans</h1>

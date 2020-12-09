@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 
-namespace Peach_Grove_Apartments_Demo_Project
+namespace AcmeApartments.Web
 {
     public class Startup
     {
