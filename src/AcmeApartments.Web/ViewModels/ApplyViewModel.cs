@@ -1,11 +1,11 @@
-﻿using AcmeApartments.Common.DTOs;
+﻿using AcmeApartments.DAL.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace AcmeApartments.Web.ViewModels
 {
     public class ApplyViewModel
     {
-        public AptUserDTO User { get; set; }
+        public AptUser User { get; set; }
 
         [Required]
         public string Occupation { get; set; }

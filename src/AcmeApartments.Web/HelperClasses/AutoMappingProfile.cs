@@ -1,5 +1,7 @@
 ﻿using AcmeApartments.BLL.DTOs;
+using AcmeApartments.Common.DTOs;
 using AcmeApartments.DAL.DTOs;
+using AcmeApartments.DAL.Models;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 
@@ -17,6 +19,12 @@ namespace AcmeApartments.BLL.HelperClasses
             CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>();
             CreateMap<ApplicationViewModel, ApplicationViewModelDTO>();
             CreateMap<ApplicationViewModelDTO, ApplicationViewModel>();
+            CreateMap<PaymentsViewModelDTO, PaymentsViewModel>();
+            CreateMap<PaymentsViewModel, PaymentsViewModelDTO>();
+            CreateMap<ReviewViewModel, ReviewViewModelDTO>();
+            CreateMap<ReviewViewModelDTO, ReviewViewModel>();
+            CreateMap<FloorPlanDTO, FloorPlan>();
+            CreateMap<FloorPlan, FloorPlanDTO>();
         }
     }
 }

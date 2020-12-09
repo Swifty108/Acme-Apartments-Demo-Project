@@ -1,11 +1,12 @@
-﻿using AcmeApartments.Common.DTOs;
+﻿using AcmeApartments.DAL.Identity;
+using AcmeApartments.DAL.Models;
 
 namespace AcmeApartments.Web.ViewModels
 {
     public class PaymentsViewModel
     {
-        public WaterBillDTO WaterBill { get; set; }
-        public ElectricBillDTO ElectricBill { get; set; }
-        public AptUserDTO AptUser { get; set; }
+        public WaterBill WaterBill { get; set; }
+        public ElectricBill ElectricBill { get; set; }
+        public AptUser AptUser { get; set; }
     }
 }

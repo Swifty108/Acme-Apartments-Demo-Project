@@ -1,6 +1,5 @@
 ﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
-using AcmeApartments.Common.DTOs;
 using AcmeApartments.Common.Interfaces;
 using AcmeApartments.DAL.Models;
 using AcmeApartments.Web.ViewModels;
@@ -67,8 +66,7 @@ namespace AcmeApartments.Web.Controllers
         {
             ModelState.Clear();
             var user = await _userService.GetUser();
-            var aptUser = _mapper.Map<AptUserDTO>(user);
-            applyViewModel.User = aptUser;
+            applyViewModel.User = user;
 
             return View(applyViewModel);
         }

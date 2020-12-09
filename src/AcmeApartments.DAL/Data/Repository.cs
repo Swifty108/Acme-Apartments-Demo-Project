@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AcmeApartments.DAL.Data
 {
-    internal class Repository : IRepository
+    public class Repository : IRepository
     {
         private readonly ApplicationDbContext _dbContext;
 

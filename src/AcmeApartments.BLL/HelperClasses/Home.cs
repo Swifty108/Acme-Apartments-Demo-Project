@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AcmeApartments.BLL.HelperClasses
 {
-    internal class Home : IHome
+    public class Home : IHome
     {
         private readonly IHomeRepository _homeRepository;
         private readonly IHttpContextAccessor _accessor;

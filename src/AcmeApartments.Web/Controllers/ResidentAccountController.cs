@@ -50,10 +50,10 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ShowApplications()
+        public async Task<IActionResult> ShowApplications()
         {//dont use resultl.Id use await
             var userId = _userService.GetUserId();
-            var applications = _applicationService.GetApplications(userId);
+            var applications = await _applicationService.GetApplications(userId);
 
             return View(applications);
         }
@@ -104,8 +104,8 @@ namespace AcmeApartments.Web.Controllers
         public async Task<IActionResult> ShowPayments()
         {
             var user = await _userService.GetUser();
-            //rename logic to something else
-            var payViewModel = await _residentAccountLogic.GetBills(user);
+            var payments = await _residentAccountLogic.GetBills(user);
+            var payViewModel = _mapper.Map<PaymentsViewModel>(payments);
 
             return View(payViewModel);
         }

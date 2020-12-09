@@ -1,5 +1,7 @@
 using AcmeApartments.BLL.HelperClasses;
 using AcmeApartments.BLL.Interfaces;
+using AcmeApartments.Common.Interfaces;
+using AcmeApartments.Common.Services;
 using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
@@ -53,8 +55,12 @@ namespace AcmeApartments.Web
             services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IManagerRepository, ManagerRepository>();
             services.AddScoped<IApplicantAccount, ApplicantAccount>();
+            services.AddScoped<IRepository, Repository>();
             services.AddScoped<IManagerAccount, ManagerAccount>();
             services.AddScoped<IResidentAccount, ResidentAccount>();
+            services.AddScoped<IHome, Home>();
+            services.AddScoped<IApplicationService, ApplicationService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddHttpContextAccessor();
 
             services.AddControllersWithViews();
