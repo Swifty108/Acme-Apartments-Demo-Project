@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AcmeApartments.DAL.Identity;
 using Microsoft.AspNetCore.Authorization;
-using AcmeApartments.DAL.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace AcmeApartments.Web.Areas.Identity.Pages.Account
 {
@@ -31,14 +28,8 @@ namespace AcmeApartments.Web.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            if (returnUrl != null)
-            {
-                return LocalRedirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToPage();
-            }
+
+            return RedirectToPage("Login", new { isLoggedout = true });
         }
     }
 }
