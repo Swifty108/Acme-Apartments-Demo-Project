@@ -40,20 +40,20 @@ namespace AcmeApartments.BLL.HelperClasses
             return floorPlans;
         }
 
-        public async Task<string> Apply(ApplicationDTO applicationDTO)
+        public async Task<string> Apply(ApplyViewModelDTO applyViewModelDTO)
         {
             var user = await _userService.GetUser();
             var app = new Application
             {
                 AptUser = user,
-                Income = applicationDTO.Income,
-                Occupation = applicationDTO.Occupation,
-                Price = applicationDTO.Price,
-                ReasonForMoving = applicationDTO.ReasonForMoving,
-                AptNumber = applicationDTO.AptNumber,
-                Area = applicationDTO.Area,
+                Income = applyViewModelDTO.Income,
+                Occupation = applyViewModelDTO.Occupation,
+                Price = applyViewModelDTO.Price,
+                ReasonForMoving = applyViewModelDTO.ReasonForMoving,
+                AptNumber = applyViewModelDTO.AptNumber,
+                Area = applyViewModelDTO.Area,
                 DateApplied = DateTime.Now,
-                SSN = applicationDTO.SSN
+                SSN = applyViewModelDTO.SSN
             };
             _homeRepository.AddApplication(app);
 

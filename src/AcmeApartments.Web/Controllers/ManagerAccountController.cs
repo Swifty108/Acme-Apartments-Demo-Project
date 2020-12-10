@@ -1,6 +1,7 @@
 ﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.Interfaces;
+using AcmeApartments.DAL.Models;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -40,15 +41,21 @@ namespace AcmeApartments.Web.Controllers
         public async Task<IActionResult> ShowApplicationUsers()
         {//todo-p: put whats in paraenth into own var better for debug and readablility
             var appUsers = await _applicationService.GetApplicationUsers();
+            ViewBag.AppCanceledSuccess = TempData["AppCanceledSuccess"];
             return View(appUsers);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplications(string userId)
+        public async Task<IActionResult> ShowApplications(string userId, string firstName, string lastName)
         {
-            var apps = await _applicationService.GetApplications(userId);
-            var appsViewModel = _mapper.Map<ApplicationViewModel>(apps);
-            return View(apps);
+            var appsWithUser = await _applicationService.GetApplications(userId);
+            var applicationsViewModel = new ApplicationsViewModel
+            {
+                Applications = appsWithUser,
+                FirstName = firstName,
+                LastName = lastName
+            };
+            return View(applicationsViewModel);
         }
 
         [HttpGet]
@@ -58,16 +65,15 @@ namespace AcmeApartments.Web.Controllers
             return View(application);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EditApplication(int applicationId)
-        {
-            var application = await _applicationService.GetApplication(applicationId);
+        public async Task<IActionResult> EditApplication(int Id)
+        {//todo-p: show success message in the user apps list only not here.
+            var application = await _applicationService.GetApplication(Id);
             if (application == null)
             {
                 return NotFound();
             }
 
-            var app = _mapper.Map<ApplicationViewModel>(application);
+            var app = _mapper.Map<ApplicationsViewModel>(application);
 
             ViewBag.AppEditSuccess = TempData["AppEditSuccess"];
             return View(app);
@@ -75,7 +81,7 @@ namespace AcmeApartments.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditApplication(ApplicationViewModel application)
+        public async Task<IActionResult> EditApplication(ApplicationsViewModel application)
         {
             if (ModelState.IsValid)
             {
@@ -97,19 +103,22 @@ namespace AcmeApartments.Web.Controllers
             return View(application);
         }
 
-        public IActionResult CancelApplication(int applicationId)
+        public async Task<IActionResult> CancelApplication(int Id)
         {
-            return View(new { applicationId });
+            var application = await _applicationService.GetApplication(Id);
+            return View(application);
         }
 
         // POST: ApplicantAccount/Delete/5
         [HttpPost, ActionName("AppCancel")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CancelApplicationConfirmed(int applicationId)
+        public async Task<IActionResult> CancelApplicationConfirmed(Application application)
         {
-            var application = await _managerAccount.CancelApplication(applicationId);
+            await _managerAccount.CancelApplication(application.ApplicationId);
 
-            return RedirectToAction("ShowApplications", new { userId = application.AptUserId });
+            TempData["AppCanceledSuccess"] = true;
+
+            return RedirectToAction("ShowApplicationUsers");
         }
 
         public async Task<IActionResult> ApproveApplication(ApproveAppViewModel approveViewModel)
@@ -126,8 +135,9 @@ namespace AcmeApartments.Web.Controllers
             }
             catch (Exception e)
             {
-                TempData["ApproveFailedMessage"] = e.Message;
-                return RedirectToAction("ShowApproveApplicationFailed");
+                throw;
+                //TempData["ApproveFailedMessage"] = e.Message;
+                //return RedirectToAction("ShowApproveApplicationFailed");
             }
             return RedirectToAction("ShowApproveApplicationSuccess");
         }

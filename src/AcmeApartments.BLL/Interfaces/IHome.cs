@@ -8,6 +8,6 @@ namespace AcmeApartments.BLL.Interfaces
     {
         public Task<FloorPlansViewModelDTO> GetFloorPlans();
 
-        public Task<string> Apply(ApplicationDTO appDTO);
+        public Task<string> Apply(ApplyViewModelDTO applyViewModelDTO);
     }
 }

@@ -1,13 +1,14 @@
 ﻿using AcmeApartments.BLL.DTOs;
+using AcmeApartments.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AcmeApartments.Web.ViewModels
 {
-    public class ApplicationViewModel
+    public class ApplicationsViewModel
     {
-        public IList<ApplicationDTO> Applications { get; set; }
+        public IList<Application> Applications { get; set; }
 
         [Display(Name = "Applicantion ID")]
         public int ApplicationId { get; set; }

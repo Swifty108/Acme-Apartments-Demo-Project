@@ -73,17 +73,17 @@ namespace AcmeApartments.Web.Controllers
 
         [Authorize(Roles = "Applicant, Resident")]
         [HttpPost]
-        public async Task<IActionResult> ApplyPost(ApplyViewModel applicationViewModel)
+        public async Task<IActionResult> ApplyPost(ApplyViewModel applyViewModel)
         {
             if (ModelState.IsValid)
             {
-                var applicationDTO = _mapper.Map<ApplicationDTO>(applicationViewModel);
-                var userRole = await _homeControllerLogic.Apply(applicationDTO);
+                var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyViewModel);
+                var userRole = await _homeControllerLogic.Apply(applyViewModelDTO);
 
                 return RedirectToAction("index", $"{userRole}account", new { IsApplySuccess = true });
             }
 
-            return RedirectToAction("Apply", applicationViewModel.AptNumber, applicationViewModel.Price);
+            return RedirectToAction("Apply", applyViewModel.AptNumber, applyViewModel.Price);
         }
 
         [HttpGet]

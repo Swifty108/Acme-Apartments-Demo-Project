@@ -17,13 +17,14 @@ namespace AcmeApartments.DAL.Data
             _dbContext = dbContext;
         }
 
-        public AptUser GetAptUser(string userId, string aptNumber = null)
+        public async Task<AptUser> GetApplicationUser(string userId)
         {
-            var applicationUser = _dbContext.Users.Where(u => u.Id == userId && u.AptNumber == aptNumber).FirstOrDefault();
+            var applicationUser = await _dbContext.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
+            _dbContext.Attach(applicationUser);
             return applicationUser;
         }
 
-        public async void UpdateUser(AptUser user)
+        public async Task UpdateUser(AptUser user)
         {
             _dbContext.Users.Update(user);
             await _dbContext.SaveChangesAsync();
@@ -40,7 +41,7 @@ namespace AcmeApartments.DAL.Data
             return await _dbContext.Applications.Where(u => u.AptUserId == userId).ToListAsync();
         }
 
-        public async void UpdateApplication(Application app)
+        public async Task UpdateApplication(Application app)
         {
             _dbContext.Applications.Update(app);
             await _dbContext.SaveChangesAsync();

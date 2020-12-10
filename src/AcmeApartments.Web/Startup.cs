@@ -33,7 +33,9 @@ namespace AcmeApartments.Web
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")),
+                    ServiceLifetime.Scoped
+                    );
             services.AddIdentity<AptUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -49,18 +51,18 @@ namespace AcmeApartments.Web
             .AddDefaultUI()
             .AddRoles<IdentityRole>();
 
-            services.AddScoped<IDbInitializer, DbInitializer>();
-            services.AddScoped<IHomeRepository, HomeRepository>();
-            services.AddScoped<IApplicantRepository, ApplicantRepository>();
-            services.AddScoped<IResidentRepository, ResidentRepository>();
-            services.AddScoped<IManagerRepository, ManagerRepository>();
-            services.AddScoped<IApplicantAccount, ApplicantAccount>();
-            services.AddScoped<IRepository, Repository>();
-            services.AddScoped<IManagerAccount, ManagerAccount>();
-            services.AddScoped<IResidentAccount, ResidentAccount>();
-            services.AddScoped<IHome, Home>();
-            services.AddScoped<IApplicationService, ApplicationService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddTransient<IDbInitializer, DbInitializer>();
+            services.AddTransient<IHomeRepository, HomeRepository>();
+            services.AddTransient<IApplicantRepository, ApplicantRepository>();
+            services.AddTransient<IResidentRepository, ResidentRepository>();
+            services.AddTransient<IManagerRepository, ManagerRepository>();
+            services.AddTransient<IApplicantAccount, ApplicantAccount>();
+            services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IManagerAccount, ManagerAccount>();
+            services.AddTransient<IResidentAccount, ResidentAccount>();
+            services.AddTransient<IHome, Home>();
+            services.AddTransient<IApplicationService, ApplicationService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddHttpContextAccessor();
 
             services.AddControllersWithViews();

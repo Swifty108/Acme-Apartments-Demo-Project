@@ -15,23 +15,30 @@ namespace AcmeApartments.Common.Services
         private readonly UserManager<AptUser> _userManager;
         private readonly IRepository _repository;
         private readonly IManagerRepository _managerRepository;
+        private readonly IUserService _userService;
 
         public ApplicationService(
             IHttpContextAccessor accessor,
             UserManager<AptUser> userManager,
             IRepository repository,
-            IManagerRepository managerRepository)
+            IManagerRepository managerRepository,
+            IUserService userService)
 
         {
             _accessor = accessor;
             _userManager = userManager;
             _repository = repository;
             _managerRepository = managerRepository;
+            _userService = userService;
         }
 
         public async Task<Application> GetApplication(int applicationId) => await _repository.GetApplication(applicationId);
 
-        public async Task<List<Application>> GetApplications(string userId) => await _repository.GetApplications(userId);
+        public async Task<List<Application>> GetApplications(string userId)
+        {
+            var apps = await _repository.GetApplications(userId);
+            return apps;
+        }
 
         public async Task<List<AptUser>> GetApplicationUsers()
         {

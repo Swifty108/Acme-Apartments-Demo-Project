@@ -1,6 +1,6 @@
 ﻿@using AcmeApartments.BLL.HelperClasses
 
-@model AcmeApartments.Web.ViewModels.ApplicationViewModel
+@model AcmeApartments.Web.ViewModels.ApplicationsViewModel
 @{
     ViewData["Title"] = "User Application";
     var routeParams = new Dictionary<string, string>();
@@ -30,7 +30,7 @@
 
                     {
                         routeParams = new Dictionary<string, string>
-                                                                                                                                    {
+                                                                                                                                                {
                                         { "userid", application.AptUserId },
                                         { "aptnumber", application.AptNumber },
                                         { "aptprice", application.Price },

@@ -1,6 +1,7 @@
 ﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.HelperClasses;
+using AcmeApartments.Common.Interfaces;
 using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
@@ -19,19 +20,23 @@ namespace AcmeApartments.BLL.HelperClasses
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
         public ManagerAccount(
             ApplicationDbContext dbContext,
             UserManager<AptUser> userManager,
             IManagerRepository managerRepository,
             IRepository repository,
-            IMapper mapper)
+            IMapper mapper,
+            IUserService userService
+            )
         {
             _managerRepository = managerRepository;
             _dbContext = dbContext;
             _userManager = userManager;
             _repository = repository;
             _mapper = mapper;
+            _userService = userService;
         }
 
         public async Task ApproveApplication(
@@ -42,47 +47,45 @@ namespace AcmeApartments.BLL.HelperClasses
             string aptPrice
             )
         {
-            var applicationUser = _repository.GetAptUser(userId, aptNumber);
+            var app = await _managerRepository.GetApplication(appId);
+
+            app.Status = ApplicationStatus.APPROVED;
+
+            await _repository.UpdateApplication(app);
+
+            var applicationUser = await _repository.GetApplicationUser(userId);
+
             applicationUser.SSN = ssn;
 
             applicationUser.AptNumber = aptNumber;
             applicationUser.AptPrice = aptPrice;
 
-            var app = await _managerRepository.GetApplication(appId);
+            await _repository.UpdateUser(applicationUser);
 
-            app.Status = ApplicationStatus.APPROVED;
-
-            _repository.UpdateApplication(app);
+            await _dbContext.SaveChangesAsync();
 
             await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
             await _userManager.AddToRoleAsync(applicationUser, "Resident");
-
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task UnApproveApplication(string userId, string aptNumber, int appId)
         {
-            var applicationUser = _repository.GetAptUser(userId, aptNumber);
-
-            if (applicationUser.AptNumber == aptNumber)
-            {
-                applicationUser.SSN = null;
-                applicationUser.AptNumber = null;
-                applicationUser.AptPrice = null;
-
-                _repository.UpdateUser(applicationUser);
-
-                await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
-                await _userManager.AddToRoleAsync(applicationUser, "Applicant");
-
-                await _dbContext.SaveChangesAsync();
-            }
-
             var app = await _managerRepository.GetApplication(appId);
 
             app.Status = ApplicationStatus.UNAPPROVED;
 
-            _repository.UpdateApplication(app);
+            await _repository.UpdateApplication(app);
+
+            var applicationUser = await _repository.GetApplicationUser(userId);
+
+            applicationUser.SSN = null;
+            applicationUser.AptNumber = null;
+            applicationUser.AptPrice = null;
+
+            await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
+            await _userManager.AddToRoleAsync(applicationUser, "Applicant");
+
+            await _repository.UpdateUser(applicationUser);
         }
 
         public async Task EditApplication(ApplicationDTO application)
@@ -96,7 +99,7 @@ namespace AcmeApartments.BLL.HelperClasses
             var application = await _managerRepository.GetApplication(ApplicationId);
             application.Status = ApplicationStatus.CANCELED;
 
-            _repository.UpdateApplication(application);
+            await _repository.UpdateApplication(application);
             await _dbContext.SaveChangesAsync();
 
             return application;

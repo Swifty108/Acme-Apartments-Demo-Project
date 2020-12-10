@@ -11,20 +11,26 @@ namespace AcmeApartments.BLL.HelperClasses
     {
         public AutoMappingProfile()
         {
-            CreateMap<ApplicationViewModel, ApplicationDTO>();
-            CreateMap<ApplicationDTO, ApplicationViewModel>();
+            CreateMap<ApplicationsViewModel, ApplyViewModelDTO>();
+            CreateMap<ApplyViewModelDTO, ApplicationsViewModel>();
+            CreateMap<ApplicationsViewModel, ApplicationDTO>();
+            CreateMap<ApplicationDTO, ApplicationsViewModel>();
+            CreateMap<ApplicationsViewModel, Application>();
+            CreateMap<Application, ApplicationsViewModel>();
             CreateMap<MaintenanceRequestDTO, MaintenanceRequestViewModel>();
             CreateMap<MaintenanceRequestViewModel, MaintenanceRequestDTO>();
             CreateMap<FloorPlansViewModel, FloorPlansViewModelDTO>();
             CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>();
-            CreateMap<ApplicationViewModel, ApplicationViewModelDTO>();
-            CreateMap<ApplicationViewModelDTO, ApplicationViewModel>();
+            CreateMap<ApplicationsViewModel, ApplicationViewModelDTO>();
+            CreateMap<ApplicationViewModelDTO, ApplicationsViewModel>();
             CreateMap<PaymentsViewModelDTO, PaymentsViewModel>();
             CreateMap<PaymentsViewModel, PaymentsViewModelDTO>();
             CreateMap<ReviewViewModel, ReviewViewModelDTO>();
             CreateMap<ReviewViewModelDTO, ReviewViewModel>();
             CreateMap<FloorPlanDTO, FloorPlan>();
             CreateMap<FloorPlan, FloorPlanDTO>();
+            CreateMap<ApplyViewModelDTO, ApplyViewModel>();
+            CreateMap<ApplyViewModel, ApplyViewModelDTO>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model Application
 
 @{
     ViewData["Title"] = "Cancel Application";
@@ -11,7 +11,7 @@
 <div>
 
     <form asp-action="AppCancel">
-        <input type="hidden" asp-for="@Model" />
+        <input type="hidden" asp-for="ApplicationId" />
         <input type="submit" value="Cancel" class="btn btn-danger" /> |
         <a asp-action="applicationuser">Back to List</a>
     </form>
