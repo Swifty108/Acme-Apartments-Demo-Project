@@ -19,16 +19,19 @@ namespace AcmeApartments.Web.Controllers
         private readonly IApplicationService _applicationService;
 
         private readonly IManagerAccount _managerAccount;
+        private readonly IUserService _userService;
 
         public ManagerAccountController(
             IMapper mapper,
             IManagerAccount managerAccount,
-            IApplicationService applicationService)
+            IApplicationService applicationService,
+            IUserService userService)
         {
             _mapper = mapper;
             //   _managerAccount = managerRepository;
             _managerAccount = managerAccount;
             _applicationService = applicationService;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -41,7 +44,6 @@ namespace AcmeApartments.Web.Controllers
         public async Task<IActionResult> ShowApplicationUsers()
         {//todo-p: put whats in paraenth into own var better for debug and readablility
             var appUsers = await _applicationService.GetApplicationUsers();
-            ViewBag.AppCanceledSuccess = TempData["AppCanceledSuccess"];
             return View(appUsers);
         }
 
@@ -55,13 +57,19 @@ namespace AcmeApartments.Web.Controllers
                 FirstName = firstName,
                 LastName = lastName
             };
+
+            ViewBag.AppEditSuccess = TempData["AppEditSuccess"];
+            ViewBag.AppApproveSuccess = TempData["AppApproveSuccess"];
+            ViewBag.AppUnApproveSuccess = TempData["AppUnApproveSuccess"];
+            ViewBag.AppCanceledSuccess = TempData["AppCanceledSuccess"];
+
             return View(applicationsViewModel);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewApplication(int applicationId)
+        public async Task<IActionResult> ViewApplication(int Id)
         {
-            var application = await _applicationService.GetApplication(applicationId);
+            var application = await _applicationService.GetApplication(Id);
             return View(application);
         }
 
@@ -75,7 +83,6 @@ namespace AcmeApartments.Web.Controllers
 
             var app = _mapper.Map<ApplicationsViewModel>(application);
 
-            ViewBag.AppEditSuccess = TempData["AppEditSuccess"];
             return View(app);
         }
 
@@ -89,9 +96,10 @@ namespace AcmeApartments.Web.Controllers
                 {
                     var applicationDTO = _mapper.Map<ApplicationDTO>(application);
                     await _managerAccount.EditApplication(applicationDTO);
+                    var user = await _userService.GetUser(application.AptUserId);
 
                     TempData["AppEditSuccess"] = true;
-                    return RedirectToAction("EditApplication");
+                    return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -115,10 +123,12 @@ namespace AcmeApartments.Web.Controllers
         public async Task<IActionResult> CancelApplicationConfirmed(Application application)
         {
             await _managerAccount.CancelApplication(application.ApplicationId);
+            var app = await _applicationService.GetApplication(application.ApplicationId);
+            var user = await _userService.GetUser(app.AptUserId);
 
             TempData["AppCanceledSuccess"] = true;
 
-            return RedirectToAction("ShowApplicationUsers");
+            return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
         public async Task<IActionResult> ApproveApplication(ApproveAppViewModel approveViewModel)
@@ -136,21 +146,12 @@ namespace AcmeApartments.Web.Controllers
             catch (Exception e)
             {
                 throw;
-                //TempData["ApproveFailedMessage"] = e.Message;
-                //return RedirectToAction("ShowApproveApplicationFailed");
             }
-            return RedirectToAction("ShowApproveApplicationSuccess");
-        }
 
-        public IActionResult ShowApproveApplicationSuccess()
-        {
-            return View();
-        }
+            var user = await _userService.GetUser(approveViewModel.UserId);
 
-        public IActionResult ShowApproveApplicationFailed()
-        {
-            ViewBag.ApproveApplicationFailed = TempData["ApproveFailedMessage"];
-            return View();
+            TempData["AppApproveSuccess"] = true;
+            return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
         public async Task<IActionResult> UnApproveApplication(string userId, string aptNumber, int applicationId)
@@ -161,21 +162,13 @@ namespace AcmeApartments.Web.Controllers
             }
             catch (Exception e)
             {
-                TempData["UnApproveFailedMessage"] = e.Message;
-                return RedirectToAction("ShowUnApproveApplicationFailed");
+                throw;
             }
-            return RedirectToAction("ShowUnApproveApplicationSuccess");
-        }
 
-        public IActionResult ShowUnApproveApplicationSuccess()
-        {
-            return View();
-        }
+            var user = await _userService.GetUser(userId);
 
-        public IActionResult ShowUnApproveApplicationFailed()
-        {
-            ViewBag.UnApproveApplicationFailed = TempData["UnApproveFailedMessage"];
-            return View();
+            TempData["AppUnApproveSuccess"] = true;
+            return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
         [HttpGet]

@@ -20,7 +20,6 @@ namespace AcmeApartments.DAL.Data
         public async Task<AptUser> GetApplicationUser(string userId)
         {
             var applicationUser = await _dbContext.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
-            _dbContext.Attach(applicationUser);
             return applicationUser;
         }
 

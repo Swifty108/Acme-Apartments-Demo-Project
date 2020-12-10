@@ -17,6 +17,8 @@ namespace AcmeApartments.BLL.HelperClasses
             CreateMap<ApplicationDTO, ApplicationsViewModel>();
             CreateMap<ApplicationsViewModel, Application>();
             CreateMap<Application, ApplicationsViewModel>();
+            CreateMap<ApplicationDTO, Application>();
+            CreateMap<Application, ApplicationDTO>();
             CreateMap<MaintenanceRequestDTO, MaintenanceRequestViewModel>();
             CreateMap<MaintenanceRequestViewModel, MaintenanceRequestDTO>();
             CreateMap<FloorPlansViewModel, FloorPlansViewModelDTO>();

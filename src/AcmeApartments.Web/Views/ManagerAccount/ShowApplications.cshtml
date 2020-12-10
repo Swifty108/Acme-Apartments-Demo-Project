@@ -3,10 +3,31 @@
 @model AcmeApartments.Web.ViewModels.ApplicationsViewModel
 @{
     ViewData["Title"] = "User Application";
+    ViewBag.AppEditSuccessMessage = "The application was successfully edited!";
+    ViewBag.AppApproveSuccessMessage = "The application was successfully approved!";
+    ViewBag.AppUnApproveSuccessMessage = "The application was successfully unapproved!";
+    ViewBag.AppCanceledSuccessMessage = "The application was successfully canceled!";
     var routeParams = new Dictionary<string, string>();
 }
 
 <partial name="_LoggedInAsPartial" />
+<br />
+@if (ViewBag.AppEditSuccess != null && ViewBag.AppEditSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppEditSuccessMessage" />
+}
+else if (ViewBag.AppApproveSuccess != null && ViewBag.AppApproveSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppApproveSuccessMessage" />
+}
+else if (ViewBag.AppUnApproveSuccess != null && ViewBag.AppUnApproveSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppUnApproveSuccessMessage" />
+}
+else if (ViewBag.AppCanceledSuccess != null && ViewBag.AppCanceledSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppCanceledSuccessMessage" />
+}
 <br />
 <h1>Applications for @Model.FirstName @Model.LastName</h1>
 
@@ -30,7 +51,7 @@
 
                     {
                         routeParams = new Dictionary<string, string>
-                                                                                                                                                {
+                                                                                                                                                                                                                                        {
                                         { "userid", application.AptUserId },
                                         { "aptnumber", application.AptNumber },
                                         { "aptprice", application.Price },

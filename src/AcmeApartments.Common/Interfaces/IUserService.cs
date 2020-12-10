@@ -7,6 +7,8 @@ namespace AcmeApartments.Common.Interfaces
     {
         public Task<AptUser> GetUser();
 
+        public Task<AptUser> GetUser(string userId);
+
         public string GetUserId();
     }
 }
