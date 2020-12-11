@@ -14,7 +14,7 @@ namespace AcmeApartments.BLL.HelperClasses
     public class ApplicantAccount : IApplicantAccount
     {
         private readonly IManagerRepository _managerRepository;
-        private readonly IApplicantRepository _applicantRepository;
+        private readonly IRepository<Application> _appRepository;
         private readonly IRepository _repository;
         private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
@@ -28,7 +28,8 @@ namespace AcmeApartments.BLL.HelperClasses
             IRepository repository,
             IApplicantRepository applicantRepository,
             IHttpContextAccessor accessor,
-            IUserService userService)
+            IUserService userService,
+            IRepository<Application> appRepository)
         {
             _managerRepository = managerRepository;
             _dbContext = dbContext;
@@ -37,13 +38,15 @@ namespace AcmeApartments.BLL.HelperClasses
             _userService = userService;
             _accessor = accessor;
             _applicantRepository = applicantRepository;
+
+            _appRepository = appRepository;
         }
 
         public async Task<List<Application>> GetApplications()
         {
             var userId = _userService.GetUserId();
 
-            return await _applicantRepository.GetApplications(userId);
+            return await _appRepository.GetApplications(userId);
         }
 
         public async Task<Application> GetApplication(int appId)

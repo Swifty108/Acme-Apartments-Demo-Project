@@ -150,5 +150,11 @@ namespace AcmeApartments.Web.Controllers
             }
             return View(viewMessage);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

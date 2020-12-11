@@ -5,7 +5,6 @@ using AcmeApartments.DAL.DTOs;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
-using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -16,27 +15,38 @@ namespace AcmeApartments.BLL.HelperClasses
 {
     public class Home : IHome
     {
-        private readonly IHomeRepository _homeRepository;
-        private readonly IHttpContextAccessor _accessor;
+        private readonly IRepository<FloorPlan> _floorPlanRepository;
+        private readonly IRepository<Application> _appRepository;
         private readonly IUserService _userService;
         private readonly UserManager<AptUser> _userManager;
 
         public Home(
             IHomeRepository homeRepository,
-            IMapper mapper,
             IHttpContextAccessor accessor,
             IUserService userService,
-            UserManager<AptUser> userManager)
+            UserManager<AptUser> userManager,
+            IRepository<FloorPlan> floorPlanRepository,
+            IRepository<Application> appRepository)
         {
-            _homeRepository = homeRepository;
-            _accessor = accessor;
+            _floorPlanRepository = floorPlanRepository;
             _userManager = userManager;
             _userService = userService;
+            _appRepository = appRepository;
         }
 
-        public async Task<FloorPlansViewModelDTO> GetFloorPlans()
+        public FloorPlansViewModelDTO GetFloorPlans()
         {
-            var floorPlans = await _homeRepository.GetFloorPlans();
+            var studioFloorPlans = _floorPlanRepository.Get(filter: f => f.FloorPlanType == "Studio").ToList();
+            var oneBedFloorPlans = _floorPlanRepository.Get(filter: f => f.FloorPlanType == "1Bed").ToList();
+            var twoBedFloorPlans = _floorPlanRepository.Get(filter: f => f.FloorPlanType == "2Bed").ToList();
+
+            var floorPlans = new FloorPlansViewModelDTO
+            {
+                StudioPlans = studioFloorPlans,
+                OneBedPlans = oneBedFloorPlans,
+                TwoBedPlans = twoBedFloorPlans
+            };
+
             return floorPlans;
         }
 
@@ -55,7 +65,7 @@ namespace AcmeApartments.BLL.HelperClasses
                 DateApplied = DateTime.Now,
                 SSN = applyViewModelDTO.SSN
             };
-            _homeRepository.AddApplication(app);
+            _appRepository.Insert(app);
 
             var userRole = _userManager.GetRolesAsync(user).Result.FirstOrDefault();
             return userRole;

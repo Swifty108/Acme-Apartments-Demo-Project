@@ -4,12 +4,28 @@
 @model AcmeApartments.Web.ViewModels.MaintenanceRequestViewModel
 @{
     ViewData["Title"] = "User Maintenace";
-    ViewBag.Success = "The maintenance request was edited successfully!";
+    ViewBag.MaintenanceEditSuccessMessage = "The maintenance request was edited successfully!";
+    ViewBag.MaintenanceApproveSuccessMessage = "The maintenance request was successfully approved!";
+    ViewBag.MaintenanceUnApproveSuccessMessage = "The maintenance request was successfully unapproved!";
+    ViewBag.MaintenanceCanceledSuccessMessage = "The maintenance request was successfully canceled!";
+
 }
 @if (ViewBag.MaintenanceEditSuccess != null && ViewBag.MaintenanceEditSuccess)
 {
 
-    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceEditSuccessMessage" />
+}
+else if (ViewBag.MaintenanceApproveSuccess != null && ViewBag.MaintenanceApproveSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceApproveSuccessMessage" />
+}
+else if (ViewBag.MaintenanceUnApproveSuccess != null && ViewBag.MaintenanceUnApproveSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceUnApproveSuccessMessage" />
+}
+else if (ViewBag.MaintenanceCanceledSuccess != null && ViewBag.MaintenanceCanceledSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceCanceledSuccessMessage" />
 }
 
 <partial name="_LoggedInAsPartial" />

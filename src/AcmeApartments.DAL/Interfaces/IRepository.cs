@@ -1,22 +1,39 @@
-﻿using AcmeApartments.DAL.Identity;
-using AcmeApartments.DAL.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace AcmeApartments.DAL.Interfaces
 {
-    public interface IRepository
+    public interface IRepository<TEntity> where TEntity : class
     {
-        public Task<AptUser> GetApplicationUser(string userId);
+        IQueryable<TEntity> Get(
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "");
 
-        public Task UpdateUser(AptUser user);
+        TEntity GetByID(object id);
 
-        public Task<Application> GetApplication(int appId);
+        void Insert(TEntity entity);
 
-        public Task UpdateApplication(Application app);
+        void Update(TEntity entityToUpdate);
 
-        public Task<List<Application>> GetApplications(string userId);
+        void Delete(TEntity entityToDelete);
 
-        public void UpdateMaintenaceRequest(MaintenanceRequest mRequest);
+        void Delete(object id);
     }
+
+    //public interface IRepository
+    //{
+    //    public Task<AptUser> GetApplicationUserByID(string userId);
+
+    //    public Task UpdateUser(AptUser user);
+
+    //    public Task<Application> GetApplicationByID(int appId);
+
+    //    public Task UpdateApplication(Application app);
+
+    //    public Task<List<Application>> GetApplications(string userId);
+
+    //    public void UpdateMaintenaceRequest(MaintenanceRequest mRequest);
+    //}
 }

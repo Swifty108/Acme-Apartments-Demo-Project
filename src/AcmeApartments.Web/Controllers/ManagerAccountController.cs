@@ -190,6 +190,10 @@ namespace AcmeApartments.Web.Controllers
             };
 
             ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
+            ViewBag.MaintenanceApproveSuccess = TempData["MaintenanceApproveSuccess"];
+            ViewBag.MaintenanceUnApproveSuccess = TempData["MaintenanceUnApproveSuccess"];
+            ViewBag.MaintenanceCanceledSuccess = TempData["MaintenanceCanceledSuccess"];
+
             return View(mViewModel);
         }
 
@@ -197,11 +201,6 @@ namespace AcmeApartments.Web.Controllers
         public async Task<IActionResult> ViewMaintenanceRequest(int maintenanceId, string firstName, string lastName)
         {
             var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
-
-            if (maintenanceRecord == null)
-            {
-                return NotFound();
-            }
 
             return View(new MaintenanceRequestViewModel
             {
@@ -258,22 +257,18 @@ namespace AcmeApartments.Web.Controllers
             }
             catch (Exception e)
             {
-                TempData["ApproveFailedMessage"] = e.Message;
-                return RedirectToAction("ShowApproveMaintenaceFailed");
+                throw;
             }
 
-            return RedirectToAction("ShowApproveMaintenanceSuccess");
-        }
+            var user = await _userService.GetUser(userId);
 
-        public IActionResult ShowApproveMaintenanceSuccess()
-        {
-            return View();
-        }
+            TempData["MaintenanceApproveSuccess"] = true;
 
-        public IActionResult ShowApproveMaintenaceFailed()
-        {
-            ViewBag.ApproveMaintenanceFailed = TempData["ApproveFailedMessage"];
-            return View();
+            return RedirectToAction("ShowMaintenanceRequests", new
+            {
+                firstName = user.FirstName,
+                lastName = user.LastName
+            });
         }
 
         public async Task<IActionResult> UnApproveMaintenanceRequest(string userId, int maintenanceId)
@@ -284,21 +279,24 @@ namespace AcmeApartments.Web.Controllers
             }
             catch (Exception e)
             {
-                TempData["UnApproveFailedMessage"] = e.Message;
-                return RedirectToAction("ShowUnApproveMaintenanceFailed");
+                throw;
             }
-            return RedirectToAction("ShowUnApproveMaintenanceSuccess");
+
+            var user = await _userService.GetUser(userId);
+
+            TempData["MaintenanceUnApproveSuccess"] = true;
+
+            return RedirectToAction("ShowMaintenanceRequests", new
+            {
+                firstName = user.FirstName,
+                lastName = user.LastName
+            });
         }
 
-        public IActionResult ShowUnApproveMaintenanceSuccess()
+        protected override void Dispose(bool disposing)
         {
-            return View();
-        }
-
-        public IActionResult ShowUnApproveMaintenanceFailed()
-        {
-            ViewBag.UnApproveMaintenanceFailed = TempData["UnApproveFailedMessage"];
-            return View();
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

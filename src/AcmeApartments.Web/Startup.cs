@@ -34,7 +34,8 @@ namespace AcmeApartments.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")),
-                    ServiceLifetime.Scoped
+                    ServiceLifetime.Transient
+
                     );
             services.AddIdentity<AptUser, IdentityRole>(options =>
             {
@@ -57,7 +58,7 @@ namespace AcmeApartments.Web
             services.AddTransient<IResidentRepository, ResidentRepository>();
             services.AddTransient<IManagerRepository, ManagerRepository>();
             services.AddTransient<IApplicantAccount, ApplicantAccount>();
-            services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IManagerAccount, ManagerAccount>();
             services.AddTransient<IResidentAccount, ResidentAccount>();
             services.AddTransient<IHome, Home>();

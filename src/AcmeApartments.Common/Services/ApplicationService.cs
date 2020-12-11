@@ -5,7 +5,7 @@ using AcmeApartments.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace AcmeApartments.Common.Services
 {
@@ -13,36 +13,33 @@ namespace AcmeApartments.Common.Services
     {
         private readonly IHttpContextAccessor _accessor;
         private readonly UserManager<AptUser> _userManager;
-        private readonly IRepository _repository;
-        private readonly IManagerRepository _managerRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
 
         public ApplicationService(
             IHttpContextAccessor accessor,
             UserManager<AptUser> userManager,
-            IRepository repository,
-            IManagerRepository managerRepository,
+            IUnitOfWork unitOfWork,
             IUserService userService)
 
         {
             _accessor = accessor;
             _userManager = userManager;
-            _repository = repository;
-            _managerRepository = managerRepository;
+            _unitOfWork = unitOfWork;
             _userService = userService;
         }
 
-        public async Task<Application> GetApplication(int applicationId) => await _repository.GetApplication(applicationId);
+        public Application GetApplication(int applicationId) => _unitOfWork.ApplicationRepository.GetByID(applicationId);
 
-        public async Task<List<Application>> GetApplications(string userId)
-        {
-            var apps = await _repository.GetApplications(userId);
-            return apps;
-        }
+        public List<Application> GetApplications(string userId) => _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId).ToList();
 
-        public async Task<List<AptUser>> GetApplicationUsers()
+        public List<AptUser> GetApplicationUsers()
         {
-            return await _managerRepository.GetApplicationUsers();
+            var users = from userRecord in _unitOfWork.AptUserRepository.Get()
+                        join applicationRecord in _unitOfWork.ApplicationRepository.Get() on userRecord.Id equals applicationRecord.AptUserId
+                        select userRecord;
+            var userList = users.Distinct().ToList();
+            return userList;
         }
     }
 }
