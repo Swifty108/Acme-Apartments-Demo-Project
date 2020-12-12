@@ -9,7 +9,7 @@ namespace AcmeApartments.Common.Interfaces
     {
         Task<Application> GetApplication(int applicationId);
 
-        public Task<List<Application>> GetApplications(string userId);
+        public List<Application> GetApplications(string userId);
 
         public Task<List<AptUser>> GetApplicationUsers();
     }

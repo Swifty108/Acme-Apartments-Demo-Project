@@ -50,7 +50,7 @@ namespace AcmeApartments.BLL.HelperClasses
             var user = await _userService.GetUser();
             var app = new Application
             {
-                AptUser = user,
+                AptUserId = user.Id,
                 Income = applyViewModelDTO.Income,
                 Occupation = applyViewModelDTO.Occupation,
                 Price = applyViewModelDTO.Price,

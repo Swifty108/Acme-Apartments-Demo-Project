@@ -78,7 +78,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<JsonResult> GetReqHistory()
         {
-            var maintenanceRequests = _residentAccountLogic.GetMaintenanceRequests();
+            var maintenanceRequests = await _residentAccountLogic.GetMaintenanceRequests();
             return Json(new
             {
                 list = maintenanceRequests
@@ -89,7 +89,7 @@ namespace AcmeApartments.Web.Controllers
         public async Task<IActionResult> ShowPayments()
         {
             var user = await _userService.GetUser();
-            var payments = _residentAccountLogic.GetBills(user);
+            var payments = await _residentAccountLogic.GetBills(user);
             var payViewModel = _mapper.Map<PaymentsViewModel>(payments);
 
             return View(payViewModel);

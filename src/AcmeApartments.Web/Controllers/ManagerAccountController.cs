@@ -44,16 +44,16 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplicationUsers()
+        public IActionResult ShowApplicationUsers()
         {//todo-p: put whats in paraenth into own var better for debug and readablility
             var appUsers = _applicationService.GetApplicationUsers();
             return View(appUsers);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplications(string userId, string firstName, string lastName)
+        public IActionResult ShowApplications(string userId, string firstName, string lastName)
         {
-            var appsWithUser = await _applicationService.GetApplications(userId);
+            var appsWithUser = _applicationService.GetApplications(userId);
             var applicationsViewModel = new ApplicationsViewModel
             {
                 Applications = appsWithUser,
@@ -98,7 +98,7 @@ namespace AcmeApartments.Web.Controllers
                 try
                 {
                     var applicationDTO = _mapper.Map<ApplicationDTO>(application);
-                    _managerAccount.EditApplication(applicationDTO);
+                    await _managerAccount.EditApplication(applicationDTO);
                     var user = await _userService.GetUserByID(application.AptUserId);
 
                     TempData["AppEditSuccess"] = true;

@@ -51,9 +51,10 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
+
         public async Task<IActionResult> ShowFloorPlans(string floorPlanType = null)
         {
-            var floorPlansViewModelDTO = _homeAccountLogic.GetFloorPlans();
+            var floorPlansViewModelDTO = await _homeAccountLogic.GetFloorPlans();
             var floorPlansViewModel = _mapper.Map<FloorPlansViewModel>(floorPlansViewModelDTO);
             floorPlansViewModel.FloorPlanType = floorPlanType;
             return View(floorPlansViewModel);

@@ -33,7 +33,7 @@ namespace AcmeApartments.BLL.HelperClasses
         public async Task<List<Application>> GetApplications()
         {
             var userId = _userService.GetUserId();
-            var applications = await _appService.GetApplications(userId);
+            var applications = _appService.GetApplications(userId);
             return applications;
         }
     }

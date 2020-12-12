@@ -31,7 +31,7 @@ namespace AcmeApartments.Common.Services
 
         public async Task<Application> GetApplication(int applicationId) => await _unitOfWork.ApplicationRepository.GetByID(applicationId);
 
-        public async Task<List<Application>> GetApplications(string userId) => await _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId).ToListAsync();
+        public List<Application> GetApplications(string userId) => _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId).ToList();
 
         public async Task<List<AptUser>> GetApplicationUsers()
         {

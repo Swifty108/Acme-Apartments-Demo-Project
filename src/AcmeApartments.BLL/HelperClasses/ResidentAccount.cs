@@ -73,10 +73,10 @@ namespace AcmeApartments.BLL.HelperClasses
             };
         }
 
-        public async Task<List<Application>> GetApplications()
+        public List<Application> GetApplications()
         {
             var userId = _userService.GetUserId();
-            var apps = await _appService.GetApplications(userId);
+            var apps = _appService.GetApplications(userId);
             return apps;
         }
 

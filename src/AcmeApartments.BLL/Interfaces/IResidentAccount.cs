@@ -16,6 +16,6 @@ namespace AcmeApartments.BLL.Interfaces
 
         public Task<List<MaintenanceRequest>> GetMaintenanceRequests();
 
-        public Task<List<Application>> GetApplications();
+        public List<Application> GetApplications();
     }
 }
