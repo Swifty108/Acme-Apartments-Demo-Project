@@ -29,7 +29,7 @@ namespace AcmeApartments.Web.Areas.Identity.Pages.Account
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
 
-            return RedirectToPage("Login", new { isLoggedout = true });
+            return RedirectToPage("Login", new { isLoggedout = true, isDirectLogin = true });
         }
     }
 }
