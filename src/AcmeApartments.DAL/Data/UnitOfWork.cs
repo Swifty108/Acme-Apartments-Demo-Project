@@ -2,6 +2,7 @@
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace AcmeApartments.DAL.Data
 {
@@ -12,6 +13,8 @@ namespace AcmeApartments.DAL.Data
         private GenericRepository<Application> _applications;
         private GenericRepository<FloorPlan> _floorPlans;
         private GenericRepository<Review> _reviews;
+        private GenericRepository<WaterBill> _waterBills;
+        private GenericRepository<ElectricBill> _electricBills;
 
         private GenericRepository<MaintenanceRequest> _maintenanceRequests;
 
@@ -65,9 +68,27 @@ namespace AcmeApartments.DAL.Data
             }
         }
 
-        public void Save()
+        public IRepository<WaterBill> WaterBillRepository
         {
-            _dbContext.SaveChanges();
+            get
+            {
+                return _waterBills ??
+                    (_waterBills = new GenericRepository<WaterBill>(_dbContext));
+            }
+        }
+
+        public IRepository<ElectricBill> ElectricBillRepository
+        {
+            get
+            {
+                return _electricBills ??
+                    (_electricBills = new GenericRepository<ElectricBill>(_dbContext));
+            }
+        }
+
+        public async Task Save()
+        {
+            await _dbContext.SaveChangesAsync();
         }
 
         private bool disposed = false;

@@ -4,8 +4,10 @@ using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AcmeApartments.Common.Services
 {
@@ -27,15 +29,15 @@ namespace AcmeApartments.Common.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Application GetApplication(int applicationId) => _unitOfWork.ApplicationRepository.GetByID(applicationId);
+        public async Task<Application> GetApplication(int applicationId) => await _unitOfWork.ApplicationRepository.GetByID(applicationId);
 
-        public List<Application> GetApplications(string userId) => _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId).ToList();
+        public async Task<List<Application>> GetApplications(string userId) => await _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId).ToListAsync();
 
-        public List<AptUser> GetApplicationUsers()
+        public async Task<List<AptUser>> GetApplicationUsers()
         {
-            var users = (from userRecord in _unitOfWork.AptUserRepository.Get()
-                         join applicationRecord in _unitOfWork.ApplicationRepository.Get() on userRecord.Id equals applicationRecord.AptUserId
-                         select userRecord).Distinct().ToList();
+            var users = await (from userRecord in _unitOfWork.AptUserRepository.Get()
+                               join applicationRecord in _unitOfWork.ApplicationRepository.Get() on userRecord.Id equals applicationRecord.AptUserId
+                               select userRecord).Distinct().ToListAsync();
 
             return users;
         }

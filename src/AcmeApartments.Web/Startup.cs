@@ -53,9 +53,6 @@ namespace AcmeApartments.Web
             .AddRoles<IdentityRole>();
 
             services.AddTransient<IDbInitializer, DbInitializer>();
-            services.AddTransient<IHomeRepository, HomeRepository>();
-            services.AddTransient<IApplicantRepository, ApplicantRepository>();
-            services.AddTransient<IResidentRepository, ResidentRepository>();
             services.AddTransient<IManagerRepository, ManagerRepository>();
             services.AddTransient<IApplicantAccount, ApplicantAccount>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();

@@ -37,7 +37,7 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ShowApplications()
+        public async Task<IActionResult> ShowApplications()
         {
             var applications = _residentAccountLogic.GetApplications();
             return View(applications);
@@ -52,7 +52,7 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitMaintenanceRequest(MaintenanceRequestViewModel maintReqViewModel)
+        public async Task<IActionResult> SubmitMaintenanceRequest(MaintenanceRequestViewModel maintReqViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetReqHistory()
+        public async Task<JsonResult> GetReqHistory()
         {
             var maintenanceRequests = _residentAccountLogic.GetMaintenanceRequests();
             return Json(new
@@ -103,7 +103,7 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult WriteAReview(ReviewViewModel review)
+        public async Task<IActionResult> WriteAReview(ReviewViewModel review)
         {
             if (ModelState.IsValid)
             {

@@ -2,6 +2,7 @@
 using AcmeApartments.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace AcmeApartments.Controllers
 {
@@ -25,7 +26,7 @@ namespace AcmeApartments.Controllers
         }
 
         [HttpGet]
-        public IActionResult ShowApplications()
+        public async Task<IActionResult> ShowApplications()
         {
             var userApplications = _applicantAccountLogic.GetApplications();
 
@@ -45,8 +46,6 @@ namespace AcmeApartments.Controllers
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
-                //await _emailService.SendEmailAsync(viewMessage);
-
                 return RedirectToAction("ContactUs");
             }
             return View(viewMessage);

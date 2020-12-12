@@ -30,9 +30,9 @@ namespace AcmeApartments.Common.Services
             return user;
         }
 
-        public AptUser GetUserByID(string userId)
+        public async Task<AptUser> GetUserByID(string userId)
         {
-            var user = _unitOfWork.AptUserRepository.GetByID(userId);
+            var user = await _unitOfWork.AptUserRepository.GetByID(userId);
             return user;
         }
 

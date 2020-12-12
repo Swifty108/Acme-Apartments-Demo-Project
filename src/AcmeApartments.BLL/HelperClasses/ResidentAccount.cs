@@ -2,45 +2,40 @@
 using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.HelperClasses;
 using AcmeApartments.Common.Interfaces;
-using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AcmeApartments.BLL.HelperClasses
 {
     public class ResidentAccount : IResidentAccount
     {
-        private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
         private readonly IUserService _userService;
         private readonly IApplicationService _appService;
         private readonly IUnitOfWork _unitOfWork;
 
         public ResidentAccount(
-            ApplicationDbContext dbContext,
             UserManager<AptUser> userManager,
-            IResidentRepository residentRepository,
             IUserService userService,
             IApplicationService appService,
             IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
             _userManager = userManager;
             _userService = userService;
             _appService = appService;
             _unitOfWork = unitOfWork;
         }
 
-        public PaymentsViewModelDTO GetBills(AptUser user)
+        public async Task<PaymentsViewModelDTO> GetBills(AptUser user)
         {
-            var waterBill = _dbContext.WaterBills.FirstOrDefault();
-            var electricBill = _dbContext.ElectricBills.FirstOrDefault();
+            var waterBill = await _unitOfWork.WaterBillRepository.Get().FirstAsync();
+            var electricBill = await _unitOfWork.ElectricBillRepository.Get().FirstAsync();
             var newWaterBill = new WaterBill();
             var newElectricBill = new ElectricBill();
 
@@ -53,8 +48,8 @@ namespace AcmeApartments.BLL.HelperClasses
                     DateDue = DateTime.Now.AddDays(20)
                 };
 
-                _dbContext.AddAsync(newWaterBill);
-                _dbContext.SaveChangesAsync();
+                await _unitOfWork.WaterBillRepository.Insert(newWaterBill);
+                await _unitOfWork.Save();
             }
 
             if (electricBill == null)
@@ -66,8 +61,8 @@ namespace AcmeApartments.BLL.HelperClasses
                     DateDue = DateTime.Now.AddDays(20)
                 };
 
-                _dbContext.AddAsync(newElectricBill);
-                _dbContext.SaveChangesAsync();
+                await _unitOfWork.ElectricBillRepository.Insert(newElectricBill);
+                await _unitOfWork.Save();
             }
 
             return new PaymentsViewModelDTO
@@ -78,10 +73,10 @@ namespace AcmeApartments.BLL.HelperClasses
             };
         }
 
-        public List<Application> GetApplications()
+        public async Task<List<Application>> GetApplications()
         {
             var userId = _userService.GetUserId();
-            var apps = _appService.GetApplications(userId);
+            var apps = await _appService.GetApplications(userId);
             return apps;
         }
 
@@ -94,7 +89,8 @@ namespace AcmeApartments.BLL.HelperClasses
                 DateReviewed = DateTime.Now,
                 ReviewText = review.ReviewText
             };
-            _unitOfWork.ReviewRepository.Insert(newReview);
+            await _unitOfWork.ReviewRepository.Insert(newReview);
+            await _unitOfWork.Save();
         }
 
         public async Task SubmitMaintenanceRequest(MaintenanceRequestDTO maintenanceRequestDTO)
@@ -109,13 +105,14 @@ namespace AcmeApartments.BLL.HelperClasses
                 Status = MaintenanceRequestStatus.PENDINGAPPROVAL
             };
 
-            _unitOfWork.MaintenanceRequestRepository.Insert(maintenanceRequest);
+            await _unitOfWork.MaintenanceRequestRepository.Insert(maintenanceRequest);
+            await _unitOfWork.Save();
         }
 
-        public List<MaintenanceRequest> GetMaintenanceRequests()
+        public async Task<List<MaintenanceRequest>> GetMaintenanceRequests()
         {
             var userId = _userService.GetUserId();
-            var requests = _unitOfWork.MaintenanceRequestRepository.Get(filter: u => u.AptUserId == userId).ToList();
+            var requests = await _unitOfWork.MaintenanceRequestRepository.Get(filter: u => u.AptUserId == userId).ToListAsync();
 
             return requests;
         }

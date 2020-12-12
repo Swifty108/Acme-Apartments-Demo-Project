@@ -6,7 +6,7 @@ namespace AcmeApartments.BLL.Interfaces
 {
     public interface IHome
     {
-        public FloorPlansViewModelDTO GetFloorPlans();
+        public Task<FloorPlansViewModelDTO> GetFloorPlans();
 
         public Task<string> Apply(ApplyViewModelDTO applyViewModelDTO);
     }

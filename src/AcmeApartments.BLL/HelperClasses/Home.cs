@@ -6,6 +6,7 @@ using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,11 +29,11 @@ namespace AcmeApartments.BLL.HelperClasses
             _unitOfWork = unitOfWork;
         }
 
-        public FloorPlansViewModelDTO GetFloorPlans()
+        public async Task<FloorPlansViewModelDTO> GetFloorPlans()
         {
-            var studioFloorPlans = _unitOfWork.FloorPlanRepository.Get(filter: f => f.FloorPlanType == "Studio").ToList();
-            var oneBedFloorPlans = _unitOfWork.FloorPlanRepository.Get(filter: f => f.FloorPlanType == "1Bed").ToList();
-            var twoBedFloorPlans = _unitOfWork.FloorPlanRepository.Get(filter: f => f.FloorPlanType == "2Bed").ToList();
+            var studioFloorPlans = await _unitOfWork.FloorPlanRepository.Get(filter: f => f.FloorPlanType == "Studio").ToListAsync();
+            var oneBedFloorPlans = await _unitOfWork.FloorPlanRepository.Get(filter: f => f.FloorPlanType == "1Bed").ToListAsync();
+            var twoBedFloorPlans = await _unitOfWork.FloorPlanRepository.Get(filter: f => f.FloorPlanType == "2Bed").ToListAsync();
 
             var floorPlans = new FloorPlansViewModelDTO
             {
@@ -59,7 +60,8 @@ namespace AcmeApartments.BLL.HelperClasses
                 DateApplied = DateTime.Now,
                 SSN = applyViewModelDTO.SSN
             };
-            _unitOfWork.ApplicationRepository.Insert(app);
+            await _unitOfWork.ApplicationRepository.Insert(app);
+            await _unitOfWork.Save();
 
             var userRole = _userManager.GetRolesAsync(user).Result.FirstOrDefault();
             return userRole;

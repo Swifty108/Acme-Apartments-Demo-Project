@@ -44,16 +44,16 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ShowApplicationUsers()
+        public async Task<IActionResult> ShowApplicationUsers()
         {//todo-p: put whats in paraenth into own var better for debug and readablility
             var appUsers = _applicationService.GetApplicationUsers();
             return View(appUsers);
         }
 
         [HttpGet]
-        public IActionResult ShowApplications(string userId, string firstName, string lastName)
+        public async Task<IActionResult> ShowApplications(string userId, string firstName, string lastName)
         {
-            var appsWithUser = _applicationService.GetApplications(userId);
+            var appsWithUser = await _applicationService.GetApplications(userId);
             var applicationsViewModel = new ApplicationsViewModel
             {
                 Applications = appsWithUser,
@@ -70,15 +70,15 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ViewApplication(int Id)
+        public async Task<IActionResult> ViewApplication(int Id)
         {
-            var application = _applicationService.GetApplication(Id);
+            var application = await _applicationService.GetApplication(Id);
             return View(application);
         }
 
-        public IActionResult EditApplication(int Id)
+        public async Task<IActionResult> EditApplication(int Id)
         {//todo-p: show success message in the user apps list only not here.
-            var application = _applicationService.GetApplication(Id);
+            var application = await _applicationService.GetApplication(Id);
             if (application == null)
             {
                 return NotFound();
@@ -91,7 +91,7 @@ namespace AcmeApartments.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditApplication(ApplicationsViewModel application)
+        public async Task<IActionResult> EditApplication(ApplicationsViewModel application)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace AcmeApartments.Web.Controllers
                 {
                     var applicationDTO = _mapper.Map<ApplicationDTO>(application);
                     _managerAccount.EditApplication(applicationDTO);
-                    var user = _userService.GetUserByID(application.AptUserId);
+                    var user = await _userService.GetUserByID(application.AptUserId);
 
                     TempData["AppEditSuccess"] = true;
                     return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
@@ -114,20 +114,20 @@ namespace AcmeApartments.Web.Controllers
             return View(application);
         }
 
-        public IActionResult CancelApplication(int Id)
+        public async Task<IActionResult> CancelApplication(int Id)
         {
-            var application = _applicationService.GetApplication(Id);
+            var application = await _applicationService.GetApplication(Id);
             return View(application);
         }
 
         // POST: ApplicantAccount/Delete/5
         [HttpPost, ActionName("AppCancel")]
         [ValidateAntiForgeryToken]
-        public IActionResult CancelApplicationConfirmed(Application application)
+        public async Task<IActionResult> CancelApplicationConfirmed(Application application)
         {
-            _managerAccount.CancelApplication(application.ApplicationId);
-            var app = _applicationService.GetApplication(application.ApplicationId);
-            var user = _userService.GetUserByID(app.AptUserId);
+            await _managerAccount.CancelApplication(application.ApplicationId);
+            var app = await _applicationService.GetApplication(application.ApplicationId);
+            var user = await _userService.GetUserByID(app.AptUserId);
 
             TempData["AppCanceledSuccess"] = true;
 
@@ -151,7 +151,7 @@ namespace AcmeApartments.Web.Controllers
                 throw;
             }
 
-            var user = _userService.GetUserByID(approveViewModel.UserId);
+            var user = await _userService.GetUserByID(approveViewModel.UserId);
 
             TempData["AppApproveSuccess"] = true;
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
@@ -168,22 +168,22 @@ namespace AcmeApartments.Web.Controllers
                 throw;
             }
 
-            var user = _userService.GetUserByID(userId);
+            var user = await _userService.GetUserByID(userId);
 
             TempData["AppUnApproveSuccess"] = true;
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
         [HttpGet]
-        public IActionResult ShowMaintenanceRequestsUsers()
+        public async Task<IActionResult> ShowMaintenanceRequestsUsers()
         {
-            var maintenanceRequestsUsers = _managerAccount.GetMaintenanceRequestsUsers();
+            var maintenanceRequestsUsers = await _managerAccount.GetMaintenanceRequestsUsers();
             return View(maintenanceRequestsUsers);
         }
 
-        public IActionResult ShowMaintenanceRequests(string firstName, string lastName)
+        public async Task<IActionResult> ShowMaintenanceRequests(string firstName, string lastName)
         {
-            var MaintenanceRecords = _managerAccount.GetMaintenanceUserRequests();
+            var MaintenanceRecords = await _managerAccount.GetMaintenanceUserRequests();
 
             var mViewModel = new MaintenanceRequestViewModel
             {
@@ -201,9 +201,9 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ViewMaintenanceRequest(int maintenanceId, string firstName, string lastName)
+        public async Task<IActionResult> ViewMaintenanceRequest(int maintenanceId, string firstName, string lastName)
         {
-            var maintenanceRecord = _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
 
             return View(new MaintenanceRequestViewModel
             {
@@ -214,9 +214,9 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditMaintenanceRequest(int maintenanceId, string firstName, string lastName)
+        public async Task<IActionResult> EditMaintenanceRequest(int maintenanceId, string firstName, string lastName)
         {
-            var maintenanceRecord = _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
 
             return View(new MaintenanceRequestViewModel
             {
@@ -234,13 +234,13 @@ namespace AcmeApartments.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)
+        public async Task<IActionResult> EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)
         {
             if (ModelState.IsValid)
             {
                 var maintenanceRequestDTO = _mapper.Map<MaintenanceRequestDTO>(maintenanceViewModel);
 
-                _managerAccount.EditMaintenanceRequest(maintenanceRequestDTO);
+                await _managerAccount.EditMaintenanceRequest(maintenanceRequestDTO);
                 TempData["MaintenanceEditSuccess"] = true;
                 return RedirectToAction("ShowMaintenanceRequests", new
                 {
@@ -252,18 +252,18 @@ namespace AcmeApartments.Web.Controllers
             return View(maintenanceViewModel);
         }
 
-        public IActionResult ApproveMaintenanceRequest(string userId, int maintenanceId)
+        public async Task<IActionResult> ApproveMaintenanceRequest(string userId, int maintenanceId)
         {
             try
             {
-                _managerAccount.ApproveMaintenanceRequest(userId, maintenanceId);
+                await _managerAccount.ApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception e)
             {
                 throw;
             }
 
-            var user = _userService.GetUserByID(userId);
+            var user = await _userService.GetUserByID(userId);
 
             TempData["MaintenanceApproveSuccess"] = true;
 
@@ -274,18 +274,18 @@ namespace AcmeApartments.Web.Controllers
             });
         }
 
-        public IActionResult UnApproveMaintenanceRequest(string userId, int maintenanceId)
+        public async Task<IActionResult> UnApproveMaintenanceRequest(string userId, int maintenanceId)
         {
             try
             {
-                _managerAccount.UnApproveMaintenanceRequest(userId, maintenanceId);
+                await _managerAccount.UnApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception e)
             {
                 throw;
             }
 
-            var user = _userService.GetUserByID(userId);
+            var user = await _userService.GetUserByID(userId);
 
             TempData["MaintenanceUnApproveSuccess"] = true;
 
