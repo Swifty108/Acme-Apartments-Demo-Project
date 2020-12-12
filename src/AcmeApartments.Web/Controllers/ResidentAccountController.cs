@@ -37,7 +37,7 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplications()
+        public IActionResult ShowApplications()
         {
             var applications = _residentAccountLogic.GetApplications();
             return View(applications);
@@ -59,7 +59,7 @@ namespace AcmeApartments.Web.Controllers
                 try
                 {
                     var maintenanceRequestDTO = _mapper.Map<MaintenanceRequestDTO>(maintReqViewModel);
-                    _residentAccountLogic.SubmitMaintenanceRequest(maintenanceRequestDTO);
+                    await _residentAccountLogic.SubmitMaintenanceRequest(maintenanceRequestDTO);
 
                     TempData["MaintenanceSuccess"] = true;
 
@@ -108,7 +108,7 @@ namespace AcmeApartments.Web.Controllers
             if (ModelState.IsValid)
             {
                 var reviewViewModelDTO = _mapper.Map<ReviewViewModelDTO>(review);
-                _residentAccountLogic.AddReview(reviewViewModelDTO);
+                await _residentAccountLogic.AddReview(reviewViewModelDTO);
 
                 TempData["ReviewSuccess"] = true;
                 return RedirectToAction("WriteAReview");

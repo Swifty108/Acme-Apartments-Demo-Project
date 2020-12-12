@@ -59,11 +59,11 @@ namespace AcmeApartments.BLL.HelperClasses
             applicationUser.AptNumber = aptNumber;
             applicationUser.AptPrice = aptPrice;
 
-            _unitOfWork.AptUserRepository.Update(applicationUser);
+            await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
+            await _userManager.AddToRoleAsync(applicationUser, "Applicant");
             await _unitOfWork.Save();
 
-            await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
-            await _userManager.AddToRoleAsync(applicationUser, "Resident");
+            _unitOfWork.AptUserRepository.Update(applicationUser);
             await _unitOfWork.Save();
         }
 
@@ -76,7 +76,7 @@ namespace AcmeApartments.BLL.HelperClasses
             _unitOfWork.ApplicationRepository.Update(app);
             await _unitOfWork.Save();
 
-            var applicationUser = await _userService.GetUser();
+            var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
 
             applicationUser.SSN = null;
             applicationUser.AptNumber = null;

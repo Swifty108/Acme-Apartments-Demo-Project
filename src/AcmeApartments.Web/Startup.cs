@@ -34,7 +34,7 @@ namespace AcmeApartments.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")),
-                    ServiceLifetime.Transient
+                    ServiceLifetime.Scoped
                     );
             services.AddIdentity<AptUser, IdentityRole>(options =>
             {

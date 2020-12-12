@@ -7,6 +7,6 @@ namespace AcmeApartments.Web.ViewModels
     {
         public WaterBill WaterBill { get; set; }
         public ElectricBill ElectricBill { get; set; }
-        public AptUser AptUser { get; set; }
+        public AptUser User { get; set; }
     }
 }

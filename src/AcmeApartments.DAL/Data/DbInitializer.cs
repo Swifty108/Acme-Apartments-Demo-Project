@@ -165,13 +165,13 @@ namespace AcmeApartments.DAL.Data
                                     {
                                         await context.ElectricBills.AddAsync(new ElectricBill
                                         {
-                                            AptUser = user,
+                                            User = user,
                                             Amount = 98.53M,
                                             DateDue = rDate.Next()
                                         });
                                         await context.WaterBills.AddAsync(new WaterBill
                                         {
-                                            AptUser = user,
+                                            User = user,
                                             Amount = 57.23M,
                                             DateDue = rDate.Next()
                                         });

@@ -44,9 +44,9 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ShowApplicationUsers()
+        public async Task<IActionResult> ShowApplicationUsers()
         {//todo-p: put whats in paraenth into own var better for debug and readablility
-            var appUsers = _applicationService.GetApplicationUsers();
+            var appUsers = await _applicationService.GetApplicationUsers();
             return View(appUsers);
         }
 

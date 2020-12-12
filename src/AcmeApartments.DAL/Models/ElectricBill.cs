@@ -11,10 +11,10 @@ namespace AcmeApartments.DAL.Models
         public int ElectricBillId { get; set; }
 
         [Required]
-        [ForeignKey("AptUser")]
+        [ForeignKey("User")]
         public string AptUserId { get; set; }
 
-        public AptUser AptUser { get; set; }
+        public AptUser User { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]

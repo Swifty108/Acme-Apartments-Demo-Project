@@ -15,7 +15,6 @@ namespace AcmeApartments.BLL.HelperClasses
 {
     public class ResidentAccount : IResidentAccount
     {
-        private readonly UserManager<AptUser> _userManager;
         private readonly IUserService _userService;
         private readonly IApplicationService _appService;
         private readonly IUnitOfWork _unitOfWork;
@@ -26,7 +25,6 @@ namespace AcmeApartments.BLL.HelperClasses
             IApplicationService appService,
             IUnitOfWork unitOfWork)
         {
-            _userManager = userManager;
             _userService = userService;
             _appService = appService;
             _unitOfWork = unitOfWork;
@@ -34,16 +32,16 @@ namespace AcmeApartments.BLL.HelperClasses
 
         public async Task<PaymentsViewModelDTO> GetBills(AptUser user)
         {
-            var waterBill = await _unitOfWork.WaterBillRepository.Get().FirstAsync();
-            var electricBill = await _unitOfWork.ElectricBillRepository.Get().FirstAsync();
+            var waterBill = await _unitOfWork.WaterBillRepository.Get().ToListAsync();
+            var electricBill = await _unitOfWork.ElectricBillRepository.Get().ToListAsync();
             var newWaterBill = new WaterBill();
             var newElectricBill = new ElectricBill();
 
-            if (waterBill == null)
+            if (waterBill.Count == 0)
             {
                 newWaterBill = new WaterBill
                 {
-                    AptUser = user,
+                    User = user,
                     Amount = 42.53M,
                     DateDue = DateTime.Now.AddDays(20)
                 };
@@ -52,11 +50,11 @@ namespace AcmeApartments.BLL.HelperClasses
                 await _unitOfWork.Save();
             }
 
-            if (electricBill == null)
+            if (waterBill.Count == 0)
             {
                 newElectricBill = new ElectricBill
                 {
-                    AptUser = user,
+                    User = user,
                     Amount = 96.53M,
                     DateDue = DateTime.Now.AddDays(20)
                 };
@@ -67,9 +65,9 @@ namespace AcmeApartments.BLL.HelperClasses
 
             return new PaymentsViewModelDTO
             {
-                AptUser = user,
-                WaterBill = waterBill ?? newWaterBill,
-                ElectricBill = electricBill ?? newElectricBill
+                User = user,
+                WaterBill = waterBill.Count == 0 ? newWaterBill : waterBill[0],
+                ElectricBill = waterBill.Count == 0 ? newElectricBill : electricBill[0]
             };
         }
 
@@ -85,7 +83,7 @@ namespace AcmeApartments.BLL.HelperClasses
             var user = await _userService.GetUser();
             var newReview = new Review
             {
-                AptUser = user,
+                User = user,
                 DateReviewed = DateTime.Now,
                 ReviewText = review.ReviewText
             };
@@ -98,7 +96,7 @@ namespace AcmeApartments.BLL.HelperClasses
             var user = await _userService.GetUser();
             var maintenanceRequest = new MaintenanceRequest
             {
-                AptUser = user,
+                User = user,
                 DateRequested = DateTime.Now,
                 isAllowedToEnter = maintenanceRequestDTO.isAllowedToEnter,
                 ProblemDescription = maintenanceRequestDTO.ProblemDescription,

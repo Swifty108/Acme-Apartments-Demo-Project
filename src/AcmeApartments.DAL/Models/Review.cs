@@ -16,10 +16,10 @@ namespace AcmeApartments.DAL.Models
         public DateTime DateReviewed { get; set; }
 
         [Required]
-        [ForeignKey("AptUser")]
+        [ForeignKey("User")]
         public string AptUserId { get; set; }
 
-        public AptUser AptUser { get; set; }
+        public AptUser User { get; set; }
 
         [Required]
         [MaxLength(10000)]

@@ -12,11 +12,11 @@ namespace AcmeApartments.DAL.Models
         public int ApplicationId { get; set; }
 
         [Required]
-        [ForeignKey(nameof(AptUser))]
+        [ForeignKey(nameof(User))]
         [Display(Name = "Applicant ID")]
         public string AptUserId { get; set; }
 
-        public AptUser AptUser { get; set; }
+        public AptUser User { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Date Applied")]
