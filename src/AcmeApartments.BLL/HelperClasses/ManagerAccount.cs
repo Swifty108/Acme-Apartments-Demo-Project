@@ -2,41 +2,38 @@
 using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.HelperClasses;
 using AcmeApartments.Common.Interfaces;
-using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AcmeApartments.BLL.HelperClasses
 {
     public class ManagerAccount : IManagerAccount
     {
-        private readonly IManagerRepository _managerRepository;
-        private readonly IRepository _repository;
-        private readonly ApplicationDbContext _dbContext;
         private readonly UserManager<AptUser> _userManager;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IApplicationService _appService;
 
         public ManagerAccount(
-            ApplicationDbContext dbContext,
             UserManager<AptUser> userManager,
-            IManagerRepository managerRepository,
-            IRepository repository,
+            IUnitOfWork unitOfWork,
             IMapper mapper,
-            IUserService userService
+            IUserService userService,
+            IApplicationService appService
             )
         {
-            _managerRepository = managerRepository;
-            _dbContext = dbContext;
             _userManager = userManager;
-            _repository = repository;
             _mapper = mapper;
             _userService = userService;
+            _unitOfWork = unitOfWork;
+            _appService = appService;
         }
 
         public async Task ApproveApplication(
@@ -47,36 +44,36 @@ namespace AcmeApartments.BLL.HelperClasses
             string aptPrice
             )
         {
-            var app = await _managerRepository.GetApplication(appId);
+            var app = _unitOfWork.ApplicationRepository.GetByID(appId);
 
             app.Status = ApplicationStatus.APPROVED;
 
-            await _repository.UpdateApplication(app);
+            _unitOfWork.ApplicationRepository.Update(app);
+            _unitOfWork.Save();
 
-            var applicationUser = await _repository.GetApplicationUser(userId);
+            var applicationUser = _unitOfWork.AptUserRepository.GetByID(userId);
 
             applicationUser.SSN = ssn;
 
             applicationUser.AptNumber = aptNumber;
             applicationUser.AptPrice = aptPrice;
 
-            await _repository.UpdateUser(applicationUser);
-
-            await _dbContext.SaveChangesAsync();
+            _unitOfWork.AptUserRepository.Update(applicationUser);
+            _unitOfWork.Save();
 
             await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
             await _userManager.AddToRoleAsync(applicationUser, "Resident");
         }
 
         public async Task UnApproveApplication(string userId, string aptNumber, int appId)
-        {
-            var app = await _managerRepository.GetApplication(appId);
+        {//todo-p: put this line in applicatin service
+            var app = _unitOfWork.ApplicationRepository.GetByID(appId);
 
             app.Status = ApplicationStatus.UNAPPROVED;
 
-            await _repository.UpdateApplication(app);
+            _unitOfWork.ApplicationRepository.Update(app);
 
-            var applicationUser = await _repository.GetApplicationUser(userId);
+            var applicationUser = await _userService.GetUser();
 
             applicationUser.SSN = null;
             applicationUser.AptNumber = null;
@@ -85,74 +82,82 @@ namespace AcmeApartments.BLL.HelperClasses
             await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
             await _userManager.AddToRoleAsync(applicationUser, "Applicant");
 
-            await _repository.UpdateUser(applicationUser);
+            _unitOfWork.AptUserRepository.Update(applicationUser);
         }
 
-        public async Task EditApplication(ApplicationDTO application)
+        public void EditApplication(ApplicationDTO application)
         {
             var applicationEntity = _mapper.Map<Application>(application);
-            await _managerRepository.EditApplication(applicationEntity);
+            _unitOfWork.ApplicationRepository.Update(applicationEntity);
         }
 
-        public async Task<Application> CancelApplication(int ApplicationId)
+        public Application CancelApplication(int ApplicationId)
         {
-            var application = await _managerRepository.GetApplication(ApplicationId);
+            var application = _appService.GetApplication(ApplicationId);
             application.Status = ApplicationStatus.CANCELED;
 
-            await _repository.UpdateApplication(application);
-            await _dbContext.SaveChangesAsync();
+            _unitOfWork.ApplicationRepository.Update(application);
+            _unitOfWork.Save();
 
             return application;
         }
 
-        public async Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId)
+        public MaintenanceRequest GetMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceId);
             return maintenanceRecord;
         }
 
-        public async Task<List<AptUser>> GetMaintenanceRequestsUsers()
+        public List<AptUser> GetMaintenanceRequestsUsers()
         {
-            var maintenanceRequests = await _managerRepository.GetMaintenanceRequestsUsers();
-            return maintenanceRequests;
+            var users = (from userRecord in _unitOfWork.AptUserRepository.Get()
+                         join mRecord in _unitOfWork.MaintenanceRequestRepository.Get() on userRecord.Id equals mRecord.AptUserId
+                         select userRecord).Distinct().ToList();
+
+            return users;
         }
 
-        public async Task<List<MaintenanceRequest>> GetMaintenanceUserRequests()
+        public List<MaintenanceRequest> GetMaintenanceUserRequests()
         {
-            var maintenanceUserRequests = await _managerRepository.GetMaintenanceUserRequests();
-            return maintenanceUserRequests;
+            var requests = (from userRecord in _unitOfWork.AptUserRepository.Get()
+                            join mRecord in _unitOfWork.MaintenanceRequestRepository.Get() on userRecord.Id equals mRecord.AptUserId
+                            select mRecord).ToList();
+
+            return requests;
         }
 
-        public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestDTO maintenanceViewModelDTO)
+        public MaintenanceRequest EditMaintenanceRequest(MaintenanceRequestDTO maintenanceViewModelDTO)
         {
-            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceViewModelDTO.Id);
+            var maintenanceRecord = _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceViewModelDTO.Id);
 
             maintenanceRecord.ProblemDescription = maintenanceViewModelDTO.ProblemDescription;
             maintenanceRecord.isAllowedToEnter = maintenanceViewModelDTO.isAllowedToEnter;
 
-            _dbContext.Update(maintenanceRecord);
-            await _dbContext.SaveChangesAsync();
+            _unitOfWork.MaintenanceRequestRepository.Update(maintenanceRecord);
+            _unitOfWork.Save();
 
             return maintenanceRecord;
         }
 
-        public async Task ApproveMaintenanceRequest(string userId, int maintenanceId)
+        public void ApproveMaintenanceRequest(string userId, int maintenanceId)
         {
-            var maintenanceRecord = await _managerRepository.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceId);
 
             maintenanceRecord.AptUserId = userId;
             maintenanceRecord.Status = MaintenanceRequestStatus.APPROVED;
 
-            _repository.UpdateMaintenaceRequest(maintenanceRecord);
+            _unitOfWork.MaintenanceRequestRepository.Update(maintenanceRecord);
+            _unitOfWork.Save();
         }
 
-        public async Task UnApproveMaintenanceRequest(string userId, int maintenanceId)
+        public void UnApproveMaintenanceRequest(string userId, int maintenanceId)
         {
-            var maintenanceRecord = await _dbContext.MaintenanceRequests.FindAsync(maintenanceId);
+            var maintenanceRecord = _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceId);
             maintenanceRecord.AptUserId = userId;
             maintenanceRecord.Status = MaintenanceRequestStatus.UNAPPROVED;
 
-            _repository.UpdateMaintenaceRequest(maintenanceRecord);
+            _unitOfWork.MaintenanceRequestRepository.Update(maintenanceRecord);
+            _unitOfWork.Save();
         }
     }
 }

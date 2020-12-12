@@ -14,7 +14,6 @@ namespace AcmeApartments.Common.Services
         private readonly IHttpContextAccessor _accessor;
         private readonly UserManager<AptUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userService;
 
         public ApplicationService(
             IHttpContextAccessor accessor,
@@ -26,7 +25,6 @@ namespace AcmeApartments.Common.Services
             _accessor = accessor;
             _userManager = userManager;
             _unitOfWork = unitOfWork;
-            _userService = userService;
         }
 
         public Application GetApplication(int applicationId) => _unitOfWork.ApplicationRepository.GetByID(applicationId);
@@ -35,11 +33,11 @@ namespace AcmeApartments.Common.Services
 
         public List<AptUser> GetApplicationUsers()
         {
-            var users = from userRecord in _unitOfWork.AptUserRepository.Get()
-                        join applicationRecord in _unitOfWork.ApplicationRepository.Get() on userRecord.Id equals applicationRecord.AptUserId
-                        select userRecord;
-            var userList = users.Distinct().ToList();
-            return userList;
+            var users = (from userRecord in _unitOfWork.AptUserRepository.Get()
+                         join applicationRecord in _unitOfWork.ApplicationRepository.Get() on userRecord.Id equals applicationRecord.AptUserId
+                         select userRecord).Distinct().ToList();
+
+            return users;
         }
     }
 }

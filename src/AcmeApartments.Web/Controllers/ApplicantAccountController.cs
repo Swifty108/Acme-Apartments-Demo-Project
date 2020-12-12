@@ -2,18 +2,17 @@
 using AcmeApartments.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace AcmeApartments.Controllers
 {
     [Authorize(Roles = "Applicant")]
     public class ApplicantAccountController : Controller
     {
-        private readonly IApplicantAccount _applicantAccount;
+        private readonly IApplicantAccount _applicantAccountLogic;
 
-        public ApplicantAccountController(IApplicantAccount applicantAccount)
+        public ApplicantAccountController(IApplicantAccount applicantAccountLogic)
         {
-            _applicantAccount = applicantAccount;
+            _applicantAccountLogic = applicantAccountLogic;
         }
 
         [HttpGet]
@@ -26,9 +25,9 @@ namespace AcmeApartments.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplications()
+        public IActionResult ShowApplications()
         {
-            var userApplications = await _applicantAccount.GetApplications();
+            var userApplications = _applicantAccountLogic.GetApplications();
 
             return View(userApplications);
         }

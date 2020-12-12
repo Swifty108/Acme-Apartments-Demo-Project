@@ -1,13 +1,12 @@
 ﻿using AcmeApartments.BLL.DTOs;
-using AcmeApartments.DAL.Models;
-using System.Collections.Generic;
+using AcmeApartments.DAL.DTOs;
 using System.Threading.Tasks;
 
 namespace AcmeApartments.BLL.Interfaces
 {
     public interface IHome
     {
-        public List<FloorPlan> GetFloorPlans();
+        public FloorPlansViewModelDTO GetFloorPlans();
 
         public Task<string> Apply(ApplyViewModelDTO applyViewModelDTO);
     }

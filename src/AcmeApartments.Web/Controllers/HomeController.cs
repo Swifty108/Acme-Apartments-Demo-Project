@@ -15,18 +15,18 @@ namespace AcmeApartments.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHome _homeControllerLogic;
+        private readonly IHome _homeAccountLogic;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
         public HomeController(ILogger<HomeController> logger,
-            IHome homeControllerLogic,
+            IHome homeAccountLogic,
             IUserService userService,
             IMapper mapper)
         {
             _logger = logger;
 
-            _homeControllerLogic = homeControllerLogic;
+            _homeAccountLogic = homeAccountLogic;
             _userService = userService;
 
             _mapper = mapper;
@@ -53,7 +53,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public IActionResult ShowFloorPlans(string floorPlanType = null)
         {
-            var floorPlansViewModelDTO = _homeControllerLogic.GetFloorPlans();
+            var floorPlansViewModelDTO = _homeAccountLogic.GetFloorPlans();
             var floorPlansViewModel = _mapper.Map<FloorPlansViewModel>(floorPlansViewModelDTO);
             floorPlansViewModel.FloorPlanType = floorPlanType;
             return View(floorPlansViewModel);
@@ -78,7 +78,7 @@ namespace AcmeApartments.Web.Controllers
             if (ModelState.IsValid)
             {
                 var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyViewModel);
-                var userRole = await _homeControllerLogic.Apply(applyViewModelDTO);
+                var userRole = await _homeAccountLogic.Apply(applyViewModelDTO);
 
                 return RedirectToAction("index", $"{userRole}account", new { IsApplySuccess = true });
             }

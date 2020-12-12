@@ -10,6 +10,9 @@ namespace AcmeApartments.DAL.Data
         private ApplicationDbContext _dbContext;
         private GenericRepository<AptUser> _aptUsers;
         private GenericRepository<Application> _applications;
+        private GenericRepository<FloorPlan> _floorPlans;
+        private GenericRepository<Review> _reviews;
+
         private GenericRepository<MaintenanceRequest> _maintenanceRequests;
 
         public UnitOfWork(ApplicationDbContext dbContext)
@@ -41,6 +44,24 @@ namespace AcmeApartments.DAL.Data
             {
                 return _maintenanceRequests ??
                     (_maintenanceRequests = new GenericRepository<MaintenanceRequest>(_dbContext));
+            }
+        }
+
+        public IRepository<FloorPlan> FloorPlanRepository
+        {
+            get
+            {
+                return _floorPlans ??
+                    (_floorPlans = new GenericRepository<FloorPlan>(_dbContext));
+            }
+        }
+
+        public IRepository<Review> ReviewRepository
+        {
+            get
+            {
+                return _reviews ??
+                    (_reviews = new GenericRepository<Review>(_dbContext));
             }
         }
 

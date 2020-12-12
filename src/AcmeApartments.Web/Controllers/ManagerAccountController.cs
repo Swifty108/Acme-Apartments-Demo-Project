@@ -21,6 +21,9 @@ namespace AcmeApartments.Web.Controllers
         private readonly IManagerAccount _managerAccount;
         private readonly IUserService _userService;
 
+        //todo-p: cqrs?
+        //todo-p: add awaits to the repos?
+
         public ManagerAccountController(
             IMapper mapper,
             IManagerAccount managerAccount,
@@ -41,16 +44,16 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplicationUsers()
+        public IActionResult ShowApplicationUsers()
         {//todo-p: put whats in paraenth into own var better for debug and readablility
-            var appUsers = await _applicationService.GetApplicationUsers();
+            var appUsers = _applicationService.GetApplicationUsers();
             return View(appUsers);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplications(string userId, string firstName, string lastName)
+        public IActionResult ShowApplications(string userId, string firstName, string lastName)
         {
-            var appsWithUser = await _applicationService.GetApplications(userId);
+            var appsWithUser = _applicationService.GetApplications(userId);
             var applicationsViewModel = new ApplicationsViewModel
             {
                 Applications = appsWithUser,
@@ -67,15 +70,15 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewApplication(int Id)
+        public IActionResult ViewApplication(int Id)
         {
-            var application = await _applicationService.GetApplication(Id);
+            var application = _applicationService.GetApplication(Id);
             return View(application);
         }
 
-        public async Task<IActionResult> EditApplication(int Id)
+        public IActionResult EditApplication(int Id)
         {//todo-p: show success message in the user apps list only not here.
-            var application = await _applicationService.GetApplication(Id);
+            var application = _applicationService.GetApplication(Id);
             if (application == null)
             {
                 return NotFound();
@@ -88,15 +91,15 @@ namespace AcmeApartments.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditApplication(ApplicationsViewModel application)
+        public IActionResult EditApplication(ApplicationsViewModel application)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
                     var applicationDTO = _mapper.Map<ApplicationDTO>(application);
-                    await _managerAccount.EditApplication(applicationDTO);
-                    var user = await _userService.GetUser(application.AptUserId);
+                    _managerAccount.EditApplication(applicationDTO);
+                    var user = _userService.GetUserByID(application.AptUserId);
 
                     TempData["AppEditSuccess"] = true;
                     return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
@@ -111,20 +114,20 @@ namespace AcmeApartments.Web.Controllers
             return View(application);
         }
 
-        public async Task<IActionResult> CancelApplication(int Id)
+        public IActionResult CancelApplication(int Id)
         {
-            var application = await _applicationService.GetApplication(Id);
+            var application = _applicationService.GetApplication(Id);
             return View(application);
         }
 
         // POST: ApplicantAccount/Delete/5
         [HttpPost, ActionName("AppCancel")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CancelApplicationConfirmed(Application application)
+        public IActionResult CancelApplicationConfirmed(Application application)
         {
-            await _managerAccount.CancelApplication(application.ApplicationId);
-            var app = await _applicationService.GetApplication(application.ApplicationId);
-            var user = await _userService.GetUser(app.AptUserId);
+            _managerAccount.CancelApplication(application.ApplicationId);
+            var app = _applicationService.GetApplication(application.ApplicationId);
+            var user = _userService.GetUserByID(app.AptUserId);
 
             TempData["AppCanceledSuccess"] = true;
 
@@ -148,7 +151,7 @@ namespace AcmeApartments.Web.Controllers
                 throw;
             }
 
-            var user = await _userService.GetUser(approveViewModel.UserId);
+            var user = _userService.GetUserByID(approveViewModel.UserId);
 
             TempData["AppApproveSuccess"] = true;
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
@@ -165,22 +168,22 @@ namespace AcmeApartments.Web.Controllers
                 throw;
             }
 
-            var user = await _userService.GetUser(userId);
+            var user = _userService.GetUserByID(userId);
 
             TempData["AppUnApproveSuccess"] = true;
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowMaintenanceRequestsUsers()
+        public IActionResult ShowMaintenanceRequestsUsers()
         {
-            var maintenanceRequestsUsers = await _managerAccount.GetMaintenanceRequestsUsers();
+            var maintenanceRequestsUsers = _managerAccount.GetMaintenanceRequestsUsers();
             return View(maintenanceRequestsUsers);
         }
 
-        public async Task<IActionResult> ShowMaintenanceRequests(string firstName, string lastName)
+        public IActionResult ShowMaintenanceRequests(string firstName, string lastName)
         {
-            var MaintenanceRecords = await _managerAccount.GetMaintenanceUserRequests();
+            var MaintenanceRecords = _managerAccount.GetMaintenanceUserRequests();
 
             var mViewModel = new MaintenanceRequestViewModel
             {
@@ -198,9 +201,9 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewMaintenanceRequest(int maintenanceId, string firstName, string lastName)
+        public IActionResult ViewMaintenanceRequest(int maintenanceId, string firstName, string lastName)
         {
-            var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = _managerAccount.GetMaintenanceRequest(maintenanceId);
 
             return View(new MaintenanceRequestViewModel
             {
@@ -211,9 +214,9 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditMaintenanceRequest(int maintenanceId, string firstName, string lastName)
+        public IActionResult EditMaintenanceRequest(int maintenanceId, string firstName, string lastName)
         {
-            var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = _managerAccount.GetMaintenanceRequest(maintenanceId);
 
             return View(new MaintenanceRequestViewModel
             {
@@ -231,13 +234,13 @@ namespace AcmeApartments.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)
+        public IActionResult EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)
         {
             if (ModelState.IsValid)
             {
                 var maintenanceRequestDTO = _mapper.Map<MaintenanceRequestDTO>(maintenanceViewModel);
 
-                await _managerAccount.EditMaintenanceRequest(maintenanceRequestDTO);
+                _managerAccount.EditMaintenanceRequest(maintenanceRequestDTO);
                 TempData["MaintenanceEditSuccess"] = true;
                 return RedirectToAction("ShowMaintenanceRequests", new
                 {
@@ -249,18 +252,18 @@ namespace AcmeApartments.Web.Controllers
             return View(maintenanceViewModel);
         }
 
-        public async Task<IActionResult> ApproveMaintenanceRequest(string userId, int maintenanceId)
+        public IActionResult ApproveMaintenanceRequest(string userId, int maintenanceId)
         {
             try
             {
-                await _managerAccount.ApproveMaintenanceRequest(userId, maintenanceId);
+                _managerAccount.ApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception e)
             {
                 throw;
             }
 
-            var user = await _userService.GetUser(userId);
+            var user = _userService.GetUserByID(userId);
 
             TempData["MaintenanceApproveSuccess"] = true;
 
@@ -271,18 +274,18 @@ namespace AcmeApartments.Web.Controllers
             });
         }
 
-        public async Task<IActionResult> UnApproveMaintenanceRequest(string userId, int maintenanceId)
+        public IActionResult UnApproveMaintenanceRequest(string userId, int maintenanceId)
         {
             try
             {
-                await _managerAccount.UnApproveMaintenanceRequest(userId, maintenanceId);
+                _managerAccount.UnApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception e)
             {
                 throw;
             }
 
-            var user = await _userService.GetUser(userId);
+            var user = _userService.GetUserByID(userId);
 
             TempData["MaintenanceUnApproveSuccess"] = true;
 
@@ -291,12 +294,6 @@ namespace AcmeApartments.Web.Controllers
                 firstName = user.FirstName,
                 lastName = user.LastName
             });
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            unitOfWork.Dispose();
-            base.Dispose(disposing);
         }
     }
 }

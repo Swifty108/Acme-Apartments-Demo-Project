@@ -8,12 +8,14 @@ namespace AcmeApartments.BLL.Interfaces
 {
     public interface IResidentAccount
     {
-        public Task<PaymentsViewModelDTO> GetBills(AptUser user);
+        public PaymentsViewModelDTO GetBills(AptUser user);
 
         public Task AddReview(ReviewViewModelDTO review);
 
         public Task SubmitMaintenanceRequest(MaintenanceRequestDTO maintenanceRequestDTO);
 
-        public Task<List<MaintenanceRequest>> GetMaintenanceRequests();
+        public List<MaintenanceRequest> GetMaintenanceRequests();
+
+        public List<Application> GetApplications();
     }
 }

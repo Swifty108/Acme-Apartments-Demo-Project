@@ -8,24 +8,24 @@ namespace AcmeApartments.BLL.Interfaces
 {
     public interface IManagerAccount
     {
-        public Task EditApplication(ApplicationDTO app);
+        public void EditApplication(ApplicationDTO application);
 
-        public Task<Application> CancelApplication(int ApplicationId);
+        public Application CancelApplication(int ApplicationId);
 
         public Task ApproveApplication(string userId, int appId, string ssn, string aptNumber, string aptPrice);
 
         public Task UnApproveApplication(string id, string aptNumber, int appid);
 
-        public Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId);
+        public MaintenanceRequest GetMaintenanceRequest(int maintenanceId);
 
-        public Task<List<AptUser>> GetMaintenanceRequestsUsers();
+        public List<AptUser> GetMaintenanceRequestsUsers();
 
-        public Task<List<MaintenanceRequest>> GetMaintenanceUserRequests();
+        public List<MaintenanceRequest> GetMaintenanceUserRequests();
 
-        public Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestDTO maintenanceViewModel);
+        public MaintenanceRequest EditMaintenanceRequest(MaintenanceRequestDTO maintenanceViewModel);
 
-        public Task ApproveMaintenanceRequest(string userId, int maintenanceId);
+        public void ApproveMaintenanceRequest(string userId, int maintenanceId);
 
-        public Task UnApproveMaintenanceRequest(string userId, int maintenanceId);
+        public void UnApproveMaintenanceRequest(string userId, int maintenanceId);
     }
 }

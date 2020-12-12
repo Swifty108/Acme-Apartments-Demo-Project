@@ -7,6 +7,8 @@ namespace AcmeApartments.DAL.Interfaces
     {
         IRepository<AptUser> AptUserRepository { get; }
         IRepository<Application> ApplicationRepository { get; }
+        IRepository<FloorPlan> FloorPlanRepository { get; }
+        IRepository<Review> ReviewRepository { get; }
         IRepository<MaintenanceRequest> MaintenanceRequestRepository { get; }
 
         void Save();
