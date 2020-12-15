@@ -1,0 +1,46 @@
+﻿@model AcmeApartments.Web.ViewModels.MaintenanceRequestViewModel
+
+@{
+    ViewData["Title"] = "View Maintenance Request";
+    Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
+}
+<partial name="_LoggedInAsPartial" />
+<h1>View Maintenance Request</h1>
+
+<div>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.mRequest.DateRequested)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.mRequest.DateRequested)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.mRequest.AptUserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.mRequest.AptUserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.mRequest.ProblemDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.mRequest.ProblemDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.mRequest.isAllowedToEnter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.mRequest.isAllowedToEnter)
+        </dd>
+    </dl>
+
+    <a asp-action="showmaintenancerequests" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">Back to List</a>
+</div>

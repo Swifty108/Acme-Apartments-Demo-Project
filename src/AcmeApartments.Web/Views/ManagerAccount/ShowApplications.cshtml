@@ -1,0 +1,141 @@
+﻿@using AcmeApartments.BLL.HelperClasses
+
+@model AcmeApartments.Web.ViewModels.ApplicationsViewModel
+@{
+    ViewData["Title"] = "User Application";
+    ViewBag.AppEditSuccessMessage = "The application was successfully edited!";
+    ViewBag.AppApproveSuccessMessage = "The application was successfully approved!";
+    ViewBag.AppUnApproveSuccessMessage = "The application was successfully unapproved!";
+    ViewBag.AppCanceledSuccessMessage = "The application was successfully canceled!";
+    var routeParams = new Dictionary<string, string>();
+}
+
+<partial name="_LoggedInAsPartial" />
+<br />
+@if (ViewBag.AppEditSuccess != null && ViewBag.AppEditSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppEditSuccessMessage" />
+}
+else if (ViewBag.AppApproveSuccess != null && ViewBag.AppApproveSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppApproveSuccessMessage" />
+}
+else if (ViewBag.AppUnApproveSuccess != null && ViewBag.AppUnApproveSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppUnApproveSuccessMessage" />
+}
+else if (ViewBag.AppCanceledSuccess != null && ViewBag.AppCanceledSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppCanceledSuccessMessage" />
+}
+<br />
+<h1>Applications for @Model.FirstName @Model.LastName</h1>
+
+<hr />
+<div class="container">
+    @{
+        if (@Model.Applications.Count > 0)
+        { <table class="table fp-table table-responsive-md">
+
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var application in @Model.Applications)
+
+                    {
+                        routeParams = new Dictionary<string, string>
+                                                                                                                                                                                                                                        {
+                                        { "userid", application.AptUserId },
+                                        { "aptnumber", application.AptNumber },
+                                        { "aptprice", application.Price },
+                                        { "ssn", application.SSN }
+
+                                };
+
+                        <tr>
+                            <td>@application.ApplicationId</td>
+
+                            <td>
+
+                                <a asp-controller="manageraccount" asp-action="viewapplication" asp-route-id="@application.ApplicationId">View</a>
+                            </td>
+
+                            <td>
+
+                                <a asp-controller="manageraccount" asp-action="editapplication" asp-route-id="@application.ApplicationId">Edit</a>
+                            </td>
+
+                            @if (application.Status == ApplicationStatus.CANCELED)
+                            {
+                                <td>
+
+                                    <span style="color: lightgray"> Cancel</span>
+                                </td>
+
+                            }
+                            else
+                            {
+
+                                <td>
+
+                                    <a asp-controller="manageraccount" asp-action="cancelapplication" asp-route-id="@application.ApplicationId">Cancel</a>
+                                </td>
+                            }
+
+                            @if (application.Status == ApplicationStatus.APPROVED)
+                            {
+
+                                <td>
+                                    <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
+
+                                    <a asp-controller="manageraccount" asp-action="unapproveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Unapprove</a>
+                                </td>
+
+                            }
+                            else if (application.Status == ApplicationStatus.UNAPPROVED)
+                            {
+                                <td>
+
+                                    <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
+
+                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Reapprove</a>
+                                </td>
+
+                            }
+
+                            else if (application.Status == ApplicationStatus.CANCELED)
+                            {
+
+                                <td>
+                                    <span style="color: darkred"><i class="fa fa-ban"></i> Canceled</span>
+
+                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;" asp-route-applicationId="@application.ApplicationId">Approve</a>
+                                </td>
+
+                            }
+                            else
+                            {
+                                <td>
+
+                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId">Approve</a>
+                                </td>
+
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h4>This applicant does not have any applications on file.</h4>
+        }
+    }
+</div>

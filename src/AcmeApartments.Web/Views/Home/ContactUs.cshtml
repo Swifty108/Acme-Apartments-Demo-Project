@@ -1,0 +1,65 @@
+﻿@model AcmeApartments.Web.ViewModels.AppUserContactViewModel
+
+@{
+    ViewData["Title"] = "Contact Us";
+    Layout = "~/Views/Shared/_HomeControllerLayout.cshtml";
+    ViewBag.Success = "Your message was sent successfully!";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-sm-12">
+
+        @if (ViewBag.ContactUsSuccess != null && ViewBag.ContactUsSuccess)
+        {
+            <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+        }
+
+        <span style="font-size: 17px;">** For demo purposes only. No message is sent to the site administrator. **</span>
+        <br />
+        <br />
+
+        <h1>Contact Us</h1>
+        <hr />
+        <form asp-action="contactus">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="SenderName" class="control-label"></label>
+
+                <input asp-for="SenderName" class="form-control" />
+
+                <span asp-validation-for="SenderName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FromEmailAddress" class="control-label"></label>
+
+                <input asp-for="FromEmailAddress" class="form-control" />
+
+                <span asp-validation-for="FromEmailAddress" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+
+                <input asp-for="Subject" class="form-control" />
+
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <textarea asp-for="Message" class="form-control" required></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}

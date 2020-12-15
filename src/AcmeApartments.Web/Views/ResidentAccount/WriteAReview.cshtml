@@ -1,0 +1,42 @@
+﻿@model AcmeApartments.Web.ViewModels.ReviewViewModel
+
+@{
+    ViewData["Title"] = "Write A Review";
+    Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
+    ViewBag.Success = "Your Review was submitted successfully!";
+}
+
+<partial name="_LoggedInAsPartial" />
+<br />
+<h1>Write A Review</h1>
+<hr />
+
+<br />
+
+@if (ViewBag.ReviewSuccess != null && ViewBag.ReviewSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="writeareview">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="ReviewText" class="control-label"></label>
+                <textarea asp-for="ReviewText" class="form-control" maxlength="10000" required></textarea>
+                <span asp-validation-for="ReviewText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}

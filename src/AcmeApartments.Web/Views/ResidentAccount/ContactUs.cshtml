@@ -1,0 +1,45 @@
+﻿@model AcmeApartments.Web.ViewModels.ApplicantContactViewModel
+
+@{
+    ViewData["Title"] = "Contact Us";
+    Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
+    ViewBag.SuccessMessage = "Your message was sent successfully!";
+}
+<partial name="_LoggedInAsPartial" />
+<br />
+@if (ViewBag.ContactUsSuccess != null && ViewBag.ContactUsSuccess)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.SuccessMessage" />
+}
+
+<h1>Contact Us</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="contactus">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Subject" class="col-md-9 control-label"></label>
+
+                <input asp-for="Subject" class="col-md-9 form-control" />
+
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="col-md-9 control-label"></label>
+                <textarea asp-for="Message" class="col-md-9 form-control" maxlength="10000" required></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}

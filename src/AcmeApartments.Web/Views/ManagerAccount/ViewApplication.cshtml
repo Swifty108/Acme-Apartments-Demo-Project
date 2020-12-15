@@ -1,0 +1,52 @@
+﻿@model AcmeApartments.DAL.Models.Application
+
+@{
+    ViewData["Title"] = "View Application";
+    Layout = "~/Views/Shared/_ManagerAccountLayout.cshtml";
+}
+<partial name="_LoggedInAsPartial" />
+<h1>View Application</h1>
+
+<div>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Occupation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Occupation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Income)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Income)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReasonForMoving)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReasonForMoving)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SSN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SSN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AptNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AptNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+
+    <a asp-action="showapplications" asp-route-userid="@Model.AptUserId">Back to List</a>
+</div>
