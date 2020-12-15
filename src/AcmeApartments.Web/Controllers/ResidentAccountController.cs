@@ -129,7 +129,6 @@ namespace AcmeApartments.Web.Controllers
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
-                // await _emailService.SendEmailAsync(viewMessage);
 
                 return RedirectToAction("ContactUs");
             }

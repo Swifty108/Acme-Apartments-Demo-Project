@@ -51,7 +51,6 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> ShowFloorPlans(string floorPlanType = null)
         {
             var floorPlansViewModelDTO = await _homeAccountLogic.GetFloorPlans();
@@ -62,7 +61,6 @@ namespace AcmeApartments.Web.Controllers
 
         [Authorize(Roles = "Applicant, Resident")]
         [HttpGet]
-        //todo-p: test with frombody
         public async Task<IActionResult> Apply([Bind("AptNumber, Price, Area, FloorPlanType")] ApplyViewModel applyViewModel)
         {
             ModelState.Clear();

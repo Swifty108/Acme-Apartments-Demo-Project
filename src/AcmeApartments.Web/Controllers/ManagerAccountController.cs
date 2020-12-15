@@ -6,7 +6,6 @@ using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
@@ -22,7 +21,6 @@ namespace AcmeApartments.Web.Controllers
         private readonly IUserService _userService;
 
         //todo-p: cqrs?
-        //todo-p: add awaits to the repos?
 
         public ManagerAccountController(
             IMapper mapper,
@@ -31,7 +29,6 @@ namespace AcmeApartments.Web.Controllers
             IUserService userService)
         {
             _mapper = mapper;
-            //   _managerAccount = managerRepository;
             _managerAccount = managerAccount;
             _applicationService = applicationService;
             _userService = userService;
@@ -45,7 +42,7 @@ namespace AcmeApartments.Web.Controllers
 
         [HttpGet]
         public async Task<IActionResult> ShowApplicationUsers()
-        {//todo-p: put whats in paraenth into own var better for debug and readablility
+        {
             var appUsers = await _applicationService.GetApplicationUsers();
             return View(appUsers);
         }
@@ -66,6 +63,11 @@ namespace AcmeApartments.Web.Controllers
             ViewBag.AppUnApproveSuccess = TempData["AppUnApproveSuccess"];
             ViewBag.AppCanceledSuccess = TempData["AppCanceledSuccess"];
 
+            ViewBag.AppEditFailed = TempData["AppEditFailed"];
+            ViewBag.AppApproveFailed = TempData["AppApproveFailed"];
+            ViewBag.AppUnApproveFailed = TempData["AppUnApproveFailed"];
+            ViewBag.AppCanceledFailed = TempData["AppCanceledFailed"];
+
             return View(applicationsViewModel);
         }
 
@@ -77,7 +79,7 @@ namespace AcmeApartments.Web.Controllers
         }
 
         public async Task<IActionResult> EditApplication(int Id)
-        {//todo-p: show success message in the user apps list only not here.
+        {
             var application = await _applicationService.GetApplication(Id);
             if (application == null)
             {
@@ -104,8 +106,9 @@ namespace AcmeApartments.Web.Controllers
                     TempData["AppEditSuccess"] = true;
                     return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
+                    TempData["AppEditFailed"] = true;
                     throw;
                 }
             }
@@ -125,10 +128,18 @@ namespace AcmeApartments.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CancelApplicationConfirmed(Application application)
         {
-            await _managerAccount.CancelApplication(application.ApplicationId);
+            try
+            {
+                await _managerAccount.CancelApplication(application.ApplicationId);
+            }
+            catch (Exception)
+            {
+                TempData["AppCanceledFailed"] = true;
+                throw;
+            }
+
             var app = await _applicationService.GetApplication(application.ApplicationId);
             var user = await _userService.GetUserByID(app.AptUserId);
-
             TempData["AppCanceledSuccess"] = true;
 
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
@@ -146,8 +157,9 @@ namespace AcmeApartments.Web.Controllers
                     approveViewModel.AptPrice
                     );
             }
-            catch (Exception e)
+            catch (Exception)
             {
+                TempData["AppApproveFailed"] = true;
                 throw;
             }
 
@@ -163,8 +175,9 @@ namespace AcmeApartments.Web.Controllers
             {
                 await _managerAccount.UnApproveApplication(userId, aptNumber, applicationId);
             }
-            catch (Exception e)
+            catch (Exception)
             {
+                TempData["AppUnApproveFailed"] = true;
                 throw;
             }
 
@@ -196,6 +209,11 @@ namespace AcmeApartments.Web.Controllers
             ViewBag.MaintenanceApproveSuccess = TempData["MaintenanceApproveSuccess"];
             ViewBag.MaintenanceUnApproveSuccess = TempData["MaintenanceUnApproveSuccess"];
             ViewBag.MaintenanceCanceledSuccess = TempData["MaintenanceCanceledSuccess"];
+
+            ViewBag.MaintenanceEditFailed = TempData["MaintenanceEditFailed"];
+            ViewBag.MaintenanceApproveFailed = TempData["MaintenanceApproveFailed"];
+            ViewBag.MaintenanceUnApproveFailed = TempData["MaintenanceUnApproveFailed"];
+            ViewBag.MaintenanceCanceledFailed = TempData["MaintenanceCanceledFailed"];
 
             return View(mViewModel);
         }
@@ -229,9 +247,6 @@ namespace AcmeApartments.Web.Controllers
             });
         }
 
-        // POST: ApplicantAccount/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)

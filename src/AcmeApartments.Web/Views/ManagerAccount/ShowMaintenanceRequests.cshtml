@@ -1,18 +1,23 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<AptUser> SignInManager
-@inject UserManager<AptUser> UserManager
-@model AcmeApartments.Web.ViewModels.MaintenanceRequestViewModel
+﻿@model AcmeApartments.Web.ViewModels.MaintenanceRequestViewModel
 @{
     ViewData["Title"] = "User Maintenace";
+
     ViewBag.MaintenanceEditSuccessMessage = "The maintenance request was edited successfully!";
+    ViewBag.MaintenanceEditFailedMessage = "There was an error editting the maintenance request. Please try again later.";
+
     ViewBag.MaintenanceApproveSuccessMessage = "The maintenance request was successfully approved!";
+    ViewBag.MaintenanceApproveFailedMessage = "There was an error approving the maintenance request. Please try again later.";
+
     ViewBag.MaintenanceUnApproveSuccessMessage = "The maintenance request was successfully unapproved!";
+    ViewBag.MaintenanceUnApproveFailedMessage = "There was an error unapproving the maintenance request. Please try again later.";
+
     ViewBag.MaintenanceCanceledSuccessMessage = "The maintenance request was successfully canceled!";
+    ViewBag.MaintenanceCanceledFailedMessage = "There was an error cancelling the maintenance request. Please try again later.";
 
 }
+
 @if (ViewBag.MaintenanceEditSuccess != null && ViewBag.MaintenanceEditSuccess)
 {
-
     <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceEditSuccessMessage" />
 }
 else if (ViewBag.MaintenanceApproveSuccess != null && ViewBag.MaintenanceApproveSuccess)
@@ -26,6 +31,22 @@ else if (ViewBag.MaintenanceUnApproveSuccess != null && ViewBag.MaintenanceUnApp
 else if (ViewBag.MaintenanceCanceledSuccess != null && ViewBag.MaintenanceCanceledSuccess)
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceCanceledSuccessMessage" />
+}
+else if (ViewBag.MaintenanceEditFailed != null && ViewBag.MaintenanceEditFailed)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceEditFailedMessage" />
+}
+else if (ViewBag.MaintenanceApproveFailed != null && ViewBag.MaintenanceApproveFailed)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceApproveFailedMessage" />
+}
+else if (ViewBag.MaintenanceUnApproveFailed != null && ViewBag.MaintenanceUnApproveFailed)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceUnApproveFailedMessage" />
+}
+else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCanceledFailed)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceCanceledFailedMessage" />
 }
 
 <partial name="_LoggedInAsPartial" />

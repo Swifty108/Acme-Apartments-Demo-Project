@@ -3,10 +3,18 @@
 @model AcmeApartments.Web.ViewModels.ApplicationsViewModel
 @{
     ViewData["Title"] = "User Application";
+
     ViewBag.AppEditSuccessMessage = "The application was successfully edited!";
+    ViewBag.AppEditFailedMessage = "There was an error editing the application. Please try again later.";
+
     ViewBag.AppApproveSuccessMessage = "The application was successfully approved!";
+    ViewBag.AppApproveFailedMessage = "There was an error approving the application. Please try again later.";
+
     ViewBag.AppUnApproveSuccessMessage = "The application was successfully unapproved!";
+    ViewBag.AppUnApproveFailedMessage = "There was an error unapproving the application. Please try again later.";
+
     ViewBag.AppCanceledSuccessMessage = "The application was successfully canceled!";
+    ViewBag.AppCanceledFailedMessage = "There was an error cancelling the application. Please try again later.";
     var routeParams = new Dictionary<string, string>();
 }
 
@@ -27,6 +35,22 @@ else if (ViewBag.AppUnApproveSuccess != null && ViewBag.AppUnApproveSuccess)
 else if (ViewBag.AppCanceledSuccess != null && ViewBag.AppCanceledSuccess)
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.AppCanceledSuccessMessage" />
+}
+else if (ViewBag.AppEditFailed != null && ViewBag.AppEditFailed)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppEditFailedMessage" />
+}
+else if (ViewBag.AppApproveFailed != null && ViewBag.AppApproveFailed)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppApproveFailedMessage" />
+}
+else if (ViewBag.AppUnApproveFailed != null && ViewBag.AppUnApproveFailed)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppUnApproveFailedMessage" />
+}
+else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppCanceledFailedMessage" />
 }
 <br />
 <h1>Applications for @Model.FirstName @Model.LastName</h1>
@@ -51,7 +75,7 @@ else if (ViewBag.AppCanceledSuccess != null && ViewBag.AppCanceledSuccess)
 
                     {
                         routeParams = new Dictionary<string, string>
-                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                                        {
                                         { "userid", application.AptUserId },
                                         { "aptnumber", application.AptNumber },
                                         { "aptprice", application.Price },
