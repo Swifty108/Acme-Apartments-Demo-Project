@@ -113,7 +113,6 @@ namespace AcmeApartments.Web.Controllers
                 }
             }
 
-            // ViewData["AptUserId"] = new SelectList(_context.AptUsers, "Id", "Id", application.AptUserId);
             return View(application);
         }
 
