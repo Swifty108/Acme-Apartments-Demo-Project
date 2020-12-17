@@ -443,7 +443,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.Application", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany("Applications")
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -452,7 +452,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.ElectricBill", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany()
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -461,7 +461,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.MaintenanceRequest", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany()
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -470,7 +470,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.Review", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany()
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -479,7 +479,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.WaterBill", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany()
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)

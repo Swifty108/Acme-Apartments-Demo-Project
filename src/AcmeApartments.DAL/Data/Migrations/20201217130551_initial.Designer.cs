@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcmeApartments.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201212110610_initial")]
+    [Migration("20201217130551_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -445,7 +445,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.Application", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany("Applications")
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -454,7 +454,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.ElectricBill", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany()
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -463,7 +463,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.MaintenanceRequest", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany()
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -472,7 +472,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.Review", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany()
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -481,7 +481,7 @@ namespace AcmeApartments.DAL.Data.Migrations
 
             modelBuilder.Entity("AcmeApartments.DAL.Models.WaterBill", b =>
                 {
-                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "AptUser")
+                    b.HasOne("AcmeApartments.DAL.Identity.AptUser", "User")
                         .WithMany()
                         .HasForeignKey("AptUserId")
                         .OnDelete(DeleteBehavior.Cascade)
