@@ -24,4 +24,4 @@ The following is the flow of user interactions within these three roles:
 
 [Click here](https://pgapartments.rajnarayanan.com) for a live demo of the project.
 
-[Click here](https://pgapartments.rajnarayanan.com) for the wiki pages of the project.
+[Click here](https://github.com/Swifty108/Acme-Apartments-Demo-Project/wiki) for the wiki pages of the project.
