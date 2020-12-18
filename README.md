@@ -22,4 +22,6 @@ The following is the flow of user interactions within these three roles:
 2. Once the manager approves the application, the `Applicant` is promoted to `Resident` status. Residents can submit maintenance requests and view their application status if they applied. 
 3. A `Manager` can approve or disapprove an application along with the authority to approve or deny maintenance requests.
 
-[Click here](https://pgapartments.rajnarayanan.com) for a live demo.
+[Click here](https://pgapartments.rajnarayanan.com) for a live demo of the project.
+
+[Click here](https://pgapartments.rajnarayanan.com) for the wiki pages of the project.
