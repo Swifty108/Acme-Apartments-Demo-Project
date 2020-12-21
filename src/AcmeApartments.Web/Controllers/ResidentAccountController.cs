@@ -1,6 +1,7 @@
 ﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.Interfaces;
+using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -52,13 +53,13 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SubmitMaintenanceRequest(MaintenanceRequestViewModel maintReqViewModel)
+        public async Task<IActionResult> SubmitMaintenanceRequest(MaintenanceRequestBindingModel maintRequestBindingModel)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var maintenanceRequestDTO = _mapper.Map<MaintenanceRequestDTO>(maintReqViewModel);
+                    var maintenanceRequestDTO = _mapper.Map<MaintenanceRequestDTO>(maintRequestBindingModel);
                     await _residentAccountLogic.SubmitMaintenanceRequest(maintenanceRequestDTO);
 
                     TempData["MaintenanceSuccess"] = true;
@@ -68,10 +69,13 @@ namespace AcmeApartments.Web.Controllers
                 catch (Exception)
                 {
                     TempData["MaintenanceSuccess"] = false;
-                    return View(maintReqViewModel);
+
+                    var maintRequestViewModel = _mapper.Map<MaintenanceRequestViewModel>(maintRequestBindingModel);
+                    return View(maintRequestViewModel);
                 }
             }
 
+            var maintReqViewModel = _mapper.Map<MaintenanceRequestViewModel>(maintRequestBindingModel);
             return View(maintReqViewModel);
         }
 
@@ -103,17 +107,20 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> WriteAReview(ReviewViewModel review)
+        public async Task<IActionResult> WriteAReview(ReviewBindingModel reviewBindingModel)
         {
             if (ModelState.IsValid)
             {
-                var reviewViewModelDTO = _mapper.Map<ReviewViewModelDTO>(review);
+                var reviewViewModelDTO = _mapper.Map<ReviewViewModelDTO>(reviewBindingModel);
                 await _residentAccountLogic.AddReview(reviewViewModelDTO);
 
                 TempData["ReviewSuccess"] = true;
                 return RedirectToAction("WriteAReview");
             }
-            return View();
+
+            var reviewViewModel = _mapper.Map<ReviewViewModel>(reviewBindingModel);
+
+            return View(reviewViewModel);
         }
 
         [HttpGet]
@@ -124,7 +131,7 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactUs(ApplicantContactViewModel viewMessage)
+        public IActionResult ContactUs(ResidentContactBindingModel residentContanctBindingModel)
         {
             if (ModelState.IsValid)
             {
@@ -132,7 +139,9 @@ namespace AcmeApartments.Web.Controllers
 
                 return RedirectToAction("ContactUs");
             }
-            return View(viewMessage);
+            var residentContactViewModel = _mapper.Map<ApplicantContactViewModel>(residentContanctBindingModel);
+
+            return View(residentContactViewModel);
         }
     }
 }

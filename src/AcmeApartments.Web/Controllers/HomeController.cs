@@ -2,6 +2,7 @@
 using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.Interfaces;
 using AcmeApartments.DAL.Models;
+using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -61,28 +62,46 @@ namespace AcmeApartments.Web.Controllers
 
         [Authorize(Roles = "Applicant, Resident")]
         [HttpGet]
-        public async Task<IActionResult> Apply([Bind("AptNumber, Price, Area, FloorPlanType")] ApplyViewModel applyViewModel)
+        public async Task<IActionResult> Apply(ApplyReturnUrlBindingModel applyReturnUrlBindingModel)
         {
             ModelState.Clear();
             var user = await _userService.GetUser();
-            applyViewModel.User = user;
+
+            var applyViewModel = new ApplyViewModel
+            {
+                FloorPlanType = applyReturnUrlBindingModel.FloorPlanType,
+                Price = applyReturnUrlBindingModel.Price,
+                AptNumber = applyReturnUrlBindingModel.AptNumber,
+                FirstName = user.FirstName,
+                Area = applyReturnUrlBindingModel.Area,
+                LastName = user.LastName,
+                DateOfBirth = user.DateOfBirth,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                StreetAddress = user.StreetAddress,
+                City = user.City,
+                State = user.State,
+                Zipcode = user.Zipcode
+            };
 
             return View(applyViewModel);
         }
 
         [Authorize(Roles = "Applicant, Resident")]
         [HttpPost]
-        public async Task<IActionResult> ApplyPost(ApplyViewModel applyViewModel)
+        public async Task<IActionResult> ApplyPost(ApplyBindingModel applyBindingModel)
         {
             if (ModelState.IsValid)
             {
-                var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyViewModel);
+                var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyBindingModel);
                 var userRole = await _homeAccountLogic.Apply(applyViewModelDTO);
 
                 return RedirectToAction("index", $"{userRole}account", new { IsApplySuccess = true });
             }
 
-            return RedirectToAction("Apply", applyViewModel.AptNumber, applyViewModel.Price);
+            var applyViewModel = _mapper.Map<ApplyViewModel>(applyBindingModel);
+
+            return RedirectToAction("Apply", new { applyViewModel.AptNumber, applyViewModel.Price, applyViewModel.Area, applyViewModel.FloorPlanType });
         }
 
         [HttpGet]

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcmeApartments.BLL.DTOs
+namespace AcmeApartments.Web.BindingModels
 {
-    public class ApplyViewModelDTO
+    public class ApplyBindingModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

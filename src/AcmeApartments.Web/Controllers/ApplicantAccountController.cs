@@ -1,5 +1,7 @@
 ﻿using AcmeApartments.BLL.Interfaces;
+using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,10 +12,12 @@ namespace AcmeApartments.Controllers
     public class ApplicantAccountController : Controller
     {
         private readonly IApplicantAccount _applicantAccountLogic;
+        private readonly IMapper _mapper;
 
-        public ApplicantAccountController(IApplicantAccount applicantAccountLogic)
+        public ApplicantAccountController(IApplicantAccount applicantAccountLogic, IMapper mapper)
         {
             _applicantAccountLogic = applicantAccountLogic;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -41,14 +45,17 @@ namespace AcmeApartments.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactUs(ApplicantContactViewModel viewMessage)
+        public IActionResult ContactUs(ApplicantContactBindingModel applicantContanctBindingModel)
         {
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
                 return RedirectToAction("ContactUs");
             }
-            return View(viewMessage);
+
+            var applicantContactViewModel = _mapper.Map<ApplicantContactViewModel>(applicantContanctBindingModel);
+
+            return View(applicantContactViewModel);
         }
     }
 }
