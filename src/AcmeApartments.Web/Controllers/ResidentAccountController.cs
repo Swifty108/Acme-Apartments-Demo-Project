@@ -139,7 +139,7 @@ namespace AcmeApartments.Web.Controllers
 
                 return RedirectToAction("ContactUs");
             }
-            var residentContactViewModel = _mapper.Map<ApplicantContactViewModel>(residentContanctBindingModel);
+            var residentContactViewModel = _mapper.Map<ResidentContactViewModel>(residentContanctBindingModel);
 
             return View(residentContactViewModel);
         }
