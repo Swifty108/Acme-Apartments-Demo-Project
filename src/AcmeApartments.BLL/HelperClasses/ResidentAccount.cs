@@ -91,15 +91,15 @@ namespace AcmeApartments.BLL.HelperClasses
             await _unitOfWork.Save();
         }
 
-        public async Task SubmitMaintenanceRequest(MaintenanceRequestDTO maintenanceRequestDTO)
+        public async Task SubmitMaintenanceRequest(NewMaintenanceRequestDTO newMaintenanceRequestDTO)
         {
             var user = await _userService.GetUser();
             var maintenanceRequest = new MaintenanceRequest
             {
                 User = user,
                 DateRequested = DateTime.Now,
-                isAllowedToEnter = maintenanceRequestDTO.isAllowedToEnter,
-                ProblemDescription = maintenanceRequestDTO.ProblemDescription,
+                isAllowedToEnter = newMaintenanceRequestDTO.isAllowedToEnter,
+                ProblemDescription = newMaintenanceRequestDTO.ProblemDescription,
                 Status = MaintenanceRequestStatus.PENDINGAPPROVAL
             };
 

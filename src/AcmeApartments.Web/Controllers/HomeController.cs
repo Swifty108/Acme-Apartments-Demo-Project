@@ -124,14 +124,17 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult ContactUs(AppUserContactViewModel viewMessage)
+        public IActionResult ContactUs(AppUserContactBindingModel appUserContactBindingModel)
         {
             if (ModelState.IsValid)
             {
                 TempData["ContactUsSuccess"] = true;
                 return RedirectToAction("ContactUs");
             }
-            return View(viewMessage);
+
+            var appUserContactViewModel = _mapper.Map<AppUserContactViewModel>(appUserContactBindingModel);
+
+            return View(appUserContactViewModel);
         }
     }
 }

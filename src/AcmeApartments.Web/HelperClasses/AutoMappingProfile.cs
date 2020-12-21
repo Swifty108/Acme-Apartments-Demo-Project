@@ -24,8 +24,8 @@ namespace AcmeApartments.BLL.HelperClasses
             CreateMap<ApplicationDTO, Application>();
             CreateMap<Application, ApplicationDTO>();
 
-            CreateMap<MaintenanceRequestDTO, MaintenanceRequestViewModel>();
-            CreateMap<MaintenanceRequestViewModel, MaintenanceRequestDTO>();
+            CreateMap<NewMaintenanceRequestDTO, NewMaintenanceRequestBindingModel>();
+            CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestDTO>();
 
             CreateMap<FloorPlansViewModel, FloorPlansViewModelDTO>();
             CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>();
@@ -54,14 +54,17 @@ namespace AcmeApartments.BLL.HelperClasses
             CreateMap<ResidentContactBindingModel, ResidentContactViewModel>();
             CreateMap<ResidentContactViewModel, ResidentContactBindingModel>();
 
-            CreateMap<MaintenanceRequestBindingModel, MaintenanceRequestViewModel>();
-            CreateMap<MaintenanceRequestViewModel, MaintenanceRequestBindingModel>();
+            CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestViewModel>();
+            CreateMap<NewMaintenanceRequestViewModel, NewMaintenanceRequestBindingModel>();
 
             CreateMap<ReviewBindingModel, ReviewViewModelDTO>();
             CreateMap<ReviewViewModelDTO, ReviewBindingModel>();
 
             CreateMap<ReviewBindingModel, ReviewViewModel>();
             CreateMap<ReviewViewModel, ReviewBindingModel>();
+
+            CreateMap<AppUserContactBindingModel, AppUserContactViewModel>();
+            CreateMap<AppUserContactViewModel, AppUserContactBindingModel>();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace AcmeApartments.BLL.Interfaces
 
         public Task AddReview(ReviewViewModelDTO review);
 
-        public Task SubmitMaintenanceRequest(MaintenanceRequestDTO maintenanceRequestDTO);
+        public Task SubmitMaintenanceRequest(NewMaintenanceRequestDTO newMaintenanceRequestDTO);
 
         public Task<List<MaintenanceRequest>> GetMaintenanceRequests();
 

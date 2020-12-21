@@ -53,13 +53,13 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SubmitMaintenanceRequest(MaintenanceRequestBindingModel maintRequestBindingModel)
+        public async Task<IActionResult> SubmitMaintenanceRequest(NewMaintenanceRequestBindingModel newMaintRequestBindingModel)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var maintenanceRequestDTO = _mapper.Map<MaintenanceRequestDTO>(maintRequestBindingModel);
+                    var maintenanceRequestDTO = _mapper.Map<NewMaintenanceRequestDTO>(newMaintRequestBindingModel);
                     await _residentAccountLogic.SubmitMaintenanceRequest(maintenanceRequestDTO);
 
                     TempData["MaintenanceSuccess"] = true;
@@ -70,13 +70,13 @@ namespace AcmeApartments.Web.Controllers
                 {
                     TempData["MaintenanceSuccess"] = false;
 
-                    var maintRequestViewModel = _mapper.Map<MaintenanceRequestViewModel>(maintRequestBindingModel);
+                    var maintRequestViewModel = _mapper.Map<NewMaintenanceRequestViewModel>(newMaintRequestBindingModel);
                     return View(maintRequestViewModel);
                 }
             }
 
-            var maintReqViewModel = _mapper.Map<MaintenanceRequestViewModel>(maintRequestBindingModel);
-            return View(maintReqViewModel);
+            var newMaintReqViewModel = _mapper.Map<NewMaintenanceRequestViewModel>(newMaintRequestBindingModel);
+            return View(newMaintReqViewModel);
         }
 
         [HttpGet]
