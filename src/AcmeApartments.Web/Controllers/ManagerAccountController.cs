@@ -20,8 +20,6 @@ namespace AcmeApartments.Web.Controllers
         private readonly IManagerAccount _managerAccount;
         private readonly IUserService _userService;
 
-        //todo-p: cqrs?
-
         public ManagerAccountController(
             IMapper mapper,
             IManagerAccount managerAccount,

@@ -4,89 +4,155 @@
     ViewData["Title"] = "Apply";
 }
 
-<h1>Application</h1> <span><b>Room #:</b></span> <span>@Model.AptNumber</span>   <span><b>Price:</b></span> <span>$@Model.Price</span>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form id="apply" asp-action="ApplyPost">
+<div class="col-md-9" style="margin: 0 auto;">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Application</h3> <span><b>Apartment #:</b></span> <span>@Model.AptNumber</span>   <span><b>Price:</b></span> <span>$@Model.Price</span>
+        </div>
+
+        <form id="apply" asp-action="Apply" class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label"></label>
-                <input class="form-control" value="@Model.FirstName" disabled />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.FirstName" class="control-label"></label>
+                        <input asp-for="@Model.FirstName" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.LastName" class="control-label"></label>
+                        <input asp-for="@Model.LastName" class="form-control" disabled />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label"></label>
-                <input class="form-control" value="@Model.LastName" disabled />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.DateOfBirth" class="control-label">Date of Birth</label>
+                        <input asp-for="@Model.DateOfBirth" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.PhoneNumber" class="control-label">Phone Number</label>
+                        <input asp-for="@Model.PhoneNumber" class="form-control" disabled />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Date of Birth</label>
-                <input class="form-control" value="@Model.DateOfBirth" disabled />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.Email" class="control-label">Email</label>
+                        <input asp-for="@Model.Email" class="form-control" disabled />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Email</label>
-                <input class="form-control" value="@Model.Email" disabled />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.StreetAddress" class="control-label"></label>
+                        <input asp-for="@Model.StreetAddress" class="form-control" disabled />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">Phone Number</label>
-                <input class="form-control" value="@Model.PhoneNumber" disabled />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.City" class="control-label"></label>
+                        <input asp-for="@Model.City" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.State" class="control-label"></label>
+                        <input asp-for="@Model.State" class="form-control" disabled />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label"></label>
-                <input class="form-control" value="@Model.StreetAddress" disabled />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.Zipcode" class="control-label"></label>
+                        <input asp-for="@Model.Zipcode" class="form-control" disabled />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label"></label>
-                <input class="form-control" value="@Model.City" disabled />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Occupation" class="control-label"></label>
+                        <input asp-for="@Model.Occupation" class="form-control" />
+                        <span asp-validation-for="@Model.Occupation" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Income" class="control-label"></label>
+                        <input asp-for="@Model.Income" class="form-control" />
+                        <span asp-validation-for="@Model.Income" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label"></label>
-                <input class="form-control" value="@Model.State" disabled />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.ReasonForMoving" class="control-label"></label>
+                        <input asp-for="@Model.ReasonForMoving" class="form-control" />
+                        <span asp-validation-for="@Model.ReasonForMoving" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="control-label"></label>
-                <input class="form-control" value="@Model.Zipcode" disabled />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.SSN" class="control-label"></label>
+                        <input asp-for="@Model.SSN" class="form-control" />
+                        <span asp-validation-for="@Model.SSN" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="@Model.Occupation" class="control-label"></label>
-                <input asp-for="@Model.Occupation" class="form-control" />
-                <span asp-validation-for="@Model.Occupation" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.AptNumber" class="control-label"></label>
+                        <input asp-for="@Model.AptNumber" class="form-control" disabled />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Area" class="control-label"></label>
+                        <input asp-for="@Model.Area" class="form-control" disabled />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="@Model.Income" class="control-label"></label>
-                <input asp-for="@Model.Income" class="form-control" />
-                <span asp-validation-for="@Model.Income" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.ReasonForMoving" class="control-label"></label>
-                <input asp-for="@Model.ReasonForMoving" class="form-control" />
-                <span asp-validation-for="@Model.ReasonForMoving" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.SSN" class="control-label"></label>
-                <input asp-for="@Model.SSN" class="form-control" />
-                <span asp-validation-for="@Model.SSN" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.AptNumber" class="control-label"></label>
-                <input asp-for="@Model.AptNumber" class="form-control" value="@Model.AptNumber" disabled />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Area" class="control-label"></label>
-                <input asp-for="@Model.Area" class="form-control" value="@Model.Area" disabled />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Price" class="control-label"></label>
-                <input asp-for="@Model.Price" class="form-control" value="@Model.Price" disabled />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="@Model.Price" class="control-label"></label>
+                        <input asp-for="@Model.Price" class="form-control" disabled />
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Apply" class="btn btn-primary" />
             </div>
+            <div>
+                <a asp-controller="home" asp-action="showfloorplans" asp-route-floorplantype="@Model.FloorPlanType">Back to List</a>
+            </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-controller="home" asp-action="showfloorplans" asp-route-floorplantype="@Model.FloorPlanType">Back to List</a>
 </div>
 
 @section Scripts {
@@ -94,7 +160,6 @@
 
     <script>
         $('#apply').on('submit', function () {
-            //event.preventDefault();
             if ($('#apply').valid()) {
                 $('input, select').prop('disabled', false);
                 return true;

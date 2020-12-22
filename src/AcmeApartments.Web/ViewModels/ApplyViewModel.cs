@@ -24,6 +24,8 @@ namespace AcmeApartments.Web.ViewModels
 
         public string AptNumber { get; set; }
         public string Area { get; set; }
+
+        [DataType(DataType.Currency)]
         public string Price { get; set; }
 
         [Required]

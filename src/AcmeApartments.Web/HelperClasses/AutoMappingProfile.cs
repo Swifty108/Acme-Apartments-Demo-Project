@@ -14,81 +14,52 @@ namespace AcmeApartments.BLL.HelperClasses
         {
             //Home controller
 
-            //keep
             CreateMap<FloorPlansViewModel, FloorPlansViewModelDTO>();
             CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>();
 
-            //keep
             CreateMap<ApplyViewModelDTO, ApplyBindingModel>();
             CreateMap<ApplyBindingModel, ApplyViewModelDTO>();
 
-            //keep
             CreateMap<ApplyViewModel, ApplyBindingModel>();
             CreateMap<ApplyBindingModel, ApplyViewModel>();
-            //keep
+
             CreateMap<AppUserContactBindingModel, AppUserContactViewModel>();
             CreateMap<AppUserContactViewModel, AppUserContactBindingModel>();
 
             //Home Controller Logic Class
 
-            //keep
             CreateMap<FloorPlan, FloorPlanDTO>();
             CreateMap<FloorPlanDTO, FloorPlan>();
 
-            ////////
-            //CreateMap<ApplicationViewModel, ApplyViewModelDTO>();
-            //CreateMap<ApplyViewModelDTO, ApplicationViewModel>();
-
-            //CreateMap<ApplicationViewModel, ApplicationDTO>();
-            //CreateMap<ApplicationDTO, ApplicationViewModel>();
-
-            //CreateMap<ApplicationViewModel, ApplicationViewModelDTO>();
-            //CreateMap<ApplicationViewModelDTO, ApplicationViewModel>();
-
-            //CreateMap<ReviewViewModel, ReviewViewModelDTO>();
-            //CreateMap<ReviewViewModelDTO, ReviewViewModel>();
-
-            ////////////////////
-
             //Manager controller
 
-            //todo-p: erase the keep comments
-
-            //keep
             CreateMap<ApplicationViewModel, Application>();
             CreateMap<Application, ApplicationViewModel>();
 
-            //keep
             CreateMap<ApplicationDTO, ApplicationBindingModel>();
             CreateMap<ApplicationBindingModel, ApplicationDTO>();
 
-            //keep
             CreateMap<ApplicationViewModel, ApplicationBindingModel>();
             CreateMap<ApplicationBindingModel, ApplicationViewModel>();
 
-            //keep
             CreateMap<MaintenanceRequestEditDTO, MaintenanceRequestEditBindingModel>();
             CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditDTO>();
 
-            //keep
             CreateMap<MaintenanceRequestEditViewModel, MaintenanceRequestEditBindingModel>();
             CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditViewModel>();
 
             //Manager Controller Logic
 
-            //keep
             CreateMap<ApplicationDTO, Application>();
             CreateMap<Application, ApplicationDTO>();
 
             //Applicant controller
 
-            //keep
             CreateMap<ApplicantContactBindingModel, ApplicantContactViewModel>();
             CreateMap<ApplicantContactViewModel, ApplicantContactBindingModel>();
 
             //Resident controller
 
-            //keep all
             CreateMap<ReviewBindingModel, ReviewViewModelDTO>();
             CreateMap<ReviewViewModelDTO, ReviewBindingModel>();
 

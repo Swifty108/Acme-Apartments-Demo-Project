@@ -88,8 +88,8 @@ namespace AcmeApartments.Web.Controllers
 
         [Authorize(Roles = "Applicant, Resident")]
         [HttpPost]
-        public async Task<IActionResult> ApplyPost(ApplyBindingModel applyBindingModel)
-        { //todo-p: check apply form with spaces in one or more fields
+        public async Task<IActionResult> Apply(ApplyBindingModel applyBindingModel)
+        {
             if (ModelState.IsValid)
             {
                 var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyBindingModel);
@@ -100,7 +100,8 @@ namespace AcmeApartments.Web.Controllers
 
             var applyViewModel = _mapper.Map<ApplyViewModel>(applyBindingModel);
 
-            return RedirectToAction("Apply", new { applyViewModel.AptNumber, applyViewModel.Price, applyViewModel.Area, applyViewModel.FloorPlanType });
+            return View(applyViewModel);
+            //return RedirectToAction("Apply", new { applyViewModel.AptNumber, applyViewModel.Price, applyViewModel.Area, applyViewModel.FloorPlanType });
         }
 
         [HttpGet]
