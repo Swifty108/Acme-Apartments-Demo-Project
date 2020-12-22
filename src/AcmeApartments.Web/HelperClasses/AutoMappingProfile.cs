@@ -1,4 +1,5 @@
 ﻿using AcmeApartments.BLL.DTOs;
+using AcmeApartments.Common.DTOs;
 using AcmeApartments.DAL.DTOs;
 using AcmeApartments.DAL.Models;
 using AcmeApartments.Web.BindingModels;
@@ -18,10 +19,6 @@ namespace AcmeApartments.BLL.HelperClasses
             CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>();
 
             //keep
-            //CreateMap<FloorPlanDTO, FloorPlan>();
-            //CreateMap<FloorPlan, FloorPlanDTO>();
-
-            //keep
             CreateMap<ApplyViewModelDTO, ApplyBindingModel>();
             CreateMap<ApplyBindingModel, ApplyViewModelDTO>();
 
@@ -32,6 +29,12 @@ namespace AcmeApartments.BLL.HelperClasses
             CreateMap<AppUserContactBindingModel, AppUserContactViewModel>();
             CreateMap<AppUserContactViewModel, AppUserContactBindingModel>();
 
+            //Home Controller Logic Class
+
+            //keep
+            CreateMap<FloorPlan, FloorPlanDTO>();
+            CreateMap<FloorPlanDTO, FloorPlan>();
+
             ////////
             //CreateMap<ApplicationViewModel, ApplyViewModelDTO>();
             //CreateMap<ApplyViewModelDTO, ApplicationViewModel>();
@@ -39,14 +42,13 @@ namespace AcmeApartments.BLL.HelperClasses
             //CreateMap<ApplicationViewModel, ApplicationDTO>();
             //CreateMap<ApplicationDTO, ApplicationViewModel>();
 
-            //CreateMap<ApplicationDTO, Application>();
-            //CreateMap<Application, ApplicationDTO>();
-
             //CreateMap<ApplicationViewModel, ApplicationViewModelDTO>();
             //CreateMap<ApplicationViewModelDTO, ApplicationViewModel>();
 
             //CreateMap<ReviewViewModel, ReviewViewModelDTO>();
             //CreateMap<ReviewViewModelDTO, ReviewViewModel>();
+
+            ////////////////////
 
             //Manager controller
 
@@ -71,6 +73,12 @@ namespace AcmeApartments.BLL.HelperClasses
             //keep
             CreateMap<MaintenanceRequestEditViewModel, MaintenanceRequestEditBindingModel>();
             CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditViewModel>();
+
+            //Manager Controller Logic
+
+            //keep
+            CreateMap<ApplicationDTO, Application>();
+            CreateMap<Application, ApplicationDTO>();
 
             //Applicant controller
 

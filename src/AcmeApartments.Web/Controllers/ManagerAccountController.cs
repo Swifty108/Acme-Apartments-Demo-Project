@@ -199,11 +199,11 @@ namespace AcmeApartments.Web.Controllers
         {
             var MaintenanceRecords = await _managerAccount.GetMaintenanceUserRequests();
 
-            var mViewModel = new MaintenanceRequestViewModel
+            var maintenanceRequestsListViewModel = new MaintenanceRequestsListViewModel
             {
-                mRequests = MaintenanceRecords,
-                userFName = firstName,
-                userLName = lastName
+                MaintenanceRequests = MaintenanceRecords,
+                UserFirstName = firstName,
+                UserLastName = lastName
             };
 
             ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
@@ -216,7 +216,7 @@ namespace AcmeApartments.Web.Controllers
             ViewBag.MaintenanceUnApproveFailed = TempData["MaintenanceUnApproveFailed"];
             ViewBag.MaintenanceCanceledFailed = TempData["MaintenanceCanceledFailed"];
 
-            return View(mViewModel);
+            return View(maintenanceRequestsListViewModel);
         }
 
         [HttpGet]
@@ -224,11 +224,11 @@ namespace AcmeApartments.Web.Controllers
         {
             var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
 
-            return View(new MaintenanceRequestViewModel
+            return View(new MaintenanceRequestViewViewModel
             {
-                mRequest = maintenanceRecord,
-                userFName = firstName,
-                userLName = lastName
+                MaintenanceRequest = maintenanceRecord,
+                UserFirstName = firstName,
+                UserLastName = lastName
             });
         }
 

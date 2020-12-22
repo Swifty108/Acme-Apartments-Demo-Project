@@ -1,4 +1,4 @@
-﻿@model AcmeApartments.Web.ViewModels.MaintenanceRequestViewModel
+﻿@model AcmeApartments.Web.ViewModels.MaintenanceRequestsListViewModel
 @{
     ViewData["Title"] = "User Maintenace";
 
@@ -51,7 +51,7 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
 
 <partial name="_LoggedInAsPartial" />
 <br />
-<h1>Maintenance Requests for @Model.userFName @Model.userLName</h1>
+<h1>Maintenance Requests for @Model.UserFirstName @Model.UserLastName</h1>
 
 <hr />
 <div class="container">
@@ -68,17 +68,17 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
             </tr>
         </thead>
         <tbody>
-            @foreach (var maintenancerecord in Model.mRequests)
+            @foreach (var maintenancerecord in Model.MaintenanceRequests)
             {
                 <tr>
                     <td>@maintenancerecord.Id</td>
 
                     <td>
-                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">View</a>
+                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.UserFirstName" asp-route-lastname="@Model.UserLastName">View</a>
                     </td>
 
                     <td>
-                        <a asp-controller="manageraccount" asp-action="editmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">Edit</a>
+                        <a asp-controller="manageraccount" asp-action="editmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.UserFirstName" asp-route-lastname="@Model.UserLastName">Edit</a>
                     </td>
 
                     @if (maintenancerecord.Status == MaintenanceRequestStatus.APPROVED)

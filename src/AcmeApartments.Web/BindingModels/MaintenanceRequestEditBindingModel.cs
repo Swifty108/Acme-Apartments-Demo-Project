@@ -6,6 +6,7 @@ namespace AcmeApartments.Web.BindingModels
     public class MaintenanceRequestEditBindingModel
     {
         public int Id { get; set; }
+        public string AptUserId { get; set; }
 
         [Required]
         [MaxLength(10000)]

@@ -49,7 +49,7 @@ namespace AcmeApartments.Web.Controllers
         {
             ViewBag.MaintenanceSuccess = TempData["MaintenanceSuccess"];
 
-            return View(new MaintenanceRequestViewModel());
+            return View(new NewMaintenanceRequestViewModel());
         }
 
         [HttpPost]

@@ -14,7 +14,9 @@ namespace AcmeApartments.Controllers
         private readonly IApplicantAccount _applicantAccountLogic;
         private readonly IMapper _mapper;
 
-        public ApplicantAccountController(IApplicantAccount applicantAccountLogic, IMapper mapper)
+        public ApplicantAccountController(
+            IApplicantAccount applicantAccountLogic,
+            IMapper mapper)
         {
             _applicantAccountLogic = applicantAccountLogic;
             _mapper = mapper;

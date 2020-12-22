@@ -20,16 +20,15 @@ namespace AcmeApartments.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
-        public HomeController(ILogger<HomeController> logger,
+        public HomeController(
+            ILogger<HomeController> logger,
             IHome homeAccountLogic,
             IUserService userService,
             IMapper mapper)
         {
             _logger = logger;
-
             _homeAccountLogic = homeAccountLogic;
             _userService = userService;
-
             _mapper = mapper;
         }
 
@@ -90,7 +89,7 @@ namespace AcmeApartments.Web.Controllers
         [Authorize(Roles = "Applicant, Resident")]
         [HttpPost]
         public async Task<IActionResult> ApplyPost(ApplyBindingModel applyBindingModel)
-        {
+        { //todo-p: check apply form with spaces in one or more fields
             if (ModelState.IsValid)
             {
                 var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyBindingModel);
@@ -111,10 +110,7 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 
         [HttpGet]
         public IActionResult ContactUs()

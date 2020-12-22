@@ -1,4 +1,4 @@
-﻿@model AcmeApartments.Web.ViewModels.MaintenanceRequestViewModel
+﻿@model AcmeApartments.Web.ViewModels.MaintenanceRequestViewViewModel
 
 @{
     ViewData["Title"] = "View Maintenance Request";
@@ -11,36 +11,36 @@
     <hr />
     <dl>
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.MaintenanceRequest.Id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.MaintenanceRequest.Id)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.mRequest.DateRequested)
+            @Html.DisplayNameFor(model => model.MaintenanceRequest.DateRequested)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.mRequest.DateRequested)
+            @Html.DisplayFor(model => model.MaintenanceRequest.DateRequested)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.mRequest.AptUserId)
+            @Html.DisplayNameFor(model => model.MaintenanceRequest.AptUserId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.mRequest.AptUserId)
+            @Html.DisplayFor(model => model.MaintenanceRequest.AptUserId)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.mRequest.ProblemDescription)
+            @Html.DisplayNameFor(model => model.MaintenanceRequest.ProblemDescription)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.mRequest.ProblemDescription)
+            @Html.DisplayFor(model => model.MaintenanceRequest.ProblemDescription)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.mRequest.isAllowedToEnter)
+            @Html.DisplayNameFor(model => model.MaintenanceRequest.isAllowedToEnter)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.mRequest.isAllowedToEnter)
+            @Html.DisplayFor(model => model.MaintenanceRequest.isAllowedToEnter)
         </dd>
     </dl>
 
-    <a asp-action="showmaintenancerequests" asp-route-firstname="@Model.userFName" asp-route-lastname="@Model.userLName">Back to List</a>
+    <a asp-action="showmaintenancerequests" asp-route-firstname="@Model.UserFirstName" asp-route-lastname="@Model.UserLastName">Back to List</a>
 </div>

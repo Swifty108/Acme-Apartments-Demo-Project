@@ -1,4 +1,4 @@
-﻿@model AcmeApartments.Web.ViewModels.MaintenanceRequestViewModel
+﻿@model AcmeApartments.Web.ViewModels.NewMaintenanceRequestViewModel
 @{
     ViewData["Title"] = "Submit Maintenance";
     Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
@@ -36,7 +36,6 @@ else if (ViewBag.MaintenanceFailure == false && ViewBag.MaintenanceFailure)
         <div class="tab-pane fade show active" id="nav-newrequest" role="tabpanel" aria-labelledby="nav-newrequest-tab">
 
             <form id="newreq" asp-action="submitmaintenancerequest">
-                <input type="hidden" asp-for="AptUserId" value="@Model.AptUserId" />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="ProblemDescription" class="control-label"></label>

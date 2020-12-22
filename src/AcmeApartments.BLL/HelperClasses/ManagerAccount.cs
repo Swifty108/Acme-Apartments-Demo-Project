@@ -90,9 +90,9 @@ namespace AcmeApartments.BLL.HelperClasses
             await _unitOfWork.Save();
         }
 
-        public async Task EditApplication(ApplicationDTO application)
+        public async Task EditApplication(ApplicationDTO applicationDTO)
         {
-            var applicationEntity = _mapper.Map<Application>(application);
+            var applicationEntity = _mapper.Map<Application>(applicationDTO);
             _unitOfWork.ApplicationRepository.Update(applicationEntity);
             await _unitOfWork.Save();
         }
