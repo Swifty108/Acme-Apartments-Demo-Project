@@ -1,5 +1,4 @@
 ﻿using AcmeApartments.BLL.DTOs;
-using AcmeApartments.Common.DTOs;
 using AcmeApartments.DAL.DTOs;
 using AcmeApartments.DAL.Models;
 using AcmeApartments.Web.BindingModels;
@@ -12,59 +11,93 @@ namespace AcmeApartments.BLL.HelperClasses
     {
         public AutoMappingProfile()
         {
-            CreateMap<ApplicationsViewModel, ApplyViewModelDTO>();
-            CreateMap<ApplyViewModelDTO, ApplicationsViewModel>();
+            //Home controller
 
-            CreateMap<ApplicationsViewModel, ApplicationDTO>();
-            CreateMap<ApplicationDTO, ApplicationsViewModel>();
-
-            CreateMap<ApplicationsViewModel, Application>();
-            CreateMap<Application, ApplicationsViewModel>();
-
-            CreateMap<ApplicationDTO, Application>();
-            CreateMap<Application, ApplicationDTO>();
-
-            CreateMap<NewMaintenanceRequestDTO, NewMaintenanceRequestBindingModel>();
-            CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestDTO>();
-
+            //keep
             CreateMap<FloorPlansViewModel, FloorPlansViewModelDTO>();
             CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>();
 
-            CreateMap<ApplicationsViewModel, ApplicationViewModelDTO>();
-            CreateMap<ApplicationViewModelDTO, ApplicationsViewModel>();
+            //keep
+            //CreateMap<FloorPlanDTO, FloorPlan>();
+            //CreateMap<FloorPlan, FloorPlanDTO>();
 
-            CreateMap<PaymentsViewModelDTO, PaymentsViewModel>();
-            CreateMap<PaymentsViewModel, PaymentsViewModelDTO>();
-
-            CreateMap<ReviewViewModel, ReviewViewModelDTO>();
-            CreateMap<ReviewViewModelDTO, ReviewViewModel>();
-
-            CreateMap<FloorPlanDTO, FloorPlan>();
-            CreateMap<FloorPlan, FloorPlanDTO>();
-
+            //keep
             CreateMap<ApplyViewModelDTO, ApplyBindingModel>();
             CreateMap<ApplyBindingModel, ApplyViewModelDTO>();
 
+            //keep
             CreateMap<ApplyViewModel, ApplyBindingModel>();
             CreateMap<ApplyBindingModel, ApplyViewModel>();
+            //keep
+            CreateMap<AppUserContactBindingModel, AppUserContactViewModel>();
+            CreateMap<AppUserContactViewModel, AppUserContactBindingModel>();
 
+            ////////
+            //CreateMap<ApplicationViewModel, ApplyViewModelDTO>();
+            //CreateMap<ApplyViewModelDTO, ApplicationViewModel>();
+
+            //CreateMap<ApplicationViewModel, ApplicationDTO>();
+            //CreateMap<ApplicationDTO, ApplicationViewModel>();
+
+            //CreateMap<ApplicationDTO, Application>();
+            //CreateMap<Application, ApplicationDTO>();
+
+            //CreateMap<ApplicationViewModel, ApplicationViewModelDTO>();
+            //CreateMap<ApplicationViewModelDTO, ApplicationViewModel>();
+
+            //CreateMap<ReviewViewModel, ReviewViewModelDTO>();
+            //CreateMap<ReviewViewModelDTO, ReviewViewModel>();
+
+            //Manager controller
+
+            //todo-p: erase the keep comments
+
+            //keep
+            CreateMap<ApplicationViewModel, Application>();
+            CreateMap<Application, ApplicationViewModel>();
+
+            //keep
+            CreateMap<ApplicationDTO, ApplicationBindingModel>();
+            CreateMap<ApplicationBindingModel, ApplicationDTO>();
+
+            //keep
+            CreateMap<ApplicationViewModel, ApplicationBindingModel>();
+            CreateMap<ApplicationBindingModel, ApplicationViewModel>();
+
+            //keep
+            CreateMap<MaintenanceRequestEditDTO, MaintenanceRequestEditBindingModel>();
+            CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditDTO>();
+
+            //keep
+            CreateMap<MaintenanceRequestEditViewModel, MaintenanceRequestEditBindingModel>();
+            CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditViewModel>();
+
+            //Applicant controller
+
+            //keep
             CreateMap<ApplicantContactBindingModel, ApplicantContactViewModel>();
             CreateMap<ApplicantContactViewModel, ApplicantContactBindingModel>();
 
-            CreateMap<ResidentContactBindingModel, ResidentContactViewModel>();
-            CreateMap<ResidentContactViewModel, ResidentContactBindingModel>();
+            //Resident controller
 
-            CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestViewModel>();
-            CreateMap<NewMaintenanceRequestViewModel, NewMaintenanceRequestBindingModel>();
-
+            //keep all
             CreateMap<ReviewBindingModel, ReviewViewModelDTO>();
             CreateMap<ReviewViewModelDTO, ReviewBindingModel>();
 
             CreateMap<ReviewBindingModel, ReviewViewModel>();
             CreateMap<ReviewViewModel, ReviewBindingModel>();
 
-            CreateMap<AppUserContactBindingModel, AppUserContactViewModel>();
-            CreateMap<AppUserContactViewModel, AppUserContactBindingModel>();
+            CreateMap<ResidentContactBindingModel, ResidentContactViewModel>();
+            CreateMap<ResidentContactViewModel, ResidentContactBindingModel>();
+
+            CreateMap<NewMaintenanceRequestDTO, NewMaintenanceRequestBindingModel>();
+            CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestDTO>();
+
+            CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestViewModel>();
+            CreateMap<NewMaintenanceRequestViewModel, NewMaintenanceRequestBindingModel>();
+
+            CreateMap<PaymentsViewModelDTO, PaymentsViewModel>();
+            CreateMap<PaymentsViewModel, PaymentsViewModelDTO>();
         }
     }
 }

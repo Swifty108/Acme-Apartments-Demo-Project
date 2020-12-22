@@ -7,7 +7,9 @@ namespace AcmeApartments.BLL.DTOs
 {
     public class MaintenanceRequestDTO
     {
+        //todo-p delete the files named "delete" at the end
         public int Id { get; set; }
+
         public string AptUserId { get; set; }
 
         [Required]

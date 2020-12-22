@@ -5,6 +5,6 @@ namespace AcmeApartments.Web.ViewModels
 {
     public class MaintenanceReqHistoryViewModel
     {
-        public List<MaintenanceRequestDTO> Requests { get; set; }
+        public List<MaintenanceRequestEditDTO> Requests { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.Common.Interfaces;
-using AcmeApartments.DAL.Models;
+using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -50,10 +50,10 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public IActionResult ShowApplications(string userId, string firstName, string lastName)
         {
-            var appsWithUser = _applicationService.GetApplications(userId);
-            var applicationsViewModel = new ApplicationsViewModel
+            var userApps = _applicationService.GetApplications(userId);
+            var userApplicationsViewModel = new UserApplicationsViewModel
             {
-                Applications = appsWithUser,
+                Applications = userApps,
                 FirstName = firstName,
                 LastName = lastName
             };
@@ -68,7 +68,7 @@ namespace AcmeApartments.Web.Controllers
             ViewBag.AppUnApproveFailed = TempData["AppUnApproveFailed"];
             ViewBag.AppCanceledFailed = TempData["AppCanceledFailed"];
 
-            return View(applicationsViewModel);
+            return View(userApplicationsViewModel);
         }
 
         [HttpGet]
@@ -86,22 +86,22 @@ namespace AcmeApartments.Web.Controllers
                 return NotFound();
             }
 
-            var app = _mapper.Map<ApplicationsViewModel>(application);
+            var app = _mapper.Map<ApplicationViewModel>(application);
 
             return View(app);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditApplication(ApplicationsViewModel application)
+        public async Task<IActionResult> EditApplication(ApplicationBindingModel applicationBindingModel)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var applicationDTO = _mapper.Map<ApplicationDTO>(application);
+                    var applicationDTO = _mapper.Map<ApplicationDTO>(applicationBindingModel);
                     await _managerAccount.EditApplication(applicationDTO);
-                    var user = await _userService.GetUserByID(application.AptUserId);
+                    var user = await _userService.GetUserByID(applicationBindingModel.AptUserId);
 
                     TempData["AppEditSuccess"] = true;
                     return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
@@ -113,7 +113,9 @@ namespace AcmeApartments.Web.Controllers
                 }
             }
 
-            return View(application);
+            var applicationViewModel = _mapper.Map<ApplicationViewModel>(applicationBindingModel);
+
+            return View(applicationViewModel);
         }
 
         public async Task<IActionResult> CancelApplication(int Id)
@@ -125,11 +127,11 @@ namespace AcmeApartments.Web.Controllers
         // POST: ApplicantAccount/Delete/5
         [HttpPost, ActionName("AppCancel")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CancelApplicationConfirmed(Application application)
+        public async Task<IActionResult> CancelApplicationConfirmed(ApplicationBindingModel applicationBindingModel)
         {
             try
             {
-                await _managerAccount.CancelApplication(application.ApplicationId);
+                await _managerAccount.CancelApplication(applicationBindingModel.ApplicationId);
             }
             catch (Exception)
             {
@@ -137,23 +139,23 @@ namespace AcmeApartments.Web.Controllers
                 throw;
             }
 
-            var app = await _applicationService.GetApplication(application.ApplicationId);
+            var app = await _applicationService.GetApplication(applicationBindingModel.ApplicationId);
             var user = await _userService.GetUserByID(app.AptUserId);
             TempData["AppCanceledSuccess"] = true;
 
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
-        public async Task<IActionResult> ApproveApplication(ApproveAppViewModel approveViewModel)
+        public async Task<IActionResult> ApproveApplication(ApproveAppBindingModel approveAppBindingModel)
         {
             try
             {
                 await _managerAccount.ApproveApplication(
-                    approveViewModel.UserId,
-                    approveViewModel.ApplicationId,
-                    approveViewModel.SSN,
-                    approveViewModel.AptNumber,
-                    approveViewModel.AptPrice
+                    approveAppBindingModel.UserId,
+                    approveAppBindingModel.ApplicationId,
+                    approveAppBindingModel.SSN,
+                    approveAppBindingModel.AptNumber,
+                    approveAppBindingModel.AptPrice
                     );
             }
             catch (Exception)
@@ -162,7 +164,7 @@ namespace AcmeApartments.Web.Controllers
                 throw;
             }
 
-            var user = await _userService.GetUserByID(approveViewModel.UserId);
+            var user = await _userService.GetUserByID(approveAppBindingModel.UserId);
 
             TempData["AppApproveSuccess"] = true;
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
@@ -235,35 +237,37 @@ namespace AcmeApartments.Web.Controllers
         {
             var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
 
-            return View(new MaintenanceRequestViewModel
+            return View(new MaintenanceRequestEditViewModel
             {
                 Id = maintenanceRecord.Id,
                 AptUserId = maintenanceRecord.AptUserId,
                 ProblemDescription = maintenanceRecord.ProblemDescription,
                 isAllowedToEnter = maintenanceRecord.isAllowedToEnter,
-                userFName = firstName,
-                userLName = lastName
+                UserFirstName = firstName,
+                UserLastName = lastName
             });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditMaintenanceRequest(MaintenanceRequestViewModel maintenanceViewModel)
+        public async Task<IActionResult> EditMaintenanceRequest(MaintenanceRequestEditBindingModel maintenanceRequestEditBindingModel)
         {
             if (ModelState.IsValid)
             {
-                var maintenanceRequestDTO = _mapper.Map<MaintenanceRequestDTO>(maintenanceViewModel);
+                var maintenanceRequestEditDTO = _mapper.Map<MaintenanceRequestEditDTO>(maintenanceRequestEditBindingModel);
 
-                await _managerAccount.EditMaintenanceRequest(maintenanceRequestDTO);
+                await _managerAccount.EditMaintenanceRequest(maintenanceRequestEditDTO);
                 TempData["MaintenanceEditSuccess"] = true;
                 return RedirectToAction("ShowMaintenanceRequests", new
                 {
-                    firstName = maintenanceViewModel.userFName,
-                    lastName = maintenanceViewModel.userLName
+                    firstName = maintenanceRequestEditBindingModel.UserFirstName,
+                    lastName = maintenanceRequestEditBindingModel.UserLastName
                 });
             }
 
-            return View(maintenanceViewModel);
+            var maintenancRequestEditViewModel = _mapper.Map<MaintenanceRequestEditViewModel>(maintenanceRequestEditBindingModel);
+
+            return View(maintenancRequestEditViewModel);
         }
 
         public async Task<IActionResult> ApproveMaintenanceRequest(string userId, int maintenanceId)
@@ -272,7 +276,7 @@ namespace AcmeApartments.Web.Controllers
             {
                 await _managerAccount.ApproveMaintenanceRequest(userId, maintenanceId);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -294,7 +298,7 @@ namespace AcmeApartments.Web.Controllers
             {
                 await _managerAccount.UnApproveMaintenanceRequest(userId, maintenanceId);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }

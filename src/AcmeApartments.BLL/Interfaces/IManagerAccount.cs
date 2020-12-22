@@ -22,7 +22,7 @@ namespace AcmeApartments.BLL.Interfaces
 
         public Task<List<MaintenanceRequest>> GetMaintenanceUserRequests();
 
-        public Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestDTO maintenanceViewModel);
+        public Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestEditDTO maintenanceViewModel);
 
         public Task ApproveMaintenanceRequest(string userId, int maintenanceId);
 

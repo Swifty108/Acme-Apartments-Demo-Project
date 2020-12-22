@@ -132,12 +132,12 @@ namespace AcmeApartments.BLL.HelperClasses
             return requests;
         }
 
-        public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestDTO maintenanceViewModelDTO)
+        public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestEditDTO maintenanceRequestEditDTO)
         {
-            var maintenanceRecord = await _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceViewModelDTO.Id);
+            var maintenanceRecord = await _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceRequestEditDTO.Id);
 
-            maintenanceRecord.ProblemDescription = maintenanceViewModelDTO.ProblemDescription;
-            maintenanceRecord.isAllowedToEnter = maintenanceViewModelDTO.isAllowedToEnter;
+            maintenanceRecord.ProblemDescription = maintenanceRequestEditDTO.ProblemDescription;
+            maintenanceRecord.isAllowedToEnter = maintenanceRequestEditDTO.isAllowedToEnter;
 
             _unitOfWork.MaintenanceRequestRepository.Update(maintenanceRecord);
             await _unitOfWork.Save();

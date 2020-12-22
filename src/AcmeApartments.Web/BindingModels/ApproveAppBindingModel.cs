@@ -1,6 +1,6 @@
-﻿namespace AcmeApartments.Web.ViewModels
+﻿namespace AcmeApartments.Web.BindingModels
 {
-    public class ApproveAppViewModel
+    public class ApproveAppBindingModel
     {
         public string UserId { get; set; }
         public int ApplicationId { get; set; }
