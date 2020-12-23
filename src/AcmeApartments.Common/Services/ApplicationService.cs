@@ -28,7 +28,10 @@ namespace AcmeApartments.Common.Services
         {
             var user = _userService.GetUser();
 
-            var apps = _unitOfWork.ApplicationRepository.Get(filter: application => application.AptNumber == aptNumber && application.AptUserId == user.Result.Id).ToList();
+            var apps = _unitOfWork.ApplicationRepository.Get(
+                filter: application => application.AptNumber == aptNumber
+                && application.AptUserId == user.Result.Id
+                && (application.Status == null || application.Status == "Approved")).ToList();
 
             return apps;
         }
