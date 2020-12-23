@@ -9,5 +9,7 @@ namespace AcmeApartments.BLL.Interfaces
         public Task<FloorPlansViewModelDTO> GetFloorPlans();
 
         public Task<string> Apply(ApplyViewModelDTO applyViewModelDTO);
+
+        public bool CheckifApplicationExists(string aptNumber);
     }
 }

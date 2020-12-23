@@ -63,6 +63,13 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Apply(ApplyReturnUrlBindingModel applyReturnUrlBindingModel)
         {
+            var isAppliationExists = _homeAccountLogic.CheckifApplicationExists(applyReturnUrlBindingModel.AptNumber);
+
+            if (isAppliationExists)
+            {
+                return RedirectToAction("ShowApplicationAlreadyExistsError");
+            }
+
             ModelState.Clear();
             var user = await _userService.GetUser();
 
@@ -86,6 +93,13 @@ namespace AcmeApartments.Web.Controllers
             return View(applyViewModel);
         }
 
+        [HttpGet]
+        public IActionResult ShowApplicationAlreadyExistsError()
+        {
+            ViewBag.ApplicationFoundError = true;
+            return View();
+        }
+
         [Authorize(Roles = "Applicant, Resident")]
         [HttpPost]
         public async Task<IActionResult> Apply(ApplyBindingModel applyBindingModel)
@@ -101,7 +115,6 @@ namespace AcmeApartments.Web.Controllers
             var applyViewModel = _mapper.Map<ApplyViewModel>(applyBindingModel);
 
             return View(applyViewModel);
-            //return RedirectToAction("Apply", new { applyViewModel.AptNumber, applyViewModel.Price, applyViewModel.Area, applyViewModel.FloorPlanType });
         }
 
         [HttpGet]

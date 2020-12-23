@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "ShowApplicationAlreadyExistsError";
+    Layout = "~/Views/Shared/_HomeControllerLayout.cshtml";
+    ViewBag.ApplicationFoundErrorMessage = "Error: You already applied for this apartment.";
+}
+
+@if (ViewBag.ApplicationFoundError != null && ViewBag.ApplicationFoundError)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.ApplicationFoundErrorMessage" />
+}

@@ -2,8 +2,6 @@
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +11,27 @@ namespace AcmeApartments.Common.Services
 {
     public class ApplicationService : IApplicationService
     {
-        private readonly IHttpContextAccessor _accessor;
-        private readonly UserManager<AptUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
         public ApplicationService(
-            IHttpContextAccessor accessor,
-            UserManager<AptUser> userManager,
             IUnitOfWork unitOfWork,
             IUserService userService)
-
         {
-            _accessor = accessor;
-            _userManager = userManager;
+            _userService = userService;
             _unitOfWork = unitOfWork;
         }
 
         public async Task<Application> GetApplication(int applicationId) => await _unitOfWork.ApplicationRepository.GetByID(applicationId);
+
+        public List<Application> GetApplicationsByAptNumber(string aptNumber)
+        {
+            var user = _userService.GetUser();
+
+            var apps = _unitOfWork.ApplicationRepository.Get(filter: application => application.AptNumber == aptNumber && application.AptUserId == user.Result.Id).ToList();
+
+            return apps;
+        }
 
         public List<Application> GetApplications(string userId) => _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId).ToList();
 

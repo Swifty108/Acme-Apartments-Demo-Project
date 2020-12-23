@@ -16,16 +16,19 @@ namespace AcmeApartments.BLL.HelperClasses
     public class Home : IHome
     {
         private readonly IUserService _userService;
+        private readonly IApplicationService _applicationService;
         private readonly UserManager<AptUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
 
         public Home(
             IUserService userService,
             UserManager<AptUser> userManager,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IApplicationService applicationService)
         {
             _userManager = userManager;
             _userService = userService;
+            _applicationService = applicationService;
             _unitOfWork = unitOfWork;
         }
 
@@ -43,6 +46,12 @@ namespace AcmeApartments.BLL.HelperClasses
             };
 
             return floorPlans;
+        }
+
+        public bool CheckifApplicationExists(string aptNumber)
+        {
+            var apps = _applicationService.GetApplicationsByAptNumber(aptNumber);
+            return apps.Count > 0 ? true : false;
         }
 
         public async Task<string> Apply(ApplyViewModelDTO applyViewModelDTO)

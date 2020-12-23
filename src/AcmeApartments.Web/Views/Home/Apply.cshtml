@@ -9,7 +9,7 @@
     <div class="card">
 
         <div class="card-header">
-            <h3>Application</h3> <span><b>Apartment #:</b></span> <span>@Model.AptNumber</span>   <span><b>Price:</b></span> <span>$@Model.Price</span>
+            <h3>Application</h3> <span><b>Apartment #:</b></span> <span>@Model.AptNumber</span>  <span><b>SF:</b></span> <span>@Model.Area</span>  <span><b>Price:</b></span> <span>$@Model.Price</span>
         </div>
 
         <form id="apply" asp-action="Apply" class="card-body">
@@ -123,28 +123,11 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="@Model.AptNumber" class="control-label"></label>
-                        <input asp-for="@Model.AptNumber" class="form-control" disabled />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="@Model.Area" class="control-label"></label>
-                        <input asp-for="@Model.Area" class="form-control" disabled />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label asp-for="@Model.Price" class="control-label"></label>
-                        <input asp-for="@Model.Price" class="form-control" disabled />
-                    </div>
-                </div>
-            </div>
+
+            @Html.HiddenFor(x => x.Price)
+            @Html.HiddenFor(x => x.AptNumber)
+            @Html.HiddenFor(x => x.Area)
+
             <div class="form-group">
                 <input type="submit" value="Apply" class="btn btn-primary" />
             </div>
