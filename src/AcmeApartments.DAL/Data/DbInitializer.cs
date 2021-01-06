@@ -78,10 +78,7 @@ namespace AcmeApartments.DAL.Data
             {
                 using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
                 {
-                    if (!context.AptUsers.Any())
-                    {
-                        context.Database.Migrate();
-                    }
+                        context.Database.Migrate();                   
                 }
             }
         }
