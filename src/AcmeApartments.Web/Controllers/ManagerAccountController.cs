@@ -193,9 +193,9 @@ namespace AcmeApartments.Web.Controllers
             return View(maintenanceRequestsUsers);
         }
 
-        public async Task<IActionResult> ShowMaintenanceRequests(string firstName, string lastName)
+        public async Task<IActionResult> ShowMaintenanceRequests(string aptUserId, string firstName, string lastName)
         {
-            var MaintenanceRecords = await _managerAccount.GetMaintenanceUserRequests();
+            var MaintenanceRecords = await _managerAccount.GetMaintenanceUserRequests(aptUserId);
 
             var maintenanceRequestsListViewModel = new MaintenanceRequestsListViewModel
             {
@@ -285,6 +285,7 @@ namespace AcmeApartments.Web.Controllers
 
             return RedirectToAction("ShowMaintenanceRequests", new
             {
+                aptUserId = user.Id,
                 firstName = user.FirstName,
                 lastName = user.LastName
             });
@@ -307,6 +308,7 @@ namespace AcmeApartments.Web.Controllers
 
             return RedirectToAction("ShowMaintenanceRequests", new
             {
+                aptUserId = user.Id,
                 firstName = user.FirstName,
                 lastName = user.LastName
             });

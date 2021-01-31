@@ -20,7 +20,7 @@ namespace AcmeApartments.BLL.Interfaces
 
         public Task<List<AptUser>> GetMaintenanceRequestsUsers();
 
-        public Task<List<MaintenanceRequest>> GetMaintenanceUserRequests();
+        public Task<List<MaintenanceRequest>> GetMaintenanceUserRequests(string aptUserId);
 
         public Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestEditDTO maintenanceViewModel);
 

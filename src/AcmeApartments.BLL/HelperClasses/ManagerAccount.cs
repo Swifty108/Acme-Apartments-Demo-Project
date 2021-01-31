@@ -123,11 +123,11 @@ namespace AcmeApartments.BLL.HelperClasses
             return users;
         }
 
-        public async Task<List<MaintenanceRequest>> GetMaintenanceUserRequests()
+        public async Task<List<MaintenanceRequest>> GetMaintenanceUserRequests(string aptUserId)
         {
             var requests = await (from userRecord in _unitOfWork.AptUserRepository.Get()
                                   join mRecord in _unitOfWork.MaintenanceRequestRepository.Get() on userRecord.Id equals mRecord.AptUserId
-                                  select mRecord).ToListAsync();
+                                  select mRecord).Where(s => s.AptUserId == aptUserId).ToListAsync();
 
             return requests;
         }
