@@ -3,7 +3,6 @@ using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -78,7 +77,7 @@ namespace AcmeApartments.DAL.Data
             {
                 using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
                 {
-                    context.Database.Migrate();      
+                    context.Database.EnsureCreatedAsync();
                 }
             }
         }
