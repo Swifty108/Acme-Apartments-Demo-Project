@@ -22,6 +22,6 @@ The following is the flow of user interactions within these three roles:
 2. Once the manager approves the application, the `Applicant` is promoted to `Resident` status. Residents can submit maintenance requests and view their application status if they applied. 
 3. A `Manager` can approve or disapprove an application along with the authority to approve or deny maintenance requests
 
-A live demo is [here](https://acmeapartments.rajnarayanan.com).
+[Click here](https://acmeapartments.rajnarayanan.com) for a live demo.
 
-And the wiki for this application is [here](https://github.com/rajndev/Acme-Apartments-ASP.NET-Core-Demo-Web-App/wiki).
+[Click here](https://github.com/rajndev/Acme-Apartments-ASP.NET-Core-Demo-Web-App/wiki) for the application wiki.
