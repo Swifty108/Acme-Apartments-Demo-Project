@@ -21,3 +21,7 @@ The following is the flow of user interactions within these three roles:
 1. A visitor to the website applies for an apartment through the floorplans page and acquires the status of an `Applicant`. The applicant account dashboard features the ability to view the application status and contact the apartment staff.
 2. Once the manager approves the application, the `Applicant` is promoted to `Resident` status. Residents can submit maintenance requests and view their application status if they applied. 
 3. A `Manager` can approve or disapprove an application along with the authority to approve or deny maintenance requests
+
+A live demo is [here](https://acmeapartments.rajnarayanan.com).
+
+And the wiki for this application is [here](https://github.com/rajndev/Acme-Apartments-ASP.NET-Core-Demo-Web-App/wiki).
