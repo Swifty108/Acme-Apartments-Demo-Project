@@ -89,7 +89,10 @@
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="studio" class="fp-applylink">Apply Now!</a></td>
+                                    if (User.IsInRole("Resident") || User.IsInRole("Applicant"))
+                                    {
+                                        <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="studio" class="fp-applylink">Apply Now!</a></td>
+                                    }
                                 }
                                 else
                                 {
@@ -136,7 +139,10 @@
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="onebed" class="fp-applylink">Apply Now!</a></td>
+                                    if (User.IsInRole("Resident") || User.IsInRole("Applicant"))
+                                    {
+                                        <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="onebed" class="fp-applylink">Apply Now!</a></td>
+                                    }
                                 }
                                 else
                                 {
@@ -184,7 +190,10 @@
 
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="twobed" class="fp-applylink">Apply Now!</a></td>
+                                    if (User.IsInRole("Resident") || User.IsInRole("Applicant"))
+                                    {
+                                        <td><a asp-controller="home" asp-action="apply" asp-route-aptnumber="@fp.AptNumber" asp-route-price="@fp.Price" asp-route-area="@fp.SF" asp-route-floorplantype="twobed" class="fp-applylink">Apply Now!</a></td>
+                                    }
                                 }
                                 else
                                 {

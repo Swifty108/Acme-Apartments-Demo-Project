@@ -12,25 +12,18 @@ namespace AcmeApartments.BLL.HelperClasses
 {
     public class ApplicantAccount : IApplicantAccount
     {
-        private readonly UserManager<AptUser> _userManager;
-        private readonly IHttpContextAccessor _accessor;
         private readonly IUserService _userService;
         private readonly IApplicationService _appService;
 
         public ApplicantAccount(
-            ApplicationDbContext dbContext,
-            UserManager<AptUser> userManager,
-            IHttpContextAccessor accessor,
             IUserService userService,
             IApplicationService appService)
         {
-            _userManager = userManager;
             _userService = userService;
-            _accessor = accessor;
             _appService = appService;
         }
 
-        public async Task<List<Application>> GetApplications()
+        public List<Application> GetApplications()
         {
             var userId = _userService.GetUserId();
             var applications = _appService.GetApplications(userId);

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcmeApartments.BLL", "src\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcmeApartments.DAL", "src\AcmeApartments.DAL\AcmeApartments.DAL.csproj", "{FC46A12A-D715-4334-968D-CC393313F5FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcmeApartments.Web", "src\AcmeApartments.Web\AcmeApartments.Web.csproj", "{0A66D4EF-AD17-4AF6-8B02-E11A131FD545}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcmeApartments.Web", "src\AcmeApartments.Web\AcmeApartments.Web.csproj", "{0A66D4EF-AD17-4AF6-8B02-E11A131FD545}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

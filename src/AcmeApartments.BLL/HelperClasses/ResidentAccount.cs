@@ -20,7 +20,6 @@ namespace AcmeApartments.BLL.HelperClasses
         private readonly IUnitOfWork _unitOfWork;
 
         public ResidentAccount(
-            UserManager<AptUser> userManager,
             IUserService userService,
             IApplicationService appService,
             IUnitOfWork unitOfWork)
@@ -32,12 +31,12 @@ namespace AcmeApartments.BLL.HelperClasses
 
         public async Task<PaymentsViewModelDTO> GetBills(AptUser user)
         {
-            var waterBill = await _unitOfWork.WaterBillRepository.Get().ToListAsync();
-            var electricBill = await _unitOfWork.ElectricBillRepository.Get().ToListAsync();
+            var waterBills = await _unitOfWork.WaterBillRepository.Get().ToListAsync();
+            var electricBills = await _unitOfWork.ElectricBillRepository.Get().ToListAsync();
             var newWaterBill = new WaterBill();
             var newElectricBill = new ElectricBill();
 
-            if (waterBill.Count == 0)
+            if (waterBills.Count == 0)
             {
                 newWaterBill = new WaterBill
                 {
@@ -50,7 +49,7 @@ namespace AcmeApartments.BLL.HelperClasses
                 await _unitOfWork.Save();
             }
 
-            if (waterBill.Count == 0)
+            if (electricBills.Count == 0)
             {
                 newElectricBill = new ElectricBill
                 {
@@ -66,8 +65,8 @@ namespace AcmeApartments.BLL.HelperClasses
             return new PaymentsViewModelDTO
             {
                 User = user,
-                WaterBill = waterBill.Count == 0 ? newWaterBill : waterBill[0],
-                ElectricBill = waterBill.Count == 0 ? newElectricBill : electricBill[0]
+                WaterBill = waterBills.Count == 0 ? newWaterBill : waterBills[0],
+                ElectricBill = waterBills.Count == 0 ? newElectricBill : electricBills[0]
             };
         }
 

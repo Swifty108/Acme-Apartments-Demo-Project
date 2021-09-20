@@ -18,7 +18,7 @@ namespace AcmeApartments.BLL.HelperClasses
     {
         private readonly UserManager<AptUser> _userManager;
         private readonly IMapper _mapper;
-        private readonly IUserService _userService;
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IApplicationService _appService;
 
@@ -26,13 +26,11 @@ namespace AcmeApartments.BLL.HelperClasses
             UserManager<AptUser> userManager,
             IUnitOfWork unitOfWork,
             IMapper mapper,
-            IUserService userService,
             IApplicationService appService
             )
         {
             _userManager = userManager;
             _mapper = mapper;
-            _userService = userService;
             _unitOfWork = unitOfWork;
             _appService = appService;
         }

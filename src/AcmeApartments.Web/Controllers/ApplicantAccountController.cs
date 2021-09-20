@@ -32,9 +32,9 @@ namespace AcmeApartments.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplications()
+        public IActionResult ShowApplications()
         {
-            var userApplications = await _applicantAccountLogic.GetApplications();
+            var userApplications = _applicantAccountLogic.GetApplications();
 
             return View(userApplications);
         }

@@ -10,12 +10,12 @@ namespace AcmeApartments.BLL.Interfaces
     {
         public Task<PaymentsViewModelDTO> GetBills(AptUser user);
 
-        public Task AddReview(ReviewViewModelDTO review);
-
-        public Task SubmitMaintenanceRequest(NewMaintenanceRequestDTO newMaintenanceRequestDTO);
+        public List<Application> GetApplications();
 
         public Task<List<MaintenanceRequest>> GetMaintenanceRequests();
 
-        public List<Application> GetApplications();
+        public Task SubmitMaintenanceRequest(NewMaintenanceRequestDTO newMaintenanceRequestDTO);
+
+        public Task AddReview(ReviewViewModelDTO review);
     }
 }
