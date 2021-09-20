@@ -23,3 +23,5 @@ The following is the flow of user interactions within these three roles:
 3. A `Manager` can approve or disapprove an application along with the authority to approve or deny maintenance requests
 
 [Click here](https://github.com/rajndev/Acme-Apartments-ASP.NET-Core-Demo-Web-App/wiki) for the application wiki.
+
+[Click here](https://acmeapartments.rajnarayanan.com) for a live demo of the project.
