@@ -1,3 +1,7 @@
+<p align="center">
+  <img width=238 src="https://user-images.githubusercontent.com/19508650/136641363-54ee714c-3495-4f74-93ab-d0f91e8b4ed9.jpg" />
+</p>
+
 # Acme Apartments Demo Web App
 
 This is an ASP.NET Core MVC demo Web App used to manage a fictional apartment complex.
