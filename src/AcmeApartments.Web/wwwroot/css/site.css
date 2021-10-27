@@ -528,7 +528,22 @@ div.login-form-icon {
 @media (min-width: 768px) {
     a.navbar-brand {
         margin-left: 320px;
-        margin-right: 190px;
+        margin-right: 126px;
+    }
+
+    a.navbar-brand.applicant-layout {
+        margin-left: 320px;
+        margin-right: 138px;
+    }
+
+    a.navbar-brand.resident-layout {
+        margin-left: 320px;
+        margin-right: 60px;
+    }
+
+    a.navbar-brand.manager-layout {
+        margin-left: 320px;
+        margin-right: 85px;
     }
 }
 
