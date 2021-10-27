@@ -44,48 +44,63 @@ namespace AcmeApartments.BLL.HelperClasses
             )
         {
             var app = await _unitOfWork.ApplicationRepository.GetByID(appId);
-
             app.Status = ApplicationStatus.APPROVED;
-
             _unitOfWork.ApplicationRepository.Update(app);
             await _unitOfWork.Save();
 
             var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
+            IList<string> roles = await _userManager.GetRolesAsync(applicationUser);
 
-            applicationUser.SSN = ssn;
+            if (roles.Contains("Applicant"))
+            {
+                applicationUser.SSN = ssn;
+                applicationUser.AptNumber = aptNumber;
+                applicationUser.AptPrice = aptPrice;
 
-            applicationUser.AptNumber = aptNumber;
-            applicationUser.AptPrice = aptPrice;
+                _unitOfWork.AptUserRepository.Update(applicationUser);
 
-            await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
-            await _userManager.AddToRoleAsync(applicationUser, "Applicant");
-            await _unitOfWork.Save();
+                await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
+                await _userManager.AddToRoleAsync(applicationUser, "Resident");
+                await _unitOfWork.Save();
 
-            _unitOfWork.AptUserRepository.Update(applicationUser);
-            await _unitOfWork.Save();
+            }
+            else if (roles.Contains("Resident"))
+            {
+                applicationUser.AptNumber = aptNumber;
+                applicationUser.AptPrice = aptPrice;
+
+                _unitOfWork.AptUserRepository.Update(applicationUser);
+                await _unitOfWork.Save();
+            }
         }
 
         public async Task UnApproveApplication(string userId, string aptNumber, int appId)
         {
             var app = await _unitOfWork.ApplicationRepository.GetByID(appId);
-
             app.Status = ApplicationStatus.UNAPPROVED;
-
             _unitOfWork.ApplicationRepository.Update(app);
             await _unitOfWork.Save();
 
             var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
+            IList<string> roles = await _userManager.GetRolesAsync(applicationUser);
 
-            applicationUser.SSN = null;
-            applicationUser.AptNumber = null;
-            applicationUser.AptPrice = null;
+            if (roles.Contains("Applicant"))
+            {
+                applicationUser.AptNumber = null;
+                applicationUser.AptPrice = null;
 
-            await _userManager.RemoveFromRoleAsync(applicationUser, "Resident");
-            await _userManager.AddToRoleAsync(applicationUser, "Applicant");
-            await _unitOfWork.Save();
+                _unitOfWork.AptUserRepository.Update(applicationUser);
+                await _unitOfWork.Save();
 
-            _unitOfWork.AptUserRepository.Update(applicationUser);
-            await _unitOfWork.Save();
+            }
+            else if (roles.Contains("Resident"))
+            {
+                applicationUser.AptNumber = aptNumber;
+                applicationUser.AptPrice = "853";
+
+                _unitOfWork.AptUserRepository.Update(applicationUser);
+                await _unitOfWork.Save();
+            }
         }
 
         public async Task EditApplication(ApplicationDTO applicationDTO)
