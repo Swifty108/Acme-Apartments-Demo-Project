@@ -8,6 +8,5 @@ namespace AcmeApartments.Web.ViewModels
         public IList<FloorPlanDTO> StudioPlans { get; set; }
         public IList<FloorPlanDTO> OneBedPlans { get; set; }
         public IList<FloorPlanDTO> TwoBedPlans { get; set; }
-        public string FloorPlanType { get; set; }
     }
 }

@@ -51,11 +51,10 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowFloorPlans(string floorPlanType = null)
+        public async Task<IActionResult> ShowFloorPlans()
         {
             var floorPlansViewModelDTO = await _homeAccountLogic.GetFloorPlans();
             var floorPlansViewModel = _mapper.Map<FloorPlansViewModel>(floorPlansViewModelDTO);
-            floorPlansViewModel.FloorPlanType = floorPlanType;
             return View(floorPlansViewModel);
         }
 
@@ -115,12 +114,6 @@ namespace AcmeApartments.Web.Controllers
             var applyViewModel = _mapper.Map<ApplyViewModel>(applyBindingModel);
 
             return View(applyViewModel);
-        }
-
-        [HttpGet]
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

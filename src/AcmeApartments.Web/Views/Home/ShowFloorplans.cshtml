@@ -15,33 +15,9 @@
 
     <nav>
         <div class="nav nav-tabs fp" id="nav-tab" role="tablist">
-            @if (Model.FloorPlanType != null)
-            {
-                if (Model.FloorPlanType == FloorPlanType.Studio)
-                {
-                    <a class="nav-item nav-link active" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
-                    <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
-                    <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
-                }
-                else if (Model.FloorPlanType == FloorPlanType.OneBed)
-                {
-                    <a class="nav-item nav-link" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
-                    <a class="nav-item nav-link active" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
-                    <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
-                }
-                else if (Model.FloorPlanType == FloorPlanType.TwoBed)
-                {
-                    <a class="nav-item nav-link" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
-                    <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
-                    <a class="nav-item nav-link active" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
-                }
-            }
-            else
-            {
                 <a class="nav-item nav-link active" id="nav-studio-tab" data-toggle="tab" href="#nav-studio" role="tab" aria-controls="nav-studio" aria-selected="true">Studio</a>
                 <a class="nav-item nav-link" id="nav-1bed-tab" data-toggle="tab" href="#nav-1bed" role="tab" aria-controls="nav-1bed" aria-selected="false">1 Bed</a>
                 <a class="nav-item nav-link" id="nav-2bed-tab" data-toggle="tab" href="#nav-2bed" role="tab" aria-controls="nav-2bed" aria-selected="false">2 Bed</a>
-            }
         </div>
     </nav>
 

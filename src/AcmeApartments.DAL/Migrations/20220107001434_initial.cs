@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AcmeApartments.DAL.Data.Migrations
+namespace AcmeApartments.DAL.Migrations
 {
     public partial class initial : Migration
     {
