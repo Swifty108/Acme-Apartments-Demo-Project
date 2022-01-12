@@ -8,7 +8,7 @@ This is an ASP.NET Core MVC demo Web App used to manage a fictional apartment co
 
 ## Technology Stacks Used
 
-**Frameworks & Tools:** ASP.NET Core MVC 3.1, EF Core 3.1, Automapper 10.1.1, SQL Server, HTML5, CSS, Bootstrap, Microsoft SQL Server Management Studio, Git for Version Control, Azure DevOps for project management, and Microsoft Teams for code reviews.
+**Frameworks, Languages, and Tools:** C#, ASP.NET Core MVC 3.1, EF Core 3.1, Automapper 10.1.1, SQL Server, HTML5, CSS, Bootstrap, Microsoft SQL Server Management Studio, Git for Version Control, Azure DevOps for project management, and Microsoft Teams for code reviews.
 
 **Design & Architectural Patterns:** generic repository pattern, unit of work pattern, MVC pattern, 3-layered architecture.
 
