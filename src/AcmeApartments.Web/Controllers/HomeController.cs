@@ -24,7 +24,7 @@ namespace AcmeApartments.Web.Controllers
             ILogger<HomeController> logger,
             IHome homeAccountLogic,
             IUserService userService,
-            IMapper mapper)
+            IMapper mapper) 
         {
             _logger = logger;
             _homeAccountLogic = homeAccountLogic;
