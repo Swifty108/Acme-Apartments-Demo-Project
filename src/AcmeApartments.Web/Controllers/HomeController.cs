@@ -103,17 +103,17 @@ namespace AcmeApartments.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Apply(ApplyBindingModel applyBindingModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyBindingModel);
-                var userRole = await _homeAccountLogic.Apply(applyViewModelDTO);
+                var applyViewModel = _mapper.Map<ApplyViewModel>(applyBindingModel);
 
-                return RedirectToAction("index", $"{userRole}account", new { IsApplySuccess = true });
+                return View(applyViewModel);
             }
 
-            var applyViewModel = _mapper.Map<ApplyViewModel>(applyBindingModel);
+            var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyBindingModel);
+            var userRole = await _homeAccountLogic.Apply(applyViewModelDTO);
 
-            return View(applyViewModel);
+            return RedirectToAction("index", $"{userRole}account", new { IsApplySuccess = true });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -126,6 +126,7 @@ namespace AcmeApartments.Web.Controllers
             return View();
         }
 
+        //ToDo: position messages in center
         [HttpPost]
         public IActionResult ContactUs(AppUserContactBindingModel appUserContactBindingModel)
         {
