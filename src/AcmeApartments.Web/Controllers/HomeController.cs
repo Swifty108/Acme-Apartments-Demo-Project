@@ -126,7 +126,6 @@ namespace AcmeApartments.Web.Controllers
             return View();
         }
 
-        //ToDo: position messages in center
         [HttpPost]
         public IActionResult ContactUs(AppUserContactBindingModel appUserContactBindingModel)
         {

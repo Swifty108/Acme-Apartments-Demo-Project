@@ -121,9 +121,9 @@ namespace AcmeApartments.BLL.HelperClasses
             return application;
         }
 
-        public async Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId)
+        public MaintenanceRequest GetMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRecord = await _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceId);
+            var maintenanceRecord = _unitOfWork.MaintenanceRequestRepository.Get(filter: maintenanceRecord => maintenanceRecord.Id == maintenanceId).FirstOrDefault();
             return maintenanceRecord;
         }
 
@@ -139,7 +139,7 @@ namespace AcmeApartments.BLL.HelperClasses
         public async Task<List<MaintenanceRequest>> GetMaintenanceUserRequests(string aptUserId)
         {
             var requests = await (from userRecord in _unitOfWork.AptUserRepository.Get()
-                                  join mRecord in _unitOfWork.MaintenanceRequestRepository.Get() on userRecord.Id equals mRecord.AptUserId
+                                  join mRecord in _unitOfWork.MaintenanceRequestRepository.Get(includeProperties: "User") on userRecord.Id equals mRecord.AptUserId
                                   select mRecord).Where(s => s.AptUserId == aptUserId).ToListAsync();
 
             return requests;

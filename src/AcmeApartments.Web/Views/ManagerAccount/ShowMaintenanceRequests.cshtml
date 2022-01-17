@@ -51,7 +51,7 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
 
 <partial name="_LoggedInAsPartial" />
 <br />
-<h1>Maintenance Requests for @Model.UserFirstName @Model.UserLastName</h1>
+<h1>Maintenance Requests for @Model.MaintenanceRequests[0].User.FirstName @Model.MaintenanceRequests[0].User.LastName</h1>
 
 <hr />
 <div class="container">
@@ -74,11 +74,11 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
                     <td>@maintenancerecord.Id</td>
 
                     <td>
-                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.UserFirstName" asp-route-lastname="@Model.UserLastName">View</a>
+                        <a asp-controller="manageraccount" asp-action="viewmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id">View</a>
                     </td>
 
                     <td>
-                        <a asp-controller="manageraccount" asp-action="editmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id" asp-route-firstname="@Model.UserFirstName" asp-route-lastname="@Model.UserLastName">Edit</a>
+                        <a asp-controller="manageraccount" asp-action="editmaintenancerequest" asp-route-maintenanceid="@maintenancerecord.Id">Edit</a>
                     </td>
 
                     @if (maintenancerecord.Status == MaintenanceRequestStatus.APPROVED)

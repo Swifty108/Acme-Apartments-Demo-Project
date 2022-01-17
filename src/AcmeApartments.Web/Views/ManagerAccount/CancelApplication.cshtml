@@ -13,6 +13,6 @@
     <form asp-action="AppCancel">
         <input type="hidden" asp-for="ApplicationId" />
         <input type="submit" value="Cancel" class="btn btn-danger" /> |
-        <a asp-action="applicationuser">Back to List</a>
+        <a asp-action="showapplications" asp-route-userid="@Model.AptUserId">Back to List</a>
     </form>
 </div>

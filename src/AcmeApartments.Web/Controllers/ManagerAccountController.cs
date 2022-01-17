@@ -46,14 +46,12 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ShowApplications(string userId, string firstName, string lastName)
+        public IActionResult ShowApplications(string userId)
         {
             var userApps = _applicationService.GetApplications(userId);
             var userApplicationsViewModel = new UserApplicationsViewModel
             {
-                Applications = userApps,
-                FirstName = firstName,
-                LastName = lastName
+                Applications = userApps
             };
 
             ViewBag.AppEditSuccess = TempData["AppEditSuccess"];
@@ -193,15 +191,13 @@ namespace AcmeApartments.Web.Controllers
             return View(maintenanceRequestsUsers);
         }
 
-        public async Task<IActionResult> ShowMaintenanceRequests(string aptUserId, string firstName, string lastName)
+        public async Task<IActionResult> ShowMaintenanceRequests(string aptUserId)
         {
-            var MaintenanceRecords = await _managerAccount.GetMaintenanceUserRequests(aptUserId);
+            var maintenanceRecords = await _managerAccount.GetMaintenanceUserRequests(aptUserId);
 
             var maintenanceRequestsListViewModel = new MaintenanceRequestsListViewModel
             {
-                MaintenanceRequests = MaintenanceRecords,
-                UserFirstName = firstName,
-                UserLastName = lastName
+                MaintenanceRequests = maintenanceRecords
             };
 
             ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
@@ -218,32 +214,19 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewMaintenanceRequest(int maintenanceId, string firstName, string lastName)
+        public IActionResult ViewMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord =  _managerAccount.GetMaintenanceRequest(maintenanceId);
 
-            return View(new MaintenanceRequestViewViewModel
-            {
-                MaintenanceRequest = maintenanceRecord,
-                UserFirstName = firstName,
-                UserLastName = lastName
-            });
+            return View(maintenanceRecord);
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditMaintenanceRequest(int maintenanceId, string firstName, string lastName)
+        public IActionResult EditMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRecord = await _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = _managerAccount.GetMaintenanceRequest(maintenanceId);
 
-            return View(new MaintenanceRequestEditViewModel
-            {
-                Id = maintenanceRecord.Id,
-                AptUserId = maintenanceRecord.AptUserId,
-                ProblemDescription = maintenanceRecord.ProblemDescription,
-                isAllowedToEnter = maintenanceRecord.isAllowedToEnter,
-                UserFirstName = firstName,
-                UserLastName = lastName
-            });
+            return View(maintenanceRecord);
         }
 
         [HttpPost]
@@ -256,11 +239,7 @@ namespace AcmeApartments.Web.Controllers
 
                 await _managerAccount.EditMaintenanceRequest(maintenanceRequestEditDTO);
                 TempData["MaintenanceEditSuccess"] = true;
-                return RedirectToAction("ShowMaintenanceRequests", new
-                {
-                    firstName = maintenanceRequestEditBindingModel.UserFirstName,
-                    lastName = maintenanceRequestEditBindingModel.UserLastName
-                });
+                return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = maintenanceRequestEditDTO.AptUserId});
             }
 
             var maintenancRequestEditViewModel = _mapper.Map<MaintenanceRequestEditViewModel>(maintenanceRequestEditBindingModel);
@@ -283,12 +262,7 @@ namespace AcmeApartments.Web.Controllers
 
             TempData["MaintenanceApproveSuccess"] = true;
 
-            return RedirectToAction("ShowMaintenanceRequests", new
-            {
-                aptUserId = user.Id,
-                firstName = user.FirstName,
-                lastName = user.LastName
-            });
+            return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = user.Id });
         }
 
         public async Task<IActionResult> UnApproveMaintenanceRequest(string userId, int maintenanceId)
@@ -306,12 +280,7 @@ namespace AcmeApartments.Web.Controllers
 
             TempData["MaintenanceUnApproveSuccess"] = true;
 
-            return RedirectToAction("ShowMaintenanceRequests", new
-            {
-                aptUserId = user.Id,
-                firstName = user.FirstName,
-                lastName = user.LastName
-            });
+            return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = user.Id });
         }
     }
 }

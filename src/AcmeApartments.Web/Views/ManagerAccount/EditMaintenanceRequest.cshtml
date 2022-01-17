@@ -1,4 +1,4 @@
-﻿@model AcmeApartments.Web.ViewModels.MaintenanceRequestEditViewModel
+﻿@model MaintenanceRequest;
 
 @{
     ViewData["Title"] = "Maintenance Edit";
@@ -13,8 +13,6 @@
     <div class="col-md-10">
         <form asp-action="editmaintenancerequest" id="maintenance-edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @Html.HiddenFor(x => x.UserFirstName)
-            @Html.HiddenFor(x => x.UserLastName)
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="control-label" value="@Model.Id" disabled />
@@ -44,7 +42,7 @@
 </div>
 
 <div>
-    <a asp-action="showmaintenancerequests" asp-route-firstname="@Model.UserFirstName" asp-route-lastname="@Model.UserLastName">Back to List</a>
+    <a asp-action="showmaintenancerequests" asp-route-aptuserid=@Model.AptUserId>Back to List</a>
 </div>
 
 @section Scripts {

@@ -15,8 +15,5 @@ namespace AcmeApartments.Web.ViewModels
 
         [DisplayName("Permitted to enter the apartment?")]
         public bool isAllowedToEnter { get; set; }
-
-        public string UserFirstName { get; set; }
-        public string UserLastName { get; set; }
     }
 }

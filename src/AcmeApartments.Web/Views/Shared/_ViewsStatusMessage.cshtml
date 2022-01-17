@@ -3,8 +3,12 @@
 @if (!String.IsNullOrEmpty(Model))
 {
     var statusMessageClass = Model.Contains("Error") ? "danger" : "success";
-    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        @Model
+
+    <div class="d-flex justify-content-center"> 
+        <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @Model
+        </div>
     </div>
+
 }

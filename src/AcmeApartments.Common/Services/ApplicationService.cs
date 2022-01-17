@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace AcmeApartments.Common.Services
 {
+    //todo: unapprove reapprove maintenance request. show either approved or unapproved in residents account
+    //todo: same with app list. also look at how the new approved app is added to the db and how subsequent changes to the UI is displayed like apt number etc is matching with app
+    //todo: fix bug maintenance request list disappears when navigate back to list
+
     public class ApplicationService : IApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -36,7 +40,7 @@ namespace AcmeApartments.Common.Services
             return apps;
         }
 
-        public List<Application> GetApplications(string userId) => _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId).ToList();
+        public List<Application> GetApplications(string userId) => _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId, includeProperties: "User").ToList();
 
         public async Task<List<AptUser>> GetApplicationUsers()
         {

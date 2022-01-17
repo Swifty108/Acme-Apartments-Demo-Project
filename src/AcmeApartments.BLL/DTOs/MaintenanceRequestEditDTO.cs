@@ -7,6 +7,8 @@ namespace AcmeApartments.BLL.DTOs
     {
         public int Id { get; set; }
 
+        public string AptUserId { get; set; }
+
         [Required]
         [MaxLength(10000)]
         [Display(Name = "Problem Description")]
