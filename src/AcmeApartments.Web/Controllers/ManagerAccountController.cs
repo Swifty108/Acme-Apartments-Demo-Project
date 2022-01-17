@@ -216,17 +216,17 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public IActionResult ViewMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRecord =  _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRequestViewModel = GetMaintenanceRequest(maintenanceId);
 
-            return View(maintenanceRecord);
+            return View(maintenanceRequestViewModel);
         }
 
         [HttpGet]
         public IActionResult EditMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRecord = _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRequestViewModel = GetMaintenanceRequest(maintenanceId);
 
-            return View(maintenanceRecord);
+            return View(maintenanceRequestViewModel);
         }
 
         [HttpPost]
@@ -281,6 +281,13 @@ namespace AcmeApartments.Web.Controllers
             TempData["MaintenanceUnApproveSuccess"] = true;
 
             return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = user.Id });
+        }
+
+        private MaintenanceRequestViewModel GetMaintenanceRequest(int maintenanceId)
+        {
+            var maintenanceRecord = _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRequestViewModel = _mapper.Map<MaintenanceRequestViewModel>(maintenanceRecord);
+            return maintenanceRequestViewModel;
         }
     }
 }

@@ -8,7 +8,6 @@
             dataType: "json",
             success: function (response) {
                 if (response.list.length != 0) {
-                    //$("#showError").hide();
                     createTable(response.list);
                 }
                 else {
@@ -27,7 +26,6 @@
 
     function createTable(data) {
         $("#tbody-appened").empty();
-        //var tbody = $("<tbody />"), tr;
 
         $.each(data, function (_, obj) {
             var tr = $("<tr />");
@@ -51,13 +49,23 @@
                         tr.append("<td> " + value + " </td>");
                         break;
                     case "status":
-                        var toAppend = (value == "Approved") ? "<td> Approved </td>" : "<td> <i class='fa fa-clock-o'></i> Pending Approval </td>";
+                        let toAppend;
+
+                        if (value == "Approved") {
+                            toAppend = "<td> <span style='color: darkgreen'><i class='fa fa-check text-success'></i> Approved</span></td>"
+                        }
+                        else if (value == "UnApproved") {
+                            toAppend = "<td><span style='color: darkred'><i class='fa fa-ban'></i> Unapproved</span></td>"
+                        }
+                        else if(value == "Pending Approval"){
+                            toAppend = "<td><i class='fa fa-clock-o'></i> Pending Approval</td>"
+                        }
+
                         tr.append(toAppend);
                         break;
                 }
             });
             tr.appendTo("#tbody-appened");
         });
-        //tbody.appendTo("#reqhistorytable");
     }
 });

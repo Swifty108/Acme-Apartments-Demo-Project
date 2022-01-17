@@ -75,6 +75,9 @@ namespace AcmeApartments.BLL.HelperClasses
             CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestViewModel>();
             CreateMap<NewMaintenanceRequestViewModel, NewMaintenanceRequestBindingModel>();
 
+            CreateMap<MaintenanceRequest, MaintenanceRequestViewModel>();
+            CreateMap<MaintenanceRequestViewModel, MaintenanceRequest>();
+
             CreateMap<PaymentsViewModelDTO, PaymentsViewModel>();
             CreateMap<PaymentsViewModel, PaymentsViewModelDTO>();
         }
