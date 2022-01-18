@@ -15,8 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\AcmeApartments.BLL\AcmeApartments.BLL.csproj" />
-    <ProjectReference Include="..\src\AcmeApartments.Web\AcmeApartments.Web.csproj" />
+    <ProjectReference Include="..\..\src\AcmeApartments.BLL\AcmeApartments.BLL.csproj" />
+    <ProjectReference Include="..\..\src\AcmeApartments.Common\AcmeApartments.Common.csproj" />
+    <ProjectReference Include="..\..\src\AcmeApartments.DAL\AcmeApartments.DAL.csproj" />
+    <ProjectReference Include="..\..\src\AcmeApartments.Web\AcmeApartments.Web.csproj" />
   </ItemGroup>
 
 </Project>

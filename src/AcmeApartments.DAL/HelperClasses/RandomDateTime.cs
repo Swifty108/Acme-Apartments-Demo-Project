@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AcmeApartments.Common.HelperClasses
+namespace AcmeApartments.DAL.HelperClasses
 {
     public class RandomDateTime
     {

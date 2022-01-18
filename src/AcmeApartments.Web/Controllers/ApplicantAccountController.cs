@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace AcmeApartments.Controllers
+namespace AcmeApartments.Web.Controllers
 {
     [Authorize(Roles = "Applicant")]
     public class ApplicantAccountController : Controller

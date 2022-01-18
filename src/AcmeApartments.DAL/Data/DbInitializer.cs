@@ -1,4 +1,4 @@
-﻿using AcmeApartments.Common.HelperClasses;
+﻿using AcmeApartments.DAL.HelperClasses;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.DAL.Models;

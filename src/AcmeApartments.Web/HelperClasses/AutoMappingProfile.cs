@@ -6,7 +6,7 @@ using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 
-namespace AcmeApartments.BLL.HelperClasses
+namespace AcmeApartments.Web.HelperClasses
 {
     public class AutoMappingProfile : Profile
     {

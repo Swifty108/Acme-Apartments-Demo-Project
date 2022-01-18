@@ -14,7 +14,7 @@ using AcmeApartments.DAL.DTOs;
 using AcmeApartments.DAL.Models;
 using System.Collections.Generic;
 
-namespace AcmeApartments.UnitTests
+namespace AcmeApartments.Tests.Controllers
 {
     public class HomeControllerTests : IClassFixture<HomeControllerFixture>
     {
@@ -121,7 +121,7 @@ namespace AcmeApartments.UnitTests
 
             //Assert
             var viewResult = result as ViewResult;
-            Assert.True((bool) viewResult.ViewData["ApplicationFoundError"]);
+            Assert.True((bool)viewResult.ViewData["ApplicationFoundError"]);
         }
 
         [Fact]
@@ -159,7 +159,7 @@ namespace AcmeApartments.UnitTests
             };
 
             _homeControllerFixture._mockMapper.Setup(x => x.Map<AppUserContactViewModel>(appUserContactBindingModel)).Returns(appUserContactViewModel);
-           
+
 
             //Act
             var result = _homeControllerFixture.State.ContactUs(appUserContactBindingModel);

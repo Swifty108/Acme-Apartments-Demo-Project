@@ -5,6 +5,7 @@ using AcmeApartments.Common.Services;
 using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
+using AcmeApartments.Web.HelperClasses;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
