@@ -23,10 +23,10 @@ namespace AcmeApartments.BLL.HelperClasses
             _appService = appService;
         }
 
-        public List<Application> GetApplications()
+        public async Task<List<Application>> GetApplications()
         {
             var userId = _userService.GetUserId();
-            var applications = _appService.GetApplications(userId);
+            var applications = await _appService.GetApplications(userId);
             return applications;
         }
     }

@@ -46,9 +46,9 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ShowApplications(string userId)
+        public async Task<IActionResult> ShowApplications(string userId)
         {
-            var userApps = _applicationService.GetApplications(userId);
+            var userApps = await _applicationService.GetApplications(userId);
             var userApplicationsViewModel = new UserApplicationsViewModel
             {
                 Applications = userApps

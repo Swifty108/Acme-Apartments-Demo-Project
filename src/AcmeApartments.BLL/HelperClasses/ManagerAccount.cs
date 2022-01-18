@@ -121,9 +121,9 @@ namespace AcmeApartments.BLL.HelperClasses
             return application;
         }
 
-        public MaintenanceRequest GetMaintenanceRequest(int maintenanceId)
+        public async Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRecord = _unitOfWork.MaintenanceRequestRepository.Get(filter: maintenanceRecord => maintenanceRecord.Id == maintenanceId).FirstOrDefault();
+            var maintenanceRecord = await _unitOfWork.MaintenanceRequestRepository.Get(filter: maintenanceRecord => maintenanceRecord.Id == maintenanceId).FirstOrDefaultAsync();
             return maintenanceRecord;
         }
 

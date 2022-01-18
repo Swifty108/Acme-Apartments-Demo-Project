@@ -62,7 +62,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Apply(ApplyReturnUrlBindingModel applyReturnUrlBindingModel)
         {
-            var isAppliationExists = _homeAccountLogic.CheckifApplicationExists(applyReturnUrlBindingModel.AptNumber);
+            var isAppliationExists = await _homeAccountLogic.CheckifApplicationExists(applyReturnUrlBindingModel.AptNumber);
 
             if (isAppliationExists)
             {

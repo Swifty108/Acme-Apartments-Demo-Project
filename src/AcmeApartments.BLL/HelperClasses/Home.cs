@@ -48,9 +48,9 @@ namespace AcmeApartments.BLL.HelperClasses
             return floorPlans;
         }
 
-        public bool CheckifApplicationExists(string aptNumber)
+        public async Task<bool> CheckifApplicationExists(string aptNumber)
         {
-            var apps = _applicationService.GetApplicationsByAptNumber(aptNumber);
+            var apps = await _applicationService.GetApplicationsByAptNumber(aptNumber);
             return apps.Count > 0 ? true : false;
         }
 

@@ -16,7 +16,7 @@ namespace AcmeApartments.BLL.Interfaces
 
         public Task UnApproveApplication(string id, string aptNumber, int appid);
 
-        public MaintenanceRequest GetMaintenanceRequest(int maintenanceId);
+        public Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId);
 
         public Task<List<AptUser>> GetMaintenanceRequestsUsers();
 

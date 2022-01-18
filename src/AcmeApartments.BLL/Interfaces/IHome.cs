@@ -10,6 +10,6 @@ namespace AcmeApartments.BLL.Interfaces
 
         public Task<string> Apply(ApplyViewModelDTO applyViewModelDTO);
 
-        public bool CheckifApplicationExists(string aptNumber);
+        public Task<bool> CheckifApplicationExists(string aptNumber);
     }
 }

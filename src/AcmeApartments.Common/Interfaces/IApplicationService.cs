@@ -9,9 +9,9 @@ namespace AcmeApartments.Common.Interfaces
     {
         public Task<Application> GetApplication(int applicationId);
 
-        public List<Application> GetApplications(string userId);
+        public Task<List<Application>> GetApplications(string userId);
 
-        public List<Application> GetApplicationsByAptNumber(string aptNumber);
+        public Task<List<Application>> GetApplicationsByAptNumber(string aptNumber);
 
         public Task<List<AptUser>> GetApplicationUsers();
     }

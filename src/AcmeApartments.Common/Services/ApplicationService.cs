@@ -28,19 +28,19 @@ namespace AcmeApartments.Common.Services
 
         public async Task<Application> GetApplication(int applicationId) => await _unitOfWork.ApplicationRepository.GetByID(applicationId);
 
-        public List<Application> GetApplicationsByAptNumber(string aptNumber)
+        public async Task<List<Application>> GetApplicationsByAptNumber(string aptNumber)
         {
             var user = _userService.GetUser();
 
-            var apps = _unitOfWork.ApplicationRepository.Get(
+            var apps = await _unitOfWork.ApplicationRepository.Get(
                 filter: application => application.AptNumber == aptNumber
                 && application.AptUserId == user.Result.Id
-                && (application.Status == null || application.Status == "Approved")).ToList();
+                && (application.Status == null || application.Status == "Approved")).ToListAsync();
 
             return apps;
         }
 
-        public List<Application> GetApplications(string userId) => _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId, includeProperties: "User").ToList();
+        public async Task<List<Application>> GetApplications(string userId) => await _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId, includeProperties: "User").ToListAsync();
 
         public async Task<List<AptUser>> GetApplicationUsers()
         {

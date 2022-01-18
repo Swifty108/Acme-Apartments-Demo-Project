@@ -6,6 +6,6 @@ namespace AcmeApartments.BLL.Interfaces
 {
     public interface IApplicantAccount
     {
-        public List<Application> GetApplications();
+        public Task<List<Application>> GetApplications();
     }
 }
