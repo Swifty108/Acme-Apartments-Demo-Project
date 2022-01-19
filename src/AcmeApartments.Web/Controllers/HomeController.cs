@@ -111,7 +111,7 @@ namespace AcmeApartments.Web.Controllers
             var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyBindingModel);
             var userRole = await _applicationService.Apply(applyViewModelDTO);
 
-            return RedirectToAction("index", $"{userRole}account", new { IsApplySuccess = true });
+            return RedirectToAction("index", $"{userRole}", new { IsApplySuccess = true });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
