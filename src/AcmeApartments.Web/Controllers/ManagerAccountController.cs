@@ -1,6 +1,5 @@
 ﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
-using AcmeApartments.Common.Interfaces;
 using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;
@@ -16,19 +15,18 @@ namespace AcmeApartments.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IApplicationService _applicationService;
-
-        private readonly IManagerAccount _managerAccount;
+        private readonly IMaintenanceService _maintenanceService;
         private readonly IUserService _userService;
 
         public ManagerAccountController(
             IMapper mapper,
-            IManagerAccount managerAccount,
             IApplicationService applicationService,
+            IMaintenanceService maintenanceService,
             IUserService userService)
         {
             _mapper = mapper;
-            _managerAccount = managerAccount;
             _applicationService = applicationService;
+            _maintenanceService = maintenanceService;
             _userService = userService;
         }
 
@@ -46,9 +44,9 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowApplications(string userId)
+        public IActionResult ShowApplications(string userId)
         {
-            var userApps = await _applicationService.GetApplications(userId);
+            var userApps = _applicationService.GetApplications(userId);
             var userApplicationsViewModel = new UserApplicationsViewModel
             {
                 Applications = userApps
@@ -74,6 +72,7 @@ namespace AcmeApartments.Web.Controllers
             return View(application);
         }
 
+        [HttpGet]
         public async Task<IActionResult> EditApplication(int Id)
         {
             var application = await _applicationService.GetApplication(Id);
@@ -96,7 +95,7 @@ namespace AcmeApartments.Web.Controllers
                 try
                 {
                     var applicationDTO = _mapper.Map<ApplicationDTO>(applicationBindingModel);
-                    await _managerAccount.EditApplication(applicationDTO);
+                    await _applicationService.EditApplication(applicationDTO);
                     var user = await _userService.GetUserByID(applicationBindingModel.AptUserId);
 
                     TempData["AppEditSuccess"] = true;
@@ -127,7 +126,7 @@ namespace AcmeApartments.Web.Controllers
         {
             try
             {
-                await _managerAccount.CancelApplication(applicationBindingModel.ApplicationId);
+                await _applicationService.CancelApplication(applicationBindingModel.ApplicationId);
             }
             catch (Exception)
             {
@@ -146,7 +145,7 @@ namespace AcmeApartments.Web.Controllers
         {
             try
             {
-                await _managerAccount.ApproveApplication(
+                await _applicationService.ApproveApplication(
                     approveAppBindingModel.UserId,
                     approveAppBindingModel.ApplicationId,
                     approveAppBindingModel.SSN,
@@ -170,7 +169,7 @@ namespace AcmeApartments.Web.Controllers
         {
             try
             {
-                await _managerAccount.UnApproveApplication(userId, aptNumber, applicationId);
+                await _applicationService.UnApproveApplication(userId, aptNumber, applicationId);
             }
             catch (Exception)
             {
@@ -187,13 +186,13 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowMaintenanceRequestsUsers()
         {
-            var maintenanceRequestsUsers = await _managerAccount.GetMaintenanceRequestsUsers();
+            var maintenanceRequestsUsers = await _maintenanceService.GetMaintenanceRequestsUsers();
             return View(maintenanceRequestsUsers);
         }
 
         public async Task<IActionResult> ShowMaintenanceRequests(string aptUserId)
         {
-            var maintenanceRecords = await _managerAccount.GetMaintenanceUserRequests(aptUserId);
+            var maintenanceRecords = await _maintenanceService.GetMaintenanceUserRequests(aptUserId);
 
             var maintenanceRequestsListViewModel = new MaintenanceRequestsListViewModel
             {
@@ -214,17 +213,17 @@ namespace AcmeApartments.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ViewMaintenanceRequest(int maintenanceId)
+        public async Task<IActionResult> ViewMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRequestViewModel = GetMaintenanceRequest(maintenanceId);
+            var maintenanceRequestViewModel = await GetMaintenanceRequest(maintenanceId);
 
             return View(maintenanceRequestViewModel);
         }
 
         [HttpGet]
-        public IActionResult EditMaintenanceRequest(int maintenanceId)
+        public async Task<IActionResult> EditMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRequestViewModel = GetMaintenanceRequest(maintenanceId);
+            var maintenanceRequestViewModel = await GetMaintenanceRequest(maintenanceId);
 
             return View(maintenanceRequestViewModel);
         }
@@ -237,7 +236,7 @@ namespace AcmeApartments.Web.Controllers
             {
                 var maintenanceRequestEditDTO = _mapper.Map<MaintenanceRequestEditDTO>(maintenanceRequestEditBindingModel);
 
-                await _managerAccount.EditMaintenanceRequest(maintenanceRequestEditDTO);
+                await _maintenanceService.EditMaintenanceRequest(maintenanceRequestEditDTO);
                 TempData["MaintenanceEditSuccess"] = true;
                 return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = maintenanceRequestEditDTO.AptUserId});
             }
@@ -251,7 +250,7 @@ namespace AcmeApartments.Web.Controllers
         {
             try
             {
-                await _managerAccount.ApproveMaintenanceRequest(userId, maintenanceId);
+                await _maintenanceService.ApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception)
             {
@@ -269,7 +268,7 @@ namespace AcmeApartments.Web.Controllers
         {
             try
             {
-                await _managerAccount.UnApproveMaintenanceRequest(userId, maintenanceId);
+                await _maintenanceService.UnApproveMaintenanceRequest(userId, maintenanceId);
             }
             catch (Exception)
             {
@@ -283,9 +282,9 @@ namespace AcmeApartments.Web.Controllers
             return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = user.Id });
         }
 
-        private MaintenanceRequestViewModel GetMaintenanceRequest(int maintenanceId)
+        public async Task<MaintenanceRequestViewModel> GetMaintenanceRequest(int maintenanceId)
         {
-            var maintenanceRecord = _managerAccount.GetMaintenanceRequest(maintenanceId);
+            var maintenanceRecord = await _maintenanceService.GetMaintenanceRequest(maintenanceId);
             var maintenanceRequestViewModel = _mapper.Map<MaintenanceRequestViewModel>(maintenanceRecord);
             return maintenanceRequestViewModel;
         }
