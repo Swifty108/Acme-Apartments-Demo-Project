@@ -143,25 +143,14 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
                                 </td>
 
                             }
-                            else
+                            else if (application.Status == ApplicationStatus.PENDINGAPPROVAL)
                             {
-                                <td>
-
-                                    <a asp-controller="manager" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId">Approve</a>
-                                </td>
-
-                            }
-
-                            @if (application.Status == ApplicationStatus.PENDINGAPPROVAL)
-                            {
-
                                 <td>
                                     <a asp-controller="manager" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId">Approve</a>
                                     <a asp-controller="manager" asp-action="unapproveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Unapprove</a>
                                 </td>
 
                             }
-
                         </tr>
                     }
                 </tbody>

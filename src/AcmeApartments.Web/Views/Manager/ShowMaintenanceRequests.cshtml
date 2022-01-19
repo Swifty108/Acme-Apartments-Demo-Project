@@ -98,17 +98,8 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
 
                             <a asp-controller="manager" asp-action="approvemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">ReApprove</a>
                         </td>
-
                     }
-                    else
-                    {
-                        <td>
-                            <a asp-controller="manager" asp-action="approvemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id">Approve</a>
-                        </td>
-
-                    }
-
-                    @if (maintenancerecord.Status == MaintenanceRequestStatus.PENDINGAPPROVAL)
+                    else if (maintenancerecord.Status == MaintenanceRequestStatus.PENDINGAPPROVAL)
                     {
                         <td>
                             <a asp-controller="manager" asp-action="approvemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id">Approve</a>
