@@ -1,6 +1,5 @@
 ﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
-using AcmeApartments.Common.Interfaces;
 using AcmeApartments.DAL.Models;
 using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
@@ -15,20 +14,19 @@ namespace AcmeApartments.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IHome _homeAccountLogic;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
-
+        private readonly IApplicationService _applicationService;
+        private readonly IFloorPlanService _floorPlanService;
         public HomeController(
-            ILogger<HomeController> logger,
-            IHome homeAccountLogic,
             IUserService userService,
+            IApplicationService applicationService,
+            IFloorPlanService floorPlansService,
             IMapper mapper) 
         {
-            _logger = logger;
-            _homeAccountLogic = homeAccountLogic;
             _userService = userService;
+            _floorPlanService = floorPlansService;
+            _applicationService = applicationService;
             _mapper = mapper;
         }
 
@@ -53,7 +51,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowFloorPlans()
         {
-            var floorPlansViewModelDTO = await _homeAccountLogic.GetFloorPlans();
+            var floorPlansViewModelDTO = await _floorPlanService.GetFloorPlans();
             var floorPlansViewModel = _mapper.Map<FloorPlansViewModel>(floorPlansViewModelDTO);
             return View(floorPlansViewModel);
         }
@@ -62,7 +60,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Apply(ApplyReturnUrlBindingModel applyReturnUrlBindingModel)
         {
-            var isAppliationExists = await _homeAccountLogic.CheckifApplicationExists(applyReturnUrlBindingModel.AptNumber);
+            var isAppliationExists = await _applicationService.CheckifApplicationExists(applyReturnUrlBindingModel.AptNumber);
 
             if (isAppliationExists)
             {
@@ -111,7 +109,7 @@ namespace AcmeApartments.Web.Controllers
             }
 
             var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyBindingModel);
-            var userRole = await _homeAccountLogic.Apply(applyViewModelDTO);
+            var userRole = await _applicationService.Apply(applyViewModelDTO);
 
             return RedirectToAction("index", $"{userRole}account", new { IsApplySuccess = true });
         }
@@ -139,5 +137,6 @@ namespace AcmeApartments.Web.Controllers
 
             return View(appUserContactViewModel);
         }
+        
     }
 }

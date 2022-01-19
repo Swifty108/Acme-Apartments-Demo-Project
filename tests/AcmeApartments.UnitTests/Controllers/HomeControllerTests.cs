@@ -9,7 +9,6 @@ using AcmeApartments.Web.BindingModels;
 using Microsoft.AspNetCore.Mvc;
 using AcmeApartments.BLL.DTOs;
 using AcmeApartments.Tests.Fixtures;
-using AcmeApartments.Common.DTOs;
 using AcmeApartments.DAL.DTOs;
 using AcmeApartments.DAL.Models;
 using System.Collections.Generic;
@@ -88,7 +87,7 @@ namespace AcmeApartments.Tests.Controllers
                 }
             };
 
-            _homeControllerFixture._mockHomeLogic.Setup(x => x.GetFloorPlans()).ReturnsAsync(floorPlansViewModelDTO);
+            _homeControllerFixture._mockFloorPlanService.Setup(x => x.GetFloorPlans()).ReturnsAsync(floorPlansViewModelDTO);
             _homeControllerFixture._mockMapper.Setup(x => x.Map<FloorPlansViewModel>(floorPlansViewModelDTO)).Returns(floorPlansViewModel);
 
             //Act
@@ -179,7 +178,7 @@ namespace AcmeApartments.Tests.Controllers
         public async Task ApplyGet_ValidBidingModel_ViewShouldReturnValidApplyViewModel()
         {
             // Arrange
-            _homeControllerFixture._mockHomeLogic.Setup(x => x.CheckifApplicationExists(It.IsAny<string>())).Returns(false);
+            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>())).ReturnsAsync(false);
 
             var user = new AptUser
             {
@@ -217,7 +216,7 @@ namespace AcmeApartments.Tests.Controllers
         public async Task ApplyGet_ApplicationExists_ShouldReturnValidRedirectToActionResult()
         {
             // Arrange
-            _homeControllerFixture._mockHomeLogic.Setup(x => x.CheckifApplicationExists(It.IsAny<string>())).Returns(true);
+            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>())).ReturnsAsync(true);
 
             var applyReturnUrlBindingModel = new ApplyReturnUrlBindingModel()
             {
@@ -252,7 +251,7 @@ namespace AcmeApartments.Tests.Controllers
             };
 
             _homeControllerFixture._mockMapper.Setup(x => x.Map<ApplyViewModelDTO>(applyBindingModel)).Returns(applyViewModelDTO);
-            _homeControllerFixture._mockHomeLogic.Setup(x => x.Apply(It.IsAny<ApplyViewModelDTO>())).ReturnsAsync("resident");
+            _homeControllerFixture._mockApplicationService.Setup(x => x.Apply(It.IsAny<ApplyViewModelDTO>())).ReturnsAsync("resident");
 
             // Act
             var result = await _homeControllerFixture.State.Apply(applyBindingModel);

@@ -1,5 +1,4 @@
 ﻿using AcmeApartments.BLL.DTOs;
-using AcmeApartments.Common.DTOs;
 using AcmeApartments.DAL.DTOs;
 using AcmeApartments.DAL.Models;
 using AcmeApartments.Web.BindingModels;
@@ -14,72 +13,72 @@ namespace AcmeApartments.Web.HelperClasses
         {
             //Home controller
 
-            CreateMap<FloorPlansViewModel, FloorPlansViewModelDTO>();
-            CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>();
+            //CreateMap<FloorPlansViewModel, FloorPlansViewModelDTO>();
+            CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>().ReverseMap();
 
-            CreateMap<ApplyViewModelDTO, ApplyBindingModel>();
-            CreateMap<ApplyBindingModel, ApplyViewModelDTO>();
+            //CreateMap<ApplyViewModelDTO, ApplyBindingModel>();
+            CreateMap<ApplyBindingModel, ApplyViewModelDTO>().ReverseMap();
 
-            CreateMap<ApplyViewModel, ApplyBindingModel>();
-            CreateMap<ApplyBindingModel, ApplyViewModel>();
+            //CreateMap<ApplyViewModel, ApplyBindingModel>();
+            CreateMap<ApplyBindingModel, ApplyViewModel>().ReverseMap();
 
-            CreateMap<AppUserContactBindingModel, AppUserContactViewModel>();
-            CreateMap<AppUserContactViewModel, AppUserContactBindingModel>();
+            CreateMap<AppUserContactBindingModel, AppUserContactViewModel>().ReverseMap();
+            //CreateMap<AppUserContactViewModel, AppUserContactBindingModel>();
 
             //Home Controller Logic Class
 
-            CreateMap<FloorPlan, FloorPlanDTO>();
-            CreateMap<FloorPlanDTO, FloorPlan>();
+            CreateMap<FloorPlan, FloorPlanDTO>().ReverseMap();
+            //CreateMap<FloorPlanDTO, FloorPlan>();
 
             //Manager controller
 
-            CreateMap<ApplicationViewModel, Application>();
-            CreateMap<Application, ApplicationViewModel>();
+            //CreateMap<ApplicationViewModel, Application>();
+            CreateMap<Application, ApplicationViewModel>().ReverseMap();
 
-            CreateMap<ApplicationDTO, ApplicationBindingModel>();
-            CreateMap<ApplicationBindingModel, ApplicationDTO>();
+            CreateMap<ApplicationDTO, ApplicationBindingModel>().ReverseMap();
+            //CreateMap<ApplicationBindingModel, ApplicationDTO>();
 
-            CreateMap<ApplicationViewModel, ApplicationBindingModel>();
-            CreateMap<ApplicationBindingModel, ApplicationViewModel>();
+            //CreateMap<ApplicationViewModel, ApplicationBindingModel>();
+            CreateMap<ApplicationBindingModel, ApplicationViewModel>().ReverseMap();
 
-            CreateMap<MaintenanceRequestEditDTO, MaintenanceRequestEditBindingModel>();
-            CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditDTO>();
+            //CreateMap<MaintenanceRequestViewModel, MaintenanceRequest>();
+            CreateMap<MaintenanceRequest, MaintenanceRequestViewModel>().ReverseMap();
 
-            CreateMap<MaintenanceRequestEditViewModel, MaintenanceRequestEditBindingModel>();
-            CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditViewModel>();
+            CreateMap<MaintenanceRequestEditDTO, MaintenanceRequestEditBindingModel>().ReverseMap();
+            //CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditDTO>();
+
+            //CreateMap<MaintenanceRequestEditViewModel, MaintenanceRequestEditBindingModel>();
+            CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditViewModel>().ReverseMap();
 
             //Manager Controller Logic
 
-            CreateMap<ApplicationDTO, Application>();
-            CreateMap<Application, ApplicationDTO>();
+            //CreateMap<ApplicationDTO, Application>();
+            CreateMap<Application, ApplicationDTO>().ReverseMap();
 
             //Applicant controller
 
-            CreateMap<ApplicantContactBindingModel, ApplicantContactViewModel>();
-            CreateMap<ApplicantContactViewModel, ApplicantContactBindingModel>();
+            CreateMap<ApplicantContactBindingModel, ApplicantContactViewModel>().ReverseMap();
+            //CreateMap<ApplicantContactViewModel, ApplicantContactBindingModel>();
 
             //Resident controller
 
-            CreateMap<ReviewBindingModel, ReviewViewModelDTO>();
-            CreateMap<ReviewViewModelDTO, ReviewBindingModel>();
+            CreateMap<ReviewBindingModel, ReviewViewModelDTO>().ReverseMap();
+            //CreateMap<ReviewViewModelDTO, ReviewBindingModel>();
 
-            CreateMap<ReviewBindingModel, ReviewViewModel>();
-            CreateMap<ReviewViewModel, ReviewBindingModel>();
+            CreateMap<ReviewBindingModel, ReviewViewModel>().ReverseMap();
+            //CreateMap<ReviewViewModel, ReviewBindingModel>();
 
-            CreateMap<ResidentContactBindingModel, ResidentContactViewModel>();
-            CreateMap<ResidentContactViewModel, ResidentContactBindingModel>();
+            CreateMap<ResidentContactBindingModel, ResidentContactViewModel>().ReverseMap();
+            //CreateMap<ResidentContactViewModel, ResidentContactBindingModel>();
 
-            CreateMap<NewMaintenanceRequestDTO, NewMaintenanceRequestBindingModel>();
-            CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestDTO>();
+            CreateMap<NewMaintenanceRequestDTO, NewMaintenanceRequestBindingModel>().ReverseMap();
+            //CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestDTO>();
 
-            CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestViewModel>();
-            CreateMap<NewMaintenanceRequestViewModel, NewMaintenanceRequestBindingModel>();
+            CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestViewModel>().ReverseMap();
+            //CreateMap<NewMaintenanceRequestViewModel, NewMaintenanceRequestBindingModel>();
 
-            CreateMap<MaintenanceRequest, MaintenanceRequestViewModel>();
-            CreateMap<MaintenanceRequestViewModel, MaintenanceRequest>();
-
-            CreateMap<PaymentsViewModelDTO, PaymentsViewModel>();
-            CreateMap<PaymentsViewModel, PaymentsViewModelDTO>();
+            CreateMap<PaymentsViewModelDTO, PaymentsViewModel>().ReverseMap();
+            //CreateMap<PaymentsViewModel, PaymentsViewModelDTO>();
         }
     }
 }

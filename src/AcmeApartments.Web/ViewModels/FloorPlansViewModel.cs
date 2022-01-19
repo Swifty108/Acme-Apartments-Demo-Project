@@ -1,4 +1,4 @@
-﻿using AcmeApartments.Common.DTOs;
+﻿using AcmeApartments.BLL.DTOs;
 using System.Collections.Generic;
 
 namespace AcmeApartments.Web.ViewModels

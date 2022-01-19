@@ -11,14 +11,14 @@ namespace AcmeApartments.Web.Controllers
     [Authorize(Roles = "Applicant")]
     public class ApplicantAccountController : Controller
     {
-        private readonly IApplicantAccount _applicantAccountLogic;
+        private readonly IApplicationService _applicationService;
         private readonly IMapper _mapper;
 
         public ApplicantAccountController(
-            IApplicantAccount applicantAccountLogic,
+            IApplicationService applicationService,
             IMapper mapper)
         {
-            _applicantAccountLogic = applicantAccountLogic;
+            _applicationService = applicationService;
             _mapper = mapper;
         }
 
@@ -34,7 +34,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public IActionResult ShowApplications()
         {
-            var userApplications = _applicantAccountLogic.GetApplications();
+            var userApplications = _applicationService.GetApplications(string.Empty);
 
             return View(userApplications);
         }

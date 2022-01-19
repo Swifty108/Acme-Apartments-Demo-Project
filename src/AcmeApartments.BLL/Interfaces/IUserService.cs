@@ -1,7 +1,7 @@
 ﻿using AcmeApartments.DAL.Identity;
 using System.Threading.Tasks;
 
-namespace AcmeApartments.Common.Interfaces
+namespace AcmeApartments.BLL.Interfaces
 {
     public interface IUserService
     {

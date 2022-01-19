@@ -1,12 +1,9 @@
-using AcmeApartments.BLL.HelperClasses;
 using AcmeApartments.BLL.Interfaces;
-using AcmeApartments.Common.Interfaces;
-using AcmeApartments.Common.Services;
+using AcmeApartments.BLL.Services;
 using AcmeApartments.DAL.Data;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using AcmeApartments.Web.HelperClasses;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -53,12 +50,12 @@ namespace AcmeApartments.Web
             .AddRoles<IdentityRole>();
 
             services.AddTransient<IDbInitializer, DbInitializer>();
-            services.AddTransient<IApplicantAccount, ApplicantAccount>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IManagerAccount, ManagerAccount>();
-            services.AddTransient<IResidentAccount, ResidentAccount>();
-            services.AddTransient<IHome, Home>();
             services.AddTransient<IApplicationService, ApplicationService>();
+            services.AddTransient<IBillService, BillService>();
+            services.AddTransient<IFloorPlanService, FloorPlanService>();
+            services.AddTransient<IMaintenanceService, MaintenanceService>();
+            services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IUserService, UserService>();
             services.AddHttpContextAccessor();
 

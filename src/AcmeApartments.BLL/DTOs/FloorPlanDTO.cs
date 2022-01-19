@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AcmeApartments.Common.DTOs
+namespace AcmeApartments.BLL.DTOs
 {
     public class FloorPlanDTO
     {

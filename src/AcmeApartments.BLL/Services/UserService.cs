@@ -1,11 +1,11 @@
-﻿using AcmeApartments.Common.Interfaces;
+﻿using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.DAL.Identity;
 using AcmeApartments.DAL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
-namespace AcmeApartments.Common.Services
+namespace AcmeApartments.BLL.Services
 {
     public class UserService : IUserService
     {

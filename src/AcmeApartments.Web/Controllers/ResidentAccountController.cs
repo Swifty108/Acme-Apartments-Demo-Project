@@ -1,6 +1,5 @@
 ﻿using AcmeApartments.BLL.DTOs;
 using AcmeApartments.BLL.Interfaces;
-using AcmeApartments.Common.Interfaces;
 using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;
@@ -14,17 +13,27 @@ namespace AcmeApartments.Web.Controllers
     [Authorize(Roles = "Resident")]
     public class ResidentAccountController : Controller
     {
-        private readonly IResidentAccount _residentAccountLogic;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
+        private readonly IApplicationService _applicationService;
+        private readonly IMaintenanceService _maintenanceService;
+        private readonly IBillService _billService;
+        private readonly IReviewService _reviewService;
+
 
         public ResidentAccountController(
             IMapper mapper,
-            IResidentAccount residentAccountLogic,
-            IUserService userService)
+            IUserService userService,
+            IMaintenanceService maintenanceService,
+            IApplicationService applicationService,
+            IBillService billService,
+            IReviewService reviewService)
         {
-            _residentAccountLogic = residentAccountLogic;
             _userService = userService;
+            _applicationService = applicationService;
+            _billService = billService;
+            _reviewService = reviewService;
+            _maintenanceService = maintenanceService;
             _mapper = mapper;
         }
 
@@ -40,7 +49,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public IActionResult ShowApplications()
         {
-            var applications = _residentAccountLogic.GetApplications();
+            var applications = _applicationService.GetApplications(string.Empty);
             return View(applications);
         }
 
@@ -49,7 +58,7 @@ namespace AcmeApartments.Web.Controllers
         {
             ViewBag.MaintenanceSuccess = TempData["MaintenanceSuccess"];
 
-            return View(new NewMaintenanceRequestViewModel());
+            return View();
         }
 
         [HttpPost]
@@ -60,7 +69,7 @@ namespace AcmeApartments.Web.Controllers
                 try
                 {
                     var maintenanceRequestDTO = _mapper.Map<NewMaintenanceRequestDTO>(newMaintRequestBindingModel);
-                    await _residentAccountLogic.SubmitMaintenanceRequest(maintenanceRequestDTO);
+                    await _maintenanceService.SubmitMaintenanceRequest(maintenanceRequestDTO);
 
                     TempData["MaintenanceSuccess"] = true;
 
@@ -82,7 +91,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<JsonResult> GetReqHistory()
         {
-            var maintenanceRequests = await _residentAccountLogic.GetMaintenanceRequests();
+            var maintenanceRequests = await _maintenanceService.GetMaintenanceRequests();
             return Json(new
             {
                 list = maintenanceRequests
@@ -93,7 +102,7 @@ namespace AcmeApartments.Web.Controllers
         public async Task<IActionResult> ShowPayments()
         {
             var user = await _userService.GetUser();
-            var payments = await _residentAccountLogic.GetBills(user);
+            var payments = await _billService.GetBills(user);
             var payViewModel = _mapper.Map<PaymentsViewModel>(payments);
 
             return View(payViewModel);
@@ -112,7 +121,7 @@ namespace AcmeApartments.Web.Controllers
             if (ModelState.IsValid)
             {
                 var reviewViewModelDTO = _mapper.Map<ReviewViewModelDTO>(reviewBindingModel);
-                await _residentAccountLogic.AddReview(reviewViewModelDTO);
+                await _reviewService.AddReview(reviewViewModelDTO);
 
                 TempData["ReviewSuccess"] = true;
                 return RedirectToAction("WriteAReview");
