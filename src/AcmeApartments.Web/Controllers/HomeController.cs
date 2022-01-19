@@ -84,7 +84,8 @@ namespace AcmeApartments.Web.Controllers
                 StreetAddress = user.StreetAddress,
                 City = user.City,
                 State = user.State,
-                Zipcode = user.Zipcode
+                Zipcode = user.Zipcode,
+                SSN = user.SSN
             };
 
             return View(applyViewModel);
