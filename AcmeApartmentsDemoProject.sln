@@ -3,7 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcmeApartments.Common", "src\AcmeApartments.Common\AcmeApartments.Common.csproj", "{75B1D755-C5C6-459E-B25F-EE12B57FC61A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcmeApartments.BLL", "src\AcmeApartments.BLL\AcmeApartments.BLL.csproj", "{F679AB72-A3EF-4E46-A746-E4FA6ED8A4A8}"
 EndProject
@@ -48,7 +47,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{75B1D755-C5C6-459E-B25F-EE12B57FC61A} = {C5137E14-A3BE-4804-B831-D909C2390103}
 		{F679AB72-A3EF-4E46-A746-E4FA6ED8A4A8} = {C5137E14-A3BE-4804-B831-D909C2390103}
 		{FC46A12A-D715-4334-968D-CC393313F5FE} = {C5137E14-A3BE-4804-B831-D909C2390103}
 		{0A66D4EF-AD17-4AF6-8B02-E11A131FD545} = {C5137E14-A3BE-4804-B831-D909C2390103}

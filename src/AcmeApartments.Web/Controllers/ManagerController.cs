@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 namespace AcmeApartments.Web.Controllers
 {
     [Authorize(Roles = "Manager")]
-    public class ManagerAccountController : Controller
+    public class ManagerController : Controller
     {
         private readonly IMapper _mapper;
         private readonly IApplicationService _applicationService;
         private readonly IMaintenanceService _maintenanceService;
         private readonly IUserService _userService;
 
-        public ManagerAccountController(
+        public ManagerController(
             IMapper mapper,
             IApplicationService applicationService,
             IMaintenanceService maintenanceService,

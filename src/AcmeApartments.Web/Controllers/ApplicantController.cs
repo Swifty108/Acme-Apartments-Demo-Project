@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace AcmeApartments.Web.Controllers
 {
     [Authorize(Roles = "Applicant")]
-    public class ApplicantAccountController : Controller
+    public class ApplicantController : Controller
     {
         private readonly IApplicationService _applicationService;
         private readonly IMapper _mapper;
 
-        public ApplicantAccountController(
+        public ApplicantController(
             IApplicationService applicationService,
             IMapper mapper)
         {

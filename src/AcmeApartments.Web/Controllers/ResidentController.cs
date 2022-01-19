@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace AcmeApartments.Web.Controllers
 {
     [Authorize(Roles = "Resident")]
-    public class ResidentAccountController : Controller
+    public class ResidentController : Controller
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
@@ -20,8 +20,7 @@ namespace AcmeApartments.Web.Controllers
         private readonly IBillService _billService;
         private readonly IReviewService _reviewService;
 
-
-        public ResidentAccountController(
+        public ResidentController(
             IMapper mapper,
             IUserService userService,
             IMaintenanceService maintenanceService,
