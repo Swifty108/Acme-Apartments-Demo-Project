@@ -1,7 +1,7 @@
 ﻿@model List<AcmeApartments.DAL.Models.Application>
 @{
     ViewData["Title"] = "My Applications";
-    Layout = "~/Views/Shared/_ResidentAccountLayout.cshtml";
+    Layout = "~/Views/Shared/_ResidentLayout.cshtml";
 }
 
 <partial name="_LoggedInAsPartial" />
@@ -45,7 +45,7 @@
                                 {
                                     <span style="color: darkred"><i class="fa fa-ban"></i> Canceled</span>
                                 }
-                                else
+                                else if (application.Status == ApplicationStatus.PENDINGAPPROVAL)
                                 {
                                     <span><i class='fa fa-clock-o'></i> Pending Approval</span>
                                 }

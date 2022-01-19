@@ -53,7 +53,8 @@ namespace AcmeApartments.BLL.Services
                 AptNumber = applyViewModelDTO.AptNumber,
                 Area = applyViewModelDTO.Area,
                 DateApplied = DateTime.Now,
-                SSN = applyViewModelDTO.SSN
+                SSN = applyViewModelDTO.SSN,
+                Status = ApplicationStatus.PENDINGAPPROVAL
             };
             await _unitOfWork.ApplicationRepository.Insert(app);
             await _unitOfWork.Save();

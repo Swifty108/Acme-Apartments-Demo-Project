@@ -3,7 +3,7 @@
         $("#showError").hide();
         $.ajax({
             type: "GET",
-            url: "/residentaccount/getreqhistory",
+            url: "/resident/getreqhistory",
             async: true,
             dataType: "json",
             success: function (response) {

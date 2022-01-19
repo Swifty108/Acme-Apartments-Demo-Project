@@ -290,15 +290,15 @@ namespace AcmeApartments.Web.Areas.Identity.Pages.Account
 
                         if (roles.Contains("Applicant"))
                         {
-                            return Redirect("~/applicantaccount/index");
+                            return Redirect("~/applicant/index");
                         }
                         else if (roles.Contains("Resident"))
                         {
-                            return LocalRedirect("/residentaccount/index");
+                            return LocalRedirect("/resident/index");
                         }
                         else if (roles.Contains("Manager"))
                         {
-                            return LocalRedirect("/manageraccount/index");
+                            return LocalRedirect("/manager/index");
                         }
                     }
                 }

@@ -27,7 +27,7 @@
                 <div style="display:flex">
                     <div class="flex flex-row" style="display: inline-block; vertical-align: middle; padding: 10px;min-width: 200px;">@Model[i].FirstName @Model[i].LastName</div>
 
-                    <div style="display: inline-block; margin-left: 50px;"><a asp-controller="manageraccount" asp-action="showapplications" asp-route-userid="@Model[i].Id" asp-route-firstname="@Model[i].FirstName" asp-route-lastname="@Model[i].LastName" class="fp-applylink" style="margin-left: 40px;">View</a></div>
+                    <div style="display: inline-block; margin-left: 50px;"><a asp-controller="manager" asp-action="showapplications" asp-route-userid="@Model[i].Id" asp-route-firstname="@Model[i].FirstName" asp-route-lastname="@Model[i].LastName" class="fp-applylink" style="margin-left: 40px;">View</a></div>
                 </div>
             }
 

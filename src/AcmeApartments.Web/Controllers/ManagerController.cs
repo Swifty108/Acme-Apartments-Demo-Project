@@ -119,7 +119,6 @@ namespace AcmeApartments.Web.Controllers
             return View(application);
         }
 
-        // POST: ApplicantAccount/Delete/5
         [HttpPost, ActionName("AppCancel")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CancelApplicationConfirmed(ApplicationBindingModel applicationBindingModel)

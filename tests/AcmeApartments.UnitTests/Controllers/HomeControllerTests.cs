@@ -259,7 +259,7 @@ namespace AcmeApartments.Tests.Controllers
 
             // Assert
             Assert.Equal("index", viewResult.ActionName);
-            Assert.Equal("residentaccount", viewResult.ControllerName);
+            Assert.Equal("resident", viewResult.ControllerName);
         }
 
         [Fact]

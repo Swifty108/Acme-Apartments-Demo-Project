@@ -88,12 +88,12 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
 
                             <td>
 
-                                <a asp-controller="manageraccount" asp-action="viewapplication" asp-route-id="@application.ApplicationId">View</a>
+                                <a asp-controller="manager" asp-action="viewapplication" asp-route-id="@application.ApplicationId">View</a>
                             </td>
 
                             <td>
 
-                                <a asp-controller="manageraccount" asp-action="editapplication" asp-route-id="@application.ApplicationId">Edit</a>
+                                <a asp-controller="manager" asp-action="editapplication" asp-route-id="@application.ApplicationId">Edit</a>
                             </td>
 
                             @if (application.Status == ApplicationStatus.CANCELED)
@@ -108,7 +108,7 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
                             {
                                 <td>
 
-                                    <a asp-controller="manageraccount" asp-action="cancelapplication" asp-route-id="@application.ApplicationId">Cancel</a>
+                                    <a asp-controller="manager" asp-action="cancelapplication" asp-route-id="@application.ApplicationId">Cancel</a>
                                 </td>
                             }
 
@@ -118,7 +118,7 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
                                 <td>
                                     <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
-                                    <a asp-controller="manageraccount" asp-action="unapproveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Unapprove</a>
+                                    <a asp-controller="manager" asp-action="unapproveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Unapprove</a>
                                 </td>
 
                             }
@@ -128,7 +128,7 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
 
                                     <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
 
-                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Reapprove</a>
+                                    <a asp-controller="manager" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Reapprove</a>
                                 </td>
 
                             }
@@ -139,7 +139,7 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
                                 <td>
                                     <span style="color: darkred"><i class="fa fa-ban"></i> Canceled</span>
 
-                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;" asp-route-applicationId="@application.ApplicationId">Approve</a>
+                                    <a asp-controller="manager" asp-action="approveapplication" asp-all-route-data="@routeParams" style="margin-left:30px;" asp-route-applicationId="@application.ApplicationId">Approve</a>
                                 </td>
 
                             }
@@ -147,10 +147,21 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
                             {
                                 <td>
 
-                                    <a asp-controller="manageraccount" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId">Approve</a>
+                                    <a asp-controller="manager" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId">Approve</a>
                                 </td>
 
                             }
+
+                            @if (application.Status == ApplicationStatus.PENDINGAPPROVAL)
+                            {
+
+                                <td>
+                                    <a asp-controller="manager" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId">Approve</a>
+                                    <a asp-controller="manager" asp-action="unapproveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Unapprove</a>
+                                </td>
+
+                            }
+
                         </tr>
                     }
                 </tbody>
