@@ -1,4 +1,4 @@
-﻿using AcmeApartments.DAL.DTOs;
+﻿using AcmeApartments.BLL.DTOs;
 using System.Threading.Tasks;
 
 namespace AcmeApartments.BLL.Interfaces

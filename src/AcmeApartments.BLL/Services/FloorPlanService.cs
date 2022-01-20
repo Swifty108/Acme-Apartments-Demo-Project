@@ -1,5 +1,5 @@
-﻿using AcmeApartments.BLL.Interfaces;
-using AcmeApartments.DAL.DTOs;
+﻿using AcmeApartments.BLL.DTOs;
+using AcmeApartments.BLL.Interfaces;
 using AcmeApartments.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -9,7 +9,6 @@ namespace AcmeApartments.Web.BindingModels
         public string LastName { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
         public string Email { get; set; }
@@ -24,13 +23,14 @@ namespace AcmeApartments.Web.BindingModels
 
         public string AptNumber { get; set; }
         public string Area { get; set; }
+
+        [DataType(DataType.Currency)]
         public string Price { get; set; }
 
         [Required]
         public int? Income { get; set; }
 
         [Required]
-        [Display(Name = "Reason for Moving")]
         public string ReasonForMoving { get; set; }
 
         [Required]

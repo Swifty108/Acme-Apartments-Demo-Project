@@ -1,7 +1,7 @@
 ﻿using AcmeApartments.DAL.Models;
 using System.Collections.Generic;
 
-namespace AcmeApartments.DAL.DTOs
+namespace AcmeApartments.BLL.DTOs
 {
     public class ApplicationViewModelDTO
     {

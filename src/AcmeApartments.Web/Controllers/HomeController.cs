@@ -6,7 +6,6 @@ using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -109,8 +108,8 @@ namespace AcmeApartments.Web.Controllers
                 return View(applyViewModel);
             }
 
-            var applyViewModelDTO = _mapper.Map<ApplyViewModelDTO>(applyBindingModel);
-            var userRole = await _applicationService.Apply(applyViewModelDTO);
+            var applyModelDTO = _mapper.Map<ApplyModelDTO>(applyBindingModel);
+            var userRole = await _applicationService.Apply(applyModelDTO);
 
             return RedirectToAction("index", $"{userRole}", new { IsApplySuccess = true });
         }

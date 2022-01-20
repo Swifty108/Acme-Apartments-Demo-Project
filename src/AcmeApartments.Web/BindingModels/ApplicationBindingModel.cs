@@ -5,17 +5,10 @@ namespace AcmeApartments.Web.BindingModels
 {
     public class ApplicationBindingModel
     {
-        [Display(Name = "Applicantion ID")]
         public int ApplicationId { get; set; }
-
-        [Display(Name = "Applicant ID")]
         public string AptUserId { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
         [DataType(DataType.Date)]
-        [Display(Name = "Date Applied")]
         public DateTime DateApplied { get; set; }
 
         [Required]

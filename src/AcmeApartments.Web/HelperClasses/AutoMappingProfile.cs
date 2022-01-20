@@ -1,5 +1,4 @@
 ﻿using AcmeApartments.BLL.DTOs;
-using AcmeApartments.DAL.DTOs;
 using AcmeApartments.DAL.Models;
 using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
@@ -15,7 +14,7 @@ namespace AcmeApartments.Web.HelperClasses
 
             CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>().ReverseMap();
 
-            CreateMap<ApplyBindingModel, ApplyViewModelDTO>().ReverseMap();
+            CreateMap<ApplyBindingModel, ApplyModelDTO>().ReverseMap();
 
             CreateMap<ApplyBindingModel, ApplyViewModel>().ReverseMap();
 

@@ -40,7 +40,7 @@ namespace AcmeApartments.BLL.Services
             return apps.Count > 0;
         }
 
-        public async Task<string> Apply(ApplyViewModelDTO applyViewModelDTO)
+        public async Task<string> Apply(ApplyModelDTO applyViewModelDTO)
         {
             var user = await _userService.GetUser();
             var app = new Application
