@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AcmeApartments.BLL.DTOs
 {
-    public class NewMaintenanceRequestDTO
+    public class NewMaintenanceRequestDto
     {
         [Required]
         [MaxLength(10000)]

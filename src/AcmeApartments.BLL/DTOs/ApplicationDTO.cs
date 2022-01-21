@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AcmeApartments.BLL.DTOs
 {
-    public class ApplicationDTO
+    public class ApplicationDto
     {
         public int ApplicationId { get; set; }
         public string AptUserId { get; set; }

@@ -5,6 +5,6 @@ namespace AcmeApartments.BLL.Interfaces
 {
     public interface IFloorPlanService
     {
-        Task<FloorPlansViewModelDTO> GetFloorPlans();
+        Task<FloorPlansViewModelDto> GetFloorPlans();
     }
 }

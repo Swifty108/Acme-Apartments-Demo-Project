@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AcmeApartments.BLL.DTOs
 {
-    public class FloorPlanDTO
+    public class FloorPlanDto
     {
         [Key]
         public int Id { get; set; }

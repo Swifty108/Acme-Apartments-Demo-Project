@@ -8,6 +8,6 @@ namespace AcmeApartments.BLL.Interfaces
 {
     public interface IReviewService
     {
-        Task AddReview(ReviewViewModelDTO review);
+        Task AddReview(ReviewViewModelDto review);
     }
 }

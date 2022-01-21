@@ -5,8 +5,8 @@ namespace AcmeApartments.Web.ViewModels
 {
     public class FloorPlansViewModel
     {
-        public IList<FloorPlanDTO> StudioPlans { get; set; }
-        public IList<FloorPlanDTO> OneBedPlans { get; set; }
-        public IList<FloorPlanDTO> TwoBedPlans { get; set; }
+        public IList<FloorPlanDto> StudioPlans { get; set; }
+        public IList<FloorPlanDto> OneBedPlans { get; set; }
+        public IList<FloorPlanDto> TwoBedPlans { get; set; }
     }
 }

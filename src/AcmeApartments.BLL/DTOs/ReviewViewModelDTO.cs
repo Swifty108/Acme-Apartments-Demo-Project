@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AcmeApartments.BLL.DTOs
 {
-    public class ReviewViewModelDTO
+    public class ReviewViewModelDto
     {
         [Required]
         [MaxLength(10000)]

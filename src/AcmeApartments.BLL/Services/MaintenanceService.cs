@@ -31,7 +31,7 @@ namespace AcmeApartments.BLL.Services
             return maintenanceRecord;
         }
 
-        public async Task SubmitMaintenanceRequest(NewMaintenanceRequestDTO newMaintenanceRequestDTO)
+        public async Task SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO)
         {
             var user = await _userService.GetUser();
             var maintenanceRequest = new MaintenanceRequest
@@ -72,7 +72,7 @@ namespace AcmeApartments.BLL.Services
             return requests;
         }
 
-        public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestEditDTO maintenanceRequestEditDTO)
+        public async Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestEditDto maintenanceRequestEditDTO)
         {
             var maintenanceRecord = await _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceRequestEditDTO.Id);
 

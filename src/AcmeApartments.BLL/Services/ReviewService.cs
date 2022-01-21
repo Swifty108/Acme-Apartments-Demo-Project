@@ -18,7 +18,7 @@ namespace AcmeApartments.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task AddReview(ReviewViewModelDTO review)
+        public async Task AddReview(ReviewViewModelDto review)
         {
             var user = await _userService.GetUser();
             var newReview = new Review

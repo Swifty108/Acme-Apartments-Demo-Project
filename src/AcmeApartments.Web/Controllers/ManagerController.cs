@@ -94,7 +94,7 @@ namespace AcmeApartments.Web.Controllers
             {
                 try
                 {
-                    var applicationDTO = _mapper.Map<ApplicationDTO>(applicationBindingModel);
+                    var applicationDTO = _mapper.Map<ApplicationDto>(applicationBindingModel);
                     await _applicationService.EditApplication(applicationDTO);
                     var user = await _userService.GetUserByID(applicationBindingModel.AptUserId);
 
@@ -233,7 +233,7 @@ namespace AcmeApartments.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var maintenanceRequestEditDTO = _mapper.Map<MaintenanceRequestEditDTO>(maintenanceRequestEditBindingModel);
+                var maintenanceRequestEditDTO = _mapper.Map<MaintenanceRequestEditDto>(maintenanceRequestEditBindingModel);
 
                 await _maintenanceService.EditMaintenanceRequest(maintenanceRequestEditDTO);
                 TempData["MaintenanceEditSuccess"] = true;

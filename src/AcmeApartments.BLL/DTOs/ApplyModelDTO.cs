@@ -3,8 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AcmeApartments.BLL.DTOs
 {
-    public class ApplyModelDTO
+    public class ApplyModelDto
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         [Required]
         public string Occupation { get; set; }
 

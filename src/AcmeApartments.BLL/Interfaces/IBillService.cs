@@ -6,6 +6,6 @@ namespace AcmeApartments.BLL.Interfaces
 {
     public interface IBillService
     {
-        Task<PaymentsViewModelDTO> GetBills(AptUser user);
+        Task<PaymentsViewModelDto> GetBills(AptUser user);
     }
 }

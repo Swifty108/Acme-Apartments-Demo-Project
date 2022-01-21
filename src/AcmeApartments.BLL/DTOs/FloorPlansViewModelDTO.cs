@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AcmeApartments.BLL.DTOs
 {
-    public class FloorPlansViewModelDTO
+    public class FloorPlansViewModelDto
     {
         public IList<FloorPlan> StudioPlans { get; set; }
         public IList<FloorPlan> OneBedPlans { get; set; }

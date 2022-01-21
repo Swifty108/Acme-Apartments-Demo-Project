@@ -67,7 +67,7 @@ namespace AcmeApartments.Web.Controllers
             {
                 try
                 {
-                    var maintenanceRequestDTO = _mapper.Map<NewMaintenanceRequestDTO>(newMaintRequestBindingModel);
+                    var maintenanceRequestDTO = _mapper.Map<NewMaintenanceRequestDto>(newMaintRequestBindingModel);
                     await _maintenanceService.SubmitMaintenanceRequest(maintenanceRequestDTO);
 
                     TempData["MaintenanceSuccess"] = true;
@@ -119,7 +119,7 @@ namespace AcmeApartments.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var reviewViewModelDTO = _mapper.Map<ReviewViewModelDTO>(reviewBindingModel);
+                var reviewViewModelDTO = _mapper.Map<ReviewViewModelDto>(reviewBindingModel);
                 await _reviewService.AddReview(reviewViewModelDTO);
 
                 TempData["ReviewSuccess"] = true;

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AcmeApartments.BLL.DTOs
 {
-    internal class ApplicationEntityDTO
+    internal class ApplicationEntityDto
     {
         [Key]
         [Display(Name = "Applicantion ID")]

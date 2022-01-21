@@ -9,7 +9,6 @@ using AcmeApartments.Web.BindingModels;
 using Microsoft.AspNetCore.Mvc;
 using AcmeApartments.BLL.DTOs;
 using AcmeApartments.Tests.Fixtures;
-using AcmeApartments.DAL.DTOs;
 using AcmeApartments.DAL.Models;
 using System.Collections.Generic;
 
@@ -61,7 +60,7 @@ namespace AcmeApartments.Tests.Controllers
         {
             //Arrange
 
-            var floorPlansViewModelDTO = new FloorPlansViewModelDTO
+            var floorPlansViewModelDTO = new FloorPlansViewModelDto
             {
                 TwoBedPlans = new List<FloorPlan>()
                 {
@@ -76,9 +75,9 @@ namespace AcmeApartments.Tests.Controllers
 
             var floorPlansViewModel = new FloorPlansViewModel
             {
-                TwoBedPlans = new List<FloorPlanDTO>()
+                TwoBedPlans = new List<FloorPlanDto>()
                 {
-                    new FloorPlanDTO()
+                    new FloorPlanDto()
                     {
                         FloorPlanType = "2bed",
                         AptNumber = "4173-325"
@@ -244,14 +243,14 @@ namespace AcmeApartments.Tests.Controllers
                 LastName = "Narayanan"
             };
 
-            var applyViewModelDTO = new ApplyViewModelDTO()
+            var applyModelDto = new ApplyModelDto()
             {
                 FirstName = applyBindingModel.FirstName,
                 LastName = applyBindingModel.LastName
             };
 
-            _homeControllerFixture._mockMapper.Setup(x => x.Map<ApplyViewModelDTO>(applyBindingModel)).Returns(applyViewModelDTO);
-            _homeControllerFixture._mockApplicationService.Setup(x => x.Apply(It.IsAny<ApplyViewModelDTO>())).ReturnsAsync("resident");
+            _homeControllerFixture._mockMapper.Setup(x => x.Map<ApplyModelDto>(applyBindingModel)).Returns(applyModelDto);
+            _homeControllerFixture._mockApplicationService.Setup(x => x.Apply(It.IsAny<ApplyModelDto>())).ReturnsAsync("resident");
 
             // Act
             var result = await _homeControllerFixture.State.Apply(applyBindingModel);

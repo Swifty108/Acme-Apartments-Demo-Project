@@ -12,9 +12,9 @@ namespace AcmeApartments.Web.HelperClasses
         {
             //Home controller
 
-            CreateMap<FloorPlansViewModelDTO, FloorPlansViewModel>().ReverseMap();
+            CreateMap<FloorPlansViewModelDto, FloorPlansViewModel>().ReverseMap();
 
-            CreateMap<ApplyBindingModel, ApplyModelDTO>().ReverseMap();
+            CreateMap<ApplyBindingModel, ApplyModelDto>().ReverseMap();
 
             CreateMap<ApplyBindingModel, ApplyViewModel>().ReverseMap();
 
@@ -22,25 +22,25 @@ namespace AcmeApartments.Web.HelperClasses
 
             //Home Controller Logic Class
 
-            CreateMap<FloorPlan, FloorPlanDTO>().ReverseMap();
+            CreateMap<FloorPlan, FloorPlanDto>().ReverseMap();
 
             //Manager controller
 
             CreateMap<Application, ApplicationViewModel>().ReverseMap();
 
-            CreateMap<ApplicationDTO, ApplicationBindingModel>().ReverseMap();
+            CreateMap<ApplicationDto, ApplicationBindingModel>().ReverseMap();
 
             CreateMap<ApplicationBindingModel, ApplicationViewModel>().ReverseMap();
 
             CreateMap<MaintenanceRequest, MaintenanceRequestViewModel>().ReverseMap();
 
-            CreateMap<MaintenanceRequestEditDTO, MaintenanceRequestEditBindingModel>().ReverseMap();
+            CreateMap<MaintenanceRequestEditDto, MaintenanceRequestEditBindingModel>().ReverseMap();
 
             CreateMap<MaintenanceRequestEditBindingModel, MaintenanceRequestEditViewModel>().ReverseMap();
 
             //Manager Controller Logic
 
-            CreateMap<Application, ApplicationDTO>().ReverseMap();
+            CreateMap<Application, ApplicationDto>().ReverseMap();
 
             //Applicant controller
 
@@ -48,17 +48,17 @@ namespace AcmeApartments.Web.HelperClasses
 
             //Resident controller
 
-            CreateMap<ReviewBindingModel, ReviewViewModelDTO>().ReverseMap();
+            CreateMap<ReviewBindingModel, ReviewViewModelDto>().ReverseMap();
 
             CreateMap<ReviewBindingModel, ReviewViewModel>().ReverseMap();
 
             CreateMap<ResidentContactBindingModel, ResidentContactViewModel>().ReverseMap();
 
-            CreateMap<NewMaintenanceRequestDTO, NewMaintenanceRequestBindingModel>().ReverseMap();
+            CreateMap<NewMaintenanceRequestDto, NewMaintenanceRequestBindingModel>().ReverseMap();
 
             CreateMap<NewMaintenanceRequestBindingModel, NewMaintenanceRequestViewModel>().ReverseMap();
 
-            CreateMap<PaymentsViewModelDTO, PaymentsViewModel>().ReverseMap();
+            CreateMap<PaymentsViewModelDto, PaymentsViewModel>().ReverseMap();
         }
     }
 }

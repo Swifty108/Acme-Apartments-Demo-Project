@@ -17,13 +17,13 @@ namespace AcmeApartments.BLL.Services
         {
            _unitOfWork = unitOfWork;
         }
-        public async Task<FloorPlansViewModelDTO> GetFloorPlans()
+        public async Task<FloorPlansViewModelDto> GetFloorPlans()
         {
             var studioFloorPlans = await _unitOfWork.FloorPlanRepository.Get(filter: f => f.FloorPlanType == "Studio").ToListAsync();
             var oneBedFloorPlans = await _unitOfWork.FloorPlanRepository.Get(filter: f => f.FloorPlanType == "1Bed").ToListAsync();
             var twoBedFloorPlans = await _unitOfWork.FloorPlanRepository.Get(filter: f => f.FloorPlanType == "2Bed").ToListAsync();
 
-            var floorPlans = new FloorPlansViewModelDTO
+            var floorPlans = new FloorPlansViewModelDto
             {
                 StudioPlans = studioFloorPlans,
                 OneBedPlans = oneBedFloorPlans,

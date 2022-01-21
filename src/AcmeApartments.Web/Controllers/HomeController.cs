@@ -108,7 +108,7 @@ namespace AcmeApartments.Web.Controllers
                 return View(applyViewModel);
             }
 
-            var applyModelDTO = _mapper.Map<ApplyModelDTO>(applyBindingModel);
+            var applyModelDTO = _mapper.Map<ApplyModelDto>(applyBindingModel);
             var userRole = await _applicationService.Apply(applyModelDTO);
 
             return RedirectToAction("index", $"{userRole}", new { IsApplySuccess = true });

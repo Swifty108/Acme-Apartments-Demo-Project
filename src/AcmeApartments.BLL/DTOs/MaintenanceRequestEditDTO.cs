@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AcmeApartments.BLL.DTOs
 {
-    public class MaintenanceRequestEditDTO
+    public class MaintenanceRequestEditDto
     {
         public int Id { get; set; }
 

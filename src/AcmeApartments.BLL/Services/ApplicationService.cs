@@ -40,7 +40,7 @@ namespace AcmeApartments.BLL.Services
             return apps.Count > 0;
         }
 
-        public async Task<string> Apply(ApplyModelDTO applyViewModelDTO)
+        public async Task<string> Apply(ApplyModelDto applyViewModelDTO)
         {
             var user = await _userService.GetUser();
             var app = new Application
@@ -164,7 +164,7 @@ namespace AcmeApartments.BLL.Services
             }
         }
 
-        public async Task EditApplication(ApplicationDTO applicationDTO)
+        public async Task EditApplication(ApplicationDto applicationDTO)
         {
             var applicationEntity = _mapper.Map<Application>(applicationDTO);
             _unitOfWork.ApplicationRepository.Update(applicationEntity);

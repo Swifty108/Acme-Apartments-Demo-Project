@@ -20,7 +20,7 @@ namespace AcmeApartments.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PaymentsViewModelDTO> GetBills(AptUser user)
+        public async Task<PaymentsViewModelDto> GetBills(AptUser user)
         {
             var waterBills = await _unitOfWork.WaterBillRepository.Get().ToListAsync();
             var electricBills = await _unitOfWork.ElectricBillRepository.Get().ToListAsync();
@@ -53,7 +53,7 @@ namespace AcmeApartments.BLL.Services
                 await _unitOfWork.Save();
             }
 
-            return new PaymentsViewModelDTO
+            return new PaymentsViewModelDto
             {
                 User = user,
                 WaterBill = waterBills.Count == 0 ? newWaterBill : waterBills[0],

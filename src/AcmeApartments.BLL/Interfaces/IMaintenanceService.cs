@@ -16,12 +16,12 @@ namespace AcmeApartments.BLL.Interfaces
 
         Task<List<MaintenanceRequest>> GetMaintenanceUserRequests(string aptUserId);
 
-        Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestEditDTO maintenanceRequestEditDTO);
+        Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestEditDto maintenanceRequestEditDTO);
 
         Task ApproveMaintenanceRequest(string userId, int maintenanceId);
 
         Task UnApproveMaintenanceRequest(string userId, int maintenanceId);
 
-        Task SubmitMaintenanceRequest(NewMaintenanceRequestDTO newMaintenanceRequestDTO);
+        Task SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO);
     }
 }
