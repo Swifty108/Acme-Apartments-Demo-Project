@@ -30,4 +30,3 @@ The following is the flow of user interactions in the application:
 
 [Click here](https://acmeapartments.rajnarayanan.com) for a live demo of the project.
 
-
