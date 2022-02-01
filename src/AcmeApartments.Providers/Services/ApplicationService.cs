@@ -77,9 +77,9 @@ namespace AcmeApartments.Providers.Services
             return apps;
         }
 
-        public List<Application> GetApplications(string userId = "")
+        public List<Application> GetApplications(string userId = null)
         {
-            if (String.IsNullOrEmpty(userId))
+            if (string.IsNullOrWhiteSpace(userId))
             {
                 userId = _userService.GetUserId();
             }
@@ -110,7 +110,7 @@ namespace AcmeApartments.Providers.Services
             await _unitOfWork.Save();
 
             var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
-            IList<string> roles = await _userManager.GetRolesAsync(applicationUser);
+            var roles = await _userManager.GetRolesAsync(applicationUser);
 
             if (roles.Contains("Applicant"))
             {
@@ -143,7 +143,7 @@ namespace AcmeApartments.Providers.Services
             await _unitOfWork.Save();
 
             var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
-            IList<string> roles = await _userManager.GetRolesAsync(applicationUser);
+            var roles = await _userManager.GetRolesAsync(applicationUser);
 
             if (roles.Contains("Applicant"))
             {

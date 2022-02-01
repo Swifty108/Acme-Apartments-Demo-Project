@@ -39,8 +39,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public IActionResult Index(bool isApplySuccess = false)
         {
-            if (isApplySuccess)
-                ViewBag.ApplySuccess = isApplySuccess;
+            ViewBag.ApplySuccess = isApplySuccess;
 
             return View();
         }
