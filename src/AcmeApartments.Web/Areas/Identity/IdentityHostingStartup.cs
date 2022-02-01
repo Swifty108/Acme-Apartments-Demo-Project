@@ -1,6 +1,6 @@
 ﻿using System;
-using AcmeApartments.DAL.Data;
-using AcmeApartments.DAL.Identity;
+using AcmeApartments.Data.Provider.Data;
+using AcmeApartments.Data.Provider.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

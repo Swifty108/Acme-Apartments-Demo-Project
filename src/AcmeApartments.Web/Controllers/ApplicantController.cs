@@ -1,4 +1,4 @@
-﻿using AcmeApartments.BLL.Interfaces;
+﻿using AcmeApartments.Providers.Interfaces;
 using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;

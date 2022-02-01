@@ -1,4 +1,4 @@
-﻿using AcmeApartments.DAL.Models;
+﻿using AcmeApartments.Data.Provider.Entities;
 using System.Collections.Generic;
 
 namespace AcmeApartments.Web.ViewModels

@@ -1,6 +1,6 @@
-﻿using AcmeApartments.BLL.DTOs;
-using AcmeApartments.BLL.Interfaces;
-using AcmeApartments.DAL.Models;
+﻿using AcmeApartments.Providers.DTOs;
+using AcmeApartments.Providers.Interfaces;
+using AcmeApartments.Data.Provider.Entities;
 using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;

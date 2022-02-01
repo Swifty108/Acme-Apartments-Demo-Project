@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\AcmeApartments.BLL\AcmeApartments.BLL.csproj" />
-		<ProjectReference Include="..\AcmeApartments.DAL\AcmeApartments.DAL.csproj" />
+	  <ProjectReference Include="..\AcmeApartments.Data.Provider\AcmeApartments.Data.Provider.csproj" />
+	  <ProjectReference Include="..\AcmeApartments.Providers\AcmeApartments.Providers.csproj" />
 	</ItemGroup>
 </Project>

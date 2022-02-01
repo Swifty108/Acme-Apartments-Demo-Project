@@ -1,5 +1,5 @@
-﻿using AcmeApartments.DAL.Identity;
-using AcmeApartments.DAL.Models;
+﻿using AcmeApartments.Data.Provider.Identity;
+using AcmeApartments.Data.Provider.Entities;
 
 namespace AcmeApartments.Web.ViewModels
 {

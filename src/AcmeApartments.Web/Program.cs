@@ -1,4 +1,4 @@
-using AcmeApartments.DAL.Interfaces;
+using AcmeApartments.Data.Provider.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

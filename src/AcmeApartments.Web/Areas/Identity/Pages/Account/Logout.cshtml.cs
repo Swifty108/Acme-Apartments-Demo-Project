@@ -1,4 +1,4 @@
-﻿using AcmeApartments.DAL.Identity;
+﻿using AcmeApartments.Data.Provider.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

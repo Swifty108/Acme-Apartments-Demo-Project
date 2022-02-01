@@ -1,8 +1,7 @@
-using AcmeApartments.BLL.Interfaces;
-using AcmeApartments.BLL.Services;
-using AcmeApartments.DAL.Data;
-using AcmeApartments.DAL.Identity;
-using AcmeApartments.DAL.Interfaces;
+using AcmeApartments.Data.Provider.Data;
+using AcmeApartments.Data.Provider.DependencyInjection;
+using AcmeApartments.Data.Provider.Identity;
+using AcmeApartments.Providers.DependencyInjection;
 using AcmeApartments.Web.HelperClasses;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,19 +43,14 @@ namespace AcmeApartments.Web
                 options.Password.RequireUppercase = false;
             })
 
+
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders()
             .AddDefaultUI()
             .AddRoles<IdentityRole>();
 
-            services.AddTransient<IDbInitializer, DbInitializer>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IApplicationService, ApplicationService>();
-            services.AddTransient<IBillService, BillService>();
-            services.AddTransient<IFloorPlanService, FloorPlanService>();
-            services.AddTransient<IMaintenanceService, MaintenanceService>();
-            services.AddTransient<IReviewService, ReviewService>();
-            services.AddTransient<IUserService, UserService>();
+            services.AddDataProviderServiceCollection();
+            services.AddProvidersServiceCollection();
             services.AddHttpContextAccessor();
 
             services.AddControllersWithViews();

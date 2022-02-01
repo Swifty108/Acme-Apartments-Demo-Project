@@ -1,4 +1,4 @@
-﻿using AcmeApartments.DAL.Identity;
+﻿using AcmeApartments.Data.Provider.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
