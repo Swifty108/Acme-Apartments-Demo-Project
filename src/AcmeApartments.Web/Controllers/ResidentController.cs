@@ -62,28 +62,28 @@ namespace AcmeApartments.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitMaintenanceRequest(NewMaintenanceRequestBindingModel newMaintRequestBindingModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    var maintenanceRequestDTO = _mapper.Map<NewMaintenanceRequestDto>(newMaintRequestBindingModel);
-                    await _maintenanceService.SubmitMaintenanceRequest(maintenanceRequestDTO);
-
-                    TempData["MaintenanceSuccess"] = true;
-
-                    return RedirectToAction("SubmitMaintenanceRequest");
-                }
-                catch (Exception)
-                {
-                    TempData["MaintenanceSuccess"] = false;
-
-                    var maintRequestViewModel = _mapper.Map<NewMaintenanceRequestViewModel>(newMaintRequestBindingModel);
-                    return View(maintRequestViewModel);
-                }
+                var newMaintReqViewModel = _mapper.Map<NewMaintenanceRequestViewModel>(newMaintRequestBindingModel);
+                return View(newMaintReqViewModel);
             }
 
-            var newMaintReqViewModel = _mapper.Map<NewMaintenanceRequestViewModel>(newMaintRequestBindingModel);
-            return View(newMaintReqViewModel);
+            try
+            {
+                var maintenanceRequestDTO = _mapper.Map<NewMaintenanceRequestDto>(newMaintRequestBindingModel);
+                await _maintenanceService.SubmitMaintenanceRequest(maintenanceRequestDTO);
+
+                TempData["MaintenanceSuccess"] = true;
+
+                return RedirectToAction("SubmitMaintenanceRequest");
+            }
+            catch (Exception)
+            {
+                TempData["MaintenanceSuccess"] = false;
+
+                var maintRequestViewModel = _mapper.Map<NewMaintenanceRequestViewModel>(newMaintRequestBindingModel);
+                return View(maintRequestViewModel);
+            }
         }
 
         [HttpGet]
@@ -116,18 +116,18 @@ namespace AcmeApartments.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> WriteAReview(ReviewBindingModel reviewBindingModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var reviewViewModelDTO = _mapper.Map<ReviewViewModelDto>(reviewBindingModel);
-                await _reviewService.AddReview(reviewViewModelDTO);
+                var reviewViewModel = _mapper.Map<ReviewViewModel>(reviewBindingModel);
 
-                TempData["ReviewSuccess"] = true;
-                return RedirectToAction("WriteAReview");
+                return View(reviewViewModel);
             }
 
-            var reviewViewModel = _mapper.Map<ReviewViewModel>(reviewBindingModel);
+            var reviewViewModelDTO = _mapper.Map<ReviewViewModelDto>(reviewBindingModel);
+            await _reviewService.AddReview(reviewViewModelDTO);
 
-            return View(reviewViewModel);
+            TempData["ReviewSuccess"] = true;
+            return RedirectToAction("WriteAReview");
         }
 
         [HttpGet]
@@ -140,15 +140,15 @@ namespace AcmeApartments.Web.Controllers
         [HttpPost]
         public IActionResult ContactUs(ResidentContactBindingModel residentContanctBindingModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                TempData["ContactUsSuccess"] = true;
+                var residentContactViewModel = _mapper.Map<ResidentContactViewModel>(residentContanctBindingModel);
 
-                return RedirectToAction("ContactUs");
+                return View(residentContactViewModel);
             }
-            var residentContactViewModel = _mapper.Map<ResidentContactViewModel>(residentContanctBindingModel);
 
-            return View(residentContactViewModel);
+            TempData["ContactUsSuccess"] = true;
+            return RedirectToAction("ContactUs");
         }
     }
 }

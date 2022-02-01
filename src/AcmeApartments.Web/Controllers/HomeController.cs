@@ -104,7 +104,6 @@ namespace AcmeApartments.Web.Controllers
             if (!ModelState.IsValid)
             {
                 var applyViewModel = _mapper.Map<ApplyViewModel>(applyBindingModel);
-
                 return View(applyViewModel);
             }
 
@@ -127,15 +126,15 @@ namespace AcmeApartments.Web.Controllers
         [HttpPost]
         public IActionResult ContactUs(AppUserContactBindingModel appUserContactBindingModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                TempData["ContactUsSuccess"] = true;
-                return RedirectToAction("ContactUs");
+                var appUserContactViewModel = _mapper.Map<AppUserContactViewModel>(appUserContactBindingModel);
+
+                return View(appUserContactViewModel);
             }
 
-            var appUserContactViewModel = _mapper.Map<AppUserContactViewModel>(appUserContactBindingModel);
-
-            return View(appUserContactViewModel);
+            TempData["ContactUsSuccess"] = true;
+            return RedirectToAction("ContactUs");
         }
         
     }

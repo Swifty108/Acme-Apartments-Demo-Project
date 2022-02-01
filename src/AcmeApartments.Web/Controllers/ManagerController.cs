@@ -90,27 +90,26 @@ namespace AcmeApartments.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditApplication(ApplicationBindingModel applicationBindingModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    var applicationDTO = _mapper.Map<ApplicationDto>(applicationBindingModel);
-                    await _applicationService.EditApplication(applicationDTO);
-                    var user = await _userService.GetUserByID(applicationBindingModel.AptUserId);
-
-                    TempData["AppEditSuccess"] = true;
-                    return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
-                }
-                catch (Exception)
-                {
-                    TempData["AppEditFailed"] = true;
-                    throw;
-                }
+                var applicationViewModel = _mapper.Map<ApplicationViewModel>(applicationBindingModel);
+                return View(applicationViewModel);
             }
 
-            var applicationViewModel = _mapper.Map<ApplicationViewModel>(applicationBindingModel);
+            try
+            {
+                var applicationDTO = _mapper.Map<ApplicationDto>(applicationBindingModel);
+                await _applicationService.EditApplication(applicationDTO);
+                var user = await _userService.GetUserByID(applicationBindingModel.AptUserId);
 
-            return View(applicationViewModel);
+                TempData["AppEditSuccess"] = true;
+                return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
+            }
+            catch (Exception)
+            {
+                TempData["AppEditFailed"] = true;
+                throw;
+            }
         }
 
         public async Task<IActionResult> CancelApplication(int Id)
@@ -231,18 +230,17 @@ namespace AcmeApartments.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditMaintenanceRequest(MaintenanceRequestEditBindingModel maintenanceRequestEditBindingModel)
         {
-            if (ModelState.IsValid)
-            {
-                var maintenanceRequestEditDTO = _mapper.Map<MaintenanceRequestEditDto>(maintenanceRequestEditBindingModel);
-
-                await _maintenanceService.EditMaintenanceRequest(maintenanceRequestEditDTO);
-                TempData["MaintenanceEditSuccess"] = true;
-                return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = maintenanceRequestEditDTO.AptUserId});
+            if (!ModelState.IsValid)
+            {    
+                var maintenancRequestEditViewModel = _mapper.Map<MaintenanceRequestEditViewModel>(maintenanceRequestEditBindingModel);
+                return View(maintenancRequestEditViewModel);
             }
 
-            var maintenancRequestEditViewModel = _mapper.Map<MaintenanceRequestEditViewModel>(maintenanceRequestEditBindingModel);
+            var maintenanceRequestEditDTO = _mapper.Map<MaintenanceRequestEditDto>(maintenanceRequestEditBindingModel);
 
-            return View(maintenancRequestEditViewModel);
+            await _maintenanceService.EditMaintenanceRequest(maintenanceRequestEditDTO);
+            TempData["MaintenanceEditSuccess"] = true;
+            return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = maintenanceRequestEditDTO.AptUserId });
         }
 
         public async Task<IActionResult> ApproveMaintenanceRequest(string userId, int maintenanceId)

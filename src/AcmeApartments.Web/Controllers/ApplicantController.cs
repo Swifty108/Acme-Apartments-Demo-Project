@@ -26,7 +26,6 @@ namespace AcmeApartments.Web.Controllers
         public IActionResult Index(bool isApplySuccess = false)
         {
             ViewBag.ApplySuccess = isApplySuccess;
-
             return View();
         }
 
@@ -34,7 +33,6 @@ namespace AcmeApartments.Web.Controllers
         public IActionResult ShowApplications()
         {
             var userApplications = _applicationService.GetApplications(string.Empty);
-
             return View(userApplications);
         }
 
@@ -48,15 +46,14 @@ namespace AcmeApartments.Web.Controllers
         [HttpPost]
         public IActionResult ContactUs(ApplicantContactBindingModel applicantContanctBindingModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                TempData["ContactUsSuccess"] = true;
-                return RedirectToAction("ContactUs");
+                var applicantContactViewModel = _mapper.Map<ApplicantContactViewModel>(applicantContanctBindingModel);
+                return View(applicantContactViewModel);
             }
 
-            var applicantContactViewModel = _mapper.Map<ApplicantContactViewModel>(applicantContanctBindingModel);
-
-            return View(applicantContactViewModel);
+            TempData["ContactUsSuccess"] = true;
+            return RedirectToAction("ContactUs");
         }
     }
 }
