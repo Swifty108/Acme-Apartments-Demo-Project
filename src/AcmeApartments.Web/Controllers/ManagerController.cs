@@ -82,7 +82,6 @@ namespace AcmeApartments.Web.Controllers
             }
 
             var app = _mapper.Map<ApplicationViewModel>(application);
-
             return View(app);
         }
 
@@ -96,20 +95,20 @@ namespace AcmeApartments.Web.Controllers
                 return View(applicationViewModel);
             }
 
-            try
-            {
-                var applicationDTO = _mapper.Map<ApplicationDto>(applicationBindingModel);
-                await _applicationService.EditApplication(applicationDTO);
-                var user = await _userService.GetUserByID(applicationBindingModel.AptUserId);
+            var applicationDTO = _mapper.Map<ApplicationDto>(applicationBindingModel);
+            var isEditSuccess = await _applicationService.EditApplication(applicationDTO);
 
+            if (isEditSuccess)
+            {
                 TempData["AppEditSuccess"] = true;
-                return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
             }
-            catch (Exception)
+            else
             {
                 TempData["AppEditFailed"] = true;
-                throw;
             }
+
+            var user = await _userService.GetUserByID(applicationBindingModel.AptUserId);
+            return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
         public async Task<IActionResult> CancelApplication(int Id)
@@ -122,62 +121,60 @@ namespace AcmeApartments.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CancelApplicationConfirmed(ApplicationBindingModel applicationBindingModel)
         {
-            try
+            var isCancelSuccess = await _applicationService.CancelApplication(applicationBindingModel.ApplicationId);
+
+            if (isCancelSuccess)
             {
-                await _applicationService.CancelApplication(applicationBindingModel.ApplicationId);
+                TempData["AppCanceledSuccess"] = true;
             }
-            catch (Exception)
+            else
             {
                 TempData["AppCanceledFailed"] = true;
-                throw;
             }
 
             var app = await _applicationService.GetApplication(applicationBindingModel.ApplicationId);
             var user = await _userService.GetUserByID(app.AptUserId);
-            TempData["AppCanceledSuccess"] = true;
-
+           
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
         public async Task<IActionResult> ApproveApplication(ApproveAppBindingModel approveAppBindingModel)
         {
-            try
-            {
-                await _applicationService.ApproveApplication(
+            var isApproveSuccess = await _applicationService.ApproveApplication(
                     approveAppBindingModel.UserId,
                     approveAppBindingModel.ApplicationId,
                     approveAppBindingModel.SSN,
                     approveAppBindingModel.AptNumber,
                     approveAppBindingModel.AptPrice
                     );
+
+            if (isApproveSuccess)
+            {
+                TempData["AppApproveSuccess"] = true;
             }
-            catch (Exception)
+            else
             {
                 TempData["AppApproveFailed"] = true;
-                throw;
             }
 
             var user = await _userService.GetUserByID(approveAppBindingModel.UserId);
-
-            TempData["AppApproveSuccess"] = true;
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
-        public async Task<IActionResult> UnApproveApplication(string userId, string aptNumber, int applicationId)
+        public async Task<IActionResult> DenyApplication(string userId, string aptNumber, int applicationId)
         {
-            try
+            var isDenySuccess = await _applicationService.DenyApplication(userId, aptNumber, applicationId);
+
+            if (isDenySuccess)
             {
-                await _applicationService.UnApproveApplication(userId, aptNumber, applicationId);
+                TempData["AppDenySuccess"] = true;
             }
-            catch (Exception)
+            else
             {
-                TempData["AppUnApproveFailed"] = true;
-                throw;
+                TempData["AppDenyFailed"] = true;
             }
 
             var user = await _userService.GetUserByID(userId);
-
-            TempData["AppUnApproveSuccess"] = true;
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
@@ -245,37 +242,35 @@ namespace AcmeApartments.Web.Controllers
 
         public async Task<IActionResult> ApproveMaintenanceRequest(string userId, int maintenanceId)
         {
-            try
+            var isApproveSuccess = await _maintenanceService.ApproveMaintenanceRequest(userId, maintenanceId);
+
+            if (isApproveSuccess)
             {
-                await _maintenanceService.ApproveMaintenanceRequest(userId, maintenanceId);
+                TempData["MaintenanceApproveSuccess"] = true;
             }
-            catch (Exception)
+            else
             {
-                throw;
+                TempData["MaintenanceApproveFailed"] = true;
             }
 
             var user = await _userService.GetUserByID(userId);
-
-            TempData["MaintenanceApproveSuccess"] = true;
-
             return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = user.Id });
         }
 
-        public async Task<IActionResult> UnApproveMaintenanceRequest(string userId, int maintenanceId)
+        public async Task<IActionResult> DenyMaintenanceRequest(string userId, int maintenanceId)
         {
-            try
+            var isDenySuccess = await _maintenanceService.DenyMaintenanceRequest(userId, maintenanceId);
+
+            if (isDenySuccess)
             {
-                await _maintenanceService.UnApproveMaintenanceRequest(userId, maintenanceId);
+                TempData["MaintenanceDenySuccess"] = true;
             }
-            catch (Exception)
+            else
             {
-                throw;
+                TempData["MaintenanceDenyFailed"] = true;
             }
 
             var user = await _userService.GetUserByID(userId);
-
-            TempData["MaintenanceUnApproveSuccess"] = true;
-
             return RedirectToAction("ShowMaintenanceRequests", new { aptUserId = user.Id });
         }
 

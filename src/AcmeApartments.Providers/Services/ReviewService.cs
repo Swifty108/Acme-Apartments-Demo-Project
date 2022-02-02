@@ -18,17 +18,27 @@ namespace AcmeApartments.Providers.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task AddReview(ReviewViewModelDto review)
+        public async Task<bool> AddReview(ReviewViewModelDto review)
         {
-            var user = await _userService.GetUser();
-            var newReview = new Review
+            try
             {
-                User = user,
-                DateReviewed = DateTime.Now,
-                ReviewText = review.ReviewText
-            };
-            await _unitOfWork.ReviewRepository.Insert(newReview);
-            await _unitOfWork.Save();
+                var user = await _userService.GetUser();
+                var newReview = new Review
+                {
+                    User = user,
+                    DateReviewed = DateTime.Now,
+                    ReviewText = review.ReviewText
+                };
+                await _unitOfWork.ReviewRepository.Insert(newReview);
+                await _unitOfWork.Save();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+            
         }
     }
 }

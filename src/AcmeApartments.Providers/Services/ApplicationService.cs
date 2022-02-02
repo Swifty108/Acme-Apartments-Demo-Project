@@ -96,7 +96,7 @@ namespace AcmeApartments.Providers.Services
             return users;
         }
 
-        public async Task ApproveApplication(
+        public async Task<bool> ApproveApplication(
             string userId,
             int appId,
             string ssn,
@@ -104,82 +104,116 @@ namespace AcmeApartments.Providers.Services
             string aptPrice
             )
         {
-            var app = await _unitOfWork.ApplicationRepository.GetByID(appId);
-            app.Status = ApplicationStatus.APPROVED;
-            _unitOfWork.ApplicationRepository.Update(app);
-            await _unitOfWork.Save();
-
-            var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
-            var roles = await _userManager.GetRolesAsync(applicationUser);
-
-            if (roles.Contains("Applicant"))
+            try
             {
-                applicationUser.SSN = ssn;
-                applicationUser.AptNumber = aptNumber;
-                applicationUser.AptPrice = aptPrice;
-
-                _unitOfWork.AptUserRepository.Update(applicationUser);
-
-                await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
-                await _userManager.AddToRoleAsync(applicationUser, "Resident");
+                var app = await _unitOfWork.ApplicationRepository.GetByID(appId);
+                app.Status = ApplicationStatus.APPROVED;
+                _unitOfWork.ApplicationRepository.Update(app);
                 await _unitOfWork.Save();
 
-            }
-            else if (roles.Contains("Resident"))
-            {
-                applicationUser.AptNumber = aptNumber;
-                applicationUser.AptPrice = aptPrice;
+                var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
+                var roles = await _userManager.GetRolesAsync(applicationUser);
 
-                _unitOfWork.AptUserRepository.Update(applicationUser);
-                await _unitOfWork.Save();
+                if (roles.Contains("Applicant"))
+                {
+                    applicationUser.SSN = ssn;
+                    applicationUser.AptNumber = aptNumber;
+                    applicationUser.AptPrice = aptPrice;
+
+                    _unitOfWork.AptUserRepository.Update(applicationUser);
+
+                    await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
+                    await _userManager.AddToRoleAsync(applicationUser, "Resident");
+                    await _unitOfWork.Save();
+
+                }
+                else if (roles.Contains("Resident"))
+                {
+                    applicationUser.AptNumber = aptNumber;
+                    applicationUser.AptPrice = aptPrice;
+
+                    _unitOfWork.AptUserRepository.Update(applicationUser);
+                    await _unitOfWork.Save();
+                }
             }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public async Task UnApproveApplication(string userId, string aptNumber, int appId)
+        public async Task<bool> DenyApplication(string userId, string aptNumber, int appId)
         {
-            var app = await _unitOfWork.ApplicationRepository.GetByID(appId);
-            app.Status = ApplicationStatus.UNAPPROVED;
-            _unitOfWork.ApplicationRepository.Update(app);
-            await _unitOfWork.Save();
-
-            var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
-            var roles = await _userManager.GetRolesAsync(applicationUser);
-
-            if (roles.Contains("Applicant"))
+            try
             {
-                applicationUser.AptNumber = null;
-                applicationUser.AptPrice = null;
-
-                _unitOfWork.AptUserRepository.Update(applicationUser);
+                var app = await _unitOfWork.ApplicationRepository.GetByID(appId);
+                app.Status = ApplicationStatus.UNAPPROVED;
+                _unitOfWork.ApplicationRepository.Update(app);
                 await _unitOfWork.Save();
 
-            }
-            else if (roles.Contains("Resident"))
-            {
-                applicationUser.AptNumber = aptNumber;
-                applicationUser.AptPrice = "853";
+                var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
+                var roles = await _userManager.GetRolesAsync(applicationUser);
 
-                _unitOfWork.AptUserRepository.Update(applicationUser);
+                if (roles.Contains("Applicant"))
+                {
+                    applicationUser.AptNumber = null;
+                    applicationUser.AptPrice = null;
+
+                    _unitOfWork.AptUserRepository.Update(applicationUser);
+                    await _unitOfWork.Save();
+
+                }
+                else if (roles.Contains("Resident"))
+                {
+                    applicationUser.AptNumber = aptNumber;
+                    applicationUser.AptPrice = "853";
+
+                    _unitOfWork.AptUserRepository.Update(applicationUser);
+                    await _unitOfWork.Save();
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> EditApplication(ApplicationDto applicationDTO)
+        {
+            try
+            {
+                var applicationEntity = _mapper.Map<Application>(applicationDTO);
+                _unitOfWork.ApplicationRepository.Update(applicationEntity);
                 await _unitOfWork.Save();
             }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public async Task EditApplication(ApplicationDto applicationDTO)
+        public async Task<bool> CancelApplication(int ApplicationId)
         {
-            var applicationEntity = _mapper.Map<Application>(applicationDTO);
-            _unitOfWork.ApplicationRepository.Update(applicationEntity);
-            await _unitOfWork.Save();
-        }
+            try
+            {
+                var application = await GetApplication(ApplicationId);
+                application.Status = ApplicationStatus.CANCELED;
 
-        public async Task<Application> CancelApplication(int ApplicationId)
-        {
-            var application = await GetApplication(ApplicationId);
-            application.Status = ApplicationStatus.CANCELED;
+                _unitOfWork.ApplicationRepository.Update(application);
+                await _unitOfWork.Save();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
 
-            _unitOfWork.ApplicationRepository.Update(application);
-            await _unitOfWork.Save();
-
-            return application;
+            return true;
         }
     }
 }

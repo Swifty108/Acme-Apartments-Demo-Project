@@ -5,6 +5,6 @@ namespace AcmeApartments.Providers.Interfaces
 {
     public interface IReviewService
     {
-        Task AddReview(ReviewViewModelDto review);
+        Task<bool> AddReview(ReviewViewModelDto review);
     }
 }

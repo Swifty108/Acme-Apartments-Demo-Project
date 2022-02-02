@@ -9,7 +9,7 @@
     ViewBag.MaintenanceApproveFailedMessage = "There was an error approving the maintenance request. Please try again later.";
 
     ViewBag.MaintenanceUnApproveSuccessMessage = "The maintenance request was successfully unapproved!";
-    ViewBag.MaintenanceUnApproveFailedMessage = "There was an error unapproving the maintenance request. Please try again later.";
+    ViewBag.MaintenanceDenyFailedMessage = "There was an error denying the maintenance request. Please try again later.";
 
     ViewBag.MaintenanceCanceledSuccessMessage = "The maintenance request was successfully canceled!";
     ViewBag.MaintenanceCanceledFailedMessage = "There was an error cancelling the maintenance request. Please try again later.";
@@ -24,7 +24,7 @@ else if (ViewBag.MaintenanceApproveSuccess != null && ViewBag.MaintenanceApprove
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceApproveSuccessMessage" />
 }
-else if (ViewBag.MaintenanceUnApproveSuccess != null && ViewBag.MaintenanceUnApproveSuccess)
+else if (ViewBag.MaintenanceDenySuccess != null && ViewBag.MaintenanceDenySuccess)
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceUnApproveSuccessMessage" />
 }
@@ -40,9 +40,9 @@ else if (ViewBag.MaintenanceApproveFailed != null && ViewBag.MaintenanceApproveF
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceApproveFailedMessage" />
 }
-else if (ViewBag.MaintenanceUnApproveFailed != null && ViewBag.MaintenanceUnApproveFailed)
+else if (ViewBag.MaintenanceDenyFailed != null && ViewBag.MaintenanceDenyFailed)
 {
-    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceUnApproveFailedMessage" />
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceDenyFailedMessage" />
 }
 else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCanceledFailed)
 {
@@ -87,7 +87,7 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
                         <td>
                             <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
-                            <a asp-controller="manager" asp-action="unapprovemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">Unapprove</a>
+                            <a asp-controller="manager" asp-action="denymaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">Deny</a>
                         </td>
 
                     }
@@ -103,7 +103,7 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
                     {
                         <td>
                             <a asp-controller="manager" asp-action="approvemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id">Approve</a>
-                            <a asp-controller="manager" asp-action="unapprovemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">Unapprove</a>
+                            <a asp-controller="manager" asp-action="denymaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">Deny</a>
                         </td>
                     }
                 </tr>

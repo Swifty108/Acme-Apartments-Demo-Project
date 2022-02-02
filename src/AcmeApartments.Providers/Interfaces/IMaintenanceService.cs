@@ -18,10 +18,10 @@ namespace AcmeApartments.Providers.Interfaces
 
         Task<MaintenanceRequest> EditMaintenanceRequest(MaintenanceRequestEditDto maintenanceRequestEditDTO);
 
-        Task ApproveMaintenanceRequest(string userId, int maintenanceId);
+        Task<bool> ApproveMaintenanceRequest(string userId, int maintenanceId);
 
-        Task UnApproveMaintenanceRequest(string userId, int maintenanceId);
+        Task<bool> DenyMaintenanceRequest(string userId, int maintenanceId);
 
-        Task SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO);
+        Task<bool> SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO);
     }
 }

@@ -20,9 +20,9 @@ namespace AcmeApartments.Providers.Interfaces
         
         Task<List<AptUser>> GetApplicationUsers();
 
-        Task EditApplication(ApplicationDto applicationDTO);
+        Task<bool> EditApplication(ApplicationDto applicationDTO);
 
-        Task ApproveApplication(
+        Task<bool> ApproveApplication(
             string userId,
             int appId,
             string ssn,
@@ -30,8 +30,8 @@ namespace AcmeApartments.Providers.Interfaces
             string aptPrice
             );
 
-        Task UnApproveApplication(string userId, string aptNumber, int appId);
+        Task<bool> DenyApplication(string userId, string aptNumber, int appId);
 
-        Task<Application> CancelApplication(int ApplicationId);
+        Task<bool> CancelApplication(int ApplicationId);
     }
 }

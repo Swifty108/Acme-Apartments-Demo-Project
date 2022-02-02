@@ -31,20 +31,29 @@ namespace AcmeApartments.Providers.Services
             return maintenanceRecord;
         }
 
-        public async Task SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO)
+        public async Task<bool> SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO)
         {
-            var user = await _userService.GetUser();
-            var maintenanceRequest = new MaintenanceRequest
+            try
             {
-                User = user,
-                DateRequested = DateTime.Now,
-                isAllowedToEnter = newMaintenanceRequestDTO.isAllowedToEnter,
-                ProblemDescription = newMaintenanceRequestDTO.ProblemDescription,
-                Status = MaintenanceRequestStatus.PENDINGAPPROVAL
-            };
+                var user = await _userService.GetUser();
+                var maintenanceRequest = new MaintenanceRequest
+                {
+                    User = user,
+                    DateRequested = DateTime.Now,
+                    isAllowedToEnter = newMaintenanceRequestDTO.isAllowedToEnter,
+                    ProblemDescription = newMaintenanceRequestDTO.ProblemDescription,
+                    Status = MaintenanceRequestStatus.PENDINGAPPROVAL
+                };
 
-            await _unitOfWork.MaintenanceRequestRepository.Insert(maintenanceRequest);
-            await _unitOfWork.Save();
+                await _unitOfWork.MaintenanceRequestRepository.Insert(maintenanceRequest);
+                await _unitOfWork.Save();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public async Task<List<MaintenanceRequest>> GetMaintenanceRequests()
@@ -85,25 +94,43 @@ namespace AcmeApartments.Providers.Services
             return maintenanceRecord;
         }
 
-        public async Task ApproveMaintenanceRequest(string userId, int maintenanceId)
+        public async Task<bool> ApproveMaintenanceRequest(string userId, int maintenanceId)
         {
-            var maintenanceRecord = await _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceId);
+            try
+            {
+                var maintenanceRecord = await _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceId);
 
-            maintenanceRecord.AptUserId = userId;
-            maintenanceRecord.Status = MaintenanceRequestStatus.APPROVED;
+                maintenanceRecord.AptUserId = userId;
+                maintenanceRecord.Status = MaintenanceRequestStatus.APPROVED;
 
-            _unitOfWork.MaintenanceRequestRepository.Update(maintenanceRecord);
-            await _unitOfWork.Save();
+                _unitOfWork.MaintenanceRequestRepository.Update(maintenanceRecord);
+                await _unitOfWork.Save();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public async Task UnApproveMaintenanceRequest(string userId, int maintenanceId)
+        public async Task<bool> DenyMaintenanceRequest(string userId, int maintenanceId)
         {
-            var maintenanceRecord = await _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceId);
-            maintenanceRecord.AptUserId = userId;
-            maintenanceRecord.Status = MaintenanceRequestStatus.UNAPPROVED;
+            try
+            {
+                var maintenanceRecord = await _unitOfWork.MaintenanceRequestRepository.GetByID(maintenanceId);
+                maintenanceRecord.AptUserId = userId;
+                maintenanceRecord.Status = MaintenanceRequestStatus.UNAPPROVED;
 
-            _unitOfWork.MaintenanceRequestRepository.Update(maintenanceRecord);
-            await _unitOfWork.Save();
+                _unitOfWork.MaintenanceRequestRepository.Update(maintenanceRecord);
+                await _unitOfWork.Save();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

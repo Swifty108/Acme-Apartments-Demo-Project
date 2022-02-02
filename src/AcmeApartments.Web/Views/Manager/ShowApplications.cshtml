@@ -10,8 +10,8 @@
     ViewBag.AppApproveSuccessMessage = "The application was successfully approved!";
     ViewBag.AppApproveFailedMessage = "There was an error approving the application. Please try again later.";
 
-    ViewBag.AppUnApproveSuccessMessage = "The application was successfully unapproved!";
-    ViewBag.AppUnApproveFailedMessage = "There was an error unapproving the application. Please try again later.";
+    ViewBag.AppDenySuccessMessage = "The application was successfully unapproved!";
+    ViewBag.AppDenyFailedMessage = "There was an error denying the application. Please try again later.";
 
     ViewBag.AppCanceledSuccessMessage = "The application was successfully canceled!";
     ViewBag.AppCanceledFailedMessage = "There was an error cancelling the application. Please try again later.";
@@ -28,7 +28,7 @@ else if (ViewBag.AppApproveSuccess != null && ViewBag.AppApproveSuccess)
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.AppApproveSuccessMessage" />
 }
-else if (ViewBag.AppUnApproveSuccess != null && ViewBag.AppUnApproveSuccess)
+else if (ViewBag.AppDenySuccess != null && ViewBag.AppDenySuccess)
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.AppUnApproveSuccessMessage" />
 }
@@ -44,7 +44,7 @@ else if (ViewBag.AppApproveFailed != null && ViewBag.AppApproveFailed)
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.AppApproveFailedMessage" />
 }
-else if (ViewBag.AppUnApproveFailed != null && ViewBag.AppUnApproveFailed)
+else if (ViewBag.AppDenyFailed != null && ViewBag.AppDenyFailed)
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.AppUnApproveFailedMessage" />
 }
@@ -118,7 +118,7 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
                                 <td>
                                     <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
-                                    <a asp-controller="manager" asp-action="unapproveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Unapprove</a>
+                                    <a asp-controller="manager" asp-action="denyapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Deny</a>
                                 </td>
 
                             }
@@ -147,7 +147,7 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
                             {
                                 <td>
                                     <a asp-controller="manager" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId">Approve</a>
-                                    <a asp-controller="manager" asp-action="unapproveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Unapprove</a>
+                                    <a asp-controller="manager" asp-action="denyapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Deny</a>
                                 </td>
 
                             }

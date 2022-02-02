@@ -4,6 +4,7 @@
     ViewData["Title"] = "Write A Review";
     Layout = "~/Views/Shared/_ResidentLayout.cshtml";
     ViewBag.Success = "Your Review was submitted successfully!";
+    ViewBag.Failure = "There was a problem submitting your request. Please try again later!";
 }
 
 <partial name="_LoggedInAsPartial" />
@@ -16,6 +17,10 @@
 @if (ViewBag.ReviewSuccess != null && ViewBag.ReviewSuccess)
 {
     <partial name="_ViewsStatusMessage" model="ViewBag.Success" />
+}
+else if(ViewBag.ReviewFailure != null && ViewBag.ReviewFailure)
+{
+    <partial name="_ViewsStatusMessage" model="ViewBag.Failure" />
 }
 
 <div class="row">

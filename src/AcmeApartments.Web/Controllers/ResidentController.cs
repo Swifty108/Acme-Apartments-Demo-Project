@@ -68,22 +68,19 @@ namespace AcmeApartments.Web.Controllers
                 return View(newMaintReqViewModel);
             }
 
-            try
+            var maintenanceRequestDTO = _mapper.Map<NewMaintenanceRequestDto>(newMaintRequestBindingModel);
+            var isSubmitSuccess = await _maintenanceService.SubmitMaintenanceRequest(maintenanceRequestDTO);
+
+            if (isSubmitSuccess)
             {
-                var maintenanceRequestDTO = _mapper.Map<NewMaintenanceRequestDto>(newMaintRequestBindingModel);
-                await _maintenanceService.SubmitMaintenanceRequest(maintenanceRequestDTO);
-
                 TempData["MaintenanceSuccess"] = true;
-
-                return RedirectToAction("SubmitMaintenanceRequest");
             }
-            catch (Exception)
+            else
             {
                 TempData["MaintenanceSuccess"] = false;
-
-                var maintRequestViewModel = _mapper.Map<NewMaintenanceRequestViewModel>(newMaintRequestBindingModel);
-                return View(maintRequestViewModel);
             }
+                
+            return RedirectToAction("SubmitMaintenanceRequest");
         }
 
         [HttpGet]
@@ -119,14 +116,21 @@ namespace AcmeApartments.Web.Controllers
             if (!ModelState.IsValid)
             {
                 var reviewViewModel = _mapper.Map<ReviewViewModel>(reviewBindingModel);
-
                 return View(reviewViewModel);
             }
 
             var reviewViewModelDTO = _mapper.Map<ReviewViewModelDto>(reviewBindingModel);
-            await _reviewService.AddReview(reviewViewModelDTO);
+            var isAddReviewSuccess = await _reviewService.AddReview(reviewViewModelDTO);
 
-            TempData["ReviewSuccess"] = true;
+            if(isAddReviewSuccess)
+            {
+                TempData["ReviewSuccess"] = true;
+            }
+            else
+            {
+                TempData["ReviewFailure"] = true;
+            }
+
             return RedirectToAction("WriteAReview");
         }
 
@@ -143,7 +147,6 @@ namespace AcmeApartments.Web.Controllers
             if (!ModelState.IsValid)
             {
                 var residentContactViewModel = _mapper.Map<ResidentContactViewModel>(residentContanctBindingModel);
-
                 return View(residentContactViewModel);
             }
 
