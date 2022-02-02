@@ -13,6 +13,8 @@
     <div class="col-md-10">
         <form asp-action="editmaintenancerequest" id="maintenance-edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @Html.HiddenFor(x => x.Id)
+                        @Html.HiddenFor(x => x.AptUserId)
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="control-label" value="@Model.Id" disabled />

@@ -65,7 +65,7 @@ namespace AcmeApartments.Providers.Services
             var apps = await _unitOfWork.ApplicationRepository.Get(
                 filter: application => application.AptNumber == aptNumber
                 && application.AptUserId == userId
-                && (application.Status == null || application.Status == "Pending Approval" || application.Status == "Approved" || application.Status == "Denied")).ToListAsync();
+                && (application.Status == null || application.Status == "Pending Approval" || application.Status == "Approved" || application.Status == "UnApproved")).ToListAsync();
 
             return apps;
         }
