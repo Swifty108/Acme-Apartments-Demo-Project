@@ -21,7 +21,6 @@ namespace AcmeApartments.Providers.Services
         private readonly IUserService _userService;
         private readonly UserManager<AptUser> _userManager;
 
-
         public ApplicationService(
             IUnitOfWork unitOfWork,
             IUserService userService,
@@ -32,12 +31,11 @@ namespace AcmeApartments.Providers.Services
             _userManager = userManager;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-
         }
 
-        public async Task<bool> CheckifApplicationExists(string aptNumber, AptUser user)
+        public async Task<bool> CheckifApplicationExists(string aptNumber, string userId)
         {
-            var apps = await GetApplicationsByAptNumber(aptNumber, user);
+            var apps = await GetApplicationsByAptNumber(aptNumber, userId);
             return apps.Count > 0;
         }
 
@@ -62,12 +60,12 @@ namespace AcmeApartments.Providers.Services
 
         public async Task<Application> GetApplication(int applicationId) => await _unitOfWork.ApplicationRepository.GetByID(applicationId);
 
-        public async Task<List<Application>> GetApplicationsByAptNumber(string aptNumber, AptUser user)
+        public async Task<List<Application>> GetApplicationsByAptNumber(string aptNumber, string userId)
         {
             var apps = await _unitOfWork.ApplicationRepository.Get(
                 filter: application => application.AptNumber == aptNumber
-                && application.AptUserId == user.Id
-                && (application.Status == null || application.Status == "Approved")).ToListAsync();
+                && application.AptUserId == userId
+                && (application.Status == null || application.Status == "Pending Approval" || application.Status == "Approved" || application.Status == "Denied")).ToListAsync();
 
             return apps;
         }
@@ -113,7 +111,6 @@ namespace AcmeApartments.Providers.Services
                     await _userManager.RemoveFromRoleAsync(user, "Applicant");
                     await _userManager.AddToRoleAsync(user, "Resident");
                     await _unitOfWork.Save();
-
                 }
                 else if (roles.Contains("Resident"))
                 {
@@ -151,7 +148,6 @@ namespace AcmeApartments.Providers.Services
 
                     _unitOfWork.AptUserRepository.Update(applicationUser);
                     await _unitOfWork.Save();
-
                 }
                 else if (roles.Contains("Resident"))
                 {

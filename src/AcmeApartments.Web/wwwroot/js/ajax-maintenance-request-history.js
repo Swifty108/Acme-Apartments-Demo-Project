@@ -55,9 +55,9 @@
                             toAppend = "<td> <span style='color: darkgreen'><i class='fa fa-check text-success'></i> Approved</span></td>"
                         }
                         else if (value == "UnApproved") {
-                            toAppend = "<td><span style='color: darkred'><i class='fa fa-ban'></i> Unapproved</span></td>"
+                            toAppend = "<td><span style='color: darkred'><i class='fa fa-ban'></i> Denied</span></td>"
                         }
-                        else if(value == "Pending Approval"){
+                        else if (value == "Pending Approval") {
                             toAppend = "<td><i class='fa fa-clock-o'></i> Pending Approval</td>"
                         }
 

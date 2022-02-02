@@ -20,12 +20,13 @@ namespace AcmeApartments.Web.Controllers
         private readonly UserManager<AptUser> _userManager;
         private readonly IApplicationService _applicationService;
         private readonly IFloorPlanService _floorPlanService;
+
         public HomeController(
             IWebUserService webUserService,
             IApplicationService applicationService,
             IFloorPlanService floorPlansService,
             UserManager<AptUser> userManager,
-            IMapper mapper) 
+            IMapper mapper)
         {
             _userManager = userManager;
             _webUserService = webUserService;
@@ -65,7 +66,7 @@ namespace AcmeApartments.Web.Controllers
         public async Task<IActionResult> Apply(ApplyReturnUrlBindingModel applyReturnUrlBindingModel)
         {
             var user = await _webUserService.GetUser();
-            var isAppliationExists = await _applicationService.CheckifApplicationExists(applyReturnUrlBindingModel.AptNumber, user);
+            var isAppliationExists = await _applicationService.CheckifApplicationExists(applyReturnUrlBindingModel.AptNumber, user.Id);
 
             if (isAppliationExists)
             {
@@ -144,6 +145,5 @@ namespace AcmeApartments.Web.Controllers
             TempData["ContactUsSuccess"] = true;
             return RedirectToAction("ContactUs");
         }
-        
     }
 }

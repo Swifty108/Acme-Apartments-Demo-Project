@@ -8,7 +8,7 @@
     ViewBag.MaintenanceApproveSuccessMessage = "The maintenance request was successfully approved!";
     ViewBag.MaintenanceApproveFailedMessage = "There was an error approving the maintenance request. Please try again later.";
 
-    ViewBag.MaintenanceUnApproveSuccessMessage = "The maintenance request was successfully unapproved!";
+    ViewBag.MaintenanceUnApproveSuccessMessage = "The maintenance request was successfully denied!";
     ViewBag.MaintenanceDenyFailedMessage = "There was an error denying the maintenance request. Please try again later.";
 
     ViewBag.MaintenanceCanceledSuccessMessage = "The maintenance request was successfully canceled!";
@@ -94,7 +94,7 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
                     else if (maintenancerecord.Status == MaintenanceRequestStatus.UNAPPROVED)
                     {
                         <td>
-                            <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
+                            <span style="color: darkred"><i class="fa fa-ban"></i> Denied</span>
 
                             <a asp-controller="manager" asp-action="approvemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">ReApprove</a>
                         </td>

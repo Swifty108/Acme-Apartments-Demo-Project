@@ -10,7 +10,7 @@
     ViewBag.AppApproveSuccessMessage = "The application was successfully approved!";
     ViewBag.AppApproveFailedMessage = "There was an error approving the application. Please try again later.";
 
-    ViewBag.AppDenySuccessMessage = "The application was successfully unapproved!";
+    ViewBag.AppDenySuccessMessage = "The application was successfully denied!";
     ViewBag.AppDenyFailedMessage = "There was an error denying the application. Please try again later.";
 
     ViewBag.AppCanceledSuccessMessage = "The application was successfully canceled!";
@@ -126,7 +126,7 @@ else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
                             {
                                 <td>
 
-                                    <span style="color: darkred"><i class="fa fa-ban"></i> Unapproved</span>
+                                    <span style="color: darkred"><i class="fa fa-ban"></i> Denied</span>
 
                                     <a asp-controller="manager" asp-action="approveapplication" asp-all-route-data="@routeParams" asp-route-applicationId="@application.ApplicationId" style="margin-left:30px;">Reapprove</a>
                                 </td>
