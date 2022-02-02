@@ -139,7 +139,7 @@ namespace AcmeApartments.Web.Controllers
 
             var app = await _applicationService.GetApplication(applicationBindingModel.ApplicationId);
             var user = await _userService.GetUserByID(app.AptUserId);
-           
+
             return RedirectToAction("ShowApplications", new { userId = user.Id, firstName = user.FirstName, lastName = user.LastName });
         }
 
@@ -237,7 +237,7 @@ namespace AcmeApartments.Web.Controllers
         public async Task<IActionResult> EditMaintenanceRequest(MaintenanceRequestEditBindingModel maintenanceRequestEditBindingModel)
         {
             if (!ModelState.IsValid)
-            {    
+            {
                 var maintenancRequestEditViewModel = _mapper.Map<MaintenanceRequestEditViewModel>(maintenanceRequestEditBindingModel);
                 return View(maintenancRequestEditViewModel);
             }

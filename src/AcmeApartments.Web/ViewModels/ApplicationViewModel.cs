@@ -5,7 +5,7 @@ namespace AcmeApartments.Web.ViewModels
 {
     public class ApplicationViewModel
     {
-        [Display(Name = "Applicantion ID")]
+        [Display(Name = "Application ID")]
         public int ApplicationId { get; set; }
 
         [Display(Name = "Applicant ID")]

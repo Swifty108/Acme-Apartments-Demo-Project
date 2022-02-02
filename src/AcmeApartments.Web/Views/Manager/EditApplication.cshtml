@@ -25,6 +25,11 @@
         <form asp-action="EditApplication" id="editapplication">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(x => x.Status)
+            @Html.HiddenFor(x => x.ApplicationId)
+            @Html.HiddenFor(x => x.AptUserId)
+            @Html.HiddenFor(x => x.AptNumber)
+            @Html.HiddenFor(x => x.Area)
+            @Html.HiddenFor(x => x.Price)
             <div class="form-group">
                 <label asp-for="ApplicationId" class="control-label"></label>
                 <input asp-for="ApplicationId" class="form-control" disabled />
