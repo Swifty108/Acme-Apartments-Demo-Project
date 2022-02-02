@@ -4,6 +4,7 @@ using AcmeApartments.Data.Provider.Interfaces;
 using AcmeApartments.Data.Provider.Entities;
 using System;
 using System.Threading.Tasks;
+using AcmeApartments.Data.Provider.Identity;
 
 namespace AcmeApartments.Providers.Services
 {
@@ -18,11 +19,10 @@ namespace AcmeApartments.Providers.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> AddReview(ReviewViewModelDto review)
+        public async Task<bool> AddReview(ReviewViewModelDto review, AptUser user)
         {
             try
-            {
-                var user = await _userService.GetUser();
+            { 
                 var newReview = new Review
                 {
                     User = user,

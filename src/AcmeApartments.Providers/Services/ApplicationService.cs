@@ -17,9 +17,10 @@ namespace AcmeApartments.Providers.Services
     public class ApplicationService : IApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
         private readonly UserManager<AptUser> _userManager;
+
 
         public ApplicationService(
             IUnitOfWork unitOfWork,
@@ -34,15 +35,14 @@ namespace AcmeApartments.Providers.Services
 
         }
 
-        public async Task<bool> CheckifApplicationExists(string aptNumber)
+        public async Task<bool> CheckifApplicationExists(string aptNumber, AptUser user)
         {
-            var apps = await GetApplicationsByAptNumber(aptNumber);
+            var apps = await GetApplicationsByAptNumber(aptNumber, user);
             return apps.Count > 0;
         }
 
-        public async Task<string> Apply(ApplyModelDto applyViewModelDTO)
+        public async Task Apply(ApplyModelDto applyViewModelDTO, AptUser user)
         {
-            var user = await _userService.GetUser();
             var app = new Application
             {
                 AptUserId = user.Id,
@@ -58,32 +58,22 @@ namespace AcmeApartments.Providers.Services
             };
             await _unitOfWork.ApplicationRepository.Insert(app);
             await _unitOfWork.Save();
-
-            var userRole = _userManager.GetRolesAsync(user).Result.FirstOrDefault();
-            return userRole;
         }
 
         public async Task<Application> GetApplication(int applicationId) => await _unitOfWork.ApplicationRepository.GetByID(applicationId);
 
-        public async Task<List<Application>> GetApplicationsByAptNumber(string aptNumber)
+        public async Task<List<Application>> GetApplicationsByAptNumber(string aptNumber, AptUser user)
         {
-            var user = _userService.GetUser();
-
             var apps = await _unitOfWork.ApplicationRepository.Get(
                 filter: application => application.AptNumber == aptNumber
-                && application.AptUserId == user.Result.Id
+                && application.AptUserId == user.Id
                 && (application.Status == null || application.Status == "Approved")).ToListAsync();
 
             return apps;
         }
 
-        public List<Application> GetApplications(string userId = null)
+        public List<Application> GetApplications(string userId)
         {
-            if (string.IsNullOrWhiteSpace(userId))
-            {
-                userId = _userService.GetUserId();
-            }
-
             return _unitOfWork.ApplicationRepository.Get(filter: application => application.AptUserId == userId, includeProperties: "User").ToList();
         }
 
@@ -97,11 +87,12 @@ namespace AcmeApartments.Providers.Services
         }
 
         public async Task<bool> ApproveApplication(
-            string userId,
+            AptUser user,
             int appId,
             string ssn,
             string aptNumber,
-            string aptPrice
+            string aptPrice,
+            IList<string> roles
             )
         {
             try
@@ -111,28 +102,25 @@ namespace AcmeApartments.Providers.Services
                 _unitOfWork.ApplicationRepository.Update(app);
                 await _unitOfWork.Save();
 
-                var applicationUser = await _unitOfWork.AptUserRepository.GetByID(userId);
-                var roles = await _userManager.GetRolesAsync(applicationUser);
-
                 if (roles.Contains("Applicant"))
                 {
-                    applicationUser.SSN = ssn;
-                    applicationUser.AptNumber = aptNumber;
-                    applicationUser.AptPrice = aptPrice;
+                    user.SSN = ssn;
+                    user.AptNumber = aptNumber;
+                    user.AptPrice = aptPrice;
 
-                    _unitOfWork.AptUserRepository.Update(applicationUser);
+                    _unitOfWork.AptUserRepository.Update(user);
 
-                    await _userManager.RemoveFromRoleAsync(applicationUser, "Applicant");
-                    await _userManager.AddToRoleAsync(applicationUser, "Resident");
+                    await _userManager.RemoveFromRoleAsync(user, "Applicant");
+                    await _userManager.AddToRoleAsync(user, "Resident");
                     await _unitOfWork.Save();
 
                 }
                 else if (roles.Contains("Resident"))
                 {
-                    applicationUser.AptNumber = aptNumber;
-                    applicationUser.AptPrice = aptPrice;
+                    user.AptNumber = aptNumber;
+                    user.AptPrice = aptPrice;
 
-                    _unitOfWork.AptUserRepository.Update(applicationUser);
+                    _unitOfWork.AptUserRepository.Update(user);
                     await _unitOfWork.Save();
                 }
             }

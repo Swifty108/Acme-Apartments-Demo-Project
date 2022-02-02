@@ -8,27 +8,28 @@ namespace AcmeApartments.Providers.Interfaces
 {
     public interface IApplicationService
     {
-        Task<bool> CheckifApplicationExists(string aptNumber);
+        Task<bool> CheckifApplicationExists(string aptNumber, AptUser user);
 
-        Task<string> Apply(ApplyModelDto applyViewModelDTO);
+        public Task Apply(ApplyModelDto applyViewModelDTO, AptUser user);
 
         Task<Application> GetApplication(int applicationId);
         
         List<Application> GetApplications(string userId);
         
-        Task<List<Application>> GetApplicationsByAptNumber(string aptNumber);
+        Task<List<Application>> GetApplicationsByAptNumber(string aptNumber, AptUser user);
         
         Task<List<AptUser>> GetApplicationUsers();
 
         Task<bool> EditApplication(ApplicationDto applicationDTO);
 
-        Task<bool> ApproveApplication(
-            string userId,
+        public Task<bool> ApproveApplication(
+            AptUser user,
             int appId,
             string ssn,
             string aptNumber,
-            string aptPrice
-            );
+            string aptPrice,
+            IList<string> roles
+        );
 
         Task<bool> DenyApplication(string userId, string aptNumber, int appId);
 

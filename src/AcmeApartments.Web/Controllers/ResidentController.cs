@@ -14,7 +14,7 @@ namespace AcmeApartments.Web.Controllers
     public class ResidentController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IUserService _userService;
+        private readonly IWebUserService _webUserService;
         private readonly IApplicationService _applicationService;
         private readonly IMaintenanceService _maintenanceService;
         private readonly IBillService _billService;
@@ -22,13 +22,13 @@ namespace AcmeApartments.Web.Controllers
 
         public ResidentController(
             IMapper mapper,
-            IUserService userService,
+            IWebUserService webUserService,
             IMaintenanceService maintenanceService,
             IApplicationService applicationService,
             IBillService billService,
             IReviewService reviewService)
         {
-            _userService = userService;
+            _webUserService = webUserService;
             _applicationService = applicationService;
             _billService = billService;
             _reviewService = reviewService;
@@ -47,7 +47,8 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public IActionResult ShowApplications()
         {
-            var applications = _applicationService.GetApplications(string.Empty);
+            var userId = _webUserService.GetUserId();
+            var applications = _applicationService.GetApplications(userId);
             return View(applications);
         }
 
@@ -69,7 +70,8 @@ namespace AcmeApartments.Web.Controllers
             }
 
             var maintenanceRequestDTO = _mapper.Map<NewMaintenanceRequestDto>(newMaintRequestBindingModel);
-            var isSubmitSuccess = await _maintenanceService.SubmitMaintenanceRequest(maintenanceRequestDTO);
+            var user = await _webUserService.GetUser();
+            var isSubmitSuccess = await _maintenanceService.SubmitMaintenanceRequest(maintenanceRequestDTO, user);
 
             if (isSubmitSuccess)
             {
@@ -86,7 +88,8 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<JsonResult> GetReqHistory()
         {
-            var maintenanceRequests = await _maintenanceService.GetMaintenanceRequests();
+            var userId = _webUserService.GetUserId();
+            var maintenanceRequests = await _maintenanceService.GetMaintenanceRequests(userId);
             return Json(new
             {
                 list = maintenanceRequests
@@ -96,7 +99,7 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowPayments()
         {
-            var user = await _userService.GetUser();
+            var user = await _webUserService.GetUser();
             var payments = await _billService.GetBills(user);
             var payViewModel = _mapper.Map<PaymentsViewModel>(payments);
 
@@ -120,7 +123,8 @@ namespace AcmeApartments.Web.Controllers
             }
 
             var reviewViewModelDTO = _mapper.Map<ReviewViewModelDto>(reviewBindingModel);
-            var isAddReviewSuccess = await _reviewService.AddReview(reviewViewModelDTO);
+            var user = await _webUserService.GetUser();
+            var isAddReviewSuccess = await _reviewService.AddReview(reviewViewModelDTO, user);
 
             if(isAddReviewSuccess)
             {

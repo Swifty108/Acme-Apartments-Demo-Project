@@ -177,7 +177,7 @@ namespace AcmeApartments.Tests.Controllers
         public async Task ApplyGet_ValidBidingModel_ViewShouldReturnValidApplyViewModel()
         {
             // Arrange
-            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>())).ReturnsAsync(false);
+            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>(), It.IsAny<AptUser>())).ReturnsAsync(false);
 
             var user = new AptUser
             {
@@ -215,7 +215,7 @@ namespace AcmeApartments.Tests.Controllers
         public async Task ApplyGet_ApplicationExists_ShouldReturnValidRedirectToActionResult()
         {
             // Arrange
-            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>())).ReturnsAsync(true);
+            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>(), It.IsAny<AptUser>())).ReturnsAsync(true);
 
             var applyReturnUrlBindingModel = new ApplyReturnUrlBindingModel()
             {
@@ -249,9 +249,14 @@ namespace AcmeApartments.Tests.Controllers
                 LastName = applyBindingModel.LastName
             };
 
-            _homeControllerFixture._mockMapper.Setup(x => x.Map<ApplyModelDto>(applyBindingModel)).Returns(applyModelDto);
-            _homeControllerFixture._mockApplicationService.Setup(x => x.Apply(It.IsAny<ApplyModelDto>())).ReturnsAsync("resident");
+            var roles = new List<string>
+            {
+                "resident"
+            };
 
+            _homeControllerFixture._mockMapper.Setup(x => x.Map<ApplyModelDto>(applyBindingModel)).Returns(applyModelDto);
+            _homeControllerFixture._mockApplicationService.Setup(x => x.Apply(It.IsAny<ApplyModelDto>(), It.IsAny<AptUser>()));
+            _homeControllerFixture._mockUserManager.Setup(x => x.GetRolesAsync(It.IsAny<AptUser>())).ReturnsAsync(roles);
             // Act
             var result = await _homeControllerFixture.State.Apply(applyBindingModel);
             var viewResult = Assert.IsType<RedirectToActionResult>(result);

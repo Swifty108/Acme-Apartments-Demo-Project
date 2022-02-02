@@ -8,22 +8,27 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using AcmeApartments.Data.Provider.Identity;
 
 namespace AcmeApartments.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IUserService _userService;
+        private readonly IWebUserService _webUserService;
+        private readonly UserManager<AptUser> _userManager;
         private readonly IApplicationService _applicationService;
         private readonly IFloorPlanService _floorPlanService;
         public HomeController(
-            IUserService userService,
+            IWebUserService webUserService,
             IApplicationService applicationService,
             IFloorPlanService floorPlansService,
+            UserManager<AptUser> userManager,
             IMapper mapper) 
         {
-            _userService = userService;
+            _userManager = userManager;
+            _webUserService = webUserService;
             _floorPlanService = floorPlansService;
             _applicationService = applicationService;
             _mapper = mapper;
@@ -59,7 +64,8 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Apply(ApplyReturnUrlBindingModel applyReturnUrlBindingModel)
         {
-            var isAppliationExists = await _applicationService.CheckifApplicationExists(applyReturnUrlBindingModel.AptNumber);
+            var user = await _webUserService.GetUser();
+            var isAppliationExists = await _applicationService.CheckifApplicationExists(applyReturnUrlBindingModel.AptNumber, user);
 
             if (isAppliationExists)
             {
@@ -67,7 +73,6 @@ namespace AcmeApartments.Web.Controllers
             }
 
             ModelState.Clear();
-            var user = await _userService.GetUser();
 
             var applyViewModel = new ApplyViewModel
             {
@@ -108,9 +113,12 @@ namespace AcmeApartments.Web.Controllers
             }
 
             var applyModelDTO = _mapper.Map<ApplyModelDto>(applyBindingModel);
-            var userRole = await _applicationService.Apply(applyModelDTO);
+            var user = await _webUserService.GetUser();
+            await _applicationService.Apply(applyModelDTO, user);
 
-            return RedirectToAction("index", $"{userRole}", new { IsApplySuccess = true });
+            var userRole = await _userManager.GetRolesAsync(user);
+
+            return RedirectToAction("index", $"{userRole[0]}", new { IsApplySuccess = true });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

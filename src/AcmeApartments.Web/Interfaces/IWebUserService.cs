@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 
 namespace AcmeApartments.Providers.Interfaces
 {
-    public interface IUserService
+    public interface IWebUserService
     {
-        public Task<AptUser> GetUserByID(string userId);
+        public Task<AptUser> GetUser();
+        public string GetUserId();
     }
 }

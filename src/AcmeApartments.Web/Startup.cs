@@ -2,7 +2,9 @@ using AcmeApartments.Data.Provider.Data;
 using AcmeApartments.Data.Provider.DependencyInjection;
 using AcmeApartments.Data.Provider.Identity;
 using AcmeApartments.Providers.DependencyInjection;
+using AcmeApartments.Providers.Interfaces;
 using AcmeApartments.Web.HelperClasses;
+using AcmeApartments.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -51,6 +53,7 @@ namespace AcmeApartments.Web
 
             services.AddDataProviderServiceCollection();
             services.AddProvidersServiceCollection();
+            services.AddScoped<IWebUserService, WebUserService>();
             services.AddHttpContextAccessor();
 
             services.AddControllersWithViews();

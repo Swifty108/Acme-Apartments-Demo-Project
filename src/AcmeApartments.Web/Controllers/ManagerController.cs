@@ -1,9 +1,11 @@
-﻿using AcmeApartments.Providers.DTOs;
+﻿using AcmeApartments.Data.Provider.Identity;
+using AcmeApartments.Providers.DTOs;
 using AcmeApartments.Providers.Interfaces;
 using AcmeApartments.Web.BindingModels;
 using AcmeApartments.Web.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -17,17 +19,20 @@ namespace AcmeApartments.Web.Controllers
         private readonly IApplicationService _applicationService;
         private readonly IMaintenanceService _maintenanceService;
         private readonly IUserService _userService;
+        private readonly UserManager<AptUser> _userManager;
 
         public ManagerController(
             IMapper mapper,
             IApplicationService applicationService,
             IMaintenanceService maintenanceService,
-            IUserService userService)
+            IUserService userService,
+            UserManager<AptUser> userManager)
         {
             _mapper = mapper;
             _applicationService = applicationService;
             _maintenanceService = maintenanceService;
             _userService = userService;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -140,12 +145,16 @@ namespace AcmeApartments.Web.Controllers
 
         public async Task<IActionResult> ApproveApplication(ApproveAppBindingModel approveAppBindingModel)
         {
+            var applicationUser = await _userService.GetUserByID(approveAppBindingModel.UserId);
+            var roles = await _userManager.GetRolesAsync(applicationUser);
+
             var isApproveSuccess = await _applicationService.ApproveApplication(
-                    approveAppBindingModel.UserId,
+                    applicationUser,
                     approveAppBindingModel.ApplicationId,
                     approveAppBindingModel.SSN,
                     approveAppBindingModel.AptNumber,
-                    approveAppBindingModel.AptPrice
+                    approveAppBindingModel.AptPrice,
+                    roles
                     );
 
             if (isApproveSuccess)

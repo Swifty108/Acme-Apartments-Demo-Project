@@ -12,12 +12,15 @@ namespace AcmeApartments.Web.Controllers
     public class ApplicantController : Controller
     {
         private readonly IApplicationService _applicationService;
+        private readonly IWebUserService _webUserService;
         private readonly IMapper _mapper;
 
         public ApplicantController(
             IApplicationService applicationService,
+            IWebUserService webUserService,
             IMapper mapper)
         {
+            _webUserService = webUserService;
             _applicationService = applicationService;
             _mapper = mapper;
         }
@@ -32,7 +35,8 @@ namespace AcmeApartments.Web.Controllers
         [HttpGet]
         public IActionResult ShowApplications()
         {
-            var userApplications = _applicationService.GetApplications(string.Empty);
+            var userId = _webUserService.GetUserId();
+            var userApplications = _applicationService.GetApplications(userId);
             return View(userApplications);
         }
 

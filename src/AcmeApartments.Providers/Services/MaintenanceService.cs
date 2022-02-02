@@ -15,13 +15,10 @@ namespace AcmeApartments.Providers.Services
     public class MaintenanceService : IMaintenanceService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userService;
 
         public MaintenanceService(
-            IUnitOfWork unitOfWork,
-            IUserService userService)
+            IUnitOfWork unitOfWork)
         {
-            _userService = userService;
             _unitOfWork = unitOfWork;
         }
 
@@ -31,11 +28,10 @@ namespace AcmeApartments.Providers.Services
             return maintenanceRecord;
         }
 
-        public async Task<bool> SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO)
+        public async Task<bool> SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO, AptUser user)
         {
             try
             {
-                var user = await _userService.GetUser();
                 var maintenanceRequest = new MaintenanceRequest
                 {
                     User = user,
@@ -56,11 +52,9 @@ namespace AcmeApartments.Providers.Services
             return true;
         }
 
-        public async Task<List<MaintenanceRequest>> GetMaintenanceRequests()
+        public async Task<List<MaintenanceRequest>> GetMaintenanceRequests(string userId)
         {
-            var userId = _userService.GetUserId();
             var requests = await _unitOfWork.MaintenanceRequestRepository.Get(filter: u => u.AptUserId == userId).ToListAsync();
-
             return requests;
         }
 

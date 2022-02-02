@@ -10,7 +10,7 @@ namespace AcmeApartments.Providers.Interfaces
     {
         Task<MaintenanceRequest> GetMaintenanceRequest(int maintenanceId);
 
-        Task<List<MaintenanceRequest>> GetMaintenanceRequests();
+        Task<List<MaintenanceRequest>> GetMaintenanceRequests(string userId);
 
         Task<List<AptUser>> GetMaintenanceRequestsUsers();
 
@@ -22,6 +22,6 @@ namespace AcmeApartments.Providers.Interfaces
 
         Task<bool> DenyMaintenanceRequest(string userId, int maintenanceId);
 
-        Task<bool> SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO);
+        Task<bool> SubmitMaintenanceRequest(NewMaintenanceRequestDto newMaintenanceRequestDTO, AptUser user);
     }
 }
