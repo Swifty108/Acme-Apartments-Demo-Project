@@ -7,7 +7,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace AcmeApartments.Web.Controllers
@@ -59,12 +58,12 @@ namespace AcmeApartments.Web.Controllers
 
             ViewBag.AppEditSuccess = TempData["AppEditSuccess"];
             ViewBag.AppApproveSuccess = TempData["AppApproveSuccess"];
-            ViewBag.AppUnApproveSuccess = TempData["AppUnApproveSuccess"];
+            ViewBag.AppDenySuccess = TempData["AppDenySuccess"];
             ViewBag.AppCanceledSuccess = TempData["AppCanceledSuccess"];
 
             ViewBag.AppEditFailed = TempData["AppEditFailed"];
             ViewBag.AppApproveFailed = TempData["AppApproveFailed"];
-            ViewBag.AppUnApproveFailed = TempData["AppUnApproveFailed"];
+            ViewBag.AppDenyFailed = TempData["AppDenyFailed"];
             ViewBag.AppCanceledFailed = TempData["AppCanceledFailed"];
 
             return View(userApplicationsViewModel);
@@ -205,12 +204,12 @@ namespace AcmeApartments.Web.Controllers
 
             ViewBag.MaintenanceEditSuccess = TempData["MaintenanceEditSuccess"];
             ViewBag.MaintenanceApproveSuccess = TempData["MaintenanceApproveSuccess"];
-            ViewBag.MaintenanceUnApproveSuccess = TempData["MaintenanceUnApproveSuccess"];
+            ViewBag.MaintenanceDenySuccess = TempData["MaintenanceDenySuccess"];
             ViewBag.MaintenanceCanceledSuccess = TempData["MaintenanceCanceledSuccess"];
 
             ViewBag.MaintenanceEditFailed = TempData["MaintenanceEditFailed"];
             ViewBag.MaintenanceApproveFailed = TempData["MaintenanceApproveFailed"];
-            ViewBag.MaintenanceUnApproveFailed = TempData["MaintenanceUnApproveFailed"];
+            ViewBag.MaintenanceDenyFailed = TempData["MaintenanceDenyFailed"];
             ViewBag.MaintenanceCanceledFailed = TempData["MaintenanceCanceledFailed"];
 
             return View(maintenanceRequestsListViewModel);

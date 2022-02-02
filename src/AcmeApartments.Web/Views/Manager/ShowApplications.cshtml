@@ -30,7 +30,7 @@ else if (ViewBag.AppApproveSuccess != null && ViewBag.AppApproveSuccess)
 }
 else if (ViewBag.AppDenySuccess != null && ViewBag.AppDenySuccess)
 {
-    <partial name="_ViewsStatusMessage" model="ViewBag.AppUnApproveSuccessMessage" />
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppDenySuccessMessage" />
 }
 else if (ViewBag.AppCanceledSuccess != null && ViewBag.AppCanceledSuccess)
 {
@@ -46,7 +46,7 @@ else if (ViewBag.AppApproveFailed != null && ViewBag.AppApproveFailed)
 }
 else if (ViewBag.AppDenyFailed != null && ViewBag.AppDenyFailed)
 {
-    <partial name="_ViewsStatusMessage" model="ViewBag.AppUnApproveFailedMessage" />
+    <partial name="_ViewsStatusMessage" model="ViewBag.AppDenyFailedMessage" />
 }
 else if (ViewBag.AppCanceledFailed != null && ViewBag.AppCanceledFailed)
 {

@@ -8,7 +8,7 @@
     ViewBag.MaintenanceApproveSuccessMessage = "The maintenance request was successfully approved!";
     ViewBag.MaintenanceApproveFailedMessage = "There was an error approving the maintenance request. Please try again later.";
 
-    ViewBag.MaintenanceUnApproveSuccessMessage = "The maintenance request was successfully denied!";
+    ViewBag.MaintenanceDenySuccessMessage = "The maintenance request was successfully denied!";
     ViewBag.MaintenanceDenyFailedMessage = "There was an error denying the maintenance request. Please try again later.";
 
     ViewBag.MaintenanceCanceledSuccessMessage = "The maintenance request was successfully canceled!";
@@ -26,7 +26,7 @@ else if (ViewBag.MaintenanceApproveSuccess != null && ViewBag.MaintenanceApprove
 }
 else if (ViewBag.MaintenanceDenySuccess != null && ViewBag.MaintenanceDenySuccess)
 {
-    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceUnApproveSuccessMessage" />
+    <partial name="_ViewsStatusMessage" model="ViewBag.MaintenanceDenySuccessMessage" />
 }
 else if (ViewBag.MaintenanceCanceledSuccess != null && ViewBag.MaintenanceCanceledSuccess)
 {
