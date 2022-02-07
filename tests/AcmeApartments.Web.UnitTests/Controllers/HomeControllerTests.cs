@@ -69,7 +69,6 @@ namespace AcmeApartments.Tests.Controllers
                         FloorPlanType = "2bed",
                         AptNumber = "4173-325"
                     }
-
                 }
             };
 
@@ -82,7 +81,6 @@ namespace AcmeApartments.Tests.Controllers
                         FloorPlanType = "2bed",
                         AptNumber = "4173-325"
                     }
-
                 }
             };
 
@@ -158,7 +156,6 @@ namespace AcmeApartments.Tests.Controllers
 
             _homeControllerFixture._mockMapper.Setup(x => x.Map<AppUserContactViewModel>(appUserContactBindingModel)).Returns(appUserContactViewModel);
 
-
             //Act
             var result = _homeControllerFixture.State.ContactUs(appUserContactBindingModel);
             ViewResult viewResult = Assert.IsType<ViewResult>(result);
@@ -177,7 +174,7 @@ namespace AcmeApartments.Tests.Controllers
         public async Task ApplyGet_ValidBidingModel_ViewShouldReturnValidApplyViewModel()
         {
             // Arrange
-            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>(), It.IsAny<AptUser>())).ReturnsAsync(false);
+            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(false);
 
             var user = new AptUser
             {
@@ -215,7 +212,7 @@ namespace AcmeApartments.Tests.Controllers
         public async Task ApplyGet_ApplicationExists_ShouldReturnValidRedirectToActionResult()
         {
             // Arrange
-            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>(), It.IsAny<AptUser>())).ReturnsAsync(true);
+            _homeControllerFixture._mockApplicationService.Setup(x => x.CheckifApplicationExists(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(true);
 
             var applyReturnUrlBindingModel = new ApplyReturnUrlBindingModel()
             {
