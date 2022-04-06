@@ -16,7 +16,7 @@ The following is the flow of user interactions in the application:
 2. Once the manager approves the application, the `Applicant` is promoted to `Resident` status. Residents can submit maintenance requests and view their application status if they applied to other apartment units. 
 3. A `Manager` can approve or deny an application along with the authority to approve or deny maintenance requests.
 
-## Technology Stacks Used
+## Technology Stacks and Tools Used
 
 **Frameworks, Languages, and Tools:** C#, ASP.NET Core MVC 3.1, EF Core 3.1, Automapper 10.1.1, SQL Server, HTML5, CSS3, Bootstrap, jQuery, AJAX, Microsoft SQL Server Management Studio, Git, Git Flow, GitHub, xUnit and Moq libraries, Azure DevOps for project management, and Microsoft Teams for sprint planning mettings, code reviews, and pair programming
 
