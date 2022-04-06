@@ -13,8 +13,8 @@ There are three primary roles in the application: `Applicant`, `Resident`, and `
 The following is the flow of user interactions in the application: 
 
 1. A visitor to the website applies for an apartment through the floorplans page and acquires the status of an `Applicant`. The applicant account dashboard features the ability to view the application status and contact the apartment staff.
-2. Once the manager approves the application, the `Applicant` is promoted to `Resident` status. Residents can submit maintenance requests and view their application status if they applied. 
-3. A `Manager` can approve or disapprove an application along with the authority to approve or deny maintenance requests
+2. Once the manager approves the application, the `Applicant` is promoted to `Resident` status. Residents can submit maintenance requests and view their application status if they applied to other apartment units. 
+3. A `Manager` can approve or deny an application along with the authority to approve or deny maintenance requests.
 
 ## Technology Stacks Used
 
