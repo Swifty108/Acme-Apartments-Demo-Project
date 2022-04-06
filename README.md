@@ -20,7 +20,7 @@ The following is the flow of user interactions in the application:
 
 **Frameworks, Languages, and Tools:** C#, ASP.NET Core MVC 3.1, EF Core 3.1, Automapper 10.1.1, SQL Server, HTML5, CSS3, Bootstrap, jQuery, AJAX, Microsoft SQL Server Management Studio, Git, GitHub, xUnit and Moq libraries, Azure DevOps for project management, and Microsoft Teams for sprint planning mettings, code reviews, and pair programming
 
-**Design & Architectural Patterns:** Generic repository pattern, Unit of work pattern, IOptions pattern, Dependency injection segregation pattern, MVC pattern, 3-layered architecture pattern
+**Design & Architectural Patterns:** Generic repository pattern, Unit of work pattern, IOptions pattern, Dependency injection segregation pattern, MVC pattern, 3-Layer architectural pattern
 
 **Visual Studio extensions:** Productivity Power Tools, CodeMaid, Github extension for Visual Studio 2019, Snippet Designer, and Web Essentials.
 
