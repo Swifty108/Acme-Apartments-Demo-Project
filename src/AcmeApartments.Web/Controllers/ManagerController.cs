@@ -289,9 +289,11 @@ namespace AcmeApartments.Web.Controllers
             return maintenanceRequestViewModel;
         }
 
-        public async Task<IActionResult> ScheduleMaintenanceRequest()
+        public async Task<IActionResult> ScheduleMaintenanceRequest(int maintenanceId)
         {
-            return View();
+            var maintenanceRequestViewModel = await GetMaintenanceRequest(maintenanceId);
+
+            return View(maintenanceRequestViewModel);
         }
 
         public async Task<IActionResult> GetSchedulerEvents()
