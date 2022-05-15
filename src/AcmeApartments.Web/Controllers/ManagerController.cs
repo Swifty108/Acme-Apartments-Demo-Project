@@ -288,5 +288,15 @@ namespace AcmeApartments.Web.Controllers
             var maintenanceRequestViewModel = _mapper.Map<MaintenanceRequestViewModel>(maintenanceRecord);
             return maintenanceRequestViewModel;
         }
+
+        public async Task<IActionResult> ScheduleMaintenanceRequest()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetSchedulerEvents()
+        {
+            return new JsonResult(null);
+        }
     }
 }

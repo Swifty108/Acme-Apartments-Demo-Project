@@ -88,6 +88,9 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
                             <span style="color: darkgreen"><i class="fa fa-check text-success"></i>Approved</span>
 
                             <a asp-controller="manager" asp-action="denymaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">Deny</a>
+                            
+                            <a asp-controller="manager" asp-action="schedulemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px; color: black"><span><i class="fa fa-calendar" style="font-size: 18px;"></i></span></a>
+
                         </td>
 
                     }
@@ -97,6 +100,9 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
                             <span style="color: darkred"><i class="fa fa-ban"></i> Denied</span>
 
                             <a asp-controller="manager" asp-action="approvemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">ReApprove</a>
+                        
+                            <span><i class="fa fa-calendar" style="color: lightgray; font-size: 18px; margin-left: 20px"></i></span>
+
                         </td>
                     }
                     else if (maintenancerecord.Status == MaintenanceRequestStatus.PENDINGAPPROVAL)
@@ -104,6 +110,9 @@ else if (ViewBag.MaintenanceCanceledFailed != null && ViewBag.MaintenanceCancele
                         <td>
                             <a asp-controller="manager" asp-action="approvemaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id">Approve</a>
                             <a asp-controller="manager" asp-action="denymaintenancerequest" asp-route-userid="@maintenancerecord.AptUserId" asp-route-maintenanceid="@maintenancerecord.Id" style="margin-left:30px;">Deny</a>
+
+                            <span><i class="fa fa-calendar" style="color: lightgray; font-size: 18px; margin-left: 20px"></i></span>
+
                         </td>
                     }
                 </tr>
