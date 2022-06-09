@@ -20,5 +20,6 @@ namespace AcmeApartments.Data.Provider.Data
         public DbSet<MaintenanceRequest> MaintenanceRequests { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<FloorPlan> FloorPlans { get; set; }
+        public DbSet<MaintenanceRequestEvent> Events { get; set; }
     }
 }

@@ -8,6 +8,8 @@ using AcmeApartments.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,7 +30,28 @@ namespace AcmeApartments.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDataProviderServiceCollection(Configuration);
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")),
+                    ServiceLifetime.Scoped
+                    );
+            services.AddIdentity<AptUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+            })
+
+
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders()
+            .AddDefaultUI()
+            .AddRoles<IdentityRole>();
+
+            services.AddDataProviderServiceCollection();
             services.AddProvidersServiceCollection();
             services.AddScoped<IWebUserService, WebUserService>();
             services.AddHttpContextAccessor();
