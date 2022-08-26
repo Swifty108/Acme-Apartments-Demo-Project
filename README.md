@@ -26,4 +26,4 @@ The following is the flow of user interactions in the application:
 
 [Click here](https://github.com/rajndev/Acme-Apartments-ASP.NET-Core-Demo-Web-App/wiki) for the application wiki.
 
-[Click here](https://acmeapartments.azurewebsites.net) for a live demo of the project
+[Click here](https://acmeapartments.rajnarayanan.com) for a live demo of the project
